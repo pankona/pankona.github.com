@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-04-23T01:59:57+09:00</updated>
+  <updated>2014-04-23T21:16:40+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[pankona]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Second Post]]></title>
+    <link href="http://pankona.github.io/blog/2014/04/23/second-post/"/>
+    <updated>2014-04-23T21:05:35+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/04/23/second-post</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First Post]]></title>
+    <link href="http://pankona.github.io/blog/2014/04/23/first-post/"/>
+    <updated>2014-04-23T21:04:21+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/04/23/first-post</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
 </feed>

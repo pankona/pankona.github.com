@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-04-24T21:29:01+09:00</updated>
+  <updated>2014-04-24T21:52:22+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressでブログを初めてみる]]></title>
+    <link href="http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/"/>
+    <updated>2014-04-24T21:44:52+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress</id>
+    <content type="html"><![CDATA[<p>ちょっと長めの通勤時間を有効活用のため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。
+マークダウンの書き方すらよくわかっていないが、徐々に進歩させていこうと思う。</p>
+
+<p>私は一応プログラマをやっている。なので色々毎日調べ事をしつつ業務にあたっている。
+きっと私が困ったところは、おそらく世の中の誰かも同じように困っているであろうと信じ、
+基本的には日々の調査結果なんかをここにアウトプットしていきたいと思っている。</p>
+
+<p>細く、長く、続けて行ければ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Second Post]]></title>

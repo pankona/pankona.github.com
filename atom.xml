@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-04-25T01:36:50+09:00</updated>
+  <updated>2014-04-25T01:40:59+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -18,11 +18,11 @@
     <link href="http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/"/>
     <updated>2014-04-24T21:44:52+09:00</updated>
     <id>http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress</id>
-    <content type="html"><![CDATA[<p>ちょっと長めの通勤時間を有効活用のため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。
-マークダウンの書き方すらよくわかっていないが、徐々に進歩させていこうと思う。</p>
+    <content type="html"><![CDATA[<p>ちょっと長めの通勤時間を有効活用するため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。
+マークダウンの書き方すらよくわかっていないが、徐々にいろいろと進歩させていこうと思う。</p>
 
-<p>私は一応プログラマをやっている。なので色々毎日調べ事をしつつ業務にあたっている。
-きっと私が困ったところは、おそらく世の中の誰かも同じように困っているであろうと信じ、
+<p>私は一応プログラマをやっている。なので色々困ったことにでくわし、そのたびに解決方法を調べつつ業務にあたっている。
+きっと私が困ったところは、おそらく世の中の誰かが同じように困っているであろうと信じ、本ブログがその助けになることを願うと共に、
 基本的には日々の調査結果なんかをここにアウトプットしていきたいと思っている。</p>
 
 <p>細く、長く、続けて行ければ。</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-04-25T23:09:20+09:00</updated>
+  <updated>2014-04-25T23:24:29+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -23,6 +23,8 @@
 
 <p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。
 <a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
+
+<p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>
 ]]></content>
   </entry>
   

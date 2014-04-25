@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-04-25T21:15:19+09:00</updated>
+  <updated>2014-04-25T23:09:20+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Add_category_list]]></title>
+    <title type="html"><![CDATA[Octopressにタグクラウドとカテゴリリストを追加してみた]]></title>
     <link href="http://pankona.github.io/blog/2014/04/25/add-category-list/"/>
     <updated>2014-04-25T21:11:53+09:00</updated>
     <id>http://pankona.github.io/blog/2014/04/25/add-category-list</id>

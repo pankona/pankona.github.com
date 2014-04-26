@@ -232,63 +232,6 @@
   
     
 <section>
-<!--
-// Octopress custom aside 'gravatar.html'
-// version: 1.0 (Dec 24, 2013)
-// (c) alalwww [https://github.com/alalwww/gravatar-aside/]
--->
-  <h1>Author</h1>
-  <div id="gravatar-aside-profile" style="clear:both">
-    <div style="height:2em"><span style="color:#ccc;font-size:small">loading profile from gravatar&#8230;</span></div>
-  </div>
-  <div style="clear:both"></div>
-  <script type="text/javascript">
-    $(function(){
-      var url = "http://www.gravatar.com/20c3394adc3ea5485023625de24b8486.json?callback=?";
-      var $box = $("#gravatar-aside-profile")
-      var $msg = $box.children().children()
-
-      var blink = function(a){a.fadeOut(400).fadeIn(400)};
-      var intervalID = window.setInterval(blink, 1500, $msg)
-
-      var setupProfile = function(data) {
-        var entry = data.entry[0]
-        $box
-          .empty()
-          .css("padding-top", 5)
-          .append($("<img>")
-            .attr("src", entry.thumbnailUrl)
-            .attr("alt", "thumbnail from Gravatar")
-            .css("float", "left")
-            .css("margin-right", 5)
-          )
-          .append($("<div>")
-            .css("padding", "5px 0px")
-            .append($("<h2>")
-              .css("margin-bottom", 5)
-              .append(entry.displayName + "(<a href='" + entry.profileUrl + "'>@" + entry.preferredUsername + "</a>)")
-            )
-            .append($("<p>")
-              .css("padding-left",90)
-              .css("margin", 0)
-              .css("font-size", "90%")
-              .html(entry.aboutMe.replace(/\n/g, "<br/>"))
-            )
-          )
-      }
-
-      var clearInterval = function(){window.clearInterval(intervalID)}
-      var updateMessageToError = function(){$msg.stop().fadeOut().text("profile load failed.").fadeIn()}
-
-      jQuery.getJSON(url)
-        .always(clearInterval)
-        .done(setupProfile)
-        .fail(updateMessageToError)
-    })
-  </script>
-</section>
-
-<section>
   <h1>About Me</h1>
   <p>A little something about me.</p>
 </section>

@@ -1,4 +1,8 @@
 <section>
   <h1>About Me</h1>
-  <p>A little something about me.</p>
+  {% if site.gravatar_email %}
+    <img src="{% gravatar_image %}" alt="Gravatar of {{site.author}} " title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" />
+  {% endif %}
+  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
+  <br clear="left">
 </section>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopressカスタマイズ | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/octopresskasutamaizu/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-04-26T20:16:15+09:00</updated>
+  <updated>2014-04-26T20:59:14+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OctopressにGravatarの画像が出るようにしてみた]]></title>
+    <link href="http://pankona.github.io/blog/2014/04/26/octopress-custom/"/>
+    <updated>2014-04-26T20:19:19+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/04/26/octopress-custom</id>
+    <content type="html"><![CDATA[<p>引き続きOctopressをカスタマイズしていく。</p>
+
+<h3>サイドバーにGravatarの画像を出すように</h3>
+
+<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
+自分のブログ感が出て良い。</p>
+
+<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
+
+<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
+
+<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、
+それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
+
+<h3>CommentをかけるようにDisqusを設定</h3>
+
+<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br>
+設定方法をざっくり書いておくと、</p>
+
+<p><span>
+1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる
+2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する
+</span></p>
+
+<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopressにタグクラウドとカテゴリリストを追加してみた]]></title>

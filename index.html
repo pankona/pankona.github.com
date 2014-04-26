@@ -9,8 +9,8 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。
-見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。 tag_cloud、category_listの追加については以下のページを参考にさせていただきました &hellip;">
+  <meta name="description" content="引き続きOctopressをカスタマイズしていく。 サイドバーにGravatarの画像を出すように 京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
+自分のブログ感が出て良い。 以下のGravatarプラグインを使わせてもらいました。多謝。 joet3ch/gravatar- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/26/octopress-custom/">OctopressにGravatarの画像が出るようにしてみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-26T20:19:19+09:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/04/26/octopress-custom/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/04/26/octopress-custom/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>引き続きOctopressをカスタマイズしていく。</p>
+
+<h3>サイドバーにGravatarの画像を出すように</h3>
+
+<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
+自分のブログ感が出て良い。</p>
+
+<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
+
+<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
+
+<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、
+それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
+
+<h3>CommentをかけるようにDisqusを設定</h3>
+
+<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br>
+設定方法をざっくり書いておくと、</p>
+
+<p><span>
+1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる
+2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する
+</span></p>
+
+<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -267,6 +330,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/26/octopress-custom/">OctopressにGravatarの画像が出るようにしてみた</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/25/add-category-list/">Octopressにタグクラウドとカテゴリリストを追加してみた</a>
       </li>
     
@@ -290,11 +357,11 @@
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(2)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (2)</a></li></ul>
 </section>
 
   

@@ -122,6 +122,26 @@
 <p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、
 それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
 
+<p>about.html はこんな感じに。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section>
+</span><span class='line'>  &lt;h1>About Me&lt;/h1>
+</span><span class='line'>  {% if site.gravatar_email %}
+</span><span class='line'>    &lt;img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" />
+</span><span class='line'>  {% endif %}
+</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
+</span><span class='line'>  &lt;br clear="left">
+</span><span class='line'>&lt;/section></span></code></pre></td></tr></table></div></figure>
+
+
 <h3>CommentをかけるようにDisqusを設定</h3>
 
 <p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br>

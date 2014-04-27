@@ -20,6 +20,21 @@ categories: "Octopressカスタマイズ"
 ↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、
 それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。
 
+about.html はこんな感じに。
+
+{% codeblock %}
+{% raw %}
+<section>
+  <h1>About Me</h1>
+  {% if site.gravatar_email %}
+    <img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" />
+  {% endif %}
+  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
+  <br clear="left">
+</section>
+{% endraw %}
+{% endcodeblock %}
+
 ### CommentをかけるようにDisqusを設定
 
 各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br>

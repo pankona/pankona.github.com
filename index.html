@@ -9,8 +9,8 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="引き続きOctopressをカスタマイズしていく。 サイドバーにGravatarの画像を出すように 京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
-自分のブログ感が出て良い。 以下のGravatarプラグインを使わせてもらいました。多謝。 joet3ch/gravatar- &hellip;">
+  <meta name="description" content="Octopressのカスタマイズを続けていく。 Fenced Code Block がうまく表示されない 具体的にどのようにうまく表示されないかというと、 1
+{% hogehoge %} といった表記。％で囲まれてる部分も Fenced Code Block &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,88 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/28/fix-pygments/">Pygmentsがエラーを吐きやがるので修正</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-28T21:15:16+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/04/28/fix-pygments/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/04/28/fix-pygments/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressのカスタマイズを続けていく。</p>
+
+<h2>Fenced Code Block がうまく表示されない</h2>
+
+<p>具体的にどのようにうまく表示されないかというと、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{% hogehoge %}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br>
+コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
+
+<p>結果として、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{\% codeblock %}
+</span><span class='line'>{\% raw %}
+</span><span class='line'>{% hogehoge %}
+</span><span class='line'>{\% endraw %}
+</span><span class='line'>{\% endcodeblock %}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というので書くことができた。raw ~ endraw というのを使う。<br>
+ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br>
+ネストさせるのはどうやればいいのかな？</p>
+
+<h2>Fenced Code Block にファイル名が表示できない</h2>
+
+<p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
+
+<p><code>{% codeblock about.html %}</code><br></p>
+
+<p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
+
+<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br>
+PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
+
+<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。
+<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments &ndash; Nonsense By Me</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -352,6 +434,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/28/fix-pygments/">Pygmentsがエラーを吐きやがるので修正</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/26/octopress-custom/">OctopressにGravatarの画像が出るようにしてみた</a>
       </li>
     
@@ -367,10 +453,6 @@
         <a href="/blog/2014/04/23/second-post/">Second Post</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/04/23/first-post/">First Post</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -379,11 +461,11 @@
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(2)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (2)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li></ul>
 </section>
 
   

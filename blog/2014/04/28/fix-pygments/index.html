@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>First Post - make clean; make</title>
+  <title>Pygmentsがエラーを吐きやがるので修正 - make clean; make</title>
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="Octopressのカスタマイズを続けていく。 Fenced Code Block がうまく表示されない 具体的にどのようにうまく表示されないかというと、 1
+{% hogehoge %} といった表記。％で囲まれてる部分も Fenced Code Block &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pankona.github.io/blog/2014/04/23/first-post">
+  <link rel="canonical" href="http://pankona.github.io/blog/2014/04/28/fix-pygments">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">First Post</h1>
+      <h1 class="entry-title">Pygmentsがエラーを吐きやがるので修正</h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2014-04-23T21:04:21+09:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
+<time datetime="2014-04-28T21:15:16+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://pankona.github.io">Comments</a>
@@ -105,7 +105,50 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><p>Octopressのカスタマイズを続けていく。</p>
+
+<h2>Fenced Code Block がうまく表示されない</h2>
+
+<p>具体的にどのようにうまく表示されないかというと、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{% hogehoge %}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br>
+コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
+
+<p>結果として、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{\% codeblock %}
+</span><span class='line'>{\% raw %}
+</span><span class='line'>{% hogehoge %}
+</span><span class='line'>{\% endraw %}
+</span><span class='line'>{\% endcodeblock %}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というので書くことができた。raw ~ endraw というのを使う。<br>
+ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br>
+ネストさせるのはどうやればいいのかな？</p>
+
+<h2>Fenced Code Block にファイル名が表示できない</h2>
+
+<p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
+
+<p><code>{% codeblock about.html %}</code><br></p>
+
+<p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
+
+<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br>
+PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
+
+<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。
+<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments &ndash; Nonsense By Me</a></p>
 </div>
 
 
@@ -128,15 +171,21 @@
   
 
 
-<time datetime="2014-04-23T21:04:21+09:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
+<time datetime="2014-04-28T21:15:16+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/04/23/first-post/" data-via="" data-counturl="http://pankona.github.io/blog/2014/04/23/first-post/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/04/28/fix-pygments/" data-via="" data-counturl="http://pankona.github.io/blog/2014/04/28/fix-pygments/" >Tweet</a>
   
   
   
@@ -145,8 +194,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/04/26/octopress-custom/" title="Previous Post: OctopressにGravatarの画像が出るようにしてみた">&laquo; OctopressにGravatarの画像が出るようにしてみた</a>
       
-        <a class="basic-alignment right" href="/blog/2014/04/23/second-post/" title="Next Post: second post">second post &raquo;</a>
       
     </p>
   </footer>
@@ -228,8 +277,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pankona.github.io/blog/2014/04/23/first-post/';
-        var disqus_url = 'http://pankona.github.io/blog/2014/04/23/first-post/';
+        var disqus_identifier = 'http://pankona.github.io/blog/2014/04/28/fix-pygments/';
+        var disqus_url = 'http://pankona.github.io/blog/2014/04/28/fix-pygments/';
         var disqus_script = 'embed.js';
       
     (function () {

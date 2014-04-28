@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-04-28T21:12:56+09:00</updated>
+  <updated>2014-04-28T21:59:21+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Pygmentsがエラーを吐きやがるので修正]]></title>
+    <link href="http://pankona.github.io/blog/2014/04/28/fix-pygments/"/>
+    <updated>2014-04-28T21:15:16+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/04/28/fix-pygments</id>
+    <content type="html"><![CDATA[<p>Octopressのカスタマイズを続けていく。</p>
+
+<h2>Fenced Code Block がうまく表示されない</h2>
+
+<p>具体的にどのようにうまく表示されないかというと、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{% hogehoge %}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br>
+コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
+
+<p>結果として、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{\% codeblock %}
+</span><span class='line'>{\% raw %}
+</span><span class='line'>{% hogehoge %}
+</span><span class='line'>{\% endraw %}
+</span><span class='line'>{\% endcodeblock %}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>というので書くことができた。raw ~ endraw というのを使う。<br>
+ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br>
+ネストさせるのはどうやればいいのかな？</p>
+
+<h2>Fenced Code Block にファイル名が表示できない</h2>
+
+<p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
+
+<p><code>{% codeblock about.html %}</code><br></p>
+
+<p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
+
+<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br>
+PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
+
+<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。
+<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments &ndash; Nonsense By Me</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[OctopressにGravatarの画像が出るようにしてみた]]></title>

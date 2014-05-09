@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopressカスタマイズ | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/octopresskasutamaizu/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-04-28T21:59:21+09:00</updated>
+  <updated>2014-05-10T01:00:59+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -20,14 +20,20 @@
     <id>http://pankona.github.io/blog/2014/04/28/fix-pygments</id>
     <content type="html"><![CDATA[<p>Octopressのカスタマイズを続けていく。</p>
 
-<h2>Fenced Code Block がうまく表示されない</h2>
+<h2 id="fenced-code-block-がうまく表示されない">Fenced Code Block がうまく表示されない</h2>
 
 <p>具体的にどのようにうまく表示されないかというと、</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{% hogehoge %}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;br>
+</span><span class='line'>&lt;br>
+</span><span class='line'>{% hogehoge %}&lt;br>
+</span><span class='line'>&lt;br></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br>
+<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br><br>
 コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
 
 <p>結果として、</p>
@@ -37,17 +43,23 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{\% codeblock %}
-</span><span class='line'>{\% raw %}
-</span><span class='line'>{% hogehoge %}
-</span><span class='line'>{\% endraw %}
-</span><span class='line'>{\% endcodeblock %}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;br>
+</span><span class='line'>&lt;br>
+</span><span class='line'>{\% codeblock %}&lt;br>
+</span><span class='line'>{\% raw %}&lt;br>
+</span><span class='line'>{% hogehoge %}&lt;br>
+</span><span class='line'>{\% endraw %}&lt;br>
+</span><span class='line'>{\% endcodeblock %}&lt;br>
+</span><span class='line'>&lt;br></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>というので書くことができた。raw ~ endraw というのを使う。<br>
-ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br>
+<p>というので書くことができた。raw ~ endraw というのを使う。<br><br>
+ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br><br>
 ネストさせるのはどうやればいいのかな？</p>
 
-<h2>Fenced Code Block にファイル名が表示できない</h2>
+<h2 id="fenced-code-block-にファイル名が表示できない">Fenced Code Block にファイル名が表示できない</h2>
 
 <p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
 
@@ -55,11 +67,11 @@
 
 <p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
 
-<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br>
+<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br><br>
 PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
 
-<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。
-<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments &ndash; Nonsense By Me</a></p>
+<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。<br>
+<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments - Nonsense By Me</a></p>
 ]]></content>
   </entry>
   
@@ -70,16 +82,16 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
     <id>http://pankona.github.io/blog/2014/04/26/octopress-custom</id>
     <content type="html"><![CDATA[<p>引き続きOctopressをカスタマイズしていく。</p>
 
-<h3>サイドバーにGravatarの画像を出すように</h3>
+<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
 
-<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
+<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br>
 自分のブログ感が出て良い。</p>
 
 <p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
 
 <p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
 
-<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、
+<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br>
 それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
 
 <p>about.html はこんな感じに。</p>
@@ -96,27 +108,27 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  {% if site.gravatar_email %}<span class="nt">&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>img src=&quot;{% gravatar_image %}&quot; alt=&quot;Gravatar of {{site.author}}&quot; title=&quot;Gravatar of {{ site.author }}&quot; align=&quot;left&quot; style=&quot;margin-right:10px;&quot; /<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>  {% endif %}
-</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
-</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;br&gt;</span>
+</span><span class='line'><span class="nt">&lt;br&gt;</span>
+</span><span class='line'><span class="nt">&lt;section&gt;&lt;br&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;&lt;br&gt;</span>
+</span><span class='line'>  {% if site.gravatar_email %}<span class="nt">&lt;br&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;&lt;br&gt;</span>
+</span><span class='line'>  {% endif %}<span class="nt">&lt;br&gt;</span>
+</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。<span class="nt">&lt;br&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;&lt;br&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;&lt;br&gt;</span>
+</span><span class='line'><span class="nt">&lt;br&gt;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<h3>CommentをかけるようにDisqusを設定</h3>
+<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
 
-<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br>
+<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br>
 設定方法をざっくり書いておくと、</p>
 
-<p><span>
-1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる
-2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する
+<p><span><br>
+1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br>
+2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br>
 </span></p>
 
 <p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
@@ -128,10 +140,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
     <link href="http://pankona.github.io/blog/2014/04/25/add-category-list/"/>
     <updated>2014-04-25T21:11:53+09:00</updated>
     <id>http://pankona.github.io/blog/2014/04/25/add-category-list</id>
-    <content type="html"><![CDATA[<p>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。
+    <content type="html"><![CDATA[<p>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。<br>
 見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。</p>
 
-<p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。
+<p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。<br>
 <a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
 
 <p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>

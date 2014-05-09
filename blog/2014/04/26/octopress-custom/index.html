@@ -107,16 +107,16 @@
 
 <div class="entry-content"><p>引き続きOctopressをカスタマイズしていく。</p>
 
-<h3>サイドバーにGravatarの画像を出すように</h3>
+<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
 
-<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
+<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br>
 自分のブログ感が出て良い。</p>
 
 <p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
 
 <p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
 
-<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、
+<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br>
 それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
 
 <p>about.html はこんな感じに。</p>
@@ -140,15 +140,14 @@
 </span><span class='line'><span class="nt">&lt;/section&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
 
-<h3>CommentをかけるようにDisqusを設定</h3>
-
-<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br>
+<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br>
 設定方法をざっくり書いておくと、</p>
 
-<p><span>
-1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる
-2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する
+<p><span><br>
+1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br>
+2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br>
 </span></p>
 
 <p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
@@ -229,6 +228,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/05/raspi-livestream-web/">Raspberry Pi + カメラモジュール + Webで配信</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/28/fix-pygments/">Pygmentsがエラーを吐きやがるので修正</a>
       </li>
     
@@ -244,10 +247,6 @@
         <a href="/blog/2014/04/24/start-blog-with-octopress/">Octopressでブログを始めてみる</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/04/23/second-post/">Second Post</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -256,11 +255,11 @@
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberry-pi' style='font-size: 120.0%'>Raspberry&nbsp;Pi(1)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberry-pi/'>Raspberry&nbsp;Pi (1)</a></li></ul>
 </section>
 
   

@@ -9,9 +9,8 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。
-いろいろ悩んだ点もあったので、やり方の結論をメモしておく。
-ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。 良さそうな例 参考にしたウェブサイトは↓。 &hellip;">
+  <meta name="description" content="このポストは Windows8.1に対してWindows Updateしたところ、何だかわからないがデュアルブートしなくなって焦ったため、
+直し方というか、そもそもどうやってデュアルブートにしているかをメモしておくための記事。 件のPCについて 以下のようなPCと、その中身の構成にしている。 &# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +76,127 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/14/arch-windows-multiboot-tips/">Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-14T17:59:10+09:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/05/14/arch-windows-multiboot-tips/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="このポストは">このポストは</h2>
+
+<p>Windows8.1に対してWindows Updateしたところ、何だかわからないがデュアルブートしなくなって焦ったため、<br>
+直し方というか、そもそもどうやってデュアルブートにしているかをメモしておくための記事。</p>
+
+<h3 id="件のpcについて">件のPCについて</h3>
+
+<p>以下のようなPCと、その中身の構成にしている。</p>
+
+<p>&#8211; PC本体：Vaio Pro 13<br>
+&#8211; OS：Arch LinuxとWindows8.1のデュアルブート</p>
+
+<h3 id="デュアルブートのためにしたこと---まずは普通にarch-linuxをインストール">デュアルブートのためにしたこと - まずは普通にArch Linuxをインストール</h3>
+
+<ul>
+<li>Arch Linux起動のためのUSBメモリを作成。ここはWindowsを使う。</li>
+</ul>
+
+<p><a href="https://wiki.archlinux.org/index.php/USB_Installation_Media_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">USB Installation Media（日本語） - Arch LinuxのWiki</a> なんかが参考になる。</p>
+
+<ul>
+<li>Windowsを使ってLinux向けのパーティションを切る。</li>
+</ul>
+
+<p>「管理」を使ってやる。<a href="http://windows.microsoft.com/ja-jp/windows/create-boot-partition#1TC=windows-7">ブート パーティンションを作成する - Microsoftのページ</a>等が参考になる。<br>
+とにかく何か領域が空いていればいい。うちの構成では180GB程度確保した。<br>
+少なくとも30GBくらいいるかな？</p>
+
+<ul>
+<li>Arch Linux起動用のUSBを挿した状態でPCを起動し、USBからのブートを行う。</li>
+</ul>
+
+<p>あとは↑で作ったパーティションにArch Linuxをインストールしていく。詳しくはやはりArch LinuxのWiki参照。<br>
+&#8211; パーティションのフォーマット。割り当て可能領域はすべて割り当て。EFIパーティションにする必要はない。普通ので。<br>
+&#8211; /mnt にフォーマットしたパーティションをマウント。<code>mount /dev/sda5 /mnt</code> ← うちの環境の場合。<br>
+&#8211; chrootする。<code>arch-chroot /mnt</code> で。 <br>
+&#8211; Arch Linuxのインストール。 <code>pacman -S base base-devel</code> とかやる。<br>
+&#8211; genfstab とかそういったことをこまごま行う。<br>
+&#8211; ブートローダのインストール。ブートローダにはgummibootを採用した。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mount /dev/sda2 /boot/EFI
+</span><span class='line'>cd /boot/EFI
+</span><span class='line'>gummiboot install</span></code></pre></td></tr></table></div></figure>
+
+<p>ここまでで勝手にデュアルブートしてくれたら嬉しかったが、そうはいかなかった（本来はこれだけでOKらしい）。<br>
+Vaioのせいなのか、Windowsのせいなのか。。</p>
+
+<h3 id="デュアルブートのためにしたこと---無理やりgummibootを使わせる">デュアルブートのためにしたこと - 無理やりgummibootを使わせる</h3>
+
+<p>上記までで何が起きるかというと、、、<br>
+どうやら、せっかくgummibootで設定したブートの設定がPC起動時になかったことにされてしまう模様。<br>
+つまりWindowsが問答無用で起動される状態に戻ってしまう。VaioのせいなのかWindowsのせいなのか。。。</p>
+
+<p>この点をちゃんと解決するのは諦めました。<br>
+諦めて、Windowsの起動に使われるファイルをgummibootのものと置き換えることでデュアルブートを実現。。<br>
+一応、やれればいいや、ということで。</p>
+
+<ul>
+<li>先ほどのUSBからArch Linuxを起動し、無理やりgummibootを使わせるようにしにいく</li>
+</ul>
+
+<p>&#8211; まず、EFIのパーティションをマウントする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mount /dev/sda2 /mnt/boot/EFI</span></code></pre></td></tr></table></div></figure>
+
+<p>&#8211; Windows起動用のファイルとgummiboot起動用のファイルを置き換える。</p>
+
+<p>&#8212; Windows起動用のファイル &#8230; /boot/EFI/Microsoft/boot/bootmgrfw.efi<br>
+&#8212; gummiboot起動用のファイル &#8230; /boot/EFI/gummiboot/gummibootx64.efi</p>
+
+<p>上記のWindows起動用のファイルを、gummiboot起動用のファイルで上書きしてやると、、、<br>
+次回のPC起動時には、OS選択の画面が表示されるはず。上書きする前にバックアップしてあげてね。。。</p>
+
+<h3 id="windowsアップデートのときに、bootmgrfw.efiが更新されちゃうことがあるっぽい">Windowsアップデートのときに、bootmgrfw.efiが更新されちゃうことがあるっぽい</h3>
+
+<p>だのでWindowsアップデートでデュアルブートができなくなったりするんだろう。<br>
+デュアルブートできなくなったら、いちいちgummibootx64.efiをWindows起動用のファイルに上書きしてやる必要がある。</p>
+
+<h2 id="これでwindowsアップデートも怖くない！">これでWindowsアップデートも怖くない！</h2>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -516,6 +636,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/14/arch-windows-multiboot-tips/">Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/05/raspi-livestream-web/">Raspberry Pi + カメラモジュール + Webで配信</a>
       </li>
     
@@ -531,10 +655,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
         <a href="/blog/2014/04/25/add-category-list/">Octopressにタグクラウドとカテゴリリストを追加してみた</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/04/24/start-blog-with-octopress/">Octopressでブログを始めてみる</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -543,11 +663,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberry-pi' style='font-size: 120.0%'>Raspberry&nbsp;Pi(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 120.0%'>ArchLinux(1)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberry-pi' style='font-size: 120.0%'>Raspberry&nbsp;Pi(1)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberry-pi/'>Raspberry&nbsp;Pi (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (1)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberry-pi/'>Raspberry&nbsp;Pi (1)</a></li></ul>
 </section>
 
   

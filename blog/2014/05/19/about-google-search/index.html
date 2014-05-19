@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopressにタグクラウドとカテゴリリストを追加してみた - make clean; make</title>
+  <title>Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった - make clean; make</title>
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。
-見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。 tag_cloud、category_listの追加については以下のページを参考にさせていただきました &hellip;">
+  <meta name="description" content="自分のページがGoogle検索にヒットしない理由 なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、
+いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、
+いやでもなんで引っかからないんだろう、と思って調査をしていたところ、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pankona.github.io/blog/2014/04/25/add-category-list">
+  <link rel="canonical" href="http://pankona.github.io/blog/2014/05/19/about-google-search">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
@@ -79,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopressにタグクラウドとカテゴリリストを追加してみた</h1>
+      <h1 class="entry-title">Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</h1>
     
     
       <p class="meta">
@@ -95,7 +96,7 @@
   
 
 
-<time datetime="2014-04-25T21:11:53+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
+<time datetime="2014-05-19T21:21:34+09:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://pankona.github.io">Comments</a>
@@ -105,13 +106,41 @@
   </header>
 
 
-<div class="entry-content"><p>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。<br>
-見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。</p>
+<div class="entry-content"><h2 id="自分のページがgoogle検索にヒットしない理由">自分のページがGoogle検索にヒットしない理由</h2>
 
-<p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。<br>
-<a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
+<p>なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、<br>
+いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、<br>
+いやでもなんで引っかからないんだろう、と思って調査をしていたところ、</p>
 
-<p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>
+<h3 id="githubのリポジトリはgoogle日本の検索に引っかからない">GithubのリポジトリはGoogle日本の検索に引っかからない</h3>
+
+<p>といった記事を見つけた。ほんまかいな？<br>
+もしかしてそのせいでうちのページはGoogleに引っかからないんじゃああるまいか？<br>
+（Github pagesを使って公開しているページなので）</p>
+
+<p>等と考えつつ、調査を続行していったところ、、、</p>
+
+<h3 id="結論からすると、githubのリポジトリはgoogle日本の検索にちゃんと引っかかる。">結論からすると、GithubのリポジトリはGoogle日本の検索にちゃんと引っかかる。</h3>
+
+<p>ただし条件がある模様。それは（おそらく）、</p>
+
+<p><strong>ページ（リポジトリの場合はREADMEかな？）に日本語が含まれていること</strong></p>
+
+<p>つまり、Google日本の検索に引っかからない、というよりは、<br>
+<strong>&quot;日本語のページを検索&quot;</strong>に引っかからない、ということである模様。<br>
+全編英語で書いてたら英語のページと判断して、&quot;日本語のページを検索&quot;には載せない、ってことかなー。<br>
+そして、Google日本の検索は、おそらくデフォルトは&quot;日本語のページを検索&quot;になってる。という話。</p>
+
+<p>加えて、GithubのリポジトリのREADMEなんかは、英語だけで書かれているケースが多い。<br>
+だからGoogle日本を使ってそのまま検索をしていると、Githubのページがあんまり出てこないという現象が。</p>
+
+<p>だので、英語だけで書かれたGithubのページも、検索オプションで言語に依らない検索にしてあげれば、Google日本の検索でも出てきます。</p>
+
+<h3 id="じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？">じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？</h3>
+
+<p>自分のGithubのリポジトリに日本人を呼び込みたい！と思ったら、READMEに日本語をちょっと混ぜてあげればリーチできる人が増えるかも？<br>
+と思っているがどうか。たぶん、おそらく、きっと、効果あると思われる。つまり自信ない。<br>
+自分のリポジトリ使って実験してみます。そのうち調査結果を書きます。</p>
 </div>
 
 
@@ -134,12 +163,12 @@
   
 
 
-<time datetime="2014-04-25T21:11:53+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
+<time datetime="2014-05-19T21:21:34+09:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ</a>
+    <a class='category' href='/blog/categories/sofalseta/'>その他</a>
   
 </span>
 
@@ -148,7 +177,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/04/25/add-category-list/" data-via="" data-counturl="http://pankona.github.io/blog/2014/04/25/add-category-list/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/05/19/about-google-search/" data-via="" data-counturl="http://pankona.github.io/blog/2014/05/19/about-google-search/" >Tweet</a>
   
   
   
@@ -157,10 +186,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/04/24/start-blog-with-octopress/" title="Previous Post: Octopressでブログを始めてみる">&laquo; Octopressでブログを始めてみる</a>
+        <a class="basic-alignment left" href="/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/" title="Previous Post: Vaio Pro 13における手のひら検知 on Arch Linux">&laquo; Vaio Pro 13における手のひら検知 on Arch Linux</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/26/octopress-custom/" title="Next Post: OctopressにGravatarの画像が出るようにしてみた">OctopressにGravatarの画像が出るようにしてみた &raquo;</a>
       
     </p>
   </footer>
@@ -242,8 +269,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pankona.github.io/blog/2014/04/25/add-category-list/';
-        var disqus_url = 'http://pankona.github.io/blog/2014/04/25/add-category-list/';
+        var disqus_identifier = 'http://pankona.github.io/blog/2014/05/19/about-google-search/';
+        var disqus_url = 'http://pankona.github.io/blog/2014/05/19/about-google-search/';
         var disqus_script = 'embed.js';
       
     (function () {

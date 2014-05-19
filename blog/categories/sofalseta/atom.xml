@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: その他 | make clean; make]]></title>
+  <link href="http://pankona.github.io/blog/categories/sofalseta/atom.xml" rel="self"/>
+  <link href="http://pankona.github.io/"/>
+  <updated>2014-05-19T21:46:10+09:00</updated>
+  <id>http://pankona.github.io/</id>
+  <author>
+    <name><![CDATA[pankona]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった]]></title>
+    <link href="http://pankona.github.io/blog/2014/05/19/about-google-search/"/>
+    <updated>2014-05-19T21:21:34+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/05/19/about-google-search</id>
+    <content type="html"><![CDATA[<h2 id="自分のページがgoogle検索にヒットしない理由">自分のページがGoogle検索にヒットしない理由</h2>
+
+<p>なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、<br>
+いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、<br>
+いやでもなんで引っかからないんだろう、と思って調査をしていたところ、</p>
+
+<h3 id="githubのリポジトリはgoogle日本の検索に引っかからない">GithubのリポジトリはGoogle日本の検索に引っかからない</h3>
+
+<p>といった記事を見つけた。ほんまかいな？<br>
+もしかしてそのせいでうちのページはGoogleに引っかからないんじゃああるまいか？<br>
+（Github pagesを使って公開しているページなので）</p>
+
+<p>等と考えつつ、調査を続行していったところ、、、</p>
+
+<h3 id="結論からすると、githubのリポジトリはgoogle日本の検索にちゃんと引っかかる。">結論からすると、GithubのリポジトリはGoogle日本の検索にちゃんと引っかかる。</h3>
+
+<p>ただし条件がある模様。それは（おそらく）、</p>
+
+<p><strong>ページ（リポジトリの場合はREADMEかな？）に日本語が含まれていること</strong></p>
+
+<p>つまり、Google日本の検索に引っかからない、というよりは、<br>
+<strong>&quot;日本語のページを検索&quot;</strong>に引っかからない、ということである模様。<br>
+全編英語で書いてたら英語のページと判断して、&quot;日本語のページを検索&quot;には載せない、ってことかなー。<br>
+そして、Google日本の検索は、おそらくデフォルトは&quot;日本語のページを検索&quot;になってる。という話。</p>
+
+<p>加えて、GithubのリポジトリのREADMEなんかは、英語だけで書かれているケースが多い。<br>
+だからGoogle日本を使ってそのまま検索をしていると、Githubのページがあんまり出てこないという現象が。</p>
+
+<p>だので、英語だけで書かれたGithubのページも、検索オプションで言語に依らない検索にしてあげれば、Google日本の検索でも出てきます。</p>
+
+<h3 id="じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？">じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？</h3>
+
+<p>自分のGithubのリポジトリに日本人を呼び込みたい！と思ったら、READMEに日本語をちょっと混ぜてあげればリーチできる人が増えるかも？<br>
+と思っているがどうか。たぶん、おそらく、きっと、効果あると思われる。つまり自信ない。<br>
+自分のリポジトリ使って実験してみます。そのうち調査結果を書きます。</p>
+]]></content>
+  </entry>
+  
+</feed>

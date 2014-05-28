@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopressでブログを始めてみる - make clean; make</title>
+  <title>日本語入力のための設定メモ for Arch Linux - make clean; make</title>
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="ちょっと長めの通勤時間を有効活用するため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。
-マークダウンの書き方すらよくわかっていないが、徐々にいろいろと進歩させていこうと思う。 私は一応プログラマをやっている。なので色々困ったことにでくわし、 &hellip;">
+  <meta name="description" content="IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。
+具体的な要望としては、 mozcを使いたい
+Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする） という二点なのだが、後者の「Alt + Space」 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress">
+  <link rel="canonical" href="http://pankona.github.io/blog/2014/05/28/use-uim-mozc">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
@@ -79,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopressでブログを始めてみる</h1>
+      <h1 class="entry-title">日本語入力のための設定メモ for Arch Linux</h1>
     
     
       <p class="meta">
@@ -95,7 +96,7 @@
   
 
 
-<time datetime="2014-04-24T21:44:52+09:00" pubdate data-updated="true">Apr 24<span>th</span>, 2014</time>
+<time datetime="2014-05-28T07:49:23+09:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://pankona.github.io">Comments</a>
@@ -105,14 +106,88 @@
   </header>
 
 
-<div class="entry-content"><p>ちょっと長めの通勤時間を有効活用するため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。<br>
-マークダウンの書き方すらよくわかっていないが、徐々にいろいろと進歩させていこうと思う。</p>
+<div class="entry-content"><p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br>
+具体的な要望としては、</p>
 
-<p>私は一応プログラマをやっている。なので色々困ったことにでくわし、そのたびに解決方法を調べつつ業務にあたっている。<br>
-きっと私が困ったところは、おそらく世の中の誰かが同じように困っているであろうと信じ、本ブログがその助けになることを願うと共に、<br>
-基本的には日々の調査結果なんかをここにアウトプットしていきたいと思っている。</p>
+<ul>
+<li>mozcを使いたい</li>
+<li>Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする）</li>
+</ul>
 
-<p>細く、長く、続けて行ければ。</p>
+<p>という二点なのだが、後者の「Alt + Space」というキーバインドを設定する方法がわからず。。。<br>
+きっとやり方があるというか、いままでごまかしごまかしやってきたのだが、<br>
+ついに気持ち悪さが先に立って、「やめてやるわ！」となったところ。</p>
+
+<p>で、IMとしてUIMを使ってみた。uim-mozc。<br>
+そしたらいともたやすく Alt + Space でのトグルが設定できちゃったもんだから拍子抜けというか。<br>
+はじめからこれ使ってれば良かったね！しばらくこれでいきます。uim-mozc。</p>
+
+<p>備忘録的に、設定方法のメモ。<br>
+Arch Linux向けです。</p>
+
+<h2 id="基本的にはwiki参照">基本的にはWiki参照</h2>
+
+<p>ブログに書いた内容というのはいずれ時代遅れになるので、、、<br>
+やはり、Arch Wikiの<a href="https://wiki.archlinux.org/index.php/Input_Japanese_using_uim_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">uim-mozcの設定方法</a>を参照するのが確実。<br>
+うちもこれでいけた。</p>
+
+<h2 id="インストールしたパッケージ">インストールしたパッケージ</h2>
+
+<ul>
+<li>uim</li>
+<li>uim-mozc</li>
+</ul>
+
+<h2 id="設定箇所">設定箇所</h2>
+
+<ul>
+<li>.xinitrc の記載</li>
+</ul>
+
+<p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
+
+<figure class='code'><figcaption><span>.xinitrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># uim</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
+</span><span class='line'>uim-xim &amp;
+</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span><span class="s1">&#39;@im=uim&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h2 id="uimの設定">uimの設定</h2>
+
+<p><code>uim-pref-gtk</code>で設定画面を出し、色々設定する。</p>
+
+<ul>
+<li>「Global settings」の設定。</li>
+</ul>
+
+<p>&#8211; Specify Default IMにチェックを入れる。<br>
+  &#8211; Default input method を Mozc にする。</p>
+
+<ul>
+<li>「Mozc」の設定。</li>
+</ul>
+
+<p>&#8211; Default Input modeはDirect Inputに。<br>
+  &#8211; ついでにVIM協調モードも有効にしておく。</p>
+
+<ul>
+<li>「Mozc key bindings」の設定。</li>
+</ul>
+
+<p>&#8211; [Mozc] on/off、両方に&quot;<Alt>space&quot;を設定。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br>
+チャンスがあれば、他のIMも試してみよっかな。<br>
+その他<br>
+- ibusからの乗り換え。キーバインド設定でaltが使えなかったため。。</p>
 </div>
 
 
@@ -135,15 +210,21 @@
   
 
 
-<time datetime="2014-04-24T21:44:52+09:00" pubdate data-updated="true">Apr 24<span>th</span>, 2014</time>
+<time datetime="2014-05-28T07:49:23+09:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/archlinux/'>ArchLinux</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/" data-via="" data-counturl="http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/" data-via="" data-counturl="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/" >Tweet</a>
   
   
   
@@ -152,10 +233,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/04/23/second-post/" title="Previous Post: second post">&laquo; second post</a>
+        <a class="basic-alignment left" href="/blog/2014/05/19/about-google-search/" title="Previous Post: Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった">&laquo; Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/25/add-category-list/" title="Next Post: Octopressにタグクラウドとカテゴリリストを追加してみた">Octopressにタグクラウドとカテゴリリストを追加してみた &raquo;</a>
       
     </p>
   </footer>
@@ -237,8 +316,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/';
-        var disqus_url = 'http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/';
+        var disqus_identifier = 'http://pankona.github.io/blog/2014/05/28/use-uim-mozc/';
+        var disqus_url = 'http://pankona.github.io/blog/2014/05/28/use-uim-mozc/';
         var disqus_script = 'embed.js';
       
     (function () {

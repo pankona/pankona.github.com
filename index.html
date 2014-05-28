@@ -9,9 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="自分のページがGoogle検索にヒットしない理由 なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、
-いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、
-いやでもなんで引っかからないんだろう、と思って調査をしていたところ、 &hellip;">
+  <meta name="description" content="IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。
+具体的な要望としては、 mozcを使いたい
+Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする） という二点なのだが、後者の「Alt + Space」 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,126 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/28/use-uim-mozc/">日本語入力のための設定メモ for Arch Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-28T07:49:23+09:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/05/28/use-uim-mozc/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br>
+具体的な要望としては、</p>
+
+<ul>
+<li>mozcを使いたい</li>
+<li>Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする）</li>
+</ul>
+
+<p>という二点なのだが、後者の「Alt + Space」というキーバインドを設定する方法がわからず。。。<br>
+きっとやり方があるというか、いままでごまかしごまかしやってきたのだが、<br>
+ついに気持ち悪さが先に立って、「やめてやるわ！」となったところ。</p>
+
+<p>で、IMとしてUIMを使ってみた。uim-mozc。<br>
+そしたらいともたやすく Alt + Space でのトグルが設定できちゃったもんだから拍子抜けというか。<br>
+はじめからこれ使ってれば良かったね！しばらくこれでいきます。uim-mozc。</p>
+
+<p>備忘録的に、設定方法のメモ。<br>
+Arch Linux向けです。</p>
+
+<h2 id="基本的にはwiki参照">基本的にはWiki参照</h2>
+
+<p>ブログに書いた内容というのはいずれ時代遅れになるので、、、<br>
+やはり、Arch Wikiの<a href="https://wiki.archlinux.org/index.php/Input_Japanese_using_uim_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">uim-mozcの設定方法</a>を参照するのが確実。<br>
+うちもこれでいけた。</p>
+
+<h2 id="インストールしたパッケージ">インストールしたパッケージ</h2>
+
+<ul>
+<li>uim</li>
+<li>uim-mozc</li>
+</ul>
+
+<h2 id="設定箇所">設定箇所</h2>
+
+<ul>
+<li>.xinitrc の記載</li>
+</ul>
+
+<p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
+
+<figure class='code'><figcaption><span>.xinitrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># uim</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
+</span><span class='line'>uim-xim &amp;
+</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span><span class="s1">&#39;@im=uim&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h2 id="uimの設定">uimの設定</h2>
+
+<p><code>uim-pref-gtk</code>で設定画面を出し、色々設定する。</p>
+
+<ul>
+<li>「Global settings」の設定。</li>
+</ul>
+
+<p>&#8211; Specify Default IMにチェックを入れる。<br>
+  &#8211; Default input method を Mozc にする。</p>
+
+<ul>
+<li>「Mozc」の設定。</li>
+</ul>
+
+<p>&#8211; Default Input modeはDirect Inputに。<br>
+  &#8211; ついでにVIM協調モードも有効にしておく。</p>
+
+<ul>
+<li>「Mozc key bindings」の設定。</li>
+</ul>
+
+<p>&#8211; [Mozc] on/off、両方に&quot;<Alt>space&quot;を設定。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br>
+チャンスがあれば、他のIMも試してみよっかな。<br>
+その他<br>
+- ibusからの乗り換え。キーバインド設定でaltが使えなかったため。。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -762,45 +882,9 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/23/first-post/">First Post</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-23T21:04:21+09:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
-        
-           | <a href="/blog/2014/04/23/first-post/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/04/23/first-post/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"></div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -821,6 +905,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/28/use-uim-mozc/">日本語入力のための設定メモ for Arch Linux</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/19/about-google-search/">Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</a>
       </li>
     
@@ -836,10 +924,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
         <a href="/blog/2014/05/05/raspi-livestream-web/">Raspberry Pi + カメラモジュール + Webで配信</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/04/28/fix-pygments/">Pygmentsがエラーを吐きやがるので修正</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -848,11 +932,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 140.0%'>ArchLinux(2)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberry-pi' style='font-size: 120.0%'>Raspberry&nbsp;Pi(1)</a> <a href='/blog/categories/sofalseta' style='font-size: 120.0%'>その他(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 160.0%'>ArchLinux(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberry-pi' style='font-size: 120.0%'>Raspberry&nbsp;Pi(1)</a> <a href='/blog/categories/sofalseta' style='font-size: 120.0%'>その他(1)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (2)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberry-pi/'>Raspberry&nbsp;Pi (1)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberry-pi/'>Raspberry&nbsp;Pi (1)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
 </section>
 
   

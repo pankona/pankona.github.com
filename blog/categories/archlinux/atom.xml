@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ArchLinux | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-05-19T21:46:10+09:00</updated>
+  <updated>2014-05-28T22:33:21+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[日本語入力のための設定メモ for Arch Linux]]></title>
+    <link href="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/"/>
+    <updated>2014-05-28T07:49:23+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/05/28/use-uim-mozc</id>
+    <content type="html"><![CDATA[<p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br>
+具体的な要望としては、</p>
+
+<ul>
+<li>mozcを使いたい</li>
+<li>Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする）</li>
+</ul>
+
+<p>という二点なのだが、後者の「Alt + Space」というキーバインドを設定する方法がわからず。。。<br>
+きっとやり方があるというか、いままでごまかしごまかしやってきたのだが、<br>
+ついに気持ち悪さが先に立って、「やめてやるわ！」となったところ。</p>
+
+<p>で、IMとしてUIMを使ってみた。uim-mozc。<br>
+そしたらいともたやすく Alt + Space でのトグルが設定できちゃったもんだから拍子抜けというか。<br>
+はじめからこれ使ってれば良かったね！しばらくこれでいきます。uim-mozc。</p>
+
+<p>備忘録的に、設定方法のメモ。<br>
+Arch Linux向けです。</p>
+
+<h2 id="基本的にはwiki参照">基本的にはWiki参照</h2>
+
+<p>ブログに書いた内容というのはいずれ時代遅れになるので、、、<br>
+やはり、Arch Wikiの<a href="https://wiki.archlinux.org/index.php/Input_Japanese_using_uim_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">uim-mozcの設定方法</a>を参照するのが確実。<br>
+うちもこれでいけた。</p>
+
+<h2 id="インストールしたパッケージ">インストールしたパッケージ</h2>
+
+<ul>
+<li>uim</li>
+<li>uim-mozc</li>
+</ul>
+
+<h2 id="設定箇所">設定箇所</h2>
+
+<ul>
+<li>.xinitrc の記載</li>
+</ul>
+
+<p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
+
+<p>```bash .xinitrc</p>
+
+<h1 id="uim">uim</h1>
+
+<p>export GTK_IM_MODULE=&#39;uim&#39;<br>
+export QT_IM_MODULE=&#39;uim&#39;<br>
+uim-xim &amp;<br>
+export XMODIFIERS=&#39;@im=uim&#39;<br>
+```</p>
+
+<h2 id="uimの設定">uimの設定</h2>
+
+<p><code>uim-pref-gtk</code>で設定画面を出し、色々設定する。</p>
+
+<ul>
+<li>「Global settings」の設定。</li>
+</ul>
+
+<p>-- Specify Default IMにチェックを入れる。<br>
+  -- Default input method を Mozc にする。</p>
+
+<ul>
+<li>「Mozc」の設定。</li>
+</ul>
+
+<p>-- Default Input modeはDirect Inputに。<br>
+  -- ついでにVIM協調モードも有効にしておく。</p>
+
+<ul>
+<li>「Mozc key bindings」の設定。</li>
+</ul>
+
+<p>-- [Mozc] on/off、両方に&quot;<Alt>space&quot;を設定。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br>
+チャンスがあれば、他のIMも試してみよっかな。<br>
+その他<br>
+- ibusからの乗り換え。キーバインド設定でaltが使えなかったため。。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Vaio Pro 13における手のひら検知 on Arch Linux]]></title>

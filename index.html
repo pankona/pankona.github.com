@@ -9,9 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。
-具体的な要望としては、 mozcを使いたい
-Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする） という二点なのだが、後者の「Alt + Space」 &hellip;">
+  <meta name="description" content="Raspberry PiにRailsを入れたときのこと。
+あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。
+（ちなみにRaspberry Piで動いているOSはArch Linuxです。） 第一の関門 Railsのいんすとーる Raspberry Piにsshで接続し、gem &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,92 @@ Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をト�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/29/rails-on-raspi/">Raspberry PiでRailsを動かしてみたときのこと</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-29T21:02:35+09:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/05/29/rails-on-raspi/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/05/29/rails-on-raspi/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Raspberry PiにRailsを入れたときのこと。<br>
+あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。<br>
+（ちなみにRaspberry Piで動いているOSはArch Linuxです。）</p>
+
+<h2 id="第一の関門-railsのいんすとーる">第一の関門 Railsのいんすとーる</h2>
+
+<p>Raspberry Piにsshで接続し、<code>gem install rails</code> とやるだけでRailsのインストールが始まる。<br>
+簡単、、、なのだがこれがなかなか終わらない。しかしこれはただ単純に待てばいいので難しいことは何もない。<br>
+終わるまで3時間程度。</p>
+
+<p>sshで接続してる場合、ほっとくとタイムアウトしてしまうと思われる。<br>
+その場合は、screen というので対策できる。nohup というのもある。<br>
+とにかく長時間放置でタイムアウトしちゃってもいい（ログアウトしちゃってもいい）対策は必要。</p>
+
+<h2 id="第二の関門-bundle-install">第二の関門 bundle install</h2>
+
+<p>Railsアプリを動かす前準備で <code>bundle install</code> 。やると思います。<br>
+これがまた死ぬほど時間かかる上に、インストール中に、</p>
+
+<p>killed</p>
+
+<p>とだけ出て終了しちゃう。当然だが bundle install は終わってない。<br>
+こっちのが問題だった。</p>
+
+<h3 id="killed-されちゃうのはメモリ不足のため">killed されちゃうのはメモリ不足のため</h3>
+
+<p>bundle install で Killed になっちゃうのは、メモリ不足のための模様。<br>
+これは、スワップ領域を設定してあげることで回避できた。<br>
+スワップ領域設定の方法については、例によってArch LinuxのWikiを参照した。<br>
+何でも載ってるね！ちなみ参照したページは<a href="https://wiki.archlinux.org/index.php/Swap_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">これ - Swap （日本語） - ArchWiki</a>。</p>
+
+<h3 id="killed-されなくなったけど、、、超時間かかる">killed されなくなったけど、、、超時間かかる</h3>
+
+<p>killed されなくなったのはいいけど、Railsのインストールのときと同じく、やたら時間がかかる。。。<br>
+9000秒くらいかかったので、実に3時間弱くらい。</p>
+
+<p>なんで時間かかるかというと、まず、**therubyracer**をインストールしようとしてるのが原因。<br>
+これ自体はいれたかったのでいいんだけど、どうやらこいつを入れるのに伴って、**libv8**というのが入る模様。<br>
+そんでこれがどうやら**ソースとってきてビルドしている**ようなのである。Raspberry Piになんてことさせるんや。。。<br>
+最近の割とパワーのあるPCなら10分程度で終わるらしいのだが。</p>
+
+<h2 id="まとめると">まとめると</h2>
+
+<p>RailsをRaspberry Piにインストールするためには、<br>
+* スワップ領域を拡大する（bundle install 中に killed されちゃうならば）<br>
+* あとはひたすら待つ。トータルで6時間くらい待つ。</p>
+
+<p>ちなみにRailsの起動がまたすっとろい。webrickじゃなくてthinにするとちょっとだけ早くなる気がする、とか。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -844,44 +930,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/23/second-post/">Second Post</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-23T21:05:35+09:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
-        
-           | <a href="/blog/2014/04/23/second-post/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/04/23/second-post/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"></div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -905,6 +953,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/29/rails-on-raspi/">Raspberry PiでRailsを動かしてみたときのこと</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/28/use-uim-mozc/">日本語入力のための設定メモ for Arch Linux</a>
       </li>
     
@@ -920,10 +972,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
         <a href="/blog/2014/05/14/arch-windows-multiboot-tips/">Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/05/raspi-livestream-web/">Raspberry Pi + カメラモジュール + Webで配信</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -932,11 +980,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 160.0%'>ArchLinux(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberry-pi' style='font-size: 120.0%'>Raspberry&nbsp;Pi(1)</a> <a href='/blog/categories/sofalseta' style='font-size: 120.0%'>その他(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 160.0%'>ArchLinux(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 160.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberry-pi' style='font-size: 120.0%'>Raspberry&nbsp;Pi(1)</a> <a href='/blog/categories/raspberrypi' style='font-size: 120.0%'>RaspberryPi(1)</a> <a href='/blog/categories/sofalseta' style='font-size: 120.0%'>その他(1)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberry-pi/'>Raspberry&nbsp;Pi (1)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberry-pi/'>Raspberry&nbsp;Pi (1)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (1)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
 </section>
 
   

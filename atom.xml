@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-05-28T22:33:21+09:00</updated>
+  <updated>2014-05-29T21:22:48+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry PiでRailsを動かしてみたときのこと]]></title>
+    <link href="http://pankona.github.io/blog/2014/05/29/rails-on-raspi/"/>
+    <updated>2014-05-29T21:02:35+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/05/29/rails-on-raspi</id>
+    <content type="html"><![CDATA[<p>Raspberry PiにRailsを入れたときのこと。<br>
+あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。<br>
+（ちなみにRaspberry Piで動いているOSはArch Linuxです。）</p>
+
+<h2 id="第一の関門-railsのいんすとーる">第一の関門 Railsのいんすとーる</h2>
+
+<p>Raspberry Piにsshで接続し、<code>gem install rails</code> とやるだけでRailsのインストールが始まる。<br>
+簡単、、、なのだがこれがなかなか終わらない。しかしこれはただ単純に待てばいいので難しいことは何もない。<br>
+終わるまで3時間程度。</p>
+
+<p>sshで接続してる場合、ほっとくとタイムアウトしてしまうと思われる。<br>
+その場合は、screen というので対策できる。nohup というのもある。<br>
+とにかく長時間放置でタイムアウトしちゃってもいい（ログアウトしちゃってもいい）対策は必要。</p>
+
+<h2 id="第二の関門-bundle-install">第二の関門 bundle install</h2>
+
+<p>Railsアプリを動かす前準備で <code>bundle install</code> 。やると思います。<br>
+これがまた死ぬほど時間かかる上に、インストール中に、</p>
+
+<p>killed</p>
+
+<p>とだけ出て終了しちゃう。当然だが bundle install は終わってない。<br>
+こっちのが問題だった。</p>
+
+<h3 id="killed-されちゃうのはメモリ不足のため">killed されちゃうのはメモリ不足のため</h3>
+
+<p>bundle install で Killed になっちゃうのは、メモリ不足のための模様。<br>
+これは、スワップ領域を設定してあげることで回避できた。<br>
+スワップ領域設定の方法については、例によってArch LinuxのWikiを参照した。<br>
+何でも載ってるね！ちなみ参照したページは<a href="https://wiki.archlinux.org/index.php/Swap_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">これ - Swap （日本語） - ArchWiki</a>。</p>
+
+<h3 id="killed-されなくなったけど、、、超時間かかる">killed されなくなったけど、、、超時間かかる</h3>
+
+<p>killed されなくなったのはいいけど、Railsのインストールのときと同じく、やたら時間がかかる。。。<br>
+9000秒くらいかかったので、実に3時間弱くらい。</p>
+
+<p>なんで時間かかるかというと、まず、**therubyracer**をインストールしようとしてるのが原因。<br>
+これ自体はいれたかったのでいいんだけど、どうやらこいつを入れるのに伴って、**libv8**というのが入る模様。<br>
+そんでこれがどうやら**ソースとってきてビルドしている**ようなのである。Raspberry Piになんてことさせるんや。。。<br>
+最近の割とパワーのあるPCなら10分程度で終わるらしいのだが。</p>
+
+<h2 id="まとめると">まとめると</h2>
+
+<p>RailsをRaspberry Piにインストールするためには、<br>
+* スワップ領域を拡大する（bundle install 中に killed されちゃうならば）<br>
+* あとはひたすら待つ。トータルで6時間くらい待つ。</p>
+
+<p>ちなみにRailsの起動がまたすっとろい。webrickじゃなくてthinにするとちょっとだけ早くなる気がする、とか。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[日本語入力のための設定メモ for Arch Linux]]></title>

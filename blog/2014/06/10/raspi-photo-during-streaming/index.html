@@ -5,13 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Raspberry PiでRailsを動かしてみたときのこと - make clean; make</title>
+  <title>RaspberryPiで動画を配信しながら写真も撮る - make clean; make</title>
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Raspberry PiにRailsを入れたときのこと。
-あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。
-（ちなみにRaspberry Piで動いているOSはArch Linuxです。） 第一の関門 Railsのインストール Raspberry Piにsshで接続し、gem &hellip;">
+  <meta name="description" content="Raspberry Pi＋カメラモジュールを使って、
+- 映像をWebページで配信しつつ。
+- いま写してる絵を保存する（写真を撮るみたいな）。写真を撮るボタンもWebページに備える。
+- 撮った写真はRaspberry Piにとりあえず保存しておいて、Webページ越しに確認できる。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pankona.github.io/blog/2014/05/29/rails-on-raspi">
+  <link rel="canonical" href="http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
@@ -80,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Raspberry PiでRailsを動かしてみたときのこと</h1>
+      <h1 class="entry-title">RaspberryPiで動画を配信しながら写真も撮る</h1>
     
     
       <p class="meta">
@@ -96,7 +97,7 @@
   
 
 
-<time datetime="2014-05-29T21:02:35+09:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time>
+<time datetime="2014-06-10T21:49:47+09:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://pankona.github.io">Comments</a>
@@ -106,57 +107,53 @@
   </header>
 
 
-<div class="entry-content"><p>Raspberry PiにRailsを入れたときのこと。<br>
-あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。<br>
-（ちなみにRaspberry Piで動いているOSはArch Linuxです。）</p>
+<div class="entry-content"><p>Raspberry Pi＋カメラモジュールを使って、<br>
+- 映像をWebページで配信しつつ。<br>
+- いま写してる絵を保存する（写真を撮るみたいな）。写真を撮るボタンもWebページに備える。<br>
+- 撮った写真はRaspberry Piにとりあえず保存しておいて、Webページ越しに確認できる。<br>
+というのをやってみた。<br>
+例によっていくつか躓いた点があるので、備忘録的に記しておく。</p>
 
-<h2 id="第一の関門-railsのインストール">第一の関門 Railsのインストール</h2>
+<h3 id="raspistillでの静止画撮影とmjpg-streamerでの動画配信は同時に行えない？">raspistillでの静止画撮影とmjpg-streamerでの動画配信は同時に行えない？</h3>
 
-<p>Raspberry Piにsshで接続し、<code>gem install rails</code> とやるだけでRailsのインストールが始まる。<br>
-簡単、、、なのだがこれがなかなか終わらない。しかしこれはただ単純に待てばいいので難しいことは何もない。<br>
-終わるまで3時間程度。</p>
+<p>どうやらそのようである。最初は、<br>
+「Webページ上にボタンを用意し、押されたら <code>raspistill</code> コマンドを発行する。」というやり方でやろうと思ったので当てが外れた感じ。<br>
+mjpg-streamerで動画を配信する状態になっている状態でraspistillコマンドを実行すると、エラーが吐かれてしまってうまくいかない。<br>
+mjpg-streamerにカメラデバイスを専有されてしまっているとか、そういう雰囲気でうまくいかないんだろうと予想。</p>
 
-<p>sshで接続してる場合、ほっとくとタイムアウトしてしまうと思われる。<br>
-その場合は、screen というので対策できる。nohup というのもある。<br>
-とにかく長時間放置でタイムアウトしちゃってもいい（ログアウトしちゃってもいい）対策は必要。</p>
+<h3 id="mjpg-streamerのsnapshot機能を使う">mjpg-streamerのsnapshot機能を使う</h3>
 
-<h2 id="第二の関門-bundle-install">第二の関門 bundle install</h2>
+<p>ではどうするかと言うと、mjpg-streamerには静止画を撮影する機能があるので、これを使ってみた。<br>
+<a href="https://code.google.com/p/mjpg-streamer/">mjpg-streamerのプロジェクトのページ</a>に少しサンプルがあって、例えば、mjpg-streamerを動作させている状態でもって、<br>
+<code>http://[Raspberry PiのIPアドレス]:8080/?action=stream</code> というURLにアクセスすれば動画配信になり、<br>
+<code>http://[Raspberry PiのIPアドレス]:8080/?action=snapshot</code> というURLにアクセスすれば、静止画の撮影になる。<br>
+これらは、同時に行うことができる。つまり、これをうまく使えば動画を配信しながら静止画の撮影ができるのでは、と。</p>
 
-<p>Railsアプリを動かす前準備で <code>bundle install</code> 。やると思います。<br>
-これがまた死ぬほど時間かかる上に、インストール中に、</p>
+<h3 id="wgetで画像を保存する">wgetで画像を保存する</h3>
 
-<p>killed</p>
+<p>Webページ上にボタンを用意しておくところまでは同じで、ボタンが押されたら <code>raspistill</code> の代わりに、<code>wget</code> を発行する。<br>
+例） <code>wget -O /tmp/picture.jpg http://[Raspberry PiのIPアドレス]:8080/?action=snapshot</code><br>
+上記の例では、/tmp/picture.jpgという名前でmjpg-streamerが出力している動画のスナップショットが保存される。<br>
+なので一応、動画配信しながら写真を撮る、という目的は達成できた。</p>
 
-<p>とだけ出て終了しちゃう。当然だが bundle install は終わってない。<br>
-こっちのが問題だった。</p>
+<p>できた、が、、、<br>
+動画配信中の画像をそのまま静止画にするだけなので、例えば静止画の画質を動画のものより良くする、とか、画像サイズを変更する、アス比を変更する、とかできない。<br>
+あくまで動画を一枚切り取っただけ、という感じ。まあ及第点か。。</p>
 
-<h3 id="killed-されちゃうのはメモリ不足のため">killed されちゃうのはメモリ不足のため</h3>
+<h3 id="撮った画像を確認するためにrailsアプリを作った">撮った画像を確認するためにRailsアプリを作った</h3>
 
-<p>bundle install で Killed になっちゃうのは、メモリ不足のための模様。<br>
-これは、スワップ領域を設定してあげることで回避できた。<br>
-スワップ領域設定の方法については、例によってArch LinuxのWikiを参照した。<br>
-何でも載ってるね！ちなみ参照したページは<a href="https://wiki.archlinux.org/index.php/Swap_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">これ - Swap （日本語） - ArchWiki</a>。</p>
-
-<h3 id="killed-されなくなったけど、、、超時間かかる">killed されなくなったけど、、、超時間かかる</h3>
-
-<p>killed されなくなったのはいいけど、Railsのインストールのときと同じく、やたら時間がかかる。。。<br>
-9000秒くらいかかったので、実に3時間弱くらい。</p>
-
-<p>なんで時間かかるかというと、まず、 <strong>therubyracer</strong> をインストールしようとしてるのが原因。<br>
-これ自体はいれたかったのでいいんだけど、どうやらこいつを入れるのに伴って、 <strong>libv8</strong> というのが入る模様。<br>
-そんでこれがどうやら <strong>ソースとってきてビルドしている</strong> ようなのである。Raspberry Piになんてことさせるんや。。。<br>
-最近の割とパワーのあるPCなら10分程度で終わるらしいのだが。</p>
-
-<h2 id="まとめると">まとめると</h2>
-
-<p>RailsをRaspberry Piにインストールするためには、</p>
+<p>Raspberry PiでRailsなんてどうなのか。でもちょっと作ってみた。<br>
+目下作り途中だが。とりあえず動いてるのを見るのは楽しい。<br>
+<a href="https://github.com/pankona/raspi_camera_server">https://github.com/pankona/raspi_camera_server</a></p>
 
 <ul>
-<li>スワップ領域を拡大する（bundle install 中に killed されちゃうならば）</li>
-<li>あとはひたすら待つ。トータルで6時間くらい待つ。</li>
+<li>あらかじめmjpg-streamerを起動した状態で、上記Railsアプリを動かす</li>
+<li>Railsアプリに何かからアクセスすると、動画が配信されている状態を確認できる</li>
+<li>動画をクリックすると、スナップショットが保存される。</li>
+<li>保存されたスナップショットは、動画下部に小さく表示される。</li>
 </ul>
 
-<p>ちなみにRailsの起動がまたすっとろい。webrickじゃなくてthinにするとちょっとだけ早くなる気がする、とか。</p>
+<p>みたいなもの。テスト書いたりして改善していこう。。</p>
 </div>
 
 
@@ -179,7 +176,7 @@
   
 
 
-<time datetime="2014-05-29T21:02:35+09:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time>
+<time datetime="2014-06-10T21:49:47+09:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
       
 
 <span class="categories">
@@ -193,7 +190,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/05/29/rails-on-raspi/" data-via="" data-counturl="http://pankona.github.io/blog/2014/05/29/rails-on-raspi/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/" data-via="" data-counturl="http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/" >Tweet</a>
   
   
   
@@ -202,10 +199,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/05/28/use-uim-mozc/" title="Previous Post: 日本語入力のための設定メモ for Arch Linux">&laquo; 日本語入力のための設定メモ for Arch Linux</a>
+        <a class="basic-alignment left" href="/blog/2014/05/29/rails-on-raspi/" title="Previous Post: Raspberry PiでRailsを動かしてみたときのこと">&laquo; Raspberry PiでRailsを動かしてみたときのこと</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/10/raspi-photo-during-streaming/" title="Next Post: RaspberryPiで動画を配信しながら写真も撮る">RaspberryPiで動画を配信しながら写真も撮る &raquo;</a>
       
     </p>
   </footer>
@@ -287,8 +282,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pankona.github.io/blog/2014/05/29/rails-on-raspi/';
-        var disqus_url = 'http://pankona.github.io/blog/2014/05/29/rails-on-raspi/';
+        var disqus_identifier = 'http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/';
+        var disqus_url = 'http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/';
         var disqus_script = 'embed.js';
       
     (function () {

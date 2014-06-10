@@ -46,7 +46,11 @@
     </url>
     <url>
         <loc>http://pankona.github.io/blog/2014/05/29/rails-on-raspi/</loc>
-        <lastmod>2014-05-29T21:22:35+09:00</lastmod>
+        <lastmod>2014-06-10T22:31:33+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/</loc>
+        <lastmod>2014-06-10T22:28:56+09:00</lastmod>
     </url>
     <url>
         <loc>http://pankona.github.io/robots.txt</loc>
@@ -54,10 +58,10 @@
     </url>
     <url>
         <loc>http://pankona.github.io/</loc>
-        <lastmod>2014-05-29T21:22:35+09:00</lastmod>
+        <lastmod>2014-06-10T22:31:33+09:00</lastmod>
     </url>
     <url>
         <loc>http://pankona.github.io/blog/archives/</loc>
-        <lastmod>2014-05-29T21:22:35+09:00</lastmod>
+        <lastmod>2014-06-10T22:31:33+09:00</lastmod>
     </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ArchLinux | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-06-10T22:32:17+09:00</updated>
+  <updated>2014-07-15T22:13:56+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -90,14 +90,12 @@ export XMODIFIERS=&#39;@im=uim&#39;<br>
 <li>「Mozc key bindings」の設定。</li>
 </ul>
 
-<p>-- [Mozc] on/off、両方に&quot;<Alt>space&quot;を設定。</p>
+<p>-- [Mozc] on/off、両方に&quot;&lt;Alt&gt;space&quot;を設定。</p>
 
 <h3 id="ここまでで">ここまでで</h3>
 
 <p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br>
-チャンスがあれば、他のIMも試してみよっかな。<br>
-その他<br>
-- ibusからの乗り換え。キーバインド設定でaltが使えなかったため。。</p>
+チャンスがあれば、他のIMも試してみよっかな。</p>
 ]]></content>
   </entry>
   

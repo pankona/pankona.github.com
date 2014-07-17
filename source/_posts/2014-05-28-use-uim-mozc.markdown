@@ -64,12 +64,10 @@ export XMODIFIERS='@im=uim'
 
 - 「Mozc key bindings」の設定。
 
-  -- [Mozc] on/off、両方に"<Alt>space"を設定。
+  -- [Mozc] on/off、両方に"\<Alt\>space"を設定。
 
 ### ここまでで
 
 Alt + Space でDirect Inputと日本語入力がトグルできるようになった。
 チャンスがあれば、他のIMも試してみよっかな。
-その他
-- ibusからの乗り換え。キーバインド設定でaltが使えなかったため。。
 

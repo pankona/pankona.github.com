@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-07-15T22:13:56+09:00</updated>
+  <updated>2014-07-17T22:01:50+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,98 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PiTFTをArch Linux on Raspberry Piで動かすのに苦戦]]></title>
+    <link href="http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/"/>
+    <updated>2014-07-17T21:11:11+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux</id>
+    <content type="html"><![CDATA[<p><a href="http://www.adafruit.com/products/1601">PiTFT</a>を購入。<br>
+さっそくRaspberry Piで動かそうとしてみたところ、これがなかなかうまくいかず。<br>
+3日程粘ってようやく動いた。やり方を記載しておく。</p>
+
+<p>Raspberry Piには、Arch Linuxが載っている前提です。</p>
+
+<h3 id="参考になるページ">参考になるページ</h3>
+
+<p><a href="https://github.com/notro/fbtft/wiki">notroさんのfbtftに関するWiki</a>。本当に感謝。Great。<br>
+ただ、ここに書いてある手順を踏んだだけではうまく動かなかった。<br>
+以下、顛末と動かすまでの手順。</p>
+
+<h4 id="rpi-updateが使える状態にする">rpi-updateが使える状態にする</h4>
+
+<p>以下、Raspberry Pi上でのコマンド入力。<br>
+以下のコマンドでrpi-updateを取得＆実行可能権限付与</p>
+
+<p><code>$ wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update</code><br>
+<code>$ chmod +x ./rpi-update</code></p>
+
+<p>rpi-updateは適当な場所に移しておく。パスが通っているところに置いておくと便利。<br>
+以下、rpi-updateがある場所にパスが通っている前提で記載。</p>
+
+<h3 id="rpi-updateを使ってkernelをアップデート">rpi-updateを使ってKernelをアップデート</h3>
+
+<p>FBTFTドライバがビルトインされているとされるバージョンにしてみる。</p>
+
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
+
+<p>なんやかや起こったあと、リブート。</p>
+
+<p><code>$ sudo reboot</code></p>
+
+<p>これでFBTFTドライバが準備オッケーになっているはず、なのだが…？</p>
+
+<h3 id="fbtft_deviceがない">fbtft_deviceがない</h3>
+
+<p>fbtft_deviceを有効にするために、modprobeしてみる。</p>
+
+<p><code>$ sudo modprobe fbtft_device name=adafruit22</code></p>
+
+<p>すると帰ってきた答えは、</p>
+
+<p><code>FATAL: Module fbtft_device not found.</code></p>
+
+<p>とのこと。実際に探してみたところ、fbtft_device.koというモジュールは存在していない様子。</p>
+
+<h3 id="いろいろやってfbtft_deviceを用意する">いろいろやってfbtft_deviceを用意する</h3>
+
+<p>fbtft_deviceを求めて色々さまよったところ、上述のKernelアップデートの際に、</p>
+
+<p><code>sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update</code></p>
+
+<p>とビルトインではなく、loadable moduleとしてfbtft_deviceが現れるやつをチョイスしてみたところ、<br>
+<code>sudo modprobe fbtft_device name=adafruit22</code>がnot foundではなく、別のエラーになった。<br>
+探してみたところ、実際にモジュールは存在した。ただし正常にmodprobeできていない。</p>
+
+<p>FBTFTのモジュールは、<br>
+<code>/lib/modules/$(uname -r)/kernel/video/fbtft</code><br>
+に置かれている。これをどこか別の場所にコピーしておく。後々使う。</p>
+
+<h3 id="rpi-updateを使ってfbtftビルトインバージョンに戻す">rpi-updateを使ってFBTFTビルトインバージョンに戻す</h3>
+
+<p>上で一回やってるやつをやって、FBTFTビルトインバージョンのKernelに戻す。</p>
+
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code><br>
+<code>$ sudo reboot</code></p>
+
+<h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す">戻したのち、コピーしておいたfbtftを所定の位置に戻す</h3>
+
+<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>の位置に戻す。</p>
+
+<h3 id="depmodする。">depmodする。</h3>
+
+<p><code>sudo depmod -a</code></p>
+
+<h3 id="fbtft_deviceをmodprobeする">fbtft_deviceをmodprobeする</h3>
+
+<p>not foundとは言われなくなり、ちゃんとロードされる。はず。</p>
+
+<h3 id="あとはnotroさんのところの手順に従う">あとはnotroさんのところの手順に従う</h3>
+
+<p>/boot/cmdline.txtであるとか、もろもろ変更する。<br>
+PiTFTはきっと動き出す。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[RaspberryPiで動画を配信しながら写真も撮る]]></title>

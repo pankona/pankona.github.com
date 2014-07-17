@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Raspberry Pi + カメラモジュール + Webで配信 - make clean; make</title>
+  <title>PiTFTをArch Linux on Raspberry Piで動かすのに苦戦 - make clean; make</title>
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。
-いろいろ悩んだ点もあったので、やり方の結論をメモしておく。
-ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。 良さそうな例 参考にしたウェブサイトは↓。 &hellip;">
+  <meta name="description" content="PiTFTを購入。
+さっそくRaspberry Piで動かそうとしてみたところ、これがなかなかうまくいかず。
+3日程粘ってようやく動いた。やり方を記載しておく。 Raspberry Piには、Arch Linuxが載っている前提です。 参考になるページ notroさんのfbtftに関するWiki。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web">
+  <link rel="canonical" href="http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Raspberry Pi + カメラモジュール + Webで配信</h1>
+      <h1 class="entry-title">PiTFTをArch Linux on Raspberry Piで動かすのに苦戦</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2014-05-05T23:38:52+09:00" pubdate data-updated="true">May 5<span>th</span>, 2014</time>
+<time datetime="2014-07-17T21:11:11+09:00" pubdate data-updated="true">Jul 17<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://pankona.github.io">Comments</a>
@@ -106,54 +106,90 @@
   </header>
 
 
-<div class="entry-content"><p>Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。<br>
-いろいろ悩んだ点もあったので、やり方の結論をメモしておく。<br>
-ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。</p>
+<div class="entry-content"><p><a href="http://www.adafruit.com/products/1601">PiTFT</a>を購入。<br>
+さっそくRaspberry Piで動かそうとしてみたところ、これがなかなかうまくいかず。<br>
+3日程粘ってようやく動いた。やり方を記載しておく。</p>
 
-<h2 id="良さそうな例">良さそうな例</h2>
+<p>Raspberry Piには、Arch Linuxが載っている前提です。</p>
 
-<p>参考にしたウェブサイトは↓。結論からするとここだけでOKだった。<br>
-<a href="https://github.com/jacksonliam/mjpg-streamer">https://github.com/jacksonliam/mjpg-streamer</a></p>
+<h3 id="参考になるページ">参考になるページ</h3>
 
-<h2 id="上記のリポジトリの情報を元にやったこと">上記のリポジトリの情報を元にやったこと</h2>
+<p><a href="https://github.com/notro/fbtft/wiki">notroさんのfbtftに関するWiki</a>。本当に感謝。Great。<br>
+ただ、ここに書いてある手順を踏んだだけではうまく動かなかった。<br>
+以下、顛末と動かすまでの手順。</p>
 
-<h3 id="mjpg-streamerのインストール。">mjpg-streamerのインストール。</h3>
+<h4 id="rpi-updateが使える状態にする">rpi-updateが使える状態にする</h4>
 
-<p>上記のリポジトリからソースコードをもってきてビルド。ビルド方法も上記のリポジトリのREADMEに記載されている。<br>
-pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは使わない。それらはinput_raspicam.soを作ってくれないため。</p>
+<p>以下、Raspberry Pi上でのコマンド入力。<br>
+以下のコマンドでrpi-updateを取得＆実行可能権限付与</p>
 
-<h3 id="超簡単にhtmlを書く。">超簡単にhtmlを書く。</h3>
+<p><code>$ wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update</code><br>
+<code>$ chmod +x ./rpi-update</code></p>
 
-<p>下記のような。とりあえずサンプルなので、簡単に。。<br>
-書いたHTMLは、任意の場所におく。ここではひとまず、<code>~/www/index.html</code>として置いたとする。</p>
+<p>rpi-updateは適当な場所に移しておく。パスが通っているところに置いておくと便利。<br>
+以下、rpi-updateがある場所にパスが通っている前提で記載。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>Raspberry Pi<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/?action=stream&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<h3 id="rpi-updateを使ってkernelをアップデート">rpi-updateを使ってKernelをアップデート</h3>
 
-<h3 id="配信するコマンドを実行する。">配信するコマンドを実行する。</h3>
+<p>FBTFTドライバがビルトインされているとされるバージョンにしてみる。</p>
 
-<p>このコマンドも件のリポジトリに記載されているが、一応。<br>
-ライブラリ（.so）へのパスが通ってなかったら、LD_LIBRARY_PATHを設定してライブラリへのパスを通すか、もしくはライブラリをフルパスで指定する。</p>
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
 
-<p><code>mjpg_streamer -o &quot;output_http.so -w ./www&quot; -i &quot;input_raspicam.so -x 1280 -y 720 -fps 15 -ex night&quot;</code></p>
+<p>なんやかや起こったあと、リブート。</p>
 
-<p>こんな感じに入力してやると、カメラが動き出して動画配信が始まる。<br>
-別のPC等からブラウザで、</p>
+<p><code>$ sudo reboot</code></p>
 
-<p><code>http://[Raspberry PiのIPアドレス]:8080/</code></p>
+<p>これでFBTFTドライバが準備オッケーになっているはず、なのだが…？</p>
 
-<p>にアクセスしてあげると、カメラが写してる画像が配信されているのが確認できると思われる。</p>
+<h3 id="fbtft_deviceがない">fbtft_deviceがない</h3>
+
+<p>fbtft_deviceを有効にするために、modprobeしてみる。</p>
+
+<p><code>$ sudo modprobe fbtft_device name=adafruit22</code></p>
+
+<p>すると帰ってきた答えは、</p>
+
+<p><code>FATAL: Module fbtft_device not found.</code></p>
+
+<p>とのこと。実際に探してみたところ、fbtft_device.koというモジュールは存在していない様子。</p>
+
+<h3 id="いろいろやってfbtft_deviceを用意する">いろいろやってfbtft_deviceを用意する</h3>
+
+<p>fbtft_deviceを求めて色々さまよったところ、上述のKernelアップデートの際に、</p>
+
+<p><code>sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update</code></p>
+
+<p>とビルトインではなく、loadable moduleとしてfbtft_deviceが現れるやつをチョイスしてみたところ、<br>
+<code>sudo modprobe fbtft_device name=adafruit22</code>がnot foundではなく、別のエラーになった。<br>
+探してみたところ、実際にモジュールは存在した。ただし正常にmodprobeできていない。</p>
+
+<p>FBTFTのモジュールは、<br>
+<code>/lib/modules/$(uname -r)/kernel/video/fbtft</code><br>
+に置かれている。これをどこか別の場所にコピーしておく。後々使う。</p>
+
+<h3 id="rpi-updateを使ってfbtftビルトインバージョンに戻す">rpi-updateを使ってFBTFTビルトインバージョンに戻す</h3>
+
+<p>上で一回やってるやつをやって、FBTFTビルトインバージョンのKernelに戻す。</p>
+
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code><br>
+<code>$ sudo reboot</code></p>
+
+<h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す">戻したのち、コピーしておいたfbtftを所定の位置に戻す</h3>
+
+<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>の位置に戻す。</p>
+
+<h3 id="depmodする。">depmodする。</h3>
+
+<p><code>sudo depmod -a</code></p>
+
+<h3 id="fbtft_deviceをmodprobeする">fbtft_deviceをmodprobeする</h3>
+
+<p>not foundとは言われなくなり、ちゃんとロードされる。はず。</p>
+
+<h3 id="あとはnotroさんのところの手順に従う">あとはnotroさんのところの手順に従う</h3>
+
+<p>/boot/cmdline.txtであるとか、もろもろ変更する。<br>
+PiTFTはきっと動き出す。</p>
 </div>
 
 
@@ -176,7 +212,7 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
   
 
 
-<time datetime="2014-05-05T23:38:52+09:00" pubdate data-updated="true">May 5<span>th</span>, 2014</time>
+<time datetime="2014-07-17T21:11:11+09:00" pubdate data-updated="true">Jul 17<span>th</span>, 2014</time>
       
 
 <span class="categories">
@@ -190,7 +226,7 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/" data-via="" data-counturl="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/" data-via="" data-counturl="http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/" >Tweet</a>
   
   
   
@@ -199,10 +235,8 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/04/28/fix-pygments/" title="Previous Post: Pygmentsがエラーを吐きやがるので修正">&laquo; Pygmentsがエラーを吐きやがるので修正</a>
+        <a class="basic-alignment left" href="/blog/2014/06/10/raspi-photo-during-streaming/" title="Previous Post: RaspberryPiで動画を配信しながら写真も撮る">&laquo; RaspberryPiで動画を配信しながら写真も撮る</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/05/14/arch-windows-multiboot-tips/" title="Next Post: Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録">Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録 &raquo;</a>
       
     </p>
   </footer>
@@ -284,8 +318,8 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/';
-        var disqus_url = 'http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/';
+        var disqus_identifier = 'http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/';
+        var disqus_url = 'http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/';
         var disqus_script = 'embed.js';
       
     (function () {

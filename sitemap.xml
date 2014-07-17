@@ -26,7 +26,7 @@
     </url>
     <url>
         <loc>http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/</loc>
-        <lastmod>2014-05-14T19:16:48+09:00</lastmod>
+        <lastmod>2014-07-17T21:34:09+09:00</lastmod>
     </url>
     <url>
         <loc>http://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/</loc>
@@ -50,7 +50,11 @@
     </url>
     <url>
         <loc>http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/</loc>
-        <lastmod>2014-06-10T22:28:56+09:00</lastmod>
+        <lastmod>2014-07-17T21:33:40+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/</loc>
+        <lastmod>2014-07-17T22:01:36+09:00</lastmod>
     </url>
     <url>
         <loc>http://pankona.github.io/robots.txt</loc>
@@ -58,10 +62,10 @@
     </url>
     <url>
         <loc>http://pankona.github.io/</loc>
-        <lastmod>2014-07-15T22:13:22+09:00</lastmod>
+        <lastmod>2014-07-17T22:01:36+09:00</lastmod>
     </url>
     <url>
         <loc>http://pankona.github.io/blog/archives/</loc>
-        <lastmod>2014-07-15T22:13:22+09:00</lastmod>
+        <lastmod>2014-07-17T22:01:36+09:00</lastmod>
     </url>
 </urlset>

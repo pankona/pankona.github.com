@@ -21,7 +21,7 @@ Raspberry Piには、Arch Linuxが載っている前提です。
 #### rpi-updateが使える状態にする
 
 以下、Raspberry Pi上でのコマンド入力。
-以下のコマンドでrpi-updateを取得＆実行可能権限付与
+以下のコマンドでrpi-updateを取得＆実行可能権限付与。
 
 `$ wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update`
 `$ chmod +x ./rpi-update`

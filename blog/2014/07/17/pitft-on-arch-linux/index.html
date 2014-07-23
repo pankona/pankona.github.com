@@ -9,9 +9,10 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="PiTFTを購入。
+  <meta name="description" content="2014/07/23/Wed 追記 以下のポストに誤りがあることがわかったので、訂正。
+誤っている部分には打ち消し線を入れておく。 PiTFTを購入。
 さっそくRaspberry Piで動かそうとしてみたところ、これがなかなかうまくいかず。
-3日程粘ってようやく動いた。やり方を記載しておく。 Raspberry Piには、Arch Linuxが載っている前提です。 参考になるページ notroさんのfbtftに関するWiki。 &hellip;">
+3日程粘ってようやく動いた。やり方を記載しておく。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,7 +107,14 @@
   </header>
 
 
-<div class="entry-content"><p><a href="http://www.adafruit.com/products/1601">PiTFT</a>を購入。<br>
+<div class="entry-content"><p><strong>2014/07/23/Wed 追記</strong></p>
+
+<p>以下のポストに誤りがあることがわかったので、訂正。<br>
+誤っている部分には打ち消し線を入れておく。</p>
+
+<hr>
+
+<p><a href="http://www.adafruit.com/products/1601">PiTFT</a>を購入。<br>
 さっそくRaspberry Piで動かそうとしてみたところ、これがなかなかうまくいかず。<br>
 3日程粘ってようやく動いた。やり方を記載しておく。</p>
 
@@ -121,7 +129,7 @@
 <h4 id="rpi-updateが使える状態にする">rpi-updateが使える状態にする</h4>
 
 <p>以下、Raspberry Pi上でのコマンド入力。<br>
-以下のコマンドでrpi-updateを取得＆実行可能権限付与</p>
+以下のコマンドでrpi-updateを取得＆実行可能権限付与。</p>
 
 <p><code>$ wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update</code><br>
 <code>$ chmod +x ./rpi-update</code></p>
@@ -141,50 +149,68 @@
 
 <p>これでFBTFTドライバが準備オッケーになっているはず、なのだが…？</p>
 
-<h3 id="fbtft_deviceがない">fbtft_deviceがない</h3>
+<h3 id="fbtft_deviceがない"><del>fbtft_deviceがない</del></h3>
 
-<p>fbtft_deviceを有効にするために、modprobeしてみる。</p>
+<p><del>fbtft_deviceを有効にするために、modprobeしてみる。</del></p>
 
 <p><code>$ sudo modprobe fbtft_device name=adafruit22</code></p>
 
-<p>すると帰ってきた答えは、</p>
+<p><del>すると帰ってきた答えは、</del></p>
 
 <p><code>FATAL: Module fbtft_device not found.</code></p>
 
-<p>とのこと。実際に探してみたところ、fbtft_device.koというモジュールは存在していない様子。</p>
+<p><del>とのこと。実際に探してみたところ、fbtft_device.koというモジュールは存在していない様子。</del></p>
 
-<h3 id="いろいろやってfbtft_deviceを用意する">いろいろやってfbtft_deviceを用意する</h3>
+<hr>
 
-<p>fbtft_deviceを求めて色々さまよったところ、上述のKernelアップデートの際に、</p>
+<p><strong>2014/07/23/Wed 訂正</strong></p>
+
+<p>結論から言うと上記の挙動であっていた。<br>
+<code>BRANCH=builtin</code>を選択した場合はfbtft_deviceがloadableなモジュールとして現れない、<br>
+つまり modprobe で見つからないと言われるのは正しかった。</p>
+
+<p>上記の状態で、あとは /boot/cmdline.txt に然るべき内容を追記するだけでOK。<br>
+その後PiTFTを接続し、Raspberry Piを再起動すれば画面に何か映るはず。</p>
+
+<p>よって以下の手順はすべて無駄であるが、<br>
+以下の手順が誤りであることを示すために残しておく。。</p>
+
+<p>以下、無駄な手順メモ。全く不要。</p>
+
+<hr>
+
+<h3 id="いろいろやってfbtft_deviceを用意する"><del>いろいろやってfbtft_deviceを用意する</del></h3>
+
+<p><del>fbtft_deviceを求めて色々さまよったところ、上述のKernelアップデートの際に、</del></p>
 
 <p><code>sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update</code></p>
 
-<p>とビルトインではなく、loadable moduleとしてfbtft_deviceが現れるやつをチョイスしてみたところ、<br>
+<p><del>とビルトインではなく、loadable moduleとしてfbtft_deviceが現れるやつをチョイスしてみたところ、</del><br>
 <code>sudo modprobe fbtft_device name=adafruit22</code>がnot foundではなく、別のエラーになった。<br>
-探してみたところ、実際にモジュールは存在した。ただし正常にmodprobeできていない。</p>
+<del>探してみたところ、実際にモジュールは存在した。ただし正常にmodprobeできていない。</del></p>
 
-<p>FBTFTのモジュールは、<br>
+<p><del>FBTFTのモジュールは、</del><br>
 <code>/lib/modules/$(uname -r)/kernel/video/fbtft</code><br>
-に置かれている。これをどこか別の場所にコピーしておく。後々使う。</p>
+<del>に置かれている。これをどこか別の場所にコピーしておく。後々使う。</del></p>
 
-<h3 id="rpi-updateを使ってfbtftビルトインバージョンに戻す">rpi-updateを使ってFBTFTビルトインバージョンに戻す</h3>
+<h3 id="rpi-updateを使ってfbtftビルトインバージョンに戻す"><del>rpi-updateを使ってFBTFTビルトインバージョンに戻す</del></h3>
 
-<p>上で一回やってるやつをやって、FBTFTビルトインバージョンのKernelに戻す。</p>
+<p><del>上で一回やってるやつをやって、FBTFTビルトインバージョンのKernelに戻す。</del></p>
 
 <p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code><br>
 <code>$ sudo reboot</code></p>
 
-<h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す">戻したのち、コピーしておいたfbtftを所定の位置に戻す</h3>
+<h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す"><del>戻したのち、コピーしておいたfbtftを所定の位置に戻す</del></h3>
 
-<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>の位置に戻す。</p>
+<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>~~の位置に戻す。~~</p>
 
-<h3 id="depmodする。">depmodする。</h3>
+<h3 id="depmodする。"><del>depmodする。</del></h3>
 
 <p><code>sudo depmod -a</code></p>
 
-<h3 id="fbtft_deviceをmodprobeする">fbtft_deviceをmodprobeする</h3>
+<h3 id="fbtft_deviceをmodprobeする"><del>fbtft_deviceをmodprobeする</del></h3>
 
-<p>not foundとは言われなくなり、ちゃんとロードされる。はず。</p>
+<p><del>not foundとは言われなくなり、ちゃんとロードされる。はず。</del></p>
 
 <h3 id="あとはnotroさんのところの手順に従う">あとはnotroさんのところの手順に従う</h3>
 

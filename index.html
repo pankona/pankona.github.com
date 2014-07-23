@@ -9,10 +9,8 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="2014/07/23/Wed 追記 以下のポストに誤りがあることがわかったので、訂正。
-誤っている部分には打ち消し線を入れておく。 PiTFTを購入。
-さっそくRaspberry Piで動かそうとしてみたところ、これがなかなかうまくいかず。
-3日程粘ってようやく動いた。やり方を記載しておく。 &hellip;">
+  <meta name="description" content="前回に引き続き、PiTFTの話題。 前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。
+タッチパネルの設定がまだだったので、手順を簡単に記しておく。 例によって、Raspberry PiにはArch Linuxが載っている前提。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +76,84 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/23/raspi-touch-panel/">PiTFTのタッチパネルを動作させる</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T21:54:58+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
+        
+           | <a href="/blog/2014/07/23/raspi-touch-panel/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/07/23/raspi-touch-panel/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前回に引き続き、PiTFTの話題。</p>
+
+<p>前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。<br>
+タッチパネルの設定がまだだったので、手順を簡単に記しておく。</p>
+
+<p>例によって、Raspberry PiにはArch Linuxが載っている前提。</p>
+
+<h3 id="タッチパネルのドライバーをロードする">タッチパネルのドライバーをロードする</h3>
+
+<p>前回、FBTFTがビルトインされているカーネルを以下のコマンドでインストールした。</p>
+
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
+
+<p>これが正しく入っていれば、タッチパネルのドライバもカーネルに含まれているはず。<br>
+ただし、画面に何かを表示させる時と異なり、手動でドライバをロードする必要がある。</p>
+
+<p>以下のコマンドで、タッチパネルのドライバをロードする。</p>
+
+<p>@@@@ 忘れたのであとで追記する @@@@</p>
+
+<p>基本的にはこれだけで動作すると思われる。<br>
+例によって<a href="https://github.com/notro/fbtft/wiki">notroさんのところのWiki</a>に載っている内容だが、<br>
+notroさんのところは充実しすぎて逆に迷う気がするので、備忘録的に残しておくことにする。。</p>
+
+<h3 id="動いているか確かめる方法">動いているか確かめる方法</h3>
+
+<p>evtestを用いて確かめられる。<br>
+evtestを起動したのちにタッチパネルをぐりぐり触ってみると、<br>
+タッチイベントの詳細がコンソールに出力される。</p>
+
+<p>また、正常にドライバがロードされると、<code>/dev/input/touchpanel</code>なるファイルが現れるはずである。<br>
+ちなみにこれはeventXへのシンボリックリンクになっている。<br>
+このファイルの有無でもドライバのロードが正しく行われたか判断できると思われる。</p>
+
+<h3 id="要追記事項">要追記事項</h3>
+
+<ul>
+<li>ドライバロードのコマンドをちゃんと確認する。</li>
+<li>キャリブレーション（回転した画面への対応）の方法。</li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -989,90 +1065,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/26/octopress-custom/">OctopressにGravatarの画像が出るようにしてみた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-26T20:19:19+09:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/04/26/octopress-custom/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/04/26/octopress-custom/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>引き続きOctopressをカスタマイズしていく。</p>
-
-<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
-
-<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br>
-自分のブログ感が出て良い。</p>
-
-<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
-
-<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
-
-<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br>
-それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
-
-<p>about.html はこんな感じに。</p>
-
-<figure class='code'><figcaption><span>about.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  {% if site.gravatar_email %}
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  {% endif %}
-</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
-</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
-
-<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br>
-設定方法をざっくり書いておくと、</p>
-
-<p><span><br>
-1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br>
-2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br>
-</span></p>
-
-<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1096,6 +1088,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/23/raspi-touch-panel/">PiTFTのタッチパネルを動作させる</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/17/pitft-on-arch-linux/">PiTFTをArch Linux on Raspberry Piで動かすのに苦戦</a>
       </li>
     
@@ -1111,10 +1107,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
         <a href="/blog/2014/05/28/use-uim-mozc/">日本語入力のための設定メモ for Arch Linux</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/19/about-google-search/">Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1123,11 +1115,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 145.0%'>ArchLinux(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 145.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(4)</a> <a href='/blog/categories/sofalseta' style='font-size: 115.0%'>その他(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 136.0%'>ArchLinux(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 136.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(5)</a> <a href='/blog/categories/sofalseta' style='font-size: 112.0%'>その他(1)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (4)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (5)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
 </section>
 
   

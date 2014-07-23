@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>OctopressにGravatarの画像が出るようにしてみた - make clean; make</title>
+  <title>PiTFTのタッチパネルを動作させる - make clean; make</title>
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="引き続きOctopressをカスタマイズしていく。 サイドバーにGravatarの画像を出すように 京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
-自分のブログ感が出て良い。 以下のGravatarプラグインを使わせてもらいました。多謝。 joet3ch/gravatar- &hellip;">
+  <meta name="description" content="前回に引き続き、PiTFTの話題。 前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。
+タッチパネルの設定がまだだったので、手順を簡単に記しておく。 例によって、Raspberry PiにはArch Linuxが載っている前提。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pankona.github.io/blog/2014/04/26/octopress-custom">
+  <link rel="canonical" href="http://pankona.github.io/blog/2014/07/23/raspi-touch-panel">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">OctopressにGravatarの画像が出るようにしてみた</h1>
+      <h1 class="entry-title">PiTFTのタッチパネルを動作させる</h1>
     
     
       <p class="meta">
@@ -95,7 +95,7 @@
   
 
 
-<time datetime="2014-04-26T20:19:19+09:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+<time datetime="2014-07-23T21:54:58+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://pankona.github.io">Comments</a>
@@ -105,52 +105,46 @@
   </header>
 
 
-<div class="entry-content"><p>引き続きOctopressをカスタマイズしていく。</p>
+<div class="entry-content"><p>前回に引き続き、PiTFTの話題。</p>
 
-<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
+<p>前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。<br>
+タッチパネルの設定がまだだったので、手順を簡単に記しておく。</p>
 
-<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br>
-自分のブログ感が出て良い。</p>
+<p>例によって、Raspberry PiにはArch Linuxが載っている前提。</p>
 
-<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
+<h3 id="タッチパネルのドライバーをロードする">タッチパネルのドライバーをロードする</h3>
 
-<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
+<p>前回、FBTFTがビルトインされているカーネルを以下のコマンドでインストールした。</p>
 
-<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br>
-それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
 
-<p>about.html はこんな感じに。</p>
+<p>これが正しく入っていれば、タッチパネルのドライバもカーネルに含まれているはず。<br>
+ただし、画面に何かを表示させる時と異なり、手動でドライバをロードする必要がある。</p>
 
-<figure class='code'><figcaption><span>about.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  {% if site.gravatar_email %}
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  {% endif %}
-</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
-</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>以下のコマンドで、タッチパネルのドライバをロードする。</p>
 
-<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
+<p>@@@@ 忘れたのであとで追記する @@@@</p>
 
-<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br>
-設定方法をざっくり書いておくと、</p>
+<p>基本的にはこれだけで動作すると思われる。<br>
+例によって<a href="https://github.com/notro/fbtft/wiki">notroさんのところのWiki</a>に載っている内容だが、<br>
+notroさんのところは充実しすぎて逆に迷う気がするので、備忘録的に残しておくことにする。。</p>
 
-<p><span><br>
-1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br>
-2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br>
-</span></p>
+<h3 id="動いているか確かめる方法">動いているか確かめる方法</h3>
 
-<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
+<p>evtestを用いて確かめられる。<br>
+evtestを起動したのちにタッチパネルをぐりぐり触ってみると、<br>
+タッチイベントの詳細がコンソールに出力される。</p>
+
+<p>また、正常にドライバがロードされると、<code>/dev/input/touchpanel</code>なるファイルが現れるはずである。<br>
+ちなみにこれはeventXへのシンボリックリンクになっている。<br>
+このファイルの有無でもドライバのロードが正しく行われたか判断できると思われる。</p>
+
+<h3 id="要追記事項">要追記事項</h3>
+
+<ul>
+<li>ドライバロードのコマンドをちゃんと確認する。</li>
+<li>キャリブレーション（回転した画面への対応）の方法。</li>
+</ul>
 </div>
 
 
@@ -173,12 +167,12 @@
   
 
 
-<time datetime="2014-04-26T20:19:19+09:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+<time datetime="2014-07-23T21:54:58+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ</a>
+    <a class='category' href='/blog/categories/raspberrypi/'>RaspberryPi</a>
   
 </span>
 
@@ -187,7 +181,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/04/26/octopress-custom/" data-via="" data-counturl="http://pankona.github.io/blog/2014/04/26/octopress-custom/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/07/23/raspi-touch-panel/" data-via="" data-counturl="http://pankona.github.io/blog/2014/07/23/raspi-touch-panel/" >Tweet</a>
   
   
   
@@ -196,10 +190,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/04/25/add-category-list/" title="Previous Post: Octopressにタグクラウドとカテゴリリストを追加してみた">&laquo; Octopressにタグクラウドとカテゴリリストを追加してみた</a>
+        <a class="basic-alignment left" href="/blog/2014/07/17/pitft-on-arch-linux/" title="Previous Post: PiTFTをArch Linux on Raspberry Piで動かすのに苦戦">&laquo; PiTFTをArch Linux on Raspberry Piで動かすのに苦戦</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/28/fix-pygments/" title="Next Post: Pygmentsがエラーを吐きやがるので修正">Pygmentsがエラーを吐きやがるので修正 &raquo;</a>
       
     </p>
   </footer>
@@ -281,8 +273,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pankona.github.io/blog/2014/04/26/octopress-custom/';
-        var disqus_url = 'http://pankona.github.io/blog/2014/04/26/octopress-custom/';
+        var disqus_identifier = 'http://pankona.github.io/blog/2014/07/23/raspi-touch-panel/';
+        var disqus_url = 'http://pankona.github.io/blog/2014/07/23/raspi-touch-panel/';
         var disqus_script = 'embed.js';
       
     (function () {

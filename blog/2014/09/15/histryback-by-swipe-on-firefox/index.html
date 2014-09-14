@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopressにタグクラウドとカテゴリリストを追加してみた - make clean; make</title>
+  <title>二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux - make clean; make</title>
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。
-見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。 tag_cloud、category_listの追加については以下のページを参考にさせていただきました &hellip;">
+  <meta name="description" content="ブラウザはFirefoxを好んで使っている。
+VimperatorとかPentadactylがあるおかげである。 いままで放置していた問題があって、それは二本指スワイプの挙動設定。 二本指で左右にスワイプしたときに、ヒストリーバック・ヒストリーフォワード、
+いわゆる「戻る」「進む」 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pankona.github.io/blog/2014/04/25/add-category-list">
+  <link rel="canonical" href="http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
@@ -79,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopressにタグクラウドとカテゴリリストを追加してみた</h1>
+      <h1 class="entry-title">二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux</h1>
     
     
       <p class="meta">
@@ -95,7 +96,7 @@
   
 
 
-<time datetime="2014-04-25T21:11:53+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
+<time datetime="2014-09-15T00:30:08+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://pankona.github.io">Comments</a>
@@ -105,13 +106,73 @@
   </header>
 
 
-<div class="entry-content"><p>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。<br>
-見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。</p>
+<div class="entry-content"><p>ブラウザはFirefoxを好んで使っている。<br>
+VimperatorとかPentadactylがあるおかげである。</p>
 
-<p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。<br>
-<a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
+<p>いままで放置していた問題があって、それは二本指スワイプの挙動設定。</p>
 
-<p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>
+<p>二本指で左右にスワイプしたときに、ヒストリーバック・ヒストリーフォワード、<br>
+いわゆる「戻る」「進む」をやってほしいんだけど、これの設定がいまいちわからず、放置していた。<br>
+ようやく設定方法がわかったので記しておく。そっこー忘れそうであるので。</p>
+
+<p>ちなみに、「on Arch Linux」と題しているが、おそらくArchに限らないLinux全般の話ではないかと想像。<br>
+UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方向二本指スワイプが仕事をしてくれなかったので。</p>
+
+<p>では、以下設定手順。</p>
+
+<h2 id="synclientの確認と設定">synclientの確認と設定</h2>
+
+<p>そもそもタッチパッドのドライバーレベルで横方向スクロールが無効になっている可能性がある。というかなってた。<br>
+なので、確認方法と設定変更方法。</p>
+
+<h4 id="synclientコマンドを打って水平方向二本指スクロールの設定を確認する">synclientコマンドを打って水平方向二本指スクロールの設定を確認する</h4>
+
+<p>以下のコマンドで現在の設定を確認できる。</p>
+
+<p><code>$ synclient</code></p>
+
+<p>ずらずらっと出てくる内容のうち、<code>HorizTwoFingerScroll</code> が確認対象の項目。<br>
+値が「0」だったら無効になっている。有効にしない限り、いくら頑張って横スワイプしても効かない。</p>
+
+<h4 id="synclientコマンドで水平方向二本指スクロールを有効にする">synclientコマンドで水平方向二本指スクロールを有効にする</h4>
+
+<p>上の確認で有効だったらここは飛ばしてOK。無効だった場合、有効にするのは以下のコマンド。</p>
+
+<p><code>$ synclient HorizTwoFingerScroll 1</code></p>
+
+<p>synclientのほうはこれでOK。</p>
+
+<h2 id="firefoxの設定">Firefoxの設定</h2>
+
+<p>さらにFirefoxの設定を変えてやる必要がある。<br>
+設定内容は<a href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics - Arch Linux Wiki</a>、Firefox 17.0 and laterの項を参考にした。</p>
+
+<p>about:configを開く。設定内容は以下。</p>
+
+<h4 id="マウスホイールのアクションを変更する">マウスホイールのアクションを変更する</h4>
+
+<p><code>mousewheel.default.action.override_x = 2</code> とした。<br>
+あんまりよく調べていないが、「2」が戻るアクションに対応している数字らしい。</p>
+
+<h4 id="スワイプ方向を逆にする">スワイプ方向を逆にする</h4>
+
+<p>デフォルトでは、左スワイプが「進む」、右スワイプが「戻る」になっている。<br>
+逆な気がする。設定してこれを逆転させる。</p>
+
+<p><code>mousewheel.default.delta_multiplier_x = -100</code> とした。</p>
+
+<h4 id="感度を落とす">感度を落とす</h4>
+
+<p>デフォルトではものすごく感度がよい。<br>
+良すぎてしまって縦スワイプがちょっと横にぶれただけで戻ったり進んだりする。<br>
+やりにくいので感度を落とす。</p>
+
+<p><code>mousewheel.default.delta_multiplier_x = -10</code> とした。</p>
+
+<h2 id="ここまでやって">ここまでやって</h2>
+
+<p>とりあえず望む形（二本指で左スワイプで戻る、右スワイプで進む）に設定できた。結構ハードルあった。。<br>
+ちなみにこれ、Mac OS向けFirefoxならデフォルトの挙動な模様。何の差なのか。。。</p>
 </div>
 
 
@@ -134,12 +195,12 @@
   
 
 
-<time datetime="2014-04-25T21:11:53+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
+<time datetime="2014-09-15T00:30:08+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ</a>
+    <a class='category' href='/blog/categories/arch/'>Arch</a>, <a class='category' href='/blog/categories/linux/'>Linux</a>
   
 </span>
 
@@ -148,7 +209,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/04/25/add-category-list/" data-via="" data-counturl="http://pankona.github.io/blog/2014/04/25/add-category-list/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/" data-via="" data-counturl="http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/" >Tweet</a>
   
   
   
@@ -157,10 +218,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/04/24/start-blog-with-octopress/" title="Previous Post: Octopressでブログを始めてみる">&laquo; Octopressでブログを始めてみる</a>
+        <a class="basic-alignment left" href="/blog/2014/07/23/raspi-touch-panel/" title="Previous Post: PiTFTのタッチパネルを動作させる">&laquo; PiTFTのタッチパネルを動作させる</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/26/octopress-custom/" title="Next Post: OctopressにGravatarの画像が出るようにしてみた">OctopressにGravatarの画像が出るようにしてみた &raquo;</a>
       
     </p>
   </footer>
@@ -242,8 +301,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pankona.github.io/blog/2014/04/25/add-category-list/';
-        var disqus_url = 'http://pankona.github.io/blog/2014/04/25/add-category-list/';
+        var disqus_identifier = 'http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/';
+        var disqus_url = 'http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/';
         var disqus_script = 'embed.js';
       
     (function () {

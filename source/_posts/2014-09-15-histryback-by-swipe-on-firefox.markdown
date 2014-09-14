@@ -3,7 +3,7 @@ layout: post
 title: "二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux"
 date: 2014-09-15 00:30:08 +0900
 comments: true
-categories: "Arch Linux"
+categories: "ArchLinux"
 ---
 
 ブラウザはFirefoxを好んで使っている。

@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-10-01T22:40:32+09:00</updated>
+  <updated>2014-10-06T09:55:05+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressカスタマイズで読書メーターのブログパーツを追加]]></title>
+    <link href="http://pankona.github.io/blog/2014/10/01/dokusho-meter/"/>
+    <updated>2014-10-01T22:41:26+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/10/01/dokusho-meter</id>
+    <content type="html"><![CDATA[<p>たまにはブログのカスタマイズをしてみる。<br>
+今回は読書メーターのブログパーツを追加してみた。</p>
+
+<p>サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。<br>
+文字ばっかだったブログにちょっと賑やかし感があって良い。</p>
+
+<p>例によって備忘録的にやり方を残しておく。<br>
+Octopressに読書メーターのブログパーツを追加する方法。</p>
+
+<h3 id="読書メーターのアカウントを取得する">読書メーターのアカウントを取得する</h3>
+
+<p><a href="http://book.akahoshitakuya.com/">読書メーターのウェブページ</a>からどうぞ。</p>
+
+<h3 id="ブログパーツを選ぶ">ブログパーツを選ぶ</h3>
+
+<p>読書メーターにログイン後、マイページに行ってみると、<br>
+<strong>「ブログパーツ」</strong>と書いてあるところがある。<br>
+そこを見ると各種ブログパーツを見つけることが出来る。</p>
+
+<h3 id="octopressをカスタマイズして、サイドバーに出るように">Octopressをカスタマイズして、サイドバーに出るように</h3>
+
+<p>ここからはOctopress側の編集。</p>
+
+<h4 id="読書メーター用のhtmlを書く。">読書メーター用のHTMLを書く。</h4>
+
+<p>中身は上記ブログパーツの内容をコピペしたものだが。<br>
+ブログパーツとして「最近読んだ本」をチョイス。</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/dokusho_meter.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot;</span> <span class="na">title=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot;</span> <span class="na">border=</span><span class="s">&quot;0&quot;</span> <span class="na">alt=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h4 id="_config.ymlを編集して、サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
+
+<p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
+
+<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html,
+</span><span class='line'>                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
+</span><span class='line'>                 custom/asides/dokusho_meter.html]
+</span></code></pre></td></tr></table></div></figure>
+
+<h4 id="deployしたら完了">deployしたら完了</h4>
+
+<p><code>bundle exec rake gen_deploy</code> 的なことをやってデプロイする。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>最近読んだ本がサイドバーに表示されるように。<br>
+ITっぽい本を並べたりすると、なんとなく技術的なブログな雰囲気が出て、<br>
+とてもいいんではないでしょうか。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux]]></title>

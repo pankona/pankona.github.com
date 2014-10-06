@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopressカスタマイズ | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/octopresskasutamaizu/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-10-01T22:40:32+09:00</updated>
+  <updated>2014-10-06T09:55:05+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressカスタマイズで読書メーターのブログパーツを追加]]></title>
+    <link href="http://pankona.github.io/blog/2014/10/01/dokusho-meter/"/>
+    <updated>2014-10-01T22:41:26+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/10/01/dokusho-meter</id>
+    <content type="html"><![CDATA[<p>たまにはブログのカスタマイズをしてみる。<br>
+今回は読書メーターのブログパーツを追加してみた。</p>
+
+<p>サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。<br>
+文字ばっかだったブログにちょっと賑やかし感があって良い。</p>
+
+<p>例によって備忘録的にやり方を残しておく。<br>
+Octopressに読書メーターのブログパーツを追加する方法。</p>
+
+<h3 id="読書メーターのアカウントを取得する">読書メーターのアカウントを取得する</h3>
+
+<p><a href="http://book.akahoshitakuya.com/">読書メーターのウェブページ</a>からどうぞ。</p>
+
+<h3 id="ブログパーツを選ぶ">ブログパーツを選ぶ</h3>
+
+<p>読書メーターにログイン後、マイページに行ってみると、<br>
+<strong>「ブログパーツ」</strong>と書いてあるところがある。<br>
+そこを見ると各種ブログパーツを見つけることが出来る。</p>
+
+<h3 id="octopressをカスタマイズして、サイドバーに出るように">Octopressをカスタマイズして、サイドバーに出るように</h3>
+
+<p>ここからはOctopress側の編集。</p>
+
+<h4 id="読書メーター用のhtmlを書く。">読書メーター用のHTMLを書く。</h4>
+
+<p>中身は上記ブログパーツの内容をコピペしたものだが。<br>
+ブログパーツとして「最近読んだ本」をチョイス。</p>
+
+<p><code>html source/_includes/custom/asides/dokusho_meter.html<br>
+&lt;section&gt;<br>
+&lt;a href=&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot; title=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;img src=&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot; border=&quot;0&quot; alt=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;/a&gt;<br>
+&lt;/section&gt;<br>
+</code></p>
+
+<h4 id="_config.ymlを編集して、サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
+
+<p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
+
+<p><code>html _config.yml<br>
+default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, <br>
+                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,<br>
+                 custom/asides/dokusho_meter.html]<br>
+</code></p>
+
+<h4 id="deployしたら完了">deployしたら完了</h4>
+
+<p><code>bundle exec rake gen_deploy</code> 的なことをやってデプロイする。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>最近読んだ本がサイドバーに表示されるように。<br>
+ITっぽい本を並べたりすると、なんとなく技術的なブログな雰囲気が出て、<br>
+とてもいいんではないでしょうか。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Pygmentsがエラーを吐きやがるので修正]]></title>

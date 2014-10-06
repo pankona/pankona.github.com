@@ -9,9 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="ブラウザはFirefoxを好んで使っている。
-VimperatorとかPentadactylがあるおかげである。 いままで放置していた問題があって、それは二本指スワイプの挙動設定。 二本指で左右にスワイプしたときに、ヒストリーバック・ヒストリーフォワード、
-いわゆる「戻る」「進む」 &hellip;">
+  <meta name="description" content="たまにはブログのカスタマイズをしてみる。
+今回は読書メーターのブログパーツを追加してみた。 サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。
+文字ばっかだったブログにちょっと賑やかし感があって良い。 例によって備忘録的にやり方を残しておく。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,101 @@ VimperatorとかPentadactylがあるおかげである。 いままで放置し�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/01/dokusho-meter/">Octopressカスタマイズで読書メーターのブログパーツを追加</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-01T22:41:26+09:00" pubdate data-updated="true">Oct 1<span>st</span>, 2014</time>
+        
+           | <a href="/blog/2014/10/01/dokusho-meter/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/10/01/dokusho-meter/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>たまにはブログのカスタマイズをしてみる。<br>
+今回は読書メーターのブログパーツを追加してみた。</p>
+
+<p>サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。<br>
+文字ばっかだったブログにちょっと賑やかし感があって良い。</p>
+
+<p>例によって備忘録的にやり方を残しておく。<br>
+Octopressに読書メーターのブログパーツを追加する方法。</p>
+
+<h3 id="読書メーターのアカウントを取得する">読書メーターのアカウントを取得する</h3>
+
+<p><a href="http://book.akahoshitakuya.com/">読書メーターのウェブページ</a>からどうぞ。</p>
+
+<h3 id="ブログパーツを選ぶ">ブログパーツを選ぶ</h3>
+
+<p>読書メーターにログイン後、マイページに行ってみると、<br>
+<strong>「ブログパーツ」</strong>と書いてあるところがある。<br>
+そこを見ると各種ブログパーツを見つけることが出来る。</p>
+
+<h3 id="octopressをカスタマイズして、サイドバーに出るように">Octopressをカスタマイズして、サイドバーに出るように</h3>
+
+<p>ここからはOctopress側の編集。</p>
+
+<h4 id="読書メーター用のhtmlを書く。">読書メーター用のHTMLを書く。</h4>
+
+<p>中身は上記ブログパーツの内容をコピペしたものだが。<br>
+ブログパーツとして「最近読んだ本」をチョイス。</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/dokusho_meter.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot;</span> <span class="na">title=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot;</span> <span class="na">border=</span><span class="s">&quot;0&quot;</span> <span class="na">alt=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h4 id="_config.ymlを編集して、サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
+
+<p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
+
+<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html,
+</span><span class='line'>                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
+</span><span class='line'>                 custom/asides/dokusho_meter.html]
+</span></code></pre></td></tr></table></div></figure>
+
+<h4 id="deployしたら完了">deployしたら完了</h4>
+
+<p><code>bundle exec rake gen_deploy</code> 的なことをやってデプロイする。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>最近読んだ本がサイドバーに表示されるように。<br>
+ITっぽい本を並べたりすると、なんとなく技術的なブログな雰囲気が出て、<br>
+とてもいいんではないでしょうか。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1005,92 +1100,6 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/05/raspi-livestream-web/">Raspberry Pi + カメラモジュール + Webで配信</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-05T23:38:52+09:00" pubdate data-updated="true">May 5<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/05/05/raspi-livestream-web/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。<br>
-いろいろ悩んだ点もあったので、やり方の結論をメモしておく。<br>
-ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。</p>
-
-<h2 id="良さそうな例">良さそうな例</h2>
-
-<p>参考にしたウェブサイトは↓。結論からするとここだけでOKだった。<br>
-<a href="https://github.com/jacksonliam/mjpg-streamer">https://github.com/jacksonliam/mjpg-streamer</a></p>
-
-<h2 id="上記のリポジトリの情報を元にやったこと">上記のリポジトリの情報を元にやったこと</h2>
-
-<h3 id="mjpg-streamerのインストール。">mjpg-streamerのインストール。</h3>
-
-<p>上記のリポジトリからソースコードをもってきてビルド。ビルド方法も上記のリポジトリのREADMEに記載されている。<br>
-pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは使わない。それらはinput_raspicam.soを作ってくれないため。</p>
-
-<h3 id="超簡単にhtmlを書く。">超簡単にhtmlを書く。</h3>
-
-<p>下記のような。とりあえずサンプルなので、簡単に。。<br>
-書いたHTMLは、任意の場所におく。ここではひとまず、<code>~/www/index.html</code>として置いたとする。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>Raspberry Pi<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/?action=stream&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="配信するコマンドを実行する。">配信するコマンドを実行する。</h3>
-
-<p>このコマンドも件のリポジトリに記載されているが、一応。<br>
-ライブラリ（.so）へのパスが通ってなかったら、LD_LIBRARY_PATHを設定してライブラリへのパスを通すか、もしくはライブラリをフルパスで指定する。</p>
-
-<p><code>mjpg_streamer -o &quot;output_http.so -w ./www&quot; -i &quot;input_raspicam.so -x 1280 -y 720 -fps 15 -ex night&quot;</code></p>
-
-<p>こんな感じに入力してやると、カメラが動き出して動画配信が始まる。<br>
-別のPC等からブラウザで、</p>
-
-<p><code>http://[Raspberry PiのIPアドレス]:8080/</code></p>
-
-<p>にアクセスしてあげると、カメラが写してる画像が配信されているのが確認できると思われる。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1114,6 +1123,10 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/01/dokusho-meter/">Octopressカスタマイズで読書メーターのブログパーツを追加</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/15/histryback-by-swipe-on-firefox/">二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux</a>
       </li>
     
@@ -1129,10 +1142,6 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
         <a href="/blog/2014/06/10/raspi-photo-during-streaming/">RaspberryPiで動画を配信しながら写真も撮る</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/05/29/rails-on-raspi/">Raspberry PiでRailsを動かしてみたときのこと</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1141,11 +1150,11 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 148.0%'>ArchLinux(4)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 136.0%'>Octopressカスタマイズ(3)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(5)</a> <a href='/blog/categories/sofalseta' style='font-size: 112.0%'>その他(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 148.0%'>ArchLinux(4)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 148.0%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(5)</a> <a href='/blog/categories/sofalseta' style='font-size: 112.0%'>その他(1)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (3)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (5)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (5)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
 </section>
 <section>
 <a href="http://book.akahoshitakuya.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

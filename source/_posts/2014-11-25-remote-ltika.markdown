@@ -3,7 +3,7 @@ layout: post
 title: "Raspberry Piにて、リモートからLチカさせてみた"
 date: 2014-11-25 22:16:43 +0900
 comments: true
-categories: "Raspberry Pi:
+categories: "RaspberryPi"
 ---
 
 Raspberry Piをリモートから制御する第一歩として、

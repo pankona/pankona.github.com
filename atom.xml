@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-11-26T22:24:34+09:00</updated>
+  <updated>2014-11-26T22:27:12+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -14,9 +14,9 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Remote Ltika]]></title>
+    <title type="html"><![CDATA[Raspberry Piにて、リモートからLチカさせてみた]]></title>
     <link href="http://pankona.github.io/blog/2014/11/25/remote-ltika/"/>
-    <updated>2014-11-25T00:00:00+09:00</updated>
+    <updated>2014-11-25T22:16:43+09:00</updated>
     <id>http://pankona.github.io/blog/2014/11/25/remote-ltika</id>
     <content type="html"><![CDATA[<p>Raspberry Piをリモートから制御する第一歩として、<br>
 ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。<br>

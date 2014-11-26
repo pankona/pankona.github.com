@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Pi | make clean; make]]></title>
+  <link href="http://pankona.github.io/blog/categories/pi/atom.xml" rel="self"/>
+  <link href="http://pankona.github.io/"/>
+  <updated>2014-11-26T22:27:12+09:00</updated>
+  <id>http://pankona.github.io/</id>
+  <author>
+    <name><![CDATA[pankona]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Piにて、リモートからLチカさせてみた]]></title>
+    <link href="http://pankona.github.io/blog/2014/11/25/remote-ltika/"/>
+    <updated>2014-11-25T22:16:43+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/11/25/remote-ltika</id>
+    <content type="html"><![CDATA[<p>Raspberry Piをリモートから制御する第一歩として、<br>
+ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。<br>
+いまのところ実にしょうもないレベルであるが、最初は誰もがしょうもなかったと言い聞かせつつ、<br>
+やったことを公開しつつ、どんなあんばいだったか記録しておこうと思う。<br>
+ちなみに、ここでいっているLEDとは、Raspberry Piボード上のLED &quot;ACT&quot; を指している。<br>
+ブレッドボードやらそういった類の何かは使っていない。</p>
+
+<h3 id="構成">構成</h3>
+
+<ul>
+<li>Raspberry Pi （OSはArch Linux） 有線LAN接続
+
+<ul>
+<li>Railsが動いていて、REST APIを公開している。</li>
+<li>REST APIを叩くことで、LEDのON/OFFを制御するスクリプトが動作し、Lチカを実現する。</li>
+</ul></li>
+<li>Androidアプリ
+
+<ul>
+<li>ボタンが2個ついてるだけの超絶シンプルアプリ</li>
+<li>ONボタンを押すとLEDを点けるほうのREST APIを叩きにいく。</li>
+<li>同様に、OFFボタンを押すとLEDを消すREST APIを叩きにいく。</li>
+<li>対向機のIPアドレスはまさかのハードコーディング。</li>
+</ul></li>
+</ul>
+
+<h3 id="ソースコード">ソースコード</h3>
+
+<ul>
+<li>Raspberry Pi側のソースコードは<a href="https://github.com/pankona/raspi_remote_blink">こちら</a>。Railsアプリ。</li>
+<li>Android側のアプリは後ほどアップロード（手元になかった）。</li>
+</ul>
+
+<h3 id="今後に向けてメモ">今後に向けてメモ</h3>
+
+<ul>
+<li>Railsアプリは、スクリプトへのパスがハードコードされていたりしてだいぶ恥ずかしいので、そのうち直す。</li>
+<li>というかファイルI/OすればLチカできることがわかったので、もはやスクリプトを使う必要はなかった。そのうち直す。</li>
+<li>応用して、自動草花への水やり機の作成を目論んでおく。できたら画像と共にアップロードしよう。</li>
+<li>カメラと合わせて、水やりしつつ、草の成長記録をツイッターに投稿する、というのもいいかもしれない。</li>
+<li>ツイッター越しに命令（水やり、写真撮影、等）を発行できるようにしてもいいかもしれない。</li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>

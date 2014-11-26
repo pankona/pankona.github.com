@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RaspberryPi | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-11-26T22:27:12+09:00</updated>
+  <updated>2014-11-26T22:27:44+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Piにて、リモートからLチカさせてみた]]></title>
+    <link href="http://pankona.github.io/blog/2014/11/25/remote-ltika/"/>
+    <updated>2014-11-25T22:16:43+09:00</updated>
+    <id>http://pankona.github.io/blog/2014/11/25/remote-ltika</id>
+    <content type="html"><![CDATA[<p>Raspberry Piをリモートから制御する第一歩として、<br>
+ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。<br>
+いまのところ実にしょうもないレベルであるが、最初は誰もがしょうもなかったと言い聞かせつつ、<br>
+やったことを公開しつつ、どんなあんばいだったか記録しておこうと思う。<br>
+ちなみに、ここでいっているLEDとは、Raspberry Piボード上のLED &quot;ACT&quot; を指している。<br>
+ブレッドボードやらそういった類の何かは使っていない。</p>
+
+<h3 id="構成">構成</h3>
+
+<ul>
+<li>Raspberry Pi （OSはArch Linux） 有線LAN接続
+
+<ul>
+<li>Railsが動いていて、REST APIを公開している。</li>
+<li>REST APIを叩くことで、LEDのON/OFFを制御するスクリプトが動作し、Lチカを実現する。</li>
+</ul></li>
+<li>Androidアプリ
+
+<ul>
+<li>ボタンが2個ついてるだけの超絶シンプルアプリ</li>
+<li>ONボタンを押すとLEDを点けるほうのREST APIを叩きにいく。</li>
+<li>同様に、OFFボタンを押すとLEDを消すREST APIを叩きにいく。</li>
+<li>対向機のIPアドレスはまさかのハードコーディング。</li>
+</ul></li>
+</ul>
+
+<h3 id="ソースコード">ソースコード</h3>
+
+<ul>
+<li>Raspberry Pi側のソースコードは<a href="https://github.com/pankona/raspi_remote_blink">こちら</a>。Railsアプリ。</li>
+<li>Android側のアプリは後ほどアップロード（手元になかった）。</li>
+</ul>
+
+<h3 id="今後に向けてメモ">今後に向けてメモ</h3>
+
+<ul>
+<li>Railsアプリは、スクリプトへのパスがハードコードされていたりしてだいぶ恥ずかしいので、そのうち直す。</li>
+<li>というかファイルI/OすればLチカできることがわかったので、もはやスクリプトを使う必要はなかった。そのうち直す。</li>
+<li>応用して、自動草花への水やり機の作成を目論んでおく。できたら画像と共にアップロードしよう。</li>
+<li>カメラと合わせて、水やりしつつ、草の成長記録をツイッターに投稿する、というのもいいかもしれない。</li>
+<li>ツイッター越しに命令（水やり、写真撮影、等）を発行できるようにしてもいいかもしれない。</li>
+</ul>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PiTFTのタッチパネルを動作させる]]></title>
@@ -289,56 +339,6 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
 </ul>
 
 <p>ちなみにRailsの起動がまたすっとろい。webrickじゃなくてthinにするとちょっとだけ早くなる気がする、とか。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Raspberry Pi + カメラモジュール + Webで配信]]></title>
-    <link href="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/"/>
-    <updated>2014-05-05T23:38:52+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/05/05/raspi-livestream-web</id>
-    <content type="html"><![CDATA[<p>Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。<br>
-いろいろ悩んだ点もあったので、やり方の結論をメモしておく。<br>
-ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。</p>
-
-<h2 id="良さそうな例">良さそうな例</h2>
-
-<p>参考にしたウェブサイトは↓。結論からするとここだけでOKだった。<br>
-<a href="https://github.com/jacksonliam/mjpg-streamer">https://github.com/jacksonliam/mjpg-streamer</a></p>
-
-<h2 id="上記のリポジトリの情報を元にやったこと">上記のリポジトリの情報を元にやったこと</h2>
-
-<h3 id="mjpg-streamerのインストール。">mjpg-streamerのインストール。</h3>
-
-<p>上記のリポジトリからソースコードをもってきてビルド。ビルド方法も上記のリポジトリのREADMEに記載されている。<br>
-pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは使わない。それらはinput_raspicam.soを作ってくれないため。</p>
-
-<h3 id="超簡単にhtmlを書く。">超簡単にhtmlを書く。</h3>
-
-<p>下記のような。とりあえずサンプルなので、簡単に。。<br>
-書いたHTMLは、任意の場所におく。ここではひとまず、<code>~/www/index.html</code>として置いたとする。</p>
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>Raspberry Pi<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://pankona.github.io/?action=stream&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
-
-<h3 id="配信するコマンドを実行する。">配信するコマンドを実行する。</h3>
-
-<p>このコマンドも件のリポジトリに記載されているが、一応。<br>
-ライブラリ（.so）へのパスが通ってなかったら、LD_LIBRARY_PATHを設定してライブラリへのパスを通すか、もしくはライブラリをフルパスで指定する。</p>
-
-<p><code>mjpg_streamer -o &quot;output_http.so -w ./www&quot; -i &quot;input_raspicam.so -x 1280 -y 720 -fps 15 -ex night&quot;</code></p>
-
-<p>こんな感じに入力してやると、カメラが動き出して動画配信が始まる。<br>
-別のPC等からブラウザで、</p>
-
-<p><code>http://[Raspberry PiのIPアドレス]:8080/</code></p>
-
-<p>にアクセスしてあげると、カメラが写してる画像が配信されているのが確認できると思われる。</p>
 ]]></content>
   </entry>
   

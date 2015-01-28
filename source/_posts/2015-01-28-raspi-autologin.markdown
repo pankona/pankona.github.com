@@ -41,15 +41,17 @@ Systemdにおける自動ログインの設定は、例によってArch Wikiに�
 ### ログイン時にifconfigし、IPアドレス部分を抽出
 
 自動ログインできたらあとは簡単で、.bashrcにでもIPアドレス出力用の何かを書いてあげればOKである。
-```ifconfig | grep inet```
+{% codeblock .bashrc %}
+ifconfig | grep inet
+{% endcodeblock %}
 これでいいや、という感じで書いておいた。
 
 ただ、起動と同時に自動ログイン → IPアドレス表示、だと、IPを取れてないことがあって具合が良くない。
 そのため、上記IPアドレス取得の前に、ちょっとだけsleepなんかを入れてあげるとそのへんは心配がなくなる。
-```.bashrc
+{% codeblock .bashrc %}
 sleep 5
 ifconfig | grep inet
-```
+{% endcodeblock %}
 こんな具合である。
 
 ### IPアドレスがわかるようになったがPiTFTがもったいない感

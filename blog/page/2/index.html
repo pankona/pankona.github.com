@@ -9,8 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="このポストは Windows8.1に対してWindows Updateしたところ、何だかわからないがデュアルブートしなくなって焦ったため、
-直し方というか、そもそもどうやってデュアルブートにしているかをメモしておくための記事。 件のPCについて 以下のようなPCと、その中身の構成にしている。 &# &hellip;">
+  <meta name="description" content="Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。
+概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。
+それは「タッチパッドの手のひら検知」。パームディテクト、Palm Detection、等と呼ばれる機能。 手のひら検知？ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +77,117 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/">Vaio Pro 13における手のひら検知 on Arch Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-15T12:25:25+09:00" pubdate data-updated="true">May 15<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。<br>
+概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。<br>
+それは「タッチパッドの手のひら検知」。パームディテクト、Palm Detection、等と呼ばれる機能。</p>
+
+<h3 id="手のひら検知？">手のひら検知？</h3>
+
+<p>もはや手のひら検知について触れる必要もなさそうだが、一応。</p>
+
+<p>Vaio Pro 13のタッチパッドはなかなか大きい。<br>
+これは最近のノートPC、MBPとか他のUltraBookにも採用されていて流行と言ったら流行。<br>
+これ自体は割と私は好みで、二本指、三本指でのスワイプなんかもやりやすくてなかなかいい。</p>
+
+<p>ただ大きいタッチパッドには弊害もあって、キーボードを打ってるときに親指の付け根のあたりで触れちゃうってこと。<br>
+触れちゃうとどうなるかっていうと、クリックした扱いになってしまって、つまりカーソルが飛ぶ。<br>
+編集中に予期せぬ場所にカーソルが飛んでしまって、あれ、これどうなった、みたいなことになる。</p>
+
+<p>それを解決してくれるのが、手のひら検知の仕組み。<br>
+つまり意図したタッチでないと思われるものは無視してくれるというやつで、考えた人凄いと思います。</p>
+
+<h3 id="arch-linux-on-vaio-pro-13の場合">Arch Linux on Vaio Pro 13の場合</h3>
+
+<p>件の手のひら検知を有効にする仕組みがある（デフォルトではオフ）。<br>
+synclient、PalmDetect、あたりでぐぐると結構出てくる。具体的には、<br>
+<code>synclient PalamDetect=1</code> とかってやって手のひら検知を有効にする。する、のだが。</p>
+
+<p>なんか全然効いてない気がするんですけど・・・。ということで調べてみた。<br>
+ほんとに効いてるのかどうかを。</p>
+
+<h3 id="結論からいうと効いてなかった">結論からいうと効いてなかった</h3>
+
+<p>効いてなかったです。ちくしょうめ。やっぱりか。</p>
+
+<p>ドライバのソースコードに簡単にログを仕込んで確認してみたところ、やっぱり効いてなかった。<br>
+Arch Linuxでタッチパッドのドライバーは、Synapticsが使われている（というか大体どこでもSynapticsか）。<br>
+ソースコードはこれ。Githubに公開されている。<a href="git:anongit.freedesktop.org/xorg/driverxf86-input-synaptics">xf86-input-synaptics</a></p>
+
+<p>なんで効かないかと言うと、の前に、ソースコードからどうやって手のひら検知をしているかを調べてみたのでそれをメモ。</p>
+
+<h3 id="どうやって手のひら検知している？">どうやって手のひら検知している？</h3>
+
+<p>以下の3要素を考慮して手のひら検知としている模様。</p>
+
+<ul>
+<li>PalmDetectの設定が有効になっているか（synclient PalmDetect=1 で有効になるやつ）</li>
+<li>PalmMinZがしきい値を超えているか（これも synclient PalmMinZ=XXX で設定できる）</li>
+<li>PalmMinWidthがしきい値を超えているか（これも synclient PalmMinWidth=XXX で設定できる）</li>
+</ul>
+
+<p>PalmMinZ は、どれくらい深く（強く？）タッチパッドが押されたら手のひらと判断するか、のしきい値。<br>
+PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手のひらとみなしましょう、という判断のためのしきい値。</p>
+
+<h3 id="arch-linux-on-vaio-pro-13-が手のひら検知をしてくれない理由">Arch Linux on Vaio Pro 13 が手のひら検知をしてくれない理由</h3>
+
+<p>上記のしきい値のうち、どうやらPalmMinWidthのほうがおかしいっぽくて、<br>
+どんな触り方をしても常に「0」で判定されてしまっている模様。<br>
+ちなみに、SynapticsはPalmMinWidthが0のときは手のひらとして判断しないように実装されている。<br>
+なので、PalmDetect、PalmMinZ、PalmMinWidth、どれをどの値にしても手のひら検知は効かないということである。ちくしょうめ。</p>
+
+<h3 id="どうすれば解決するのか？">どうすれば解決するのか？</h3>
+
+<h4 id="palmminwidthを正しく判定させる方法">PalmMinWidthを正しく判定させる方法</h4>
+
+<p>調査をしているが今のところわからない。。一般ピープルに手が及ぶ範囲なのかどうか。</p>
+
+<h4 id="それ以外の対処法？">それ以外の対処法？</h4>
+
+<p>PalmMinWidthはもう一切判断に含めないようにソースコードを書き換えてみたが、、、<br>
+それってつまりタッチ深度だけで手のひらを検知するということであって、それはまあ微妙な感じ。</p>
+
+<h4 id="つまり">つまり</h4>
+
+<p><strong>残念ながら、手のひら検知がいまいちな件は解決できていない。</strong>なんとかする方法の調査はTo Be Continuedである。<br>
+デュアルブートしているWindowsの側ではできているっぽいので、Arch Linux側でも出来ないことないと信じて。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -638,6 +750,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/28/raspi-autologin/">Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/25/remote-ltika/">Raspberry Piにて、リモートからLチカさせてみた</a>
       </li>
     
@@ -653,10 +769,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
         <a href="/blog/2014/07/23/raspi-touch-panel/">PiTFTのタッチパネルを動作させる</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/07/17/pitft-on-arch-linux/">PiTFTをArch Linux on Raspberry Piで動かすのに苦戦</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -665,11 +777,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 140.0%'>ArchLinux(4)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 140.0%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(6)</a> <a href='/blog/categories/sofalseta' style='font-size: 110.0%'>その他(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 108.57142857142857%'>その他(1)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (6)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (1)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>
@@ -681,7 +793,7 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - pankona -
+  Copyright &copy; 2015 - pankona -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

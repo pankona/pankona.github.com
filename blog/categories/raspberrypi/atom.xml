@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RaspberryPi | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2015-01-28T21:32:51+09:00</updated>
+  <updated>2015-01-28T21:42:31+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -53,15 +53,22 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
 <h3 id="ログイン時にifconfigし、ipアドレス部分を抽出">ログイン時にifconfigし、IPアドレス部分を抽出</h3>
 
 <p>自動ログインできたらあとは簡単で、.bashrcにでもIPアドレス出力用の何かを書いてあげればOKである。<br>
-<code>ifconfig | grep inet</code><br>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>.bashrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;br>
+</span><span class='line'>ifconfig | grep inet&lt;br></span></code></pre></td></tr></table></div></figure></notextile></div><br>
 これでいいや、という感じで書いておいた。</p>
 
 <p>ただ、起動と同時に自動ログイン → IPアドレス表示、だと、IPを取れてないことがあって具合が良くない。<br>
 そのため、上記IPアドレス取得の前に、ちょっとだけsleepなんかを入れてあげるとそのへんは心配がなくなる。<br>
-<code>.bashrc<br>
-sleep 5<br>
-ifconfig | grep inet<br>
-</code><br>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>.bashrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;br>
+</span><span class='line'>sleep 5&lt;br>
+</span><span class='line'>ifconfig | grep inet&lt;br></span></code></pre></td></tr></table></div></figure></notextile></div><br>
 こんな具合である。</p>
 
 <h3 id="ipアドレスがわかるようになったがpitftがもったいない感">IPアドレスがわかるようになったがPiTFTがもったいない感</h3>

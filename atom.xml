@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-11-26T22:27:44+09:00</updated>
+  <updated>2015-01-28T21:42:31+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる]]></title>
+    <link href="http://pankona.github.io/blog/2015/01/28/raspi-autologin/"/>
+    <updated>2015-01-28T21:10:39+09:00</updated>
+    <id>http://pankona.github.io/blog/2015/01/28/raspi-autologin</id>
+    <content type="html"><![CDATA[<p>しばらく愛用のVaio Proをいじる時間がとれなかったもんで、新しい記事をポストできずにおった。<br>
+実におよそ2ヶ月ぶりの新規記事。新年あけましておめでとうございます。<br>
+今年もぼちぼちでやっていきます。目指せ100記事。</p>
+
+<h3 id="raspberry-pi起動時に、pitftにipアドレスを表示させる">Raspberry Pi起動時に、PiTFTにIPアドレスを表示させる</h3>
+
+<p>いま自分のとこで扱っているRaspberry Piは、基本的に画面を接続せず、操作はネットワーク越し（SSH）に行う前提にしている。<br>
+そのため、SSHによるログインにあたってはRaspberry PiのIPアドレスを知る等してネットワーク的にリーチする必要がある。</p>
+
+<p>いままではarpをしてみたりpingをブロードキャストに投げてみたり、ホストネームを打ってみたり、色々やっていたのであるが、<br>
+いまひとつうまく行かないことがあって、そのたびにトラブルシューティングのために、結局画面を接続する必要が生じていた。<br>
+実に間抜け感を感じるわけである。</p>
+
+<p>PiTFTをくっつけた、というのはちょっと前の記事で書いたところなのであるが、<br>
+じゃあとりあえず、Raspberry Pi起動時にこいつに現在のIPアドレスを出力してみれば便利なのでは、と思ったのである。<br>
+IPアドレスさえわかれば、だいたいにおいてSSH接続できるしね。</p>
+
+<p>方法は、<br>
+* 自動でログインさせる<br>
+* ログイン時にifconfigし、IPアドレスの部分を抽出しつつ、コンソール（PiTFT）出力<br>
+といった感じ。以下、詳細。</p>
+
+<h3 id="自動ログインさせる">自動ログインさせる</h3>
+
+<p>ちなみに私が扱っているRaspberry PiにはArch Linuxが載っている。<br>
+Raspbian、Pidora等とは設定が違うと思われるので注意されたし。<br>
+Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用いられている。</p>
+
+<p>Systemdにおける自動ログインの設定は、例によってArch Wikiに載っていたのでそれを参照した。<br>
+ここを参照。→  <a href="https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console_(%E6%97%A5%E6%9C%AC%E8%AA%9E)%5Dx">Automatic login to virtual console</a><br>
+仮想コンソールの章を、騙されたと思ってそのまま設定し、そんで再起動してやればもう自動ログインできているはずである。</p>
+
+<h3 id="ログイン時にifconfigし、ipアドレス部分を抽出">ログイン時にifconfigし、IPアドレス部分を抽出</h3>
+
+<p>自動ログインできたらあとは簡単で、.bashrcにでもIPアドレス出力用の何かを書いてあげればOKである。</p>
+
+<figure class='code'><figcaption><span>.bashrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ifconfig | grep inet</span></code></pre></td></tr></table></div></figure>
+
+<p>これでいいや、という感じで書いておいた。</p>
+
+<p>ただ、起動と同時に自動ログイン → IPアドレス表示、だと、IPを取れてないことがあって具合が良くない。<br>
+そのため、上記IPアドレス取得の前に、ちょっとだけsleepなんかを入れてあげるとそのへんは心配がなくなる。</p>
+
+<figure class='code'><figcaption><span>.bashrc </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sleep 5
+</span><span class='line'>ifconfig | grep inet</span></code></pre></td></tr></table></div></figure>
+
+<p>こんな具合である。</p>
+
+<h3 id="ipアドレスがわかるようになったがpitftがもったいない感">IPアドレスがわかるようになったがPiTFTがもったいない感</h3>
+
+<p>PiTFTだとちょっとやりすぎなので、もっと小さい画面モジュールでやってもいいと思う。<br>
+というか早く無線化しようね。次の目標は無線化です。それでは。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Piにて、リモートからLチカさせてみた]]></title>

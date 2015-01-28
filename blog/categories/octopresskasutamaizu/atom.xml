@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopressカスタマイズ | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/octopresskasutamaizu/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2014-11-26T22:27:44+09:00</updated>
+  <updated>2015-01-28T21:32:51+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -85,36 +85,26 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
 
 <p>具体的にどのようにうまく表示されないかというと、</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;br>
-</span><span class='line'>&lt;br>
-</span><span class='line'>{% hogehoge %}&lt;br>
-</span><span class='line'>&lt;br></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}<br>
+{% raw %}<br>
+{% hogehoge %}<br>
+{% endraw %}<br>
+{% endcodeblock %}</p>
 
 <p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br><br>
 コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
 
 <p>結果として、</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;br>
-</span><span class='line'>&lt;br>
-</span><span class='line'>{\% codeblock %}&lt;br>
-</span><span class='line'>{\% raw %}&lt;br>
-</span><span class='line'>{% hogehoge %}&lt;br>
-</span><span class='line'>{\% endraw %}&lt;br>
-</span><span class='line'>{\% endcodeblock %}&lt;br>
-</span><span class='line'>&lt;br></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}<br>
+{% raw %}<br>
+{\% codeblock %}<br>
+{\% raw %}<br>
+{% hogehoge %}<br>
+{\% endraw %}<br>
+{\% endcodeblock %}<br>
+{% endraw %}<br>
+{% endcodeblock %}</p>
 
 <p>というので書くことができた。raw ~ endraw というのを使う。<br><br>
 ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br><br>
@@ -124,7 +114,7 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
 
 <p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
 
-<p><code>{% codeblock about.html %}</code><br></p>
+<p><code>{% raw %}{% codeblock about.html %}{% endraw %}</code><br></p>
 
 <p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
 
@@ -157,30 +147,18 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <p>about.html はこんな感じに。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>about.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;br&gt;</span>
-</span><span class='line'><span class="nt">&lt;br&gt;</span>
-</span><span class='line'><span class="nt">&lt;section&gt;&lt;br&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;&lt;br&gt;</span>
-</span><span class='line'>  {% if site.gravatar_email %}<span class="nt">&lt;br&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;&lt;br&gt;</span>
-</span><span class='line'>  {% endif %}<span class="nt">&lt;br&gt;</span>
-</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。<span class="nt">&lt;br&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;&lt;br&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;&lt;br&gt;</span>
-</span><span class='line'><span class="nt">&lt;br&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock about.html %}<br>
+{% raw %}<br>
+<section><br>
+  <h1>About Me</h1><br>
+  {% if site.gravatar_email %}<br>
+    <img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" /><br>
+  {% endif %}<br>
+  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。<br>
+  <br clear="left"><br>
+</section><br>
+{% endraw %}<br>
+{% endcodeblock %}</p>
 
 <h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
 

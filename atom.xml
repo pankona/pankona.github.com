@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2015-01-28T21:42:31+09:00</updated>
+  <updated>2015-01-28T21:50:27+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[月間300ヒットを達成していた]]></title>
+    <link href="http://pankona.github.io/blog/2015/01/28/300hot-per-month/"/>
+    <updated>2015-01-28T21:44:18+09:00</updated>
+    <id>http://pankona.github.io/blog/2015/01/28/300hot-per-month</id>
+    <content type="html"><![CDATA[<p>12月のことであるが、実は月間300ヒットを達成していた。<br>
+うち250ヒットは自分の手によるもの、、、とかそういうことではなく、<br>
+概ね自分以外の方々によって、月間300ヒットを達成できたのである。<br>
+300ヒット。たかが300ヒット。されど300ヒット。 一日平均10人。</p>
+
+<p>これからもほそぼそ、ぼちぼち、書いていこうと思う。<br>
+学んだことをアウトプットするのが大事だと誰か偉い人も言っておった。私もそう思う。<br>
+書いたことによって、誰かひとりでも何かの助けになればと願いつつ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる]]></title>

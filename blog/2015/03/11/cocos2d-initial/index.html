@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>日本語入力のための設定メモ for Arch Linux - make clean; make</title>
+  <title>Cocos2d-xをやってみている - make clean; make</title>
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。
-具体的な要望としては、 mozcを使いたい
-Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする） という二点なのだが、後者の「Alt + Space」 &hellip;">
+  <meta name="description" content="2015.03.07に娘が生まれました。
+これからも頑張ります。近況を記す。 cocos2d-xを始めてみたのである 昨年末からあまりRaspberry Piを触れない環境におかれていたもので、
+何か手軽にプログラミングをエンジョイできないかと思って、探して見た結果がcocos2d-x。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をト�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pankona.github.io/blog/2014/05/28/use-uim-mozc">
+  <link rel="canonical" href="http://pankona.github.io/blog/2015/03/11/cocos2d-initial">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
@@ -80,7 +80,7 @@ Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をト�
   
   <header>
     
-      <h1 class="entry-title">日本語入力のための設定メモ for Arch Linux</h1>
+      <h1 class="entry-title">Cocos2d-xをやってみている</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@ Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をト�
   
 
 
-<time datetime="2014-05-28T07:49:23+09:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
+<time datetime="2015-03-11T20:29:27+09:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://pankona.github.io">Comments</a>
@@ -106,86 +106,52 @@ Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をト�
   </header>
 
 
-<div class="entry-content"><p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br>
-具体的な要望としては、</p>
+<div class="entry-content"><p>2015.03.07に娘が生まれました。<br>
+これからも頑張ります。近況を記す。</p>
 
-<ul>
-<li>mozcを使いたい</li>
-<li>Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする）</li>
-</ul>
+<h3 id="cocos2d-xを始めてみたのである">cocos2d-xを始めてみたのである</h3>
 
-<p>という二点なのだが、後者の「Alt + Space」というキーバインドを設定する方法がわからず。。。<br>
-きっとやり方があるというか、いままでごまかしごまかしやってきたのだが、<br>
-ついに気持ち悪さが先に立って、「やめてやるわ！」となったところ。</p>
+<p>昨年末からあまりRaspberry Piを触れない環境におかれていたもので、<br>
+何か手軽にプログラミングをエンジョイできないかと思って、探して見た結果がcocos2d-x。<br>
+Unityじゃなくてcocos2d-xにしたのは、Linux向けの開発環境があるからである。<br>
+Unityやってみたかったけど、LinuxでやりたかったらWineを使え、みたいな感じになっているようで、<br>
+そんなことこっちから願い下げだ、ということで、cocos2d-x。<br>
+C++で書けて、これから触ってみようと思っているLuaとも相性がいい様子で、願ったり叶ったりである。</p>
 
-<p>で、IMとしてUIMを使ってみた。uim-mozc。<br>
-そしたらいともたやすく Alt + Space でのトグルが設定できちゃったもんだから拍子抜けというか。<br>
-はじめからこれ使ってれば良かったね！しばらくこれでいきます。uim-mozc。</p>
+<h3 id="いま作っているもの">いま作っているもの</h3>
 
-<p>備忘録的に、設定方法のメモ。<br>
-Arch Linux向けです。</p>
+<p>なかなか始めてみると面白い。<br>
+とりあえずわかりやすいところから馴染んでいこうということで、<br>
+ブロック崩しを題材にして制作に励んでいるところ。リポジトリはこちら。<br>
+<a href="https://github.com/pankona/KonaReflection">KonaReflection</a><br>
+プロジェクト名は3日程真剣に考えた挙句これである。</p>
 
-<h2 id="基本的にはwiki参照">基本的にはWiki参照</h2>
+<p>開発環境は、愛機のVaio Pro 13（Arch Linux）と職場Mac Book Proの両刀で実践中。<br>
+デプロイターゲットはLinux、Mac（いずれもデバッグ目的）、そしてAndroid。<br>
+※ 職場MBPを使っているが、ちゃんと仕事はしている。暇なときにやっている。</p>
 
-<p>ブログに書いた内容というのはいずれ時代遅れになるので、、、<br>
-やはり、Arch Wikiの<a href="https://wiki.archlinux.org/index.php/Input_Japanese_using_uim_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">uim-mozcの設定方法</a>を参照するのが確実。<br>
-うちもこれでいけた。</p>
+<p>どこまで作るかという話もあるが、とりあえず誰かを楽しませることが出来るレベルまで作ろうかと思う。<br>
+せっかく作るなら、一応、体としてはやりきりたいではないか。</p>
 
-<h2 id="インストールしたパッケージ">インストールしたパッケージ</h2>
+<h3 id="longest-streakを13に伸ばす">Longest Streakを13に伸ばす</h3>
 
-<ul>
-<li>uim</li>
-<li>uim-mozc</li>
-</ul>
+<p>なんやかやあって途絶えてしまったが、Longest Streakは13まで更新した。<br>
+そんなもん伸ばして何になるの、というのもわかるが、ちょっとでも、毎日ソース更新しなきゃ、という気持ちになるのであれば、<br>
+意味がなくもないんじゃないかと思いつつ。また仕切りなおして伸ばしていこう。</p>
 
-<h2 id="設定箇所">設定箇所</h2>
+<h3 id="cocos2d-xを使ったアプリをeclipseで開発できるようにした">cocos2d-xを使ったアプリをEclipseで開発できるようにした</h3>
 
-<ul>
-<li>.xinitrc の記載</li>
-</ul>
+<p>Android向け、という話ではそこそこ記事があるが、ことLinux向けで開発環境構築というと記事がなかなかない。<br>
+しかし出来るようになった。Eclipse＋CDT＋諸々設定（←ここがめんどい）。<br>
+設定方法は別の記事としてまとめようと思う。cocos2d-x＋Eclipse＋Linux向けビルド、の体。</p>
 
-<p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
+<h3 id="vimでも開発できるように調整した">vimでも開発できるように調整した</h3>
 
-<figure class='code'><figcaption><span>.xinitrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># uim</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
-</span><span class='line'>uim-xim &amp;
-</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span><span class="s1">&#39;@im=uim&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h2 id="uimの設定">uimの設定</h2>
-
-<p><code>uim-pref-gtk</code>で設定画面を出し、色々設定する。</p>
-
-<ul>
-<li>「Global settings」の設定。</li>
-</ul>
-
-<p>&#8211; Specify Default IMにチェックを入れる。<br>
-  &#8211; Default input method を Mozc にする。</p>
-
-<ul>
-<li>「Mozc」の設定。</li>
-</ul>
-
-<p>&#8211; Default Input modeはDirect Inputに。<br>
-  &#8211; ついでにVIM協調モードも有効にしておく。</p>
-
-<ul>
-<li>「Mozc key bindings」の設定。</li>
-</ul>
-
-<p>&#8211; [Mozc] on/off、両方に&quot;&lt;Alt&gt;space&quot;を設定。</p>
-
-<h3 id="ここまでで">ここまでで</h3>
-
-<p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br>
-チャンスがあれば、他のIMも試してみよっかな。</p>
+<p>いっときEclipseを用いてcocos2d-xの開発環境を作ることを諦めかけた（めんどすぎた）のだが、<br>
+そのとき、Vimだけでやれるように開発環境構築を頑張ってみたのである。<br>
+割といい具合になったのでこっちもそのうち記事にしてみようと思う。<br>
+Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせである。<br>
+だけどまあ結局はEclipseを使いそうである。事足りてしまうし、むしろvrapperがあればそこそこ快適である。</p>
 </div>
 
 
@@ -208,12 +174,12 @@ Arch Linux向けです。</p>
   
 
 
-<time datetime="2014-05-28T07:49:23+09:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
+<time datetime="2015-03-11T20:29:27+09:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/archlinux/'>ArchLinux</a>
+    <a class='category' href='/blog/categories/cocos2d-x/'>cocos2d-x</a>
   
 </span>
 
@@ -222,23 +188,21 @@ Arch Linux向けです。</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/" data-via="" data-counturl="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2015/03/11/cocos2d-initial/" data-via="" data-counturl="http://pankona.github.io/blog/2015/03/11/cocos2d-initial/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
   
   
   <!-- hatena bookmark -->
-  <a href="http://b.hatena.ne.jp/entry/http://pankona.github.io/blog/2014/05/28/use-uim-mozc/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://b.hatena.ne.jp/entry/http://pankona.github.io/blog/2015/03/11/cocos2d-initial/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
 </div>
 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/05/19/about-google-search/" title="Previous Post: Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった">&laquo; Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</a>
+        <a class="basic-alignment left" href="/blog/2015/01/28/300hot-per-month/" title="Previous Post: 月間300ヒットを達成していた">&laquo; 月間300ヒットを達成していた</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/05/29/rails-on-raspi/" title="Next Post: Raspberry PiでRailsを動かしてみたときのこと">Raspberry PiでRailsを動かしてみたときのこと &raquo;</a>
       
     </p>
   </footer>
@@ -323,8 +287,8 @@ Arch Linux向けです。</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pankona.github.io/blog/2014/05/28/use-uim-mozc/';
-        var disqus_url = 'http://pankona.github.io/blog/2014/05/28/use-uim-mozc/';
+        var disqus_identifier = 'http://pankona.github.io/blog/2015/03/11/cocos2d-initial/';
+        var disqus_url = 'http://pankona.github.io/blog/2015/03/11/cocos2d-initial/';
         var disqus_script = 'embed.js';
       
     (function () {

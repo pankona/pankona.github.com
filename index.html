@@ -9,10 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="12月のことであるが、実は月間300ヒットを達成していた。
-うち250ヒットは自分の手によるもの、、、とかそういうことではなく、
-概ね自分以外の方々によって、月間300ヒットを達成できたのである。
-300ヒット。たかが300ヒット。されど300ヒット。 一日平均10人。 これからもほそぼそ、 &hellip;">
+  <meta name="description" content="2015.03.07に娘が生まれました。
+これからも頑張ります。近況を記す。 cocos2d-xを始めてみたのである 昨年末からあまりRaspberry Piを触れない環境におかれていたもので、
+何か手軽にプログラミングをエンジョイできないかと思って、探して見た結果がcocos2d-x。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/11/cocos2d-initial/">Cocos2d-xをやってみている</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-11T20:29:27+09:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
+        
+           | <a href="/blog/2015/03/11/cocos2d-initial/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2015/03/11/cocos2d-initial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2015.03.07に娘が生まれました。<br>
+これからも頑張ります。近況を記す。</p>
+
+<h3 id="cocos2d-xを始めてみたのである">cocos2d-xを始めてみたのである</h3>
+
+<p>昨年末からあまりRaspberry Piを触れない環境におかれていたもので、<br>
+何か手軽にプログラミングをエンジョイできないかと思って、探して見た結果がcocos2d-x。<br>
+Unityじゃなくてcocos2d-xにしたのは、Linux向けの開発環境があるからである。<br>
+Unityやってみたかったけど、LinuxでやりたかったらWineを使え、みたいな感じになっているようで、<br>
+そんなことこっちから願い下げだ、ということで、cocos2d-x。<br>
+C++で書けて、これから触ってみようと思っているLuaとも相性がいい様子で、願ったり叶ったりである。</p>
+
+<h3 id="いま作っているもの">いま作っているもの</h3>
+
+<p>なかなか始めてみると面白い。<br>
+とりあえずわかりやすいところから馴染んでいこうということで、<br>
+ブロック崩しを題材にして制作に励んでいるところ。リポジトリはこちら。<br>
+<a href="https://github.com/pankona/KonaReflection">KonaReflection</a><br>
+プロジェクト名は3日程真剣に考えた挙句これである。</p>
+
+<p>開発環境は、愛機のVaio Pro 13（Arch Linux）と職場Mac Book Proの両刀で実践中。<br>
+デプロイターゲットはLinux、Mac（いずれもデバッグ目的）、そしてAndroid。<br>
+※ 職場MBPを使っているが、ちゃんと仕事はしている。暇なときにやっている。</p>
+
+<p>どこまで作るかという話もあるが、とりあえず誰かを楽しませることが出来るレベルまで作ろうかと思う。<br>
+せっかく作るなら、一応、体としてはやりきりたいではないか。</p>
+
+<h3 id="longest-streakを13に伸ばす">Longest Streakを13に伸ばす</h3>
+
+<p>なんやかやあって途絶えてしまったが、Longest Streakは13まで更新した。<br>
+そんなもん伸ばして何になるの、というのもわかるが、ちょっとでも、毎日ソース更新しなきゃ、という気持ちになるのであれば、<br>
+意味がなくもないんじゃないかと思いつつ。また仕切りなおして伸ばしていこう。</p>
+
+<h3 id="cocos2d-xを使ったアプリをeclipseで開発できるようにした">cocos2d-xを使ったアプリをEclipseで開発できるようにした</h3>
+
+<p>Android向け、という話ではそこそこ記事があるが、ことLinux向けで開発環境構築というと記事がなかなかない。<br>
+しかし出来るようになった。Eclipse＋CDT＋諸々設定（←ここがめんどい）。<br>
+設定方法は別の記事としてまとめようと思う。cocos2d-x＋Eclipse＋Linux向けビルド、の体。</p>
+
+<h3 id="vimでも開発できるように調整した">vimでも開発できるように調整した</h3>
+
+<p>いっときEclipseを用いてcocos2d-xの開発環境を作ることを諦めかけた（めんどすぎた）のだが、<br>
+そのとき、Vimだけでやれるように開発環境構築を頑張ってみたのである。<br>
+割といい具合になったのでこっちもそのうち記事にしてみようと思う。<br>
+Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせである。<br>
+だけどまあ結局はEclipseを使いそうである。事足りてしまうし、むしろvrapperがあればそこそこ快適である。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -899,124 +982,6 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/28/use-uim-mozc/">日本語入力のための設定メモ for Arch Linux</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-28T07:49:23+09:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/05/28/use-uim-mozc/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br>
-具体的な要望としては、</p>
-
-<ul>
-<li>mozcを使いたい</li>
-<li>Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする）</li>
-</ul>
-
-<p>という二点なのだが、後者の「Alt + Space」というキーバインドを設定する方法がわからず。。。<br>
-きっとやり方があるというか、いままでごまかしごまかしやってきたのだが、<br>
-ついに気持ち悪さが先に立って、「やめてやるわ！」となったところ。</p>
-
-<p>で、IMとしてUIMを使ってみた。uim-mozc。<br>
-そしたらいともたやすく Alt + Space でのトグルが設定できちゃったもんだから拍子抜けというか。<br>
-はじめからこれ使ってれば良かったね！しばらくこれでいきます。uim-mozc。</p>
-
-<p>備忘録的に、設定方法のメモ。<br>
-Arch Linux向けです。</p>
-
-<h2 id="基本的にはwiki参照">基本的にはWiki参照</h2>
-
-<p>ブログに書いた内容というのはいずれ時代遅れになるので、、、<br>
-やはり、Arch Wikiの<a href="https://wiki.archlinux.org/index.php/Input_Japanese_using_uim_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">uim-mozcの設定方法</a>を参照するのが確実。<br>
-うちもこれでいけた。</p>
-
-<h2 id="インストールしたパッケージ">インストールしたパッケージ</h2>
-
-<ul>
-<li>uim</li>
-<li>uim-mozc</li>
-</ul>
-
-<h2 id="設定箇所">設定箇所</h2>
-
-<ul>
-<li>.xinitrc の記載</li>
-</ul>
-
-<p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
-
-<figure class='code'><figcaption><span>.xinitrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># uim</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
-</span><span class='line'>uim-xim &amp;
-</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span><span class="s1">&#39;@im=uim&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h2 id="uimの設定">uimの設定</h2>
-
-<p><code>uim-pref-gtk</code>で設定画面を出し、色々設定する。</p>
-
-<ul>
-<li>「Global settings」の設定。</li>
-</ul>
-
-<p>&#8211; Specify Default IMにチェックを入れる。<br>
-  &#8211; Default input method を Mozc にする。</p>
-
-<ul>
-<li>「Mozc」の設定。</li>
-</ul>
-
-<p>&#8211; Default Input modeはDirect Inputに。<br>
-  &#8211; ついでにVIM協調モードも有効にしておく。</p>
-
-<ul>
-<li>「Mozc key bindings」の設定。</li>
-</ul>
-
-<p>&#8211; [Mozc] on/off、両方に&quot;&lt;Alt&gt;space&quot;を設定。</p>
-
-<h3 id="ここまでで">ここまでで</h3>
-
-<p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br>
-チャンスがあれば、他のIMも試してみよっかな。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1040,6 +1005,10 @@ Arch Linux向けです。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/11/cocos2d-initial/">Cocos2d-xをやってみている</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/01/28/300hot-per-month/">月間300ヒットを達成していた</a>
       </li>
     
@@ -1055,10 +1024,6 @@ Arch Linux向けです。</p>
         <a href="/blog/2014/10/01/dokusho-meter/">Octopressカスタマイズで読書メーターのブログパーツを追加</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/09/15/histryback-by-swipe-on-firefox/">二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1067,11 +1032,11 @@ Arch Linux向けです。</p>
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 117.14285714285714%'>その他(2)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 108.57142857142857%'>cocos2d-x(1)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 117.14285714285714%'>その他(2)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (2)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (1)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (2)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

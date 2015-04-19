@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Cocos2d-x | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/cocos2d-x/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2015-03-11T20:51:01+09:00</updated>
+  <updated>2015-04-19T12:42:50+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,169 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cocos2d-x + Travis CI]]></title>
+    <link href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/"/>
+    <updated>2015-04-19T11:26:14+09:00</updated>
+    <id>http://pankona.github.io/blog/2015/04/19/cocos-with-travisci</id>
+    <content type="html"><![CDATA[<p>引き続きcocos2d-xを使ってブロック崩しを作っている。<br>
+かれこれ２ヶ月あまりが経過した。ほぼ通勤時間でのみ作っている。</p>
+
+<p>いまのところの作業の流れとしては、<br>
+* まずLinux向けにビルドして動作確認<br>
+* 問題なさそうであれば、Android向けのビルドを実施<br>
+* なんとかして実機にAPKを移し、インストールする</p>
+
+<p>という手順なのであるが、実機へのデプロイがなかなか面倒である。<br>
+基本的に電車内なので、ケーブルをスマホとPCに繋いで〜、というひと手間がなかなか面倒である。<br>
+すると端末間のファイル共有だったり、原始的にメール越しにAPK共有、等があるが、、、やはり面倒である。</p>
+
+<p>デプロイもっと楽にする手段としてDeployGateさんを使わせてもらうという手がある。<br>
+これを用いると、変更をコミットするとそれだけで最新版APKがメールで送られてくるっていうようになるようである。</p>
+
+<p>なので今回はこれを導入してみることにした。流れは以下のような感じになる予定である。<br>
+* PC上にてcocos2d-xでアプリ作成。ソースをGithubにPush。<br>
+* Travis CIでビルド。<br>
+* ビルド成果物をTravis CIがDeployGateに送信。<br>
+* DeployGateがわしのスマホにメールを送信（APK添付）。</p>
+
+<p>以下、長文。</p>
+
+<h2 id="cocos2d-x-+-travis-ci">cocos2d-x + Travis CI</h2>
+
+<p>CI環境としてTravis CIをチョイスした。無料で使えるからである（Publicなリポジトリ限定かな）。<br>
+初のTravis CI利用ということもあり、なかなかに躓いたというか知らんことが多かったので、備忘録を残す。</p>
+
+<h3 id="そもそもtravis-ciに何をしてもらえるか">そもそもTravis CIに何をしてもらえるか</h3>
+
+<p>ちょいちょい試してみたところ、以下のような感じである。</p>
+
+<ul>
+<li>GithubへのPushをトリガーにして自動的にビルド実施。
+
+<ul>
+<li>ビルドに限らず、任意のScriptを実行可能。自動テストなんかも行うようにするとなお吉。</li>
+<li>ビルド前処理、後処理、など、割と細かくステージ分けがされている。</li>
+</ul></li>
+<li>ビルド失敗、成功の旨をメールにて通知。</li>
+<li>masterだけでなく、他のブランチへのPushに対しても同様の処理をしてくれる。</li>
+</ul>
+
+<p>ざっくりだがこんな感じだろうと。無料で使えるにしては十分かな。</p>
+
+<h3 id="さっそく設定する">さっそく設定する</h3>
+
+<p>設定手順はこんな感じ。</p>
+
+<ol>
+<li>Travis CIのWebサイトにて、監視してほしいリポジトリの設定をする。</li>
+<li>リポジトリのトップに .travis.yml を置く。</li>
+<li>あとはソースをプッシュするだけ。</li>
+</ol>
+
+<p>(1)と(3)は別に問題ないと思われる。問題は(2)である。<br>
+以下、.travis.ymlの内容について書く。</p>
+
+<h3 id="ビルドパスした-.travis.yml-はこれ">ビルドパスした .travis.yml はこれ</h3>
+
+<p>いかにもやっつけ感満載でありつつ、とりあえずビルドパスするところまでいけた。<br>
+記念に貼り付けておく。もしかして誰かの役に立つことも願いつつ。</p>
+
+<p>```yml .travis.yml<br>
+language: android</p>
+
+<h1 id="handle-git-submodules-yourself">Handle git submodules yourself</h1>
+
+<p>git:<br>
+    submodules: false</p>
+
+<p>install:</p>
+
+<h1 id="ndk-configuration">NDK configuration</h1>
+
+<h1 id="android-sdk-configuration">Android SDK configuration</h1>
+
+<h1 id="git-submodule">git submodule</h1>
+
+<h1 id="use-sed-to-replace-the-ssh-url-with-the-public-url,-then-initialize-submodules">Use sed to replace the SSH URL with the public URL, then initialize submodules</h1>
+
+<h1 id="cocos-setup">cocos setup</h1>
+
+<p>script:<br>
+    - cd ..<br>
+    - cocos compile -p android -j 8<br>
+```</p>
+
+<p>躓き備忘録を以下に記しておく。</p>
+
+<h4 id="travis-ciは何で動いてるんだろ">Travis CIは何で動いてるんだろ</h4>
+
+<p>Ubuntu 14.04（64bit）らしい。<br>
+なので各種Linuxのコマンドは使える。</p>
+
+<h4 id="cocosコマンド使えるようにする？">cocosコマンド使えるようにする？</h4>
+
+<p>cocos2d-xの開発では、cocosコマンドによるビルドを使うのが便利である。<br>
+ただし、ちょっと環境構築が面倒な一面もある。</p>
+
+<p>上記のymlでは、結果的にcocosコマンドを使える状態にしている。<br>
+「Travis CIはAndroidのビルドをサポートしている」ようなのだが、なのでもしかしたら、<br>
+cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたりでなんとかできるのかもしれない。</p>
+
+<p>と思ったのだが、どうやらNativeビルドには対応していないようである（あらかじめ用意されてはいない）。<br>
+なので、おとなしくcocosコマンドを使う方針で設定してみた。</p>
+
+<h4 id="ndkを解凍するときにtravis-ciがerror-137で終わる">NDKを解凍するときにTravis CIがerror 137で終わる</h4>
+
+<p>上記ymlでいうところの、以下の箇所を実行するとerror 137を報告してビルドが失敗に終わることがあった。</p>
+
+<p><code>yml .travi.yaml (part)<br>
+    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin<br>
+    - chmod a+x android-ndk-r10d-linux-x86_64.bin<br>
+    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!<br>
+</code></p>
+
+<p>解凍時にログをリダイレクトしているが、これをしないとログが大量に出過ぎることが原因でTravis CIに怒られ、ビルドが失敗に終わる。<br>
+それとは別に、解凍にメモリをくいすぎて、いわゆるメモリショートでプロセスが殺されるのがerror 137の原因らしい。。。</p>
+
+<p><code>sudo: required</code> をファイルの冒頭に書いていたのであるが、それを消したらerror 137は解消した。<br>
+意味不明だが、回避策もよくわからないのでもう追っかけるのはやめた。。。</p>
+
+<h4 id="android-sdkはあえて用意しなくていい">Android SDKはあえて用意しなくていい</h4>
+
+<p>NDKは自前で用意する必要があるが、Android SDKはTravis CI側で用意してくれているので、あえて自前で用意しなくてもいい。</p>
+
+<p>というか、Android SDKをダウンロード → Update SDK の流れを実施すると、今度はストレージ容量を圧迫してしまうため、<br>
+後続の処理（git submodule）実行時にストレージ容量不足でビルドが失敗に終わる。<br>
+有料にすれば解決するのかな？とりあえずわしの環境ではAndroid SDKを自前で準備することは出来なかった。。</p>
+
+<h4 id="gitスキームを用いているsubmodule取得に失敗する">gitスキームを用いているsubmodule取得に失敗する</h4>
+
+<p>SSH鍵の関係で、gitスキームを用いているsubmoduleの取得に失敗する。<br>
+なのでgitを用いてる部分はhttpsに無理やり書き換えている。以下の部分である。<br>
+涙ぐましい。</p>
+
+<p>```yml .travis.yml (part)</p>
+
+<h1 id="use-sed-to-replace-the-ssh-url-with-the-public-url,-then-initialize-submodules">Use sed to replace the SSH URL with the public URL, then initialize submodules</h1>
+
+<p>ここまでいくと、Travis CI上で<code>cocos</code>コマンドが使えるようになる。<br>
+<code>cocos compile -p android -j 8</code>でビルド実行。APKが生成される（デバッグ版）はずである。</p>
+
+<p>成果物がでてくるところまできたので、Travis CIの設定はひとまず以上とした。<br>
+おかげさまで、リポジトリにTravis CIバッヂを貼ることができた。</p>
+
+<p><a href="https://github.com/pankona/KonaReflection">https://github.com/pankona/KonaReflection</a></p>
+
+<h4 id="deploygateさんへのデプロイは">DeployGateさんへのデプロイは</h4>
+
+<p>ビルド成功の後、curlコマンドでAPKをDeployGateさんへ送信すればいい模様。<br>
+できたらまた躓きポイントを載せていこうと思う。</p>
+
+<p>今回はここまで。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cocos2d-xをやってみている]]></title>

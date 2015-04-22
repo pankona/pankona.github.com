@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Cocos2d-x | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/cocos2d-x/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2015-04-22T19:45:55+09:00</updated>
+  <updated>2015-04-22T19:48:49+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -270,7 +270,8 @@ cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたり
 <h4 id="deploygateさんへのデプロイは">DeployGateさんへのデプロイは</h4>
 
 <p>ビルド成功の後、curlコマンドでAPKをDeployGateさんへ送信すればいい模様。<br>
-できたらまた躓きポイントを載せていこうと思う。</p>
+できたらまた躓きポイントを載せていこうと思う。<br>
+追記：DeployGateさんへのアップロードについては<a href="http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/">次回記事</a>も見てね。</p>
 
 <p>今回はここまで。</p>
 ]]></content>

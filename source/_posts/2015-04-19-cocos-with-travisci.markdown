@@ -189,6 +189,7 @@ https://github.com/pankona/KonaReflection
 
 ビルド成功の後、curlコマンドでAPKをDeployGateさんへ送信すればいい模様。
 できたらまた躓きポイントを載せていこうと思う。
+追記：DeployGateさんへのアップロードについては[次回記事](http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/)も見てね。
 
 今回はここまで。
 

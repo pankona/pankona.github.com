@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Cocos2d-x | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/cocos2d-x/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2015-04-19T12:42:50+09:00</updated>
+  <updated>2015-04-22T19:45:55+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,106 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cocos2d-x + Travis CI + DeployGate]]></title>
+    <link href="http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/"/>
+    <updated>2015-04-22T19:25:11+09:00</updated>
+    <id>http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate</id>
+    <content type="html"><![CDATA[<p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。<br>
+今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。</p>
+
+<h2 id="だいたいのやり方">だいたいのやり方</h2>
+
+<ul>
+<li>ビルドが成功したら<code>curl</code>コマンドにてDeployGateにAPKをアップロードする。</li>
+<li>アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。</li>
+<li>API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
+
+<ul>
+<li>暗号化には<code>travis</code>コマンドを用いる。</li>
+</ul></li>
+</ul>
+
+<h2 id="ちょっと細かいやり方">ちょっと細かいやり方</h2>
+
+<p>まずはAPKアップロード成功後の.travis.ymlを載せておく。</p>
+
+<p>```yml .travis.yml<br>
+language: android</p>
+
+<h1 id="handle-git-submodules-yourself">Handle git submodules yourself</h1>
+
+<p>git:<br>
+    submodules: false</p>
+
+<p>env:<br>
+  global:<br>
+    secure: &quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;</p>
+
+<p>install:</p>
+
+<h1 id="ndk-configuration">NDK configuration</h1>
+
+<h1 id="android-sdk-configuration">Android SDK configuration</h1>
+
+<h1 id="git-submodule">git submodule</h1>
+
+<h1 id="use-sed-to-replace-the-ssh-url-with-the-public-url,-then-initialize-submodules">Use sed to replace the SSH URL with the public URL, then initialize submodules</h1>
+
+<h1 id="cocos-setup">cocos setup</h1>
+
+<p>script:<br>
+    - cocos compile -p android -j 8</p>
+
+<p>after_success:<br>
+    - echo $TRAVIS_BRANCH<br>
+    - echo $TRAVIS_PULL_REQUEST<br>
+    - &#39;[ &quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ] &amp;&amp; curl -F &quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot; -F &quot;token=${DEPLOYGATE_TOKEN}&quot; -F &quot;message=Deploy from Travis CI&quot; <a href="https://deploygate.com/api/users/pankona/apps">https://deploygate.com/api/users/pankona/apps</a>&#39;<br>
+```</p>
+
+<h3 id="前回からの変更点（apkアップロードのために追加した部分）">前回からの変更点（APKアップロードのために追加した部分）</h3>
+
+<p>前回から増えたり変更したりしたのは以下。</p>
+
+<p><code>yml .travis.yml (part)<br>
+env:<br>
+  global:<br>
+    secure: &quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;<br>
+</code></p>
+
+<p><code>yml .travis.yml (part)<br>
+    - &#39;[ &quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ] &amp;&amp; curl -F &quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot; -F &quot;token=${DEPLOYGATE_TOKEN}&quot; -F &quot;message=Deploy from Travis CI&quot; https://deploygate.com/api/users/pankona/apps&#39;<br>
+</code></p>
+
+<p>後者の部分で、<code>${DEPLOYGATE_TOKEN}</code>という環境変数を参照しているが、これを設定しているのが前者の部分。</p>
+
+<h3 id="deploygate_tokenの暗号化">DEPLOYGATE_TOKENの暗号化</h3>
+
+<p>以下のコマンドでDeployGateのAPI Keyを暗号化する。</p>
+
+<p><code>$ gem install travis</code> # travisコマンドを使えるようにする。<br>
+<code>$ travis encrypt DEPLOYGATE_TOKEN={My DeployGate API Key}</code> # DeployGateで確認したAPI Keyを暗号化するコマンド（中括弧はいらない）。</p>
+
+<p>このコマンドで得られた文字列をそのまま.travis.ymlに貼っつければOKである。</p>
+
+<h3 id="いつアップロードするか">いつアップロードするか</h3>
+
+<p>以下の条件を満たした場合のみ、APKのアップロードを行うようにした。<br>
+これは、Pull Requestがmasterにマージされたとき、を意味している（つもり）。<br>
+<code>&quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ]</code></p>
+
+<p>これをやっとかないと、ブランチにコミットをPUSHしたタイミングだったりPull Requestを作ったタイミングだったり、でアップロードが走る。<br>
+個人的にはやり過ぎ感があったので、APKはmasterからだけ作ればいいやという制限を施した。</p>
+
+<h3 id="これがそこそこ楽だと思います">これがそこそこ楽だと思います</h3>
+
+<p>AndroidアプリにAPKをいちいち頑張って転送しなくても、開発中アプリをインストールすることができるようになった。<br>
+ちなみに、アップロードされたAPKはDeployGateアプリ経由で取得することになる。</p>
+
+<p>今回はここまで。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cocos2d-x + Travis CI]]></title>

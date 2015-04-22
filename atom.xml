@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2015-04-19T12:42:50+09:00</updated>
+  <updated>2015-04-22T19:45:55+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,179 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Cocos2d-x + Travis CI + DeployGate]]></title>
+    <link href="http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/"/>
+    <updated>2015-04-22T19:25:11+09:00</updated>
+    <id>http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate</id>
+    <content type="html"><![CDATA[<p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。<br>
+今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。</p>
+
+<h2 id="だいたいのやり方">だいたいのやり方</h2>
+
+<ul>
+<li>ビルドが成功したら<code>curl</code>コマンドにてDeployGateにAPKをアップロードする。</li>
+<li>アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。</li>
+<li>API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
+
+<ul>
+<li>暗号化には<code>travis</code>コマンドを用いる。</li>
+</ul></li>
+</ul>
+
+<h2 id="ちょっと細かいやり方">ちょっと細かいやり方</h2>
+
+<p>まずはAPKアップロード成功後の.travis.ymlを載せておく。</p>
+
+<figure class='code'><figcaption><span>.travis.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">android</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Handle git submodules yourself</span>
+</span><span class='line'><span class="l-Scalar-Plain">git</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">submodules</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">global</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">secure</span><span class="p-Indicator">:</span> <span class="s">&quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="c1"># NDK configuration</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">printenv</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo `pwd`</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">chmod a+x android-ndk-r10d-linux-x86_64.bin</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting</span> <span class="c1"># because log will be too long!</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export NDK_ROOT=`pwd`/android-ndk-r10d</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $NDK_ROOT</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$NDK_ROOT</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $PATH</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Android SDK configuration</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export ANDROID_SDK_ROOT=/usr/local/android-sdk</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># git submodule</span>
+</span><span class='line'><span class="c1"># Use sed to replace the SSH URL with the public URL, then initialize submodules</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">sed -i &#39;s/git@github.com:/https:\/\/github.com\//&#39; .gitmodules</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git submodule update --init --recursive</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># cocos setup </span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cd ./cocos2d</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python download-deps.py --remove-download=yes</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python ./setup.py</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$COCOS_CONSOLE_ROOT</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export COCOS_TEMPLATES_ROOT=`pwd`/templates</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$COCOS_TEMPLATES_ROOT</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export ANT_ROOT=/usr/share/ant/bin</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$ANT_ROOT</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">printenv</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cd ..</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cocos compile -p android -j 8</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">after_success</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $TRAVIS_BRANCH</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $TRAVIS_PULL_REQUEST</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="s">&#39;[</span><span class="nv"> </span><span class="s">&quot;$TRAVIS_BRANCH&quot;</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;master&quot;</span><span class="nv"> </span><span class="s">-a</span><span class="nv"> </span><span class="s">&quot;$TRAVIS_PULL_REQUEST&quot;</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;false&quot;</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">curl</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot;</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;token=${DEPLOYGATE_TOKEN}&quot;</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;message=Deploy</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">Travis</span><span class="nv"> </span><span class="s">CI&quot;</span><span class="nv"> </span><span class="s">https://deploygate.com/api/users/pankona/apps&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="前回からの変更点（apkアップロードのために追加した部分）">前回からの変更点（APKアップロードのために追加した部分）</h3>
+
+<p>前回から増えたり変更したりしたのは以下。</p>
+
+<figure class='code'><figcaption><span>.travis.yml (part)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">global</span><span class="p-Indicator">:</span>
+</span><span class='line'>    <span class="l-Scalar-Plain">secure</span><span class="p-Indicator">:</span> <span class="s">&quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<figure class='code'><figcaption><span>.travis.yml (part)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="p-Indicator">-</span> <span class="s">&#39;[</span><span class="nv"> </span><span class="s">&quot;$TRAVIS_BRANCH&quot;</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;master&quot;</span><span class="nv"> </span><span class="s">-a</span><span class="nv"> </span><span class="s">&quot;$TRAVIS_PULL_REQUEST&quot;</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;false&quot;</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">curl</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot;</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;token=${DEPLOYGATE_TOKEN}&quot;</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;message=Deploy</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">Travis</span><span class="nv"> </span><span class="s">CI&quot;</span><span class="nv"> </span><span class="s">https://deploygate.com/api/users/pankona/apps&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<p>後者の部分で、<code>${DEPLOYGATE_TOKEN}</code>という環境変数を参照しているが、これを設定しているのが前者の部分。</p>
+
+<h3 id="deploygate_tokenの暗号化">DEPLOYGATE_TOKENの暗号化</h3>
+
+<p>以下のコマンドでDeployGateのAPI Keyを暗号化する。</p>
+
+<p><code>$ gem install travis</code> # travisコマンドを使えるようにする。<br>
+<code>$ travis encrypt DEPLOYGATE_TOKEN={My DeployGate API Key}</code> # DeployGateで確認したAPI Keyを暗号化するコマンド（中括弧はいらない）。</p>
+
+<p>このコマンドで得られた文字列をそのまま.travis.ymlに貼っつければOKである。</p>
+
+<h3 id="いつアップロードするか">いつアップロードするか</h3>
+
+<p>以下の条件を満たした場合のみ、APKのアップロードを行うようにした。<br>
+これは、Pull Requestがmasterにマージされたとき、を意味している（つもり）。<br>
+<code>&quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ]</code></p>
+
+<p>これをやっとかないと、ブランチにコミットをPUSHしたタイミングだったりPull Requestを作ったタイミングだったり、でアップロードが走る。<br>
+個人的にはやり過ぎ感があったので、APKはmasterからだけ作ればいいやという制限を施した。</p>
+
+<h3 id="これがそこそこ楽だと思います">これがそこそこ楽だと思います</h3>
+
+<p>AndroidアプリにAPKをいちいち頑張って転送しなくても、開発中アプリをインストールすることができるようになった。<br>
+ちなみに、アップロードされたAPKはDeployGateアプリ経由で取得することになる。</p>
+
+<p>今回はここまで。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cocos2d-x + Travis CI]]></title>
@@ -1341,22 +1514,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 <a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
 
 <p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopressでブログを始めてみる]]></title>
-    <link href="http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/"/>
-    <updated>2014-04-24T21:44:52+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress</id>
-    <content type="html"><![CDATA[<p>ちょっと長めの通勤時間を有効活用するため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。<br>
-マークダウンの書き方すらよくわかっていないが、徐々にいろいろと進歩させていこうと思う。</p>
-
-<p>私は一応プログラマをやっている。なので色々困ったことにでくわし、そのたびに解決方法を調べつつ業務にあたっている。<br>
-きっと私が困ったところは、おそらく世の中の誰かが同じように困っているであろうと信じ、本ブログがその助けになることを願うと共に、<br>
-基本的には日々の調査結果なんかをここにアウトプットしていきたいと思っている。</p>
-
-<p>細く、長く、続けて行ければ。</p>
 ]]></content>
   </entry>
   

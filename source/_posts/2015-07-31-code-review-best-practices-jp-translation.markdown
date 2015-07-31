@@ -10,7 +10,7 @@ categories: "その他"
 
 [Code Review Best Practices 日本語翻訳](http://pankona.github.io/CodeReviewBestPractices_JP_Translation/)
 
-コードレビューのやり方に関しての記事であるが、よくまとまっていると思ったため、
+コードレビューのやり方に関しての記事であるが、分かりやすいしフムフムと感じる内容だったため、
 本人に許可をいただいて、翻訳、掲載をさせていただいた。
 ありがとう、ケビンさん。
 

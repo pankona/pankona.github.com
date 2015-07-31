@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2015-04-22T19:48:49+09:00</updated>
+  <updated>2015-07-31T19:56:11+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Code Review Best Practices を日本語訳した]]></title>
+    <link href="http://pankona.github.io/blog/2015/07/31/code-review-best-practices-jp-translation/"/>
+    <updated>2015-07-31T19:36:04+09:00</updated>
+    <id>http://pankona.github.io/blog/2015/07/31/code-review-best-practices-jp-translation</id>
+    <content type="html"><![CDATA[<p><a href="http://kevinlondon.com/2015/05/05/code-review-best-practices.html">Code Review Best Practices - Kevin London&#39;s blog</a>の日本語訳を作成した。</p>
+
+<p><a href="http://pankona.github.io/CodeReviewBestPractices_JP_Translation/">Code Review Best Practices 日本語翻訳</a></p>
+
+<p>コードレビューのやり方に関しての記事であるが、よくまとまっていると思ったため、<br>
+本人に許可をいただいて、翻訳、掲載をさせていただいた。<br>
+ありがとう、ケビンさん。</p>
+
+<p>おかしい点、改善点にお気づきの方がいらっしゃれば、issue登録、pull request、なんでもいいので連絡いただけると嬉しい。<br>
+リポジトリは<a href="https://github.com/pankona/CodeReviewBestPractices_JP_Translation">こちら</a></p>
+
+<p>実は<a href="http://postd.cc/code-review-best-practices/">POSTDに同じ記事を訳したもの</a>があることが分かったのだが、、、<br>
+まあいくつあってもいいかな、等と思いつつ。ちなみに訳はほとんど同じだった。</p>
+
+<p>この手のものは英語のままでいいと思う気持ちがある反面、<br>
+やっぱり日本人は日本語のほうが速く読める人が多いだろうし、一定の価値はあるかな、等と思うところである。</p>
+
+<p>記事の中で印象深かったのは、<em>Compliment / reinforce good practices</em> の部分である。</p>
+
+<p>平たく言えば、コードレビューで見つけた良いところを褒めていけ、という内容。<br>
+コードレビューではとかく指摘を探すことに終始しがちであるが、<br>
+確かに、褒めるというかイイネというか＋１というか、をしていくことで、<br>
+いい空気、もっといいコード書いてやろう的なモチベーションアップ、とか そういう効果もあるんじゃないかと思ったりもする。<br>
+ギスギスしがちなコードレビューの現場にはオススメ。私もやっていきます。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Cocos2d-x + Travis CI + DeployGate]]></title>
@@ -909,7 +941,7 @@ evtestを起動したのちにタッチパネルをぐりぐり触ってみる�
 
 <h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す"><del>戻したのち、コピーしておいたfbtftを所定の位置に戻す</del></h3>
 
-<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>~~の位置に戻す。~~</p>
+<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code><del>の位置に戻す。</del></p>
 
 <h3 id="depmodする。"><del>depmodする。</del></h3>
 
@@ -1500,21 +1532,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 </span></p>
 
 <p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopressにタグクラウドとカテゴリリストを追加してみた]]></title>
-    <link href="http://pankona.github.io/blog/2014/04/25/add-category-list/"/>
-    <updated>2014-04-25T21:11:53+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/04/25/add-category-list</id>
-    <content type="html"><![CDATA[<p>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。<br>
-見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。</p>
-
-<p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。<br>
-<a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
-
-<p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>
 ]]></content>
   </entry>
   

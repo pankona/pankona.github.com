@@ -9,8 +9,8 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="前回の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。
-今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。 だいたいのやり方 ビルドが成功したらcurlコマンドにてDeployGateにAPKをアップロードする &hellip;">
+  <meta name="description" content="Code Review Best Practices - Kevin London&#39;s blogの日本語訳を作成した。 Code Review Best Practices 日本語翻訳 コードレビューのやり方に関しての記事であるが、よくまとまっていると思ったため、
+本人に許可をいただいて、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-31T19:36:04+09:00" pubdate data-updated="true">Jul 31<span>st</span>, 2015</time>
+        
+           | <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2015/07/31/code-review-best-practices-jp-translation/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://kevinlondon.com/2015/05/05/code-review-best-practices.html">Code Review Best Practices - Kevin London&#39;s blog</a>の日本語訳を作成した。</p>
+
+<p><a href="http://pankona.github.io/CodeReviewBestPractices_JP_Translation/">Code Review Best Practices 日本語翻訳</a></p>
+
+<p>コードレビューのやり方に関しての記事であるが、よくまとまっていると思ったため、<br>
+本人に許可をいただいて、翻訳、掲載をさせていただいた。<br>
+ありがとう、ケビンさん。</p>
+
+<p>おかしい点、改善点にお気づきの方がいらっしゃれば、issue登録、pull request、なんでもいいので連絡いただけると嬉しい。<br>
+リポジトリは<a href="https://github.com/pankona/CodeReviewBestPractices_JP_Translation">こちら</a></p>
+
+<p>実は<a href="http://postd.cc/code-review-best-practices/">POSTDに同じ記事を訳したもの</a>があることが分かったのだが、、、<br>
+まあいくつあってもいいかな、等と思いつつ。ちなみに訳はほとんど同じだった。</p>
+
+<p>この手のものは英語のままでいいと思う気持ちがある反面、<br>
+やっぱり日本人は日本語のほうが速く読める人が多いだろうし、一定の価値はあるかな、等と思うところである。</p>
+
+<p>記事の中で印象深かったのは、<em>Compliment / reinforce good practices</em> の部分である。</p>
+
+<p>平たく言えば、コードレビューで見つけた良いところを褒めていけ、という内容。<br>
+コードレビューではとかく指摘を探すことに終始しがちであるが、<br>
+確かに、褒めるというかイイネというか＋１というか、をしていくことで、<br>
+いい空気、もっといいコード書いてやろう的なモチベーションアップ、とか そういう効果もあるんじゃないかと思ったりもする。<br>
+ギスギスしがちなコードレビューの現場にはオススメ。私もやっていきます。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1143,153 +1205,6 @@ evtestを起動したのちにタッチパネルをぐりぐり触ってみる�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/17/pitft-on-arch-linux/">PiTFTをArch Linux on Raspberry Piで動かすのに苦戦</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-17T21:11:11+09:00" pubdate data-updated="true">Jul 17<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/07/17/pitft-on-arch-linux/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>2014/07/23/Wed 追記</strong></p>
-
-<p>以下のポストに誤りがあることがわかったので、訂正。<br>
-誤っている部分には打ち消し線を入れておく。</p>
-
-<hr>
-
-<p><a href="http://www.adafruit.com/products/1601">PiTFT</a>を購入。<br>
-さっそくRaspberry Piで動かそうとしてみたところ、これがなかなかうまくいかず。<br>
-3日程粘ってようやく動いた。やり方を記載しておく。</p>
-
-<p>Raspberry Piには、Arch Linuxが載っている前提です。</p>
-
-<h3 id="参考になるページ">参考になるページ</h3>
-
-<p><a href="https://github.com/notro/fbtft/wiki">notroさんのfbtftに関するWiki</a>。本当に感謝。Great。<br>
-ただ、ここに書いてある手順を踏んだだけではうまく動かなかった。<br>
-以下、顛末と動かすまでの手順。</p>
-
-<h4 id="rpi-updateが使える状態にする">rpi-updateが使える状態にする</h4>
-
-<p>以下、Raspberry Pi上でのコマンド入力。<br>
-以下のコマンドでrpi-updateを取得＆実行可能権限付与。</p>
-
-<p><code>$ wget https://raw.github.com/Hexxeh/rpi-update/master/rpi-update</code><br>
-<code>$ chmod +x ./rpi-update</code></p>
-
-<p>rpi-updateは適当な場所に移しておく。パスが通っているところに置いておくと便利。<br>
-以下、rpi-updateがある場所にパスが通っている前提で記載。</p>
-
-<h3 id="rpi-updateを使ってkernelをアップデート">rpi-updateを使ってKernelをアップデート</h3>
-
-<p>FBTFTドライバがビルトインされているとされるバージョンにしてみる。</p>
-
-<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
-
-<p>なんやかや起こったあと、リブート。</p>
-
-<p><code>$ sudo reboot</code></p>
-
-<p>これでFBTFTドライバが準備オッケーになっているはず、なのだが…？</p>
-
-<h3 id="fbtft_deviceがない"><del>fbtft_deviceがない</del></h3>
-
-<p><del>fbtft_deviceを有効にするために、modprobeしてみる。</del></p>
-
-<p><code>$ sudo modprobe fbtft_device name=adafruit22</code></p>
-
-<p><del>すると帰ってきた答えは、</del></p>
-
-<p><code>FATAL: Module fbtft_device not found.</code></p>
-
-<p><del>とのこと。実際に探してみたところ、fbtft_device.koというモジュールは存在していない様子。</del></p>
-
-<hr>
-
-<p><strong>2014/07/23/Wed 訂正</strong></p>
-
-<p>結論から言うと上記の挙動であっていた。<br>
-<code>BRANCH=builtin</code>を選択した場合はfbtft_deviceがloadableなモジュールとして現れない、<br>
-つまり modprobe で見つからないと言われるのは正しかった。</p>
-
-<p>上記の状態で、あとは /boot/cmdline.txt に然るべき内容を追記するだけでOK。<br>
-その後PiTFTを接続し、Raspberry Piを再起動すれば画面に何か映るはず。</p>
-
-<p>よって以下の手順はすべて無駄であるが、<br>
-以下の手順が誤りであることを示すために残しておく。。</p>
-
-<p>以下、無駄な手順メモ。全く不要。</p>
-
-<hr>
-
-<h3 id="いろいろやってfbtft_deviceを用意する"><del>いろいろやってfbtft_deviceを用意する</del></h3>
-
-<p><del>fbtft_deviceを求めて色々さまよったところ、上述のKernelアップデートの際に、</del></p>
-
-<p><code>sudo REPO_URI=https://github.com/notro/rpi-firmware rpi-update</code></p>
-
-<p><del>とビルトインではなく、loadable moduleとしてfbtft_deviceが現れるやつをチョイスしてみたところ、</del><br>
-<code>sudo modprobe fbtft_device name=adafruit22</code>がnot foundではなく、別のエラーになった。<br>
-<del>探してみたところ、実際にモジュールは存在した。ただし正常にmodprobeできていない。</del></p>
-
-<p><del>FBTFTのモジュールは、</del><br>
-<code>/lib/modules/$(uname -r)/kernel/video/fbtft</code><br>
-<del>に置かれている。これをどこか別の場所にコピーしておく。後々使う。</del></p>
-
-<h3 id="rpi-updateを使ってfbtftビルトインバージョンに戻す"><del>rpi-updateを使ってFBTFTビルトインバージョンに戻す</del></h3>
-
-<p><del>上で一回やってるやつをやって、FBTFTビルトインバージョンのKernelに戻す。</del></p>
-
-<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code><br>
-<code>$ sudo reboot</code></p>
-
-<h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す"><del>戻したのち、コピーしておいたfbtftを所定の位置に戻す</del></h3>
-
-<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>~~の位置に戻す。~~</p>
-
-<h3 id="depmodする。"><del>depmodする。</del></h3>
-
-<p><code>sudo depmod -a</code></p>
-
-<h3 id="fbtft_deviceをmodprobeする"><del>fbtft_deviceをmodprobeする</del></h3>
-
-<p><del>not foundとは言われなくなり、ちゃんとロードされる。はず。</del></p>
-
-<h3 id="あとはnotroさんのところの手順に従う">あとはnotroさんのところの手順に従う</h3>
-
-<p>/boot/cmdline.txtであるとか、もろもろ変更する。<br>
-PiTFTはきっと動き出す。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1313,6 +1228,10 @@ PiTFTはきっと動き出す。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x + Travis CI + DeployGate</a>
       </li>
     
@@ -1328,10 +1247,6 @@ PiTFTはきっと動き出す。</p>
         <a href="/blog/2015/01/28/300hot-per-month/">月間300ヒットを達成していた</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/01/28/raspi-autologin/">Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1340,11 +1255,11 @@ PiTFTはきっと動き出す。</p>
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 117.14285714285714%'>その他(2)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 125.71428571428572%'>その他(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (2)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

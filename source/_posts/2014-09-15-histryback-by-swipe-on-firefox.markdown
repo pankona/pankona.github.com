@@ -38,7 +38,7 @@ UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方
 
 上の確認で有効だったらここは飛ばしてOK。無効だった場合、有効にするのは以下のコマンド。
 
-`$ synclient HorizTwoFingerScroll 1`
+`$ synclient HorizTwoFingerScroll=1`
 
 synclientのほうはこれでOK。
 

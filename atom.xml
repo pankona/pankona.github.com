@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2015-07-31T19:59:01+09:00</updated>
+  <updated>2016-01-31T16:59:41+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -755,7 +755,7 @@ UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方
 
 <p>上の確認で有効だったらここは飛ばしてOK。無効だった場合、有効にするのは以下のコマンド。</p>
 
-<p><code>$ synclient HorizTwoFingerScroll 1</code></p>
+<p><code>$ synclient HorizTwoFingerScroll=1</code></p>
 
 <p>synclientのほうはこれでOK。</p>
 

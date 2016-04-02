@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RaspberryPi | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-01-31T16:59:41+09:00</updated>
+  <updated>2016-04-03T01:15:02+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -276,7 +276,7 @@ evtestを起動したのちにタッチパネルをぐりぐり触ってみる�
 
 <h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す"><del>戻したのち、コピーしておいたfbtftを所定の位置に戻す</del></h3>
 
-<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code><del>の位置に戻す。</del></p>
+<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>~~の位置に戻す。~~</p>
 
 <h3 id="depmodする。"><del>depmodする。</del></h3>
 

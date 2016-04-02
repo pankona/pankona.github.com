@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-01-31T16:59:41+09:00</updated>
+  <updated>2016-04-03T01:15:02+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,220 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編]]></title>
+    <link href="http://pankona.github.io/blog/2016/03/31/z370c-bad-point/"/>
+    <updated>2016-03-31T00:36:22+09:00</updated>
+    <id>http://pankona.github.io/blog/2016/03/31/z370c-bad-point</id>
+    <content type="html"><![CDATA[<p>前回に引き続き、ZenPad 7.0 (Z370C) のレビューを記事にする。<br>
+今回は、1ヶ月程度使って感じた ZenPad 7.0 に対するフラストレーションについて。<br>
+つまりイマイチな点に触れていく。<br>
+感触良い点については前回の記事で触れているので、ぜひそちらも見てね。</p>
+
+<h2 id="タッチの精度・感度がいまいち">タッチの精度・感度がいまいち</h2>
+
+<p>これはもしかしたら初期不良の類かもしれないが、とにかくタッチが微妙である。<br>
+「一度タップしたのに効かなかったのでもう一度タップしてみる」、みたいなことがしょっちゅうである。</p>
+
+<p>あとはロングタップ、いわゆる長押しであるが、これがとても不安定である。<br>
+一点をタップし続けているにも関わらず、タップ位置がぐらぐらずれてしまったり。<br>
+長押しに関しては、何度かトライしているとそのうち成功したりするが、かなり気を使わなければならないのが残念なところである。</p>
+
+<p>※ ネット上のレビュー記事を見ていると同様の報告は見当たらなかったので、、、私が持っている端末限定の現象の可能性もある。</p>
+
+<h2 id="動画再生には向かない">動画再生には向かない</h2>
+
+<p>性能の問題であろうが、比較的高ビットレートな動画の再生には耐えられなかった。<br>
+カクカクになったり、音だけ進んで絵がついてこない、等の現象が起きるケースがあった。<br>
+16:9 の画面は動画再生には良いので、この点は仕方ないと思いつつ、若干の残念感はある。</p>
+
+<p>ちなみに、ニコニコ動画のエコノミーならいけます。</p>
+
+<h2 id="ゲームも概ね向かない">ゲームも概ね向かない</h2>
+
+<p>こちらもお察しいただけるかと思うが、昨今のぐりぐり 3D が動くようなゲームはほぼ動かないと言っていい。<br>
+タブレット界隈のベンチマーク的な存在である○○マスターとかも一応試してみたが、、厳しかった。<br>
+そういうのをプレイしたいひとには本当にオススメ端末なので、注意されたしである。</p>
+
+<p>極軽い処理で済むゲーム、将棋とかそこらへんだろうか、であれば動作すると思われる。</p>
+
+<h2 id="sim-が挿さらない">SIM が挿さらない</h2>
+
+<p>これは不満点とはちょっと違うが、惜しいと思う点。<br>
+SIM が挿さらないので、ネットワークに関しては WiFi での運用となる。<br>
+移動中のネットワークに関しては、スマホのテザリングか何かで解決してあげる必要がある。</p>
+
+<p>とはいえ、SIM を使いたかったら、SIM が挿せる ZenPad 7.0 (Z370KL) があるので、<br>
+そちらを求めるのが正しい。ちなみに性能も Z370KL のほうが若干良い模様である。</p>
+
+<h2 id="総評">総評</h2>
+
+<p>3つの記事にわたって、ZenPad 7.0 (Z370C) の見た目、良いところ、いまいちなところについて記事にした。<br>
+性能がいまいちだったり SIM が挿せなかったりという不満点はあるものの、<br>
+値段が安いため、用途がバッチリ合えば非常にコストパフォーマンスの高い良機種であると思う。</p>
+
+<p>個人的には、引き続き使い倒してやろうと思っているので、また何か気づいたことがあれば記事にしようかな、と。<br>
+前回までの記事で紹介できなかった画像をそえつつ、今回はこのへんで。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/2.jpg" alt="Z370C"><br>
+ZenPad 7.0 with ZenClutch 開いてみたところ。片手で持つのに手頃な大きさのタブレット。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/10.jpg" alt="Z370C"><br>
+ZenClutch は渋め。「ASUS COLLECTION」と印字されている。渋め。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/8.jpg" alt="Z370C"><br>
+側面。電源ボタンとボリュームボタンが配置されている。カバーつけてしまうとちょっと押しにくい。<br>
+ただ、カバーあければ自動でスリープ解除になるので、あまり押す機会はないかも。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ASUS ZenPad 7.0 (Z370C) レビュー その二 : 良いところ編]]></title>
+    <link href="http://pankona.github.io/blog/2016/03/29/z370c-good-point/"/>
+    <updated>2016-03-29T23:53:19+09:00</updated>
+    <id>http://pankona.github.io/blog/2016/03/29/z370c-good-point</id>
+    <content type="html"><![CDATA[<p>前回に引き続き、ZenPad 7.0 (Z370C) のレビューを書いていく。<br>
+今回は、1ヶ月程度使って分かってきた ZenPad 7.0 の使用感について。</p>
+
+<h2 id="性能はぶっちゃけいまいち">性能はぶっちゃけいまいち</h2>
+
+<p>1ヶ月使って、使わなくても分かることかもしれないが、性能は正直物足りないと感じる。<br>
+何かにつけて動作がモタモタするというか。Chrome 起動に0.5秒くらい掛かるとかそういうの。<br>
+ZenPad 7.0 のスペックそのものは<a href="https://www.asus.com/jp/Tablets/ASUS_ZenPad_70_Z370C/specifications/">公式ページ</a>を参照されたし。</p>
+
+<p>みんな大好き Antutu ベンチマーク的には、20000点弱くらい。これは Nexus 7 (2012) とドッコイな感じ。<br>
+そりゃーいまどきの OS 乗っけていまどきのアプリを動かせば、重たく感じるのも無理はないかな、と。</p>
+
+<p>とはいえ、1万円台で購入できるタブレットであることを考えると妥当とも思える。<br>
+逆に言えば、性能をそれほど必要としない使い方をする分には問題にならない。</p>
+
+<p>なので、 <strong>「この使い方をすれば快適」</strong> というのを今回は紹介していく。</p>
+
+<h2 id="web-ブラウジング">Web ブラウジング</h2>
+
+<p>いわゆるネットサーフィンをする分には、それほどストレスを感じることはなかった。<br>
+※ ページが重かったらキツイ。</p>
+
+<p>普段は 5 インチのスマートフォンを使っている私であるが、<br>
+やはり画面が大きいほうが文字も見やすいし、目にも優しい。</p>
+
+<p>スマートデバイスの主な用途がネットサーフィンの方はかなりいると思うが、<br>
+そういう用途では使用に耐えうる、むしろ快適、となるんじゃないかと。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/6.jpg" alt="Z370C"><br>
+Yahoo を表示してみた様子。画面が広いため表示できる情報量は多い。</p>
+
+<h2 id="電子書籍">電子書籍</h2>
+
+<p>16:9 の画面なので電子書籍には若干不向きかもしれない（画面上下に黒帯が出てしまう）が、<br>
+これもやはりスマートフォンの 5 インチ前後の画面で見るのに比べれば、見やすさが雲泥の差である。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/9.jpg" alt="Z370C"><br>
+漫画も読みやすい。スマートフォンだと読む気が起こらなかったが、これならイケる気がする。</p>
+
+<h2 id="フォトビューア">フォトビューア</h2>
+
+<p>写真をタブレットで見るのは定番かもしれないが、やはり大きめの画面で見るのは良い。<br>
+昨今のスマートフォンは高解像度な写真も取れるし、Google フォトの同期を活かして、<br>
+撮るのはスマホ、見るのはタブレット、みたいにしていくスタイルもオススメ。快適です。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/7.jpg" alt="Z370C"><br>
+写真を表示してみた様子。とても見やすい。かわいい。</p>
+
+<h2 id="大きさが手頃なので電車内でも快適">大きさが手頃なので電車内でも快適</h2>
+
+<p>上記の用途は、私の場合は主に移動中に行うことになるのだが、<br>
+前回の記事で触れたように、7 インチという大きさが手頃で持ちやすく、電車のお供してとても優秀。<br>
+ついでに ZenClutch で滑りにくいこともあり、片手運用も可能。片手つり革でも大丈夫。</p>
+
+<h2 id="fep-は-atok">FEP は ATOK</h2>
+
+<p>実は ATOK がプリインである。常日頃から ATOK ユーザである私にとってこれは朗報。<br>
+というか ATOK 買っているのでプリインじゃなくても良かったんだけど。ATOK オススメ。<br>
+これは ZenPad のレビューではない気もするが、ATOK プリインの ZenPad オススメ、ということで。</p>
+
+<h2 id="電池のもちは普通">電池のもちは普通</h2>
+
+<p>そこかしこの記事で Z370C はバッテリーのもちが悪い、と言われているような気がするが、<br>
+やたら電池を食うような使い方をしない限り、充電しないで丸一日はもつ程度には動いてくれる。<br>
+私にとってこれは十分なので、バッテリー面で特に不満を感じることはなかった。</p>
+
+<h2 id="ということで">ということで</h2>
+
+<p>使い方が間違っていなければ（変な期待を持たなければ）、性能がいまいちとはいえ、<br>
+十分快適に使っていけるポテンシャルを持っているという印象でした。<br>
+今回はこのへんで。… 次回はだめな使い方を紹介していく。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編]]></title>
+    <link href="http://pankona.github.io/blog/2016/03/29/z370c-appearance/"/>
+    <updated>2016-03-29T00:40:56+09:00</updated>
+    <id>http://pankona.github.io/blog/2016/03/29/z370c-appearance</id>
+    <content type="html"><![CDATA[<p>ZenTour2016 にて ZenPad 7.0 (Z370C) を入手するに至った。<br>
+ASUS様より無料でいただいた形であるが、レビュー記事をしたためることが条件である。</p>
+
+<p>ので、ここから3つ、ZenPad 7.0 (Z370C) のレビューをしていく。<br>
+まず見た目、次に使ってみて良いところ、最後に使ってみて悪いところ、について<br>
+書いていこうと思う。</p>
+
+<p>というわけで、見た目編、行きます。</p>
+
+<h2 id="zenpad-7.0-(z370c)-を見よ">ZenPad 7.0 (Z370C) を見よ</h2>
+
+<p>こちらが Z370C with ZenClutch である。<br>
+以下はオモテ面。なお、大きさのイメージが伝わりやすいように近くにポンジュースを配置している。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/1.jpg" alt="Z370C"></p>
+
+<p>今回は本体だけでなく、周辺アクセサリであるカバーもいただいている。<br>
+ZenClutch。結構高いんだよこれ。いやほんとに。値段の甲斐あってか(?)、さながら高級財布のような佇まいである。<br>
+以下はウラ面。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/3.jpg" alt="Z370C"></p>
+
+<p>この ZenClutch であるが、本革のような雰囲気があり、なんというか、手触りが良い。<br>
+ただ、タブレット本体を使う際にはカバーを開いて本体の背面側に折り返す関係上、<br>
+タブレット使用中はおそらくその手触りの良い部分に触れることがない。滑り止めにもなりそうなのだが。<br>
+少し残念であるが、とはいえ小脇に抱えて持ち歩くにはとても良いことには変わりない。</p>
+
+<h2 id="大きさは持ち運びにはちょうどいい">大きさは持ち運びにはちょうどいい</h2>
+
+<p>ZenPad 7.0 (Z370C) は名の通り 7 インチのタブレット。大きさ的には Nexus 7 シリーズとほぼ同等。<br>
+Nexus 7 よりも若干薄いかな、と。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/4.jpg" alt="Z370C"></p>
+
+<p>そして軽い。公称値は 272 グラム。ZenClutch を着せているので若干重たくなるとはいえ、やはり軽い。<br>
+このくらいの軽さであれば、かばんに入れておいても全く気にならないレベルであると感じる。</p>
+
+<h2 id="カバーをあけると自動でスリープ復帰">カバーをあけると自動でスリープ復帰</h2>
+
+<p>電源ボタンを押さずともスリープから復帰するのはなかなか快適。<br>
+電源ボタンがへたって故障する心配もない点も大きいと思う。<br>
+ちなみに当然、カバーをしめたら自動でスリープします。これも快適。</p>
+
+<h2 id="ベゼルは狭め">ベゼルは狭め</h2>
+
+<p>ベゼル、特に左右の枠は狭めであると感じた（他のタブレットと比較したわけではないが）。<br>
+以下の画像で伝わるだろうか。</p>
+
+<p><img src="http://pankona.github.io/images/z370c/5.jpg" alt="Z370C"></p>
+
+<p>この点も見た目のスタイリッシュさに寄与している点ではないだろうか。</p>
+
+<h2 id="見た目に関する総評">見た目に関する総評</h2>
+
+<p>見た目に関しては、高級感があり、大きすぎず、軽く、画面もまあまあ大きく使えていて、良いとこばかりと言っていい。<br>
+値段が1万円台であることを考えると、こと見た目に関してはお値段以上であると思われる。見た目オススメ。</p>
+
+<p>ただ、性能に関してはちょっと色々あるので次回の記事で書こうと思うが、、、<br>
+性能さえもう少しイケていれば、間違いなく誰にでもオススメできる機種だったと思う。惜しい。<br>
+今回はこのへんで。次回は性能について。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Code Review Best Practices を日本語訳した]]></title>
@@ -35,7 +249,7 @@
 <p>この手のものは英語のままでいいと思う気持ちがある反面、<br>
 やっぱり日本人は日本語のほうが速く読める人が多いだろうし、一定の価値はあるかな、等と思うところである。</p>
 
-<p>記事の中で印象深かったのは、<em>Compliment / reinforce good practices</em> の部分である。</p>
+<p>記事の中で印象深かったのは、*Compliment / reinforce good practices* の部分である。</p>
 
 <p>平たく言えば、コードレビューで見つけた良いところを褒めていけ、という内容。<br>
 コードレビューではとかく指摘を探すことに終始しがちであるが、<br>
@@ -941,7 +1155,7 @@ evtestを起動したのちにタッチパネルをぐりぐり触ってみる�
 
 <h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す"><del>戻したのち、コピーしておいたfbtftを所定の位置に戻す</del></h3>
 
-<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code><del>の位置に戻す。</del></p>
+<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>~~の位置に戻す。~~</p>
 
 <h3 id="depmodする。"><del>depmodする。</del></h3>
 
@@ -1372,166 +1586,6 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
 デュアルブートできなくなったら、いちいちgummibootx64.efiをWindows起動用のファイルに上書きしてやる必要がある。</p>
 
 <h2 id="これでwindowsアップデートも怖くない！">これでWindowsアップデートも怖くない！</h2>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Raspberry Pi + カメラモジュール + Webで配信]]></title>
-    <link href="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/"/>
-    <updated>2014-05-05T23:38:52+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/05/05/raspi-livestream-web</id>
-    <content type="html"><![CDATA[<p>Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。<br>
-いろいろ悩んだ点もあったので、やり方の結論をメモしておく。<br>
-ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。</p>
-
-<h2 id="良さそうな例">良さそうな例</h2>
-
-<p>参考にしたウェブサイトは↓。結論からするとここだけでOKだった。<br>
-<a href="https://github.com/jacksonliam/mjpg-streamer">https://github.com/jacksonliam/mjpg-streamer</a></p>
-
-<h2 id="上記のリポジトリの情報を元にやったこと">上記のリポジトリの情報を元にやったこと</h2>
-
-<h3 id="mjpg-streamerのインストール。">mjpg-streamerのインストール。</h3>
-
-<p>上記のリポジトリからソースコードをもってきてビルド。ビルド方法も上記のリポジトリのREADMEに記載されている。<br>
-pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは使わない。それらはinput_raspicam.soを作ってくれないため。</p>
-
-<h3 id="超簡単にhtmlを書く。">超簡単にhtmlを書く。</h3>
-
-<p>下記のような。とりあえずサンプルなので、簡単に。。<br>
-書いたHTMLは、任意の場所におく。ここではひとまず、<code>~/www/index.html</code>として置いたとする。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>Raspberry Pi<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/?action=stream&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="配信するコマンドを実行する。">配信するコマンドを実行する。</h3>
-
-<p>このコマンドも件のリポジトリに記載されているが、一応。<br>
-ライブラリ（.so）へのパスが通ってなかったら、LD_LIBRARY_PATHを設定してライブラリへのパスを通すか、もしくはライブラリをフルパスで指定する。</p>
-
-<p><code>mjpg_streamer -o &quot;output_http.so -w ./www&quot; -i &quot;input_raspicam.so -x 1280 -y 720 -fps 15 -ex night&quot;</code></p>
-
-<p>こんな感じに入力してやると、カメラが動き出して動画配信が始まる。<br>
-別のPC等からブラウザで、</p>
-
-<p><code>http://[Raspberry PiのIPアドレス]:8080/</code></p>
-
-<p>にアクセスしてあげると、カメラが写してる画像が配信されているのが確認できると思われる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pygmentsがエラーを吐きやがるので修正]]></title>
-    <link href="http://pankona.github.io/blog/2014/04/28/fix-pygments/"/>
-    <updated>2014-04-28T21:15:16+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/04/28/fix-pygments</id>
-    <content type="html"><![CDATA[<p>Octopressのカスタマイズを続けていく。</p>
-
-<h2 id="fenced-code-block-がうまく表示されない">Fenced Code Block がうまく表示されない</h2>
-
-<p>具体的にどのようにうまく表示されないかというと、</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{% hogehoge %}</span></code></pre></td></tr></table></div></figure>
-
-<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br><br>
-コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
-
-<p>結果として、</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{\% codeblock %}
-</span><span class='line'>{\% raw %}
-</span><span class='line'>{% hogehoge %}
-</span><span class='line'>{\% endraw %}
-</span><span class='line'>{\% endcodeblock %}</span></code></pre></td></tr></table></div></figure>
-
-<p>というので書くことができた。raw ~ endraw というのを使う。<br><br>
-ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br><br>
-ネストさせるのはどうやればいいのかな？</p>
-
-<h2 id="fenced-code-block-にファイル名が表示できない">Fenced Code Block にファイル名が表示できない</h2>
-
-<p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
-
-<p><code>{% codeblock about.html %}</code><br></p>
-
-<p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
-
-<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br><br>
-PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
-
-<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。<br>
-<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments - Nonsense By Me</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[OctopressにGravatarの画像が出るようにしてみた]]></title>
-    <link href="http://pankona.github.io/blog/2014/04/26/octopress-custom/"/>
-    <updated>2014-04-26T20:19:19+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/04/26/octopress-custom</id>
-    <content type="html"><![CDATA[<p>引き続きOctopressをカスタマイズしていく。</p>
-
-<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
-
-<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br>
-自分のブログ感が出て良い。</p>
-
-<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
-
-<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
-
-<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br>
-それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
-
-<p>about.html はこんな感じに。</p>
-
-<figure class='code'><figcaption><span>about.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  {% if site.gravatar_email %}
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  {% endif %}
-</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
-</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
-
-<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br>
-設定方法をざっくり書いておくと、</p>
-
-<p><span><br>
-1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br>
-2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br>
-</span></p>
-
-<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
 ]]></content>
   </entry>
   

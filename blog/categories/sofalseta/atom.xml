@@ -4,7 +4,7 @@
   <title><![CDATA[Category: その他 | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/sofalseta/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-01-31T16:59:41+09:00</updated>
+  <updated>2016-04-03T01:15:02+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -35,7 +35,7 @@
 <p>この手のものは英語のままでいいと思う気持ちがある反面、<br>
 やっぱり日本人は日本語のほうが速く読める人が多いだろうし、一定の価値はあるかな、等と思うところである。</p>
 
-<p>記事の中で印象深かったのは、<em>Compliment / reinforce good practices</em> の部分である。</p>
+<p>記事の中で印象深かったのは、*Compliment / reinforce good practices* の部分である。</p>
 
 <p>平たく言えば、コードレビューで見つけた良いところを褒めていけ、という内容。<br>
 コードレビューではとかく指摘を探すことに終始しがちであるが、<br>

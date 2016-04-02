@@ -9,10 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="2014/07/23/Wed 追記 以下のポストに誤りがあることがわかったので、訂正。
-誤っている部分には打ち消し線を入れておく。 PiTFTを購入。
-さっそくRaspberry Piで動かそうとしてみたところ、これがなかなかうまくいかず。
-3日程粘ってようやく動いた。やり方を記載しておく。 &hellip;">
+  <meta name="description" content="たまにはブログのカスタマイズをしてみる。
+今回は読書メーターのブログパーツを追加してみた。 サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。
+文字ばっかだったブログにちょっと賑やかし感があって良い。 例によって備忘録的にやり方を残しておく。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,284 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/01/dokusho-meter/">Octopressカスタマイズで読書メーターのブログパーツを追加</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-01T22:41:26+09:00" pubdate data-updated="true">Oct 1<span>st</span>, 2014</time>
+        
+           | <a href="/blog/2014/10/01/dokusho-meter/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/10/01/dokusho-meter/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>たまにはブログのカスタマイズをしてみる。<br>
+今回は読書メーターのブログパーツを追加してみた。</p>
+
+<p>サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。<br>
+文字ばっかだったブログにちょっと賑やかし感があって良い。</p>
+
+<p>例によって備忘録的にやり方を残しておく。<br>
+Octopressに読書メーターのブログパーツを追加する方法。</p>
+
+<h3 id="読書メーターのアカウントを取得する">読書メーターのアカウントを取得する</h3>
+
+<p><a href="http://book.akahoshitakuya.com/">読書メーターのウェブページ</a>からどうぞ。</p>
+
+<h3 id="ブログパーツを選ぶ">ブログパーツを選ぶ</h3>
+
+<p>読書メーターにログイン後、マイページに行ってみると、<br>
+<strong>「ブログパーツ」</strong>と書いてあるところがある。<br>
+そこを見ると各種ブログパーツを見つけることが出来る。</p>
+
+<h3 id="octopressをカスタマイズして、サイドバーに出るように">Octopressをカスタマイズして、サイドバーに出るように</h3>
+
+<p>ここからはOctopress側の編集。</p>
+
+<h4 id="読書メーター用のhtmlを書く。">読書メーター用のHTMLを書く。</h4>
+
+<p>中身は上記ブログパーツの内容をコピペしたものだが。<br>
+ブログパーツとして「最近読んだ本」をチョイス。</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/asides/dokusho_meter.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot;</span> <span class="na">title=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot;</span> <span class="na">border=</span><span class="s">&quot;0&quot;</span> <span class="na">alt=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h4 id="_config.ymlを編集して、サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
+
+<p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
+
+<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html,
+</span><span class='line'>                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
+</span><span class='line'>                 custom/asides/dokusho_meter.html]
+</span></code></pre></td></tr></table></div></figure>
+
+<h4 id="deployしたら完了">deployしたら完了</h4>
+
+<p><code>bundle exec rake gen_deploy</code> 的なことをやってデプロイする。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>最近読んだ本がサイドバーに表示されるように。<br>
+ITっぽい本を並べたりすると、なんとなく技術的なブログな雰囲気が出て、<br>
+とてもいいんではないでしょうか。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/15/histryback-by-swipe-on-firefox/">二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-15T00:30:08+09:00" pubdate data-updated="true">Sep 15<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/09/15/histryback-by-swipe-on-firefox/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ブラウザはFirefoxを好んで使っている。<br>
+VimperatorとかPentadactylがあるおかげである。</p>
+
+<p>いままで放置していた問題があって、それは二本指スワイプの挙動設定。</p>
+
+<p>二本指で左右にスワイプしたときに、ヒストリーバック・ヒストリーフォワード、<br>
+いわゆる「戻る」「進む」をやってほしいんだけど、これの設定がいまいちわからず、放置していた。<br>
+ようやく設定方法がわかったので記しておく。そっこー忘れそうであるので。</p>
+
+<p>ちなみに、「on Arch Linux」と題しているが、おそらくArchに限らないLinux全般の話ではないかと想像。<br>
+UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方向二本指スワイプが仕事をしてくれなかったので。</p>
+
+<p>では、以下設定手順。</p>
+
+<h2 id="synclientの確認と設定">synclientの確認と設定</h2>
+
+<p>そもそもタッチパッドのドライバーレベルで横方向スクロールが無効になっている可能性がある。というかなってた。<br>
+なので、確認方法と設定変更方法。</p>
+
+<h4 id="synclientコマンドを打って水平方向二本指スクロールの設定を確認する">synclientコマンドを打って水平方向二本指スクロールの設定を確認する</h4>
+
+<p>以下のコマンドで現在の設定を確認できる。</p>
+
+<p><code>$ synclient</code></p>
+
+<p>ずらずらっと出てくる内容のうち、<code>HorizTwoFingerScroll</code> が確認対象の項目。<br>
+値が「0」だったら無効になっている。有効にしない限り、いくら頑張って横スワイプしても効かない。</p>
+
+<h4 id="synclientコマンドで水平方向二本指スクロールを有効にする">synclientコマンドで水平方向二本指スクロールを有効にする</h4>
+
+<p>上の確認で有効だったらここは飛ばしてOK。無効だった場合、有効にするのは以下のコマンド。</p>
+
+<p><code>$ synclient HorizTwoFingerScroll=1</code></p>
+
+<p>synclientのほうはこれでOK。</p>
+
+<h2 id="firefoxの設定">Firefoxの設定</h2>
+
+<p>さらにFirefoxの設定を変えてやる必要がある。<br>
+設定内容は<a href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics - Arch Linux Wiki</a>、Firefox 17.0 and laterの項を参考にした。</p>
+
+<p>about:configを開く。設定内容は以下。</p>
+
+<h4 id="マウスホイールのアクションを変更する">マウスホイールのアクションを変更する</h4>
+
+<p><code>mousewheel.default.action.override_x = 2</code> とした。<br>
+あんまりよく調べていないが、「2」が戻るアクションに対応している数字らしい。</p>
+
+<h4 id="スワイプ方向を逆にする">スワイプ方向を逆にする</h4>
+
+<p>デフォルトでは、左スワイプが「進む」、右スワイプが「戻る」になっている。<br>
+逆な気がする。設定してこれを逆転させる。</p>
+
+<p><code>mousewheel.default.delta_multiplier_x = -100</code> とした。</p>
+
+<h4 id="感度を落とす">感度を落とす</h4>
+
+<p>デフォルトではものすごく感度がよい。<br>
+良すぎてしまって縦スワイプがちょっと横にぶれただけで戻ったり進んだりする。<br>
+やりにくいので感度を落とす。</p>
+
+<p><code>mousewheel.default.delta_multiplier_x = -10</code> とした。</p>
+
+<h2 id="ここまでやって">ここまでやって</h2>
+
+<p>とりあえず望む形（二本指で左スワイプで戻る、右スワイプで進む）に設定できた。結構ハードルあった。。<br>
+ちなみにこれ、Mac OS向けFirefoxならデフォルトの挙動な模様。何の差なのか。。。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/23/raspi-touch-panel/">PiTFTのタッチパネルを動作させる</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-23T21:54:58+09:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
+        
+           | <a href="/blog/2014/07/23/raspi-touch-panel/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/07/23/raspi-touch-panel/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前回に引き続き、PiTFTの話題。</p>
+
+<p>前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。<br>
+タッチパネルの設定がまだだったので、手順を簡単に記しておく。</p>
+
+<p>例によって、Raspberry PiにはArch Linuxが載っている前提。</p>
+
+<h3 id="タッチパネルのドライバーをロードする">タッチパネルのドライバーをロードする</h3>
+
+<p>前回、FBTFTがビルトインされているカーネルを以下のコマンドでインストールした。</p>
+
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
+
+<p>これが正しく入っていれば、タッチパネルのドライバもカーネルに含まれているはず。<br>
+ただし、画面に何かを表示させる時と異なり、手動でドライバをロードする必要がある。</p>
+
+<p>以下のコマンドで、タッチパネルのドライバをロードする。</p>
+
+<p>@@@@ 忘れたのであとで追記する @@@@</p>
+
+<p>基本的にはこれだけで動作すると思われる。<br>
+例によって<a href="https://github.com/notro/fbtft/wiki">notroさんのところのWiki</a>に載っている内容だが、<br>
+notroさんのところは充実しすぎて逆に迷う気がするので、備忘録的に残しておくことにする。。</p>
+
+<h3 id="動いているか確かめる方法">動いているか確かめる方法</h3>
+
+<p>evtestを用いて確かめられる。<br>
+evtestを起動したのちにタッチパネルをぐりぐり触ってみると、<br>
+タッチイベントの詳細がコンソールに出力される。</p>
+
+<p>また、正常にドライバがロードされると、<code>/dev/input/touchpanel</code>なるファイルが現れるはずである。<br>
+ちなみにこれはeventXへのシンボリックリンクになっている。<br>
+このファイルの有無でもドライバのロードが正しく行われたか判断できると思われる。</p>
+
+<h3 id="要追記事項">要追記事項</h3>
+
+<ul>
+<li>ドライバロードのコマンドをちゃんと確認する。</li>
+<li>キャリブレーション（回転した画面への対応）の方法。</li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -205,7 +482,7 @@
 
 <h3 id="戻したのち、コピーしておいたfbtftを所定の位置に戻す"><del>戻したのち、コピーしておいたfbtftを所定の位置に戻す</del></h3>
 
-<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code><del>の位置に戻す。</del></p>
+<p><code>/lib/modules/$(uname -r)/kernel/video/fbtft</code>~~の位置に戻す。~~</p>
 
 <h3 id="depmodする。"><del>depmodする。</del></h3>
 
@@ -823,256 +1100,6 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/05/raspi-livestream-web/">Raspberry Pi + カメラモジュール + Webで配信</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-05T23:38:52+09:00" pubdate data-updated="true">May 5<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/05/05/raspi-livestream-web/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。<br>
-いろいろ悩んだ点もあったので、やり方の結論をメモしておく。<br>
-ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。</p>
-
-<h2 id="良さそうな例">良さそうな例</h2>
-
-<p>参考にしたウェブサイトは↓。結論からするとここだけでOKだった。<br>
-<a href="https://github.com/jacksonliam/mjpg-streamer">https://github.com/jacksonliam/mjpg-streamer</a></p>
-
-<h2 id="上記のリポジトリの情報を元にやったこと">上記のリポジトリの情報を元にやったこと</h2>
-
-<h3 id="mjpg-streamerのインストール。">mjpg-streamerのインストール。</h3>
-
-<p>上記のリポジトリからソースコードをもってきてビルド。ビルド方法も上記のリポジトリのREADMEに記載されている。<br>
-pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは使わない。それらはinput_raspicam.soを作ってくれないため。</p>
-
-<h3 id="超簡単にhtmlを書く。">超簡単にhtmlを書く。</h3>
-
-<p>下記のような。とりあえずサンプルなので、簡単に。。<br>
-書いたHTMLは、任意の場所におく。ここではひとまず、<code>~/www/index.html</code>として置いたとする。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>Raspberry Pi<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/?action=stream&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="配信するコマンドを実行する。">配信するコマンドを実行する。</h3>
-
-<p>このコマンドも件のリポジトリに記載されているが、一応。<br>
-ライブラリ（.so）へのパスが通ってなかったら、LD_LIBRARY_PATHを設定してライブラリへのパスを通すか、もしくはライブラリをフルパスで指定する。</p>
-
-<p><code>mjpg_streamer -o &quot;output_http.so -w ./www&quot; -i &quot;input_raspicam.so -x 1280 -y 720 -fps 15 -ex night&quot;</code></p>
-
-<p>こんな感じに入力してやると、カメラが動き出して動画配信が始まる。<br>
-別のPC等からブラウザで、</p>
-
-<p><code>http://[Raspberry PiのIPアドレス]:8080/</code></p>
-
-<p>にアクセスしてあげると、カメラが写してる画像が配信されているのが確認できると思われる。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/28/fix-pygments/">Pygmentsがエラーを吐きやがるので修正</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-28T21:15:16+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/04/28/fix-pygments/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/04/28/fix-pygments/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopressのカスタマイズを続けていく。</p>
-
-<h2 id="fenced-code-block-がうまく表示されない">Fenced Code Block がうまく表示されない</h2>
-
-<p>具体的にどのようにうまく表示されないかというと、</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{% hogehoge %}</span></code></pre></td></tr></table></div></figure>
-
-<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br><br>
-コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
-
-<p>結果として、</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>{\% codeblock %}
-</span><span class='line'>{\% raw %}
-</span><span class='line'>{% hogehoge %}
-</span><span class='line'>{\% endraw %}
-</span><span class='line'>{\% endcodeblock %}</span></code></pre></td></tr></table></div></figure>
-
-<p>というので書くことができた。raw ~ endraw というのを使う。<br><br>
-ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br><br>
-ネストさせるのはどうやればいいのかな？</p>
-
-<h2 id="fenced-code-block-にファイル名が表示できない">Fenced Code Block にファイル名が表示できない</h2>
-
-<p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
-
-<p><code>{% codeblock about.html %}</code><br></p>
-
-<p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
-
-<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br><br>
-PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
-
-<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。<br>
-<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments - Nonsense By Me</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/26/octopress-custom/">OctopressにGravatarの画像が出るようにしてみた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-26T20:19:19+09:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/04/26/octopress-custom/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/04/26/octopress-custom/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>引き続きOctopressをカスタマイズしていく。</p>
-
-<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
-
-<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br>
-自分のブログ感が出て良い。</p>
-
-<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
-
-<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
-
-<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br>
-それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
-
-<p>about.html はこんな感じに。</p>
-
-<figure class='code'><figcaption><span>about.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>  {% if site.gravatar_email %}
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  {% endif %}
-</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
-</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
-
-<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br>
-設定方法をざっくり書いておくと、</p>
-
-<p><span><br>
-1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br>
-2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br>
-</span></p>
-
-<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1098,23 +1125,23 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/03/31/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/29/z370c-good-point/">ASUS ZenPad 7.0 (Z370C) レビュー その二 : 良いところ編</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/29/z370c-appearance/">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a>
       </li>
     
       <li class="post">
         <a href="/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x + Travis CI + DeployGate</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/19/cocos-with-travisci/">Cocos2d-x + Travis CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/11/cocos2d-initial/">Cocos2d-xをやってみている</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/28/300hot-per-month/">月間300ヒットを達成していた</a>
       </li>
     
   </ul>
@@ -1125,11 +1152,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 125.71428571428572%'>その他(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 125.71428571428572%'>その他(3)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (3)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

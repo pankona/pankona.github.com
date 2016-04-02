@@ -9,8 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。
-見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。 tag_cloud、category_listの追加については以下のページを参考にさせていただきました &hellip;">
+  <meta name="description" content="Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。
+いろいろ悩んだ点もあったので、やり方の結論をメモしておく。
+ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。 良さそうな例 参考にしたウェブサイトは↓。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +77,256 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/05/raspi-livestream-web/">Raspberry Pi + カメラモジュール + Webで配信</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-05T23:38:52+09:00" pubdate data-updated="true">May 5<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/05/05/raspi-livestream-web/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。<br>
+いろいろ悩んだ点もあったので、やり方の結論をメモしておく。<br>
+ちなみに、Raspberry PiにはArch Linux (ARM版) を載せている。</p>
+
+<h2 id="良さそうな例">良さそうな例</h2>
+
+<p>参考にしたウェブサイトは↓。結論からするとここだけでOKだった。<br>
+<a href="https://github.com/jacksonliam/mjpg-streamer">https://github.com/jacksonliam/mjpg-streamer</a></p>
+
+<h2 id="上記のリポジトリの情報を元にやったこと">上記のリポジトリの情報を元にやったこと</h2>
+
+<h3 id="mjpg-streamerのインストール。">mjpg-streamerのインストール。</h3>
+
+<p>上記のリポジトリからソースコードをもってきてビルド。ビルド方法も上記のリポジトリのREADMEに記載されている。<br>
+pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは使わない。それらはinput_raspicam.soを作ってくれないため。</p>
+
+<h3 id="超簡単にhtmlを書く。">超簡単にhtmlを書く。</h3>
+
+<p>下記のような。とりあえずサンプルなので、簡単に。。<br>
+書いたHTMLは、任意の場所におく。ここではひとまず、<code>~/www/index.html</code>として置いたとする。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>Raspberry Pi<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/?action=stream&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="配信するコマンドを実行する。">配信するコマンドを実行する。</h3>
+
+<p>このコマンドも件のリポジトリに記載されているが、一応。<br>
+ライブラリ（.so）へのパスが通ってなかったら、LD_LIBRARY_PATHを設定してライブラリへのパスを通すか、もしくはライブラリをフルパスで指定する。</p>
+
+<p><code>mjpg_streamer -o &quot;output_http.so -w ./www&quot; -i &quot;input_raspicam.so -x 1280 -y 720 -fps 15 -ex night&quot;</code></p>
+
+<p>こんな感じに入力してやると、カメラが動き出して動画配信が始まる。<br>
+別のPC等からブラウザで、</p>
+
+<p><code>http://[Raspberry PiのIPアドレス]:8080/</code></p>
+
+<p>にアクセスしてあげると、カメラが写してる画像が配信されているのが確認できると思われる。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/28/fix-pygments/">Pygmentsがエラーを吐きやがるので修正</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-28T21:15:16+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/04/28/fix-pygments/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/04/28/fix-pygments/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopressのカスタマイズを続けていく。</p>
+
+<h2 id="fenced-code-block-がうまく表示されない">Fenced Code Block がうまく表示されない</h2>
+
+<p>具体的にどのようにうまく表示されないかというと、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{% hogehoge %}</span></code></pre></td></tr></table></div></figure>
+
+<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br><br>
+コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
+
+<p>結果として、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>{\% codeblock %}
+</span><span class='line'>{\% raw %}
+</span><span class='line'>{% hogehoge %}
+</span><span class='line'>{\% endraw %}
+</span><span class='line'>{\% endcodeblock %}</span></code></pre></td></tr></table></div></figure>
+
+<p>というので書くことができた。raw ~ endraw というのを使う。<br><br>
+ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br><br>
+ネストさせるのはどうやればいいのかな？</p>
+
+<h2 id="fenced-code-block-にファイル名が表示できない">Fenced Code Block にファイル名が表示できない</h2>
+
+<p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
+
+<p><code>{% codeblock about.html %}</code><br></p>
+
+<p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
+
+<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br><br>
+PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
+
+<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。<br>
+<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments - Nonsense By Me</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/26/octopress-custom/">OctopressにGravatarの画像が出るようにしてみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-26T20:19:19+09:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/04/26/octopress-custom/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/04/26/octopress-custom/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>引き続きOctopressをカスタマイズしていく。</p>
+
+<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
+
+<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br>
+自分のブログ感が出て良い。</p>
+
+<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
+
+<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
+
+<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br>
+それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
+
+<p>about.html はこんな感じに。</p>
+
+<figure class='code'><figcaption><span>about.html </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>  {% if site.gravatar_email %}
+</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  {% endif %}
+</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
+</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'><span class="nt">&lt;/section&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
+
+<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br>
+設定方法をざっくり書いておくと、</p>
+
+<p><span><br>
+1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br>
+2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br>
+</span></p>
+
+<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -267,23 +518,23 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/03/31/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/29/z370c-good-point/">ASUS ZenPad 7.0 (Z370C) レビュー その二 : 良いところ編</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/03/29/z370c-appearance/">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a>
       </li>
     
       <li class="post">
         <a href="/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x + Travis CI + DeployGate</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/19/cocos-with-travisci/">Cocos2d-x + Travis CI</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/11/cocos2d-initial/">Cocos2d-xをやってみている</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/28/300hot-per-month/">月間300ヒットを達成していた</a>
       </li>
     
   </ul>
@@ -294,11 +545,11 @@
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 125.71428571428572%'>その他(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 125.71428571428572%'>その他(3)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (3)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

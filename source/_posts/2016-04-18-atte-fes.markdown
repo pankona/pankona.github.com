@@ -1,12 +1,16 @@
 ---
 layout: post
-title: "atte fes@mercari 参加してきました"
+title: "atte fes@メルカリ"
 date: 2016-04-18 19:34:12 +0900
 comments: true
 categories: その他
 ---
 
 [WIP] 書き途中。メモ
+
+2016.04.18 に、六本木は森タワーのメルカリさん宅にて、atte fes なるものが行われた。
+[【100名限定】atte FeS【Go・Swift開発編】 - conpass](http://mercari.connpass.com/event/29506/)
+こちらのイベントにブログ枠にて参加させていただいた。どんな感じだったか、本記事で紹介させていただく。
 
 ![attefes](/images/attefes/0.jpg)
 ![attefes](/images/attefes/1.jpg)
@@ -18,6 +22,10 @@ categories: その他
 ![attefes](/images/attefes/7.jpg)
 ![attefes](/images/attefes/8.jpg)
 ![attefes](/images/attefes/9.jpg)
+
+## ビールと軽食
+
+## アッテ開発の技術：Golang と Google Cloud Platform (鶴岡達也さん)
 
 * GAE/Go の話
 * データベースは各リージョンにひとつ
@@ -60,7 +68,7 @@ categories: その他
   * 並列書き込み、同一エンティティでなければ制限なし
 * DataStore RDBのパターンをそのまま当てはめることはできない
 
-## 設計方針
+### 設計方針
 
 * GAE へのロックイン
   * ビジネスロジックを GAE に依存しないようにして、いざというときに切り替えられるように
@@ -68,7 +76,7 @@ categories: その他
 
 * GAE/Go 推し！
 
-## 質疑応答
+### 質疑応答
 
 * Q. Parse の例。Google に依存することについて
 * A. Google がだめになるならうちもだめだろう、という思い切り。
@@ -90,7 +98,7 @@ Facebook でもリポジトリは一個。Git だと遅いので Marcurial 改�
 
 hatakenokakashi: goとswiftは似てるそう。swiftエンジニアがgoのスイスイ読めたそう。型の書き方が似ているそう。 #attefes |08:15 PM Apr 18, 2016|
 
-## アッテ開発の技術 Swift と RxSwift
+## アッテ開発の技術：Swift と RxSwift (大庭慎一郎さん)
 
 大庭慎一郎さん
 
@@ -117,7 +125,7 @@ hatakenokakashi: goとswiftは似てるそう。swiftエンジニアがgoのス�
 * A. 部分的に採用していくこともできる。
   * hatakenokakashi: 質問「Rxはどこから手をいれればいいですか？」 ->データバインディングから始めるといい #attefes |08:47 PM Apr 18, 2016|
 
-## アッテ iOS の設計と開発フローの変遷
+## アッテ開発の技術：アッテの設計と開発フローの変遷 (石川洋資さん)
 
 石川洋資 さん (ishkawa)
 * パワー感じる
@@ -148,7 +156,4 @@ hatakenokakashi: goとswiftは似てるそう。swiftエンジニアがgoのス�
   * CI 時間は 7分くらい 
   * 病気で倒れても誰でもデプロイできる
   * tenntenn: ビルドと申請作業が属人化しやすいよなぁ #attefes |09:08 PM Apr 18, 2016|
-
-
-
 

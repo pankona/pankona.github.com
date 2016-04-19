@@ -8,16 +8,16 @@ categories: その他
 
 [WIP] 書き途中。メモ
 
-[attefes](/images/attefes/0.jpg)
-[attefes](/images/attefes/1.jpg)
-[attefes](/images/attefes/2.jpg)
-[attefes](/images/attefes/3.jpg)
-[attefes](/images/attefes/4.jpg)
-[attefes](/images/attefes/5.jpg)
-[attefes](/images/attefes/6.jpg)
-[attefes](/images/attefes/7.jpg)
-[attefes](/images/attefes/8.jpg)
-[attefes](/images/attefes/9.jpg)
+![attefes](/images/attefes/0.jpg)
+![attefes](/images/attefes/1.jpg)
+![attefes](/images/attefes/2.jpg)
+![attefes](/images/attefes/3.jpg)
+![attefes](/images/attefes/4.jpg)
+![attefes](/images/attefes/5.jpg)
+![attefes](/images/attefes/6.jpg)
+![attefes](/images/attefes/7.jpg)
+![attefes](/images/attefes/8.jpg)
+![attefes](/images/attefes/9.jpg)
 
 * GAE/Go の話
 * データベースは各リージョンにひとつ

@@ -9,10 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="前回に引き続き、ZenPad 7.0 (Z370C) のレビューを記事にする。
-今回は、1ヶ月程度使って感じた ZenPad 7.0 に対するフラストレーションについて。
-つまりイマイチな点に触れていく。
-感触良い点については前回の記事で触れているので、ぜひそちらも見てね。 タッチの精度・ &hellip;">
+  <meta name="description" content="2016.04.18 に、六本木は森タワーのメルカリさん宅にて、atte fes が行われました。
+アッテの開発技術をお伝えする atte FeS【Go・Swift開発編】を開催しました - Mercari Engineering Blog
+本イベントにブログ枠にて参加させていただきましたので、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,206 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/18/atte-fes/">Atte fes@Mercari</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-04-18T19:34:12+09:00" pubdate data-updated="true">Apr 18<span>th</span>, 2016</time>
+        
+           | <a href="/blog/2016/04/18/atte-fes/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2016/04/18/atte-fes/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/attefes/title.jpg" alt="attefes"></p>
+
+<p>2016.04.18 に、六本木は森タワーのメルカリさん宅にて、atte fes が行われました。<br>
+<a href="http://tech.mercari.com/entry/2016/04/20/130620">アッテの開発技術をお伝えする atte FeS【Go・Swift開発編】を開催しました - Mercari Engineering Blog</a><br>
+本イベントにブログ枠にて参加させていただきましたので、ひとつそのレポートをば、したためます。</p>
+
+<p>発表時に用いられた資料は、↑のリンク先にアップしていただいているので、参照されたし。<br>
+ちなみに、冒頭の画像は会場でいただいたデカールです。ねこかわいい。</p>
+
+<h2 id="最初にビールと軽食で乾杯">最初にビールと軽食で乾杯</h2>
+
+<p>いきなり技術的な話題ではないところからなんですが、実にシャレオツだったビールブースにふれないわけにはいかない。</p>
+
+<p><img src="/images/attefes/0.jpg" alt="attefes"><br>
+図1. 三種類のビールが提供されている。しかも缶じゃない。感動。</p>
+
+<p><img src="/images/attefes/1.jpg" alt="attefes"><br>
+図2. 軽食が提供されている。</p>
+
+<p>ビールは3種類とも一杯ずついただきましたが、とても美味でございました。<br>
+また夕飯食べずに駆けつけたものだったので、普通に空腹でありました。軽食もいただけて良かった！<br>
+おかげさまで集中して発表に耳を傾けることができました。ありがとうございました。</p>
+
+<p><img src="/images/attefes/2.jpg" alt="attefes"><br>
+図3. 司会の方の音頭で乾杯。</p>
+
+<h2 id="アッテ開発の技術：golang-と-google-cloud-platform-(鶴岡達也さん)">アッテ開発の技術：<br>Golang と Google Cloud Platform (鶴岡達也さん)</h2>
+
+<p>さて、発表内容について。</p>
+
+<p><img src="/images/attefes/3.jpg" alt="attefes"><br>
+図4. 鶴岡さん</p>
+
+<p>ひとつめは鶴岡達也さんによる「Golang と Google Cloud Platform」。</p>
+
+<p>発表の具体的な内容は実際に資料をご覧いただければ分かると思いますので、<br>
+本記事では私が印象に残った箇所について触れていくことにします。</p>
+
+<h3 id="なぜ-web-アプリ開発に-go/gae-を採用したか？">なぜ Web アプリ開発に Go/GAE を採用したか？</h3>
+
+<p>さまざま理由があったようですが、個人的には、<br>
+<strong>「3年後にもエンジニアにとって魅力的な場所であるため」</strong> に、多様性と技術の開拓の意味もふくめての採用であったというのが印象的でした。<br>
+そういうふうな文化があると、エンジニアにとって満足感が高い職場になっていくんじゃないかなー、等と。<br>
+とてもいいと思いました。ええ、弊社でもぜひそうしていきたい…。</p>
+
+<h3 id="go言語はチームで開発しやすい">Go言語はチームで開発しやすい</h3>
+
+<p>私も個人的にちょいちょい Go 言語を触りますが、ほんとに周辺ツールの充実っぷりが凄まじい。<br>
+lint、コードフォーマッタ、変数名には Go 言語公式のポリシーが存在する、等。<br>
+チーム開発に採用すれば、やれインデントが〜とか、インポートの順番が〜、とかをソースレビューに持ち込むこともなくなる。<br>
+そういう点も学習コストを下げるのに役立っているかな。Go 言語、私もオススメです。</p>
+
+<h3 id="godoc-を有効に使う">GoDoc を有効に使う</h3>
+
+<p>GoDoc は概ね常に最新に保っているとのことで、つまり、<br>
+「API を使いたいひとはとりあえず GoDoc 見て」で済んでいる、らしいです。<br>
+チームで開発しやすい、効率化という面で GoDoc を有効に使えている例かな、と。<br>
+ドキュメントをおざなりにしないところ、素敵です。<br>
+またこういうドキュメンテーションのためのツールが提供されているのも Go 言語のいいところ。<br>
+Go 言語、私もオススメです。</p>
+
+<h3 id="gae-のインスタンスは-200-ms-で立ち上がる">GAE のインスタンスは 200 ms で立ち上がる</h3>
+
+<p>速い！この速さはオートスケール時にとっても活きてくる模様。<br>
+アクセス過多でスパイクしてもあっとうい間に平穏を取り戻す図は、私の心にも平穏と興奮を与えるものでありました。</p>
+
+<h3 id="その他の話題、rdb-vs-nosql、datastore-の良いところ、等">その他の話題、RDB vs NoSQL、DataStore の良いところ、等</h3>
+
+<p>他にも興味深いトピックについて話されていました。<br>
+ぜひ、スライドを直に見ていただければと。</p>
+
+<h2 id="アッテ開発の技術：swift-と-rxswift-(大庭慎一郎さん)">アッテ開発の技術：<br>Swift と RxSwift (大庭慎一郎さん)</h2>
+
+<p><img src="/images/attefes/4.jpg" alt="attefes"><br>
+図5. 大庭さん</p>
+
+<p>正直に言うと Reactive Programming というものがほぼ分かってない私ですが、<br>
+発表は非常に興味深く聞かせていただきました。Reactive Programming ええな！</p>
+
+<h3 id="swift-の採用を決めた経緯">Swift の採用を決めた経緯</h3>
+
+<p>Swift を採用した経緯について。そもそも流用する資産がなかったとのことで、<br>
+だったら色々機能の豊富な Swift にしましょうよ、ということだったと思います。</p>
+
+<p>Objective-C は、それはそれで今まで蓄えられたノウハウが Web 上に豊富に転がっていたりして、いわゆる「ハマりにくさ」では Swift より上のような気はする。そういう意味では Objective-C にも良いところはあるだろう。<br>
+とはいえ、Swift と Objective-C、どっち採用したらテンションあがるかと言われれば、やはり Swift であるかなと。3年後もエンジニアにとって魅力的な場所を醸造しているひとつかもしれない、等と思いつつ。</p>
+
+<h3 id="リアクティブプログラミングに頼るとプログラミング能力が下がる？">リアクティブプログラミングに頼るとプログラミング能力が下がる？</h3>
+
+<p>プログラミング能力が下がるは言い過ぎかも？<br>
+スライド上のサンプルコードは短く完結にわかりやすく書かれていて、いったん慣れてしまったら辞められない的なものを感じた。<br>
+なるほど、馴染んできたら普通のプログラミング (？) のやり方忘れちゃうかもしれないですね。</p>
+
+<p>とはいえ学習コストは高い模様。<br>
+質疑応答では「急に全部ではなく、部分的に採用していくこともできる」と。<br>
+データバインディングから始めるのがやりやすいのではないか、と仰っておられました。</p>
+
+<h3 id="リアクティブプログラミング-参考サイト">リアクティブプログラミング 参考サイト</h3>
+
+<p>スライド中でも触れられていますが、リアクティブプログラミングについては以下のサイトが理解の助けになったとのこと。<br>
+<a href="http://ninjinkun.hatenablog.com/entry/introrxja">【翻訳】あなたが求めていたリアクティブプログラミング入門 - ninjinkun&#39;s diary</a></p>
+
+<p>以下のページでは、Reactive な動き (Stream) を図で理解できるようになっています。<br>
+<a href="http://rxmarbles.com/">RxMarbles - Interactive diagrams of Rx Observables</a></p>
+
+<h2 id="アッテ開発の技術：アッテ-ios-の設計と開発フローの変遷-(石川洋資さん)">アッテ開発の技術：<br>アッテ iOS の設計と開発フローの変遷 (石川洋資さん)</h2>
+
+<p><img src="/images/attefes/7.jpg" alt="attefes"><br>
+図6. 石川さん</p>
+
+<h3 id="同じ構造の実装の一元化">同じ構造の実装の一元化</h3>
+
+<p>よくある同じ構造のもの、 ページネーション、フォームのバリデーションであるとかの共通化の話。<br>
+MVVM でいうところの VM 部分で、共通するGenericな部分 + 型スペシフィックな部分は型パラメータもらって作る、という構造の紹介。<br>
+特にページネーションは、10回書いたら7回くらいバグってるくらいのバグを埋め込みやすい部分らしく、<br>
+共通化することで、「高速な開発で、かつ安全」な設計に近づくことができたとのこと。</p>
+
+<p>新しい設計を試すのは、場合によっては難しいことだと思う。<br>
+つい、いま動いているところは触りたくない、以前作ったものと同じような構造が出てきたら踏襲する、等と<br>
+してしまいがちな昨今（ですよね）、飽き足らず、より良いモノ作ろうぜという熱気にあふれている、等と感じておりました。<br>
+素敵だ。</p>
+
+<h3 id="自動デプロイの話">自動デプロイの話</h3>
+
+<p>ご多分にもれずというか、やはり iOS アプリも自動ビルド/自動デプロイをなさっている模様。<br>
+構成要素としては、<br>
+* Travis CI (CI 時間は7分くらい)<br>
+* agvtool でビルド番号を振る (Xcodeに付随)。<br>
+* DeployGate (dev) と TestFlight (prod) にデプロイ</p>
+
+<p>また、その他の作法として、<br>
+* 手元でのアーカイブはしない。<br>
+* QAが通ればそのまま審査へ</p>
+
+<p>というのが紹介されていました。</p>
+
+<p>ビルドとかデプロイ、あと審査もだと思いますが、ものすごく属人化しがちな部分であると思う。<br>
+<strong>「病気で倒れても誰でもデプロイできる」</strong> と仰っていましたが、これって本当に大事なこと。<br>
+作業をひとにロックインしない工夫をしていかないとね。属人化は不幸の始まり。</p>
+
+<p>ところで CI に掛かる時間が7分って結構早いような気がしている。<br>
+早さ、特に CI とかそういう常日頃から何度も繰り返し行われる事柄の早さは重要。</p>
+
+<p>何も考えずにそこそこの規模の iOS アプリビルドしたら、結構時間かかっちゃうと思うんだよね。それこそ10分くらい余裕で。<br>
+さらっと7分って言っていましたが、ここにはきっと色々な工夫がなされているんだと想像します。</p>
+
+<h2 id="その後">その後</h2>
+
+<p><img src="/images/attefes/8.jpg" alt="attefes"><br>
+図7. 懇親会。みな思い思いの方を捕まえては話し込む。</p>
+
+<p><img src="/images/attefes/9.jpg" alt="attefes"><br>
+図8. 懇親会。運営おつかれさまでした。</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>Mercari からスピンアウト (?) した SOUZOH という組織は、なんというか、<br>
+新しいやり方をどんどん取り入れていて、エンジニア的にはテンションあがる環境であるという印象でした。<br>
+それで実際うまいことやれているっていうのは、なお凄いことかな。</p>
+
+<p>そんな感じで、おいしいビールをいただきながら学ばせていただいた atte fes でございました。オススメは Tokyo White。<br>
+運営の方々、登壇の方々におかれましては、大変おつかれさまでございました！</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1153,86 +1352,6 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/11/25/remote-ltika/">Raspberry Piにて、リモートからLチカさせてみた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-11-25T22:16:43+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/11/25/remote-ltika/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/11/25/remote-ltika/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Raspberry Piをリモートから制御する第一歩として、<br>
-ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。<br>
-いまのところ実にしょうもないレベルであるが、最初は誰もがしょうもなかったと言い聞かせつつ、<br>
-やったことを公開しつつ、どんなあんばいだったか記録しておこうと思う。<br>
-ちなみに、ここでいっているLEDとは、Raspberry Piボード上のLED &quot;ACT&quot; を指している。<br>
-ブレッドボードやらそういった類の何かは使っていない。</p>
-
-<h3 id="構成">構成</h3>
-
-<ul>
-<li>Raspberry Pi （OSはArch Linux） 有線LAN接続
-
-<ul>
-<li>Railsが動いていて、REST APIを公開している。</li>
-<li>REST APIを叩くことで、LEDのON/OFFを制御するスクリプトが動作し、Lチカを実現する。</li>
-</ul></li>
-<li>Androidアプリ
-
-<ul>
-<li>ボタンが2個ついてるだけの超絶シンプルアプリ</li>
-<li>ONボタンを押すとLEDを点けるほうのREST APIを叩きにいく。</li>
-<li>同様に、OFFボタンを押すとLEDを消すREST APIを叩きにいく。</li>
-<li>対向機のIPアドレスはまさかのハードコーディング。</li>
-</ul></li>
-</ul>
-
-<h3 id="ソースコード">ソースコード</h3>
-
-<ul>
-<li>Raspberry Pi側のソースコードは<a href="https://github.com/pankona/raspi_remote_blink">こちら</a>。Railsアプリ。</li>
-<li>Android側のアプリは後ほどアップロード（手元になかった）。</li>
-</ul>
-
-<h3 id="今後に向けてメモ">今後に向けてメモ</h3>
-
-<ul>
-<li>Railsアプリは、スクリプトへのパスがハードコードされていたりしてだいぶ恥ずかしいので、そのうち直す。</li>
-<li>というかファイルI/OすればLチカできることがわかったので、もはやスクリプトを使う必要はなかった。そのうち直す。</li>
-<li>応用して、自動草花への水やり機の作成を目論んでおく。できたら画像と共にアップロードしよう。</li>
-<li>カメラと合わせて、水やりしつつ、草の成長記録をツイッターに投稿する、というのもいいかもしれない。</li>
-<li>ツイッター越しに命令（水やり、写真撮影、等）を発行できるようにしてもいいかもしれない。</li>
-</ul>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1248,12 +1367,16 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
   
     <img src="http://www.gravatar.com/avatar/20c3394adc3ea5485023625de24b8486" alt="Gravatar of pankona " title="Gravatar of pankona" align="left" style="margin-right:10px;" />
   
-  名前はpankonaです。Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
+  名前はpankonaです。Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。西武新宿線ユーザ。Go 言語好き。ソフトウェアエンジニアやってますたぶん。
   <br clear="left">
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/18/atte-fes/">Atte fes@Mercari</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/03/31/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a>
@@ -1271,10 +1394,6 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
         <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x + Travis CI + DeployGate</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1283,11 +1402,11 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 125.71428571428572%'>その他(3)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (3)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

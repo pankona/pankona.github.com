@@ -9,9 +9,10 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="たまにはブログのカスタマイズをしてみる。
-今回は読書メーターのブログパーツを追加してみた。 サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。
-文字ばっかだったブログにちょっと賑やかし感があって良い。 例によって備忘録的にやり方を残しておく。 &hellip;">
+  <meta name="description" content="Raspberry Piをリモートから制御する第一歩として、
+ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。
+いまのところ実にしょうもないレベルであるが、最初は誰もがしょうもなかったと言い聞かせつつ、
+やったことを公開しつつ、どんなあんばいだったか記録しておこうと思う &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/25/remote-ltika/">Raspberry Piにて、リモートからLチカさせてみた</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-25T22:16:43+09:00" pubdate data-updated="true">Nov 25<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/11/25/remote-ltika/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/11/25/remote-ltika/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Raspberry Piをリモートから制御する第一歩として、<br>
+ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。<br>
+いまのところ実にしょうもないレベルであるが、最初は誰もがしょうもなかったと言い聞かせつつ、<br>
+やったことを公開しつつ、どんなあんばいだったか記録しておこうと思う。<br>
+ちなみに、ここでいっているLEDとは、Raspberry Piボード上のLED &quot;ACT&quot; を指している。<br>
+ブレッドボードやらそういった類の何かは使っていない。</p>
+
+<h3 id="構成">構成</h3>
+
+<ul>
+<li>Raspberry Pi （OSはArch Linux） 有線LAN接続
+
+<ul>
+<li>Railsが動いていて、REST APIを公開している。</li>
+<li>REST APIを叩くことで、LEDのON/OFFを制御するスクリプトが動作し、Lチカを実現する。</li>
+</ul></li>
+<li>Androidアプリ
+
+<ul>
+<li>ボタンが2個ついてるだけの超絶シンプルアプリ</li>
+<li>ONボタンを押すとLEDを点けるほうのREST APIを叩きにいく。</li>
+<li>同様に、OFFボタンを押すとLEDを消すREST APIを叩きにいく。</li>
+<li>対向機のIPアドレスはまさかのハードコーディング。</li>
+</ul></li>
+</ul>
+
+<h3 id="ソースコード">ソースコード</h3>
+
+<ul>
+<li>Raspberry Pi側のソースコードは<a href="https://github.com/pankona/raspi_remote_blink">こちら</a>。Railsアプリ。</li>
+<li>Android側のアプリは後ほどアップロード（手元になかった）。</li>
+</ul>
+
+<h3 id="今後に向けてメモ">今後に向けてメモ</h3>
+
+<ul>
+<li>Railsアプリは、スクリプトへのパスがハードコードされていたりしてだいぶ恥ずかしいので、そのうち直す。</li>
+<li>というかファイルI/OすればLチカできることがわかったので、もはやスクリプトを使う必要はなかった。そのうち直す。</li>
+<li>応用して、自動草花への水やり機の作成を目論んでおく。できたら画像と共にアップロードしよう。</li>
+<li>カメラと合わせて、水やりしつつ、草の成長記録をツイッターに投稿する、というのもいいかもしれない。</li>
+<li>ツイッター越しに命令（水やり、写真撮影、等）を発行できるようにしてもいいかもしれない。</li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -979,127 +1060,6 @@ PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手の�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/14/arch-windows-multiboot-tips/">Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-14T17:59:10+09:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/05/14/arch-windows-multiboot-tips/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2 id="このポストは">このポストは</h2>
-
-<p>Windows8.1に対してWindows Updateしたところ、何だかわからないがデュアルブートしなくなって焦ったため、<br>
-直し方というか、そもそもどうやってデュアルブートにしているかをメモしておくための記事。</p>
-
-<h3 id="件のpcについて">件のPCについて</h3>
-
-<p>以下のようなPCと、その中身の構成にしている。</p>
-
-<p>&#8211; PC本体：Vaio Pro 13<br>
-&#8211; OS：Arch LinuxとWindows8.1のデュアルブート</p>
-
-<h3 id="デュアルブートのためにしたこと---まずは普通にarch-linuxをインストール">デュアルブートのためにしたこと - まずは普通にArch Linuxをインストール</h3>
-
-<ul>
-<li>Arch Linux起動のためのUSBメモリを作成。ここはWindowsを使う。</li>
-</ul>
-
-<p><a href="https://wiki.archlinux.org/index.php/USB_Installation_Media_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">USB Installation Media（日本語） - Arch LinuxのWiki</a> なんかが参考になる。</p>
-
-<ul>
-<li>Windowsを使ってLinux向けのパーティションを切る。</li>
-</ul>
-
-<p>「管理」を使ってやる。<a href="http://windows.microsoft.com/ja-jp/windows/create-boot-partition#1TC=windows-7">ブート パーティンションを作成する - Microsoftのページ</a>等が参考になる。<br>
-とにかく何か領域が空いていればいい。うちの構成では180GB程度確保した。<br>
-少なくとも30GBくらいいるかな？</p>
-
-<ul>
-<li>Arch Linux起動用のUSBを挿した状態でPCを起動し、USBからのブートを行う。</li>
-</ul>
-
-<p>あとは↑で作ったパーティションにArch Linuxをインストールしていく。詳しくはやはりArch LinuxのWiki参照。<br>
-&#8211; パーティションのフォーマット。割り当て可能領域はすべて割り当て。EFIパーティションにする必要はない。普通ので。<br>
-&#8211; /mnt にフォーマットしたパーティションをマウント。<code>mount /dev/sda5 /mnt</code> ← うちの環境の場合。<br>
-&#8211; chrootする。<code>arch-chroot /mnt</code> で。 <br>
-&#8211; Arch Linuxのインストール。 <code>pacman -S base base-devel</code> とかやる。<br>
-&#8211; genfstab とかそういったことをこまごま行う。<br>
-&#8211; ブートローダのインストール。ブートローダにはgummibootを採用した。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mount /dev/sda2 /boot/EFI
-</span><span class='line'>cd /boot/EFI
-</span><span class='line'>gummiboot install</span></code></pre></td></tr></table></div></figure>
-
-<p>ここまでで勝手にデュアルブートしてくれたら嬉しかったが、そうはいかなかった（本来はこれだけでOKらしい）。<br>
-Vaioのせいなのか、Windowsのせいなのか。。</p>
-
-<h3 id="デュアルブートのためにしたこと---無理やりgummibootを使わせる">デュアルブートのためにしたこと - 無理やりgummibootを使わせる</h3>
-
-<p>上記までで何が起きるかというと、、、<br>
-どうやら、せっかくgummibootで設定したブートの設定がPC起動時になかったことにされてしまう模様。<br>
-つまりWindowsが問答無用で起動される状態に戻ってしまう。VaioのせいなのかWindowsのせいなのか。。。</p>
-
-<p>この点をちゃんと解決するのは諦めました。<br>
-諦めて、Windowsの起動に使われるファイルをgummibootのものと置き換えることでデュアルブートを実現。。<br>
-一応、やれればいいや、ということで。</p>
-
-<ul>
-<li>先ほどのUSBからArch Linuxを起動し、無理やりgummibootを使わせるようにしにいく</li>
-</ul>
-
-<p>&#8211; まず、EFIのパーティションをマウントする。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mount /dev/sda2 /mnt/boot/EFI</span></code></pre></td></tr></table></div></figure>
-
-<p>&#8211; Windows起動用のファイルとgummiboot起動用のファイルを置き換える。</p>
-
-<p>&#8212; Windows起動用のファイル &#8230; /boot/EFI/Microsoft/boot/bootmgrfw.efi<br>
-&#8212; gummiboot起動用のファイル &#8230; /boot/EFI/gummiboot/gummibootx64.efi</p>
-
-<p>上記のWindows起動用のファイルを、gummiboot起動用のファイルで上書きしてやると、、、<br>
-次回のPC起動時には、OS選択の画面が表示されるはず。上書きする前にバックアップしてあげてね。。。</p>
-
-<h3 id="windowsアップデートのときに、bootmgrfw.efiが更新されちゃうことがあるっぽい">Windowsアップデートのときに、bootmgrfw.efiが更新されちゃうことがあるっぽい</h3>
-
-<p>だのでWindowsアップデートでデュアルブートができなくなったりするんだろう。<br>
-デュアルブートできなくなったら、いちいちgummibootx64.efiをWindows起動用のファイルに上書きしてやる必要がある。</p>
-
-<h2 id="これでwindowsアップデートも怖くない！">これでWindowsアップデートも怖くない！</h2>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1117,12 +1077,16 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
   
     <img src="http://www.gravatar.com/avatar/20c3394adc3ea5485023625de24b8486" alt="Gravatar of pankona " title="Gravatar of pankona" align="left" style="margin-right:10px;" />
   
-  名前はpankonaです。Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
+  名前はpankonaです。Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。西武新宿線ユーザ。Go 言語好き。ソフトウェアエンジニアやってますたぶん。
   <br clear="left">
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/04/18/atte-fes/">Atte fes@Mercari</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/03/31/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a>
@@ -1140,10 +1104,6 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
         <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x + Travis CI + DeployGate</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1152,11 +1112,11 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 125.71428571428572%'>その他(3)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (3)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

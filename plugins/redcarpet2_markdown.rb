@@ -3,8 +3,10 @@ require 'digest/md5'
 require 'redcarpet'
 require 'albino'
 
-PYGMENTS_CACHE_DIR = File.expand_path('../../_cache', __FILE__)
-FileUtils.mkdir_p(PYGMENTS_CACHE_DIR)
+if (defined?(PYGMENTS_CACHE_DIR)).nil?
+  PYGMENTS_CACHE_DIR = File.expand_path('../../_cache', __FILE__)
+  FileUtils.mkdir_p(PYGMENTS_CACHE_DIR)
+end
 
 class Redcarpet2Markdown < Redcarpet::Render::HTML
   def block_code(code, lang)

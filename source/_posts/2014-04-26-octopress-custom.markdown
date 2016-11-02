@@ -22,7 +22,7 @@ categories: "Octopressカスタマイズ"
 
 about.html はこんな感じに。
 
-{% codeblock about.html %}
+{% codeblock %}
 {% raw %}
 <section>
   <h1>About Me</h1>

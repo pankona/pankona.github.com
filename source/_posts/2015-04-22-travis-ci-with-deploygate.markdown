@@ -20,7 +20,7 @@ categories: "cocos2d-x"
 
 まずはAPKアップロード成功後の.travis.ymlを載せておく。
 
-```yml .travis.yml
+```
 language: android
 
 # Handle git submodules yourself
@@ -78,13 +78,13 @@ after_success:
 
 前回から増えたり変更したりしたのは以下。
 
-```yml .travis.yml (part)
+```
 env:
   global:
     secure: "TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE="
 ```
 
-```yml .travis.yml (part)
+```
     - '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'
 ```
 

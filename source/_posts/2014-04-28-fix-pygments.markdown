@@ -42,7 +42,7 @@ Octopressのカスタマイズを続けていく。
 
 Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。
 
-`{% raw %}{% codeblock about.html %}{% endraw %}`<br>
+`{% raw %}{% codeblock %}{% endraw %}`<br>
 
 出るという触れ込みだったのだが、なかなかどうして出なかった。
 

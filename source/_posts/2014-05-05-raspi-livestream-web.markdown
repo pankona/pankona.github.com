@@ -26,7 +26,7 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
 下記のような。とりあえずサンプルなので、簡単に。。
 書いたHTMLは、任意の場所におく。ここではひとまず、`~/www/index.html`として置いたとする。
 
-```html
+```
 <html>
   <body>
     <h1>Raspberry Pi</h1>

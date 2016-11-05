@@ -1,10 +1,31 @@
 ---
 layout: post
-title: "golang.tokyo #1"
+title: "golang.tokyo #1@mercari"
 date: 2016-10-25 19:38:13 +0900
 comments: true
 categories: golang
 ---
+
+2016.10.25 に六本木の森タワーメルカリさんにて、golang.tokyo #1 が行われました。
+
+[golang.tokyo #1 - connpass](http://golangtokyo.connpass.com/event/39965/)
+
+本イベントにブログ枠にして参加させていただきましたので、
+その内容をレポートしていきます。
+
+![golang.tokyo-1](/images/golang.tokyo-1/01.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/02.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/03.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/04.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/05.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/06.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/07.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/08.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/09.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/10.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/11.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/12.jpg)
+![golang.tokyo-1](/images/golang.tokyo-1/13.jpg)
 
 # 登壇者自己紹介 & どこで Go を使っているか
 

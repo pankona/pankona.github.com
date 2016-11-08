@@ -134,25 +134,23 @@ Octopressに読書メーターのブログパーツを追加する方法。</p>
 <p>中身は上記ブログパーツの内容をコピペしたものだが。<br>
 ブログパーツとして「最近読んだ本」をチョイス。</p>
 
-<figure class='code'><figcaption><span>source/_includes/custom/asides/dokusho_meter.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot;</span> <span class="na">title=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot;</span> <span class="na">border=</span><span class="s">&quot;0&quot;</span> <span class="na">alt=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>&lt;a href="http://book.akahoshitakuya.com/u/{人によって違うID}" title="{人の名前}の最近読んだ本"&gt;&lt;img src="http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg" border="0" alt="{人の名前}の最近読んだ本"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
 
 <h4 id="_config.ymlを編集して、サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
 
 <p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
 
-<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html,
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, 
 </span><span class='line'>                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
-</span><span class='line'>                 custom/asides/dokusho_meter.html]
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>                 custom/asides/dokusho_meter.html]</span></code></pre></td></tr></table></div></figure>
 
 <h4 id="deployしたら完了">deployしたら完了</h4>
 
@@ -244,7 +242,11 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2016/04/18/atte-fes/">Atte fes@Mercari</a>
+        <a href="/blog/2016/10/25/golangtokyo/">golang.tokyo #1@mercari</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/18/atte-fes/">Atte Fes@mercari</a>
       </li>
     
       <li class="post">
@@ -259,10 +261,6 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
         <a href="/blog/2016/03/29/z370c-appearance/">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -271,11 +269,11 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 108.57142857142857%'>golang(1)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (1)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

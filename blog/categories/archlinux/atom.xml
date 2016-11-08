@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ArchLinux | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-04-21T00:40:47+09:00</updated>
+  <updated>2016-11-08T16:35:51+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -132,16 +132,13 @@ Arch Linux向けです。</p>
 </ul>
 
 <p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
-
-<p>```bash .xinitrc</p>
-
-<h1 id="uim">uim</h1>
-
-<p>export GTK_IM_MODULE=&#39;uim&#39;<br>
-export QT_IM_MODULE=&#39;uim&#39;<br>
-uim-xim &amp;<br>
-export XMODIFIERS=&#39;@im=uim&#39;<br>
-```</p>
+<div class="highlight"><pre><code class="text"><span></span># uim
+export GTK_IM_MODULE=&#39;uim&#39;
+export QT_IM_MODULE=&#39;uim&#39;
+uim-xim &amp;
+export XMODIFIERS=&#39;@im=uim&#39;
+</code></pre>
+</div>
 
 <h2 id="uimの設定">uimの設定</h2>
 
@@ -299,7 +296,7 @@ PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手の�
 -- Arch Linuxのインストール。 <code>pacman -S base base-devel</code> とかやる。<br>
 -- genfstab とかそういったことをこまごま行う。<br>
 -- ブートローダのインストール。ブートローダにはgummibootを採用した。</p>
-<div class="highlight"><pre><code class="text">mount /dev/sda2 /boot/EFI
+<div class="highlight"><pre><code class="text"><span></span>mount /dev/sda2 /boot/EFI
 cd /boot/EFI
 gummiboot install
 </code></pre>
@@ -323,7 +320,7 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
 </ul>
 
 <p>-- まず、EFIのパーティションをマウントする。</p>
-<div class="highlight"><pre><code class="text">mount /dev/sda2 /mnt/boot/EFI
+<div class="highlight"><pre><code class="text"><span></span>mount /dev/sda2 /mnt/boot/EFI
 </code></pre>
 </div>
 

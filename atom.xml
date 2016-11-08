@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-04-21T00:40:47+09:00</updated>
+  <updated>2016-11-08T16:35:51+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -14,7 +14,369 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Atte fes@Mercari]]></title>
+    <title type="html"><![CDATA[golang.tokyo #1@mercari]]></title>
+    <link href="http://pankona.github.io/blog/2016/10/25/golangtokyo/"/>
+    <updated>2016-10-25T19:38:13+09:00</updated>
+    <id>http://pankona.github.io/blog/2016/10/25/golangtokyo</id>
+    <content type="html"><![CDATA[<p>2016.10.25 に六本木の森タワーメルカリさんにて、golang.tokyo #1 が行われました。</p>
+
+<p><a href="http://golangtokyo.connpass.com/event/39965/">golang.tokyo #1 - connpass</a></p>
+
+<p>以下に togetter まとまってます。<br>
+<a href="http://togetter.com/li/1040839">メルカリ本社で開催されたGo言語勉強会 golang.tokyo #1 #golangtokyo - Togetterまとめ</a></p>
+
+<p>参加者の方のまとめです。きれいにまとまっていて読み応えあります。<br>
+<a href="http://godgarden.goat.me/3Hf9qTNO">Hello Gophers, Hello Golang.tokyo #1 - 365 simple life - g.o.a.t</a></p>
+
+<p>本イベントにブログ枠にして参加させていただきましたので、<br>
+その内容をレポートしていきます。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/06.jpg" alt="golang.tokyo-1"><br>
+図1. 入り口にていただいたステッカー。にゃってとごっふぁーくん。かわゆし。</p>
+
+<h2 id="どういう主旨のイベントかと言うと">どういう主旨のイベントかと言うと</h2>
+
+<p>いわゆる一般的な勉強会（？）でやるような、「数人の発表者が順繰りにスライドを用いて発表を行っていく」という体ではなく、パネルディスカッション形式。<br>
+事前に収集された質問に対して、パネラーの方々が体験談を踏まえて回答をしていく、というのが主な内容。<br>
+名だたる5名のパネラーさん達の詳細については、<a href="http://golangtokyo.connpass.com/event/39965/">connpass のイベントページ</a>を参照いただきたい。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/05.jpg" alt="golang.tokyo-1"><br>
+図2. 司会の tenntenn さん。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/09.jpg" alt="golang.tokyo-1"><br>
+図3. 向かって左正面。Songmu さん、大谷さん、kaneshin さん。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/02.jpg" alt="golang.tokyo-1"><br>
+図4. 向かって右正面。y_matsuwitter さん、辻さん。</p>
+
+<p>写真遠いし真っ黒やんけ。しかし顔で勉強会するわけじゃないということでご容赦いただければと思います。</p>
+
+<p>ちなみに開始当初から軽食、おビールなんかも振る舞われており、20時前開始という、<br>
+おそらく夕飯食べてないであろう我々には、とても良い環境を提供いただいておりました。<br>
+メルカリさん、いつもありがとうございます。</p>
+
+<h2 id="本番中も質問が募集されていた">本番中も質問が募集されていた</h2>
+
+<p>Google Apps のどの機能なのかちょっと失念してしまったのですが、<br>
+本番中も質問を次々ポストできる形式になっていて＋既存の質問に対してイイねが可能になっていて、<br>
+みんなが聞きたい質問が優先的に採用されてディスカッションされるというスキームでした。</p>
+
+<p>あんまり見かけないやり方だなぁと思いつつ、視聴者参加型で面白い仕組みだと思いましたので、<br>
+今後もやってくれたらいいなー、と感想を残しておきます。</p>
+
+<h2 id="そして本編---質問と回答集">そして本編 - 質問と回答集</h2>
+
+<p>前置きが長くなってしまいましたが、<br>
+ここからは実際どのような質問がされ、どのように回答がなされたのかを載せていきます。<br>
+※ 全部載せるとだだ長くなってしまうので、独断と偏見で端折りつつ、お送ります。</p>
+
+<h3 id="q.-メンバーの-go-の教育はどうしてますか？">Q. メンバーの Go の教育はどうしてますか？</h3>
+
+<p>Go に馴染みのないメンバーにどうやって Go を学んでもらうか？というトピック。</p>
+
+<ul>
+<li>辻さん &gt; 
+
+<ul>
+<li><a href="https://tour.golang.org/welcome/1">tour of go</a>、<a href="https://golang.org/doc/effective_go.html">effective go</a> あたりから入ってもらう。</li>
+<li><a href="http://qiita.com/tenntenn/items/0e33a4959250d1a55045">初心者が見ると幸せになる場所　#golang</a></li>
+<li>標準ライブラリのコード読んだり</li>
+<li>ハマりどころの勉強会をしたり</li>
+<li>あとは実践あるのみでソースレビュー
+
+<ul>
+<li>経験ある人をレビュアーにいれ、Go っぽくないコードを指摘したり</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/04.jpg" alt="golang.tokyo-1"><br>
+図5. そしてディスカッションが始まった</p>
+
+<h3 id="q.-ideやデバッグはどうしているか">Q. IDEやデバッグはどうしているか</h3>
+
+<p>Go でデバッガといえば <a href="https://github.com/derekparker/delve">delve</a> かと思ったが、思ったより使われていないのかなという印象。<br>
+ちょこちょこテスト書いて動かしていけば、それほど難儀なデバッグが必要になることも少ないっていうことかしら？</p>
+
+<ul>
+<li>songmu さん &gt;
+
+<ul>
+<li>vim 使っている。メンバーが使っているのは結構バラバラ。</li>
+<li>デバッグは主に print デバッグ。ちょっとコード書いてちょっとテスト書いて、みたいな。</li>
+</ul></li>
+<li>大谷さん &gt;
+
+<ul>
+<li>intellij idea。何人か vim。</li>
+<li>デバッグは主に print デバッグ。実際に動かしながら。</li>
+</ul></li>
+</ul>
+
+<h3 id="q.-コーディオング規約、レビューの指針、golint-に従うか、など。">Q. コーディオング規約、レビューの指針、golint に従うか、など。</h3>
+
+<p>個人的には、従うと腹を決めて一度クリーンな状態になれば、あとはさほど苦ではないと思うが、はたして。</p>
+
+<ul>
+<li>辻さん &gt;
+
+<ul>
+<li>コーディング規約は <a href="https://github.com/golang/go/wiki/CodeReviewComments">CodeReviewComment</a> を基準にしている。</li>
+<li>発火させるだけの単純なチャンネルには 空 struct を使う。</li>
+<li>golint はベストエフォート。というのも、3rd party ツールがが生成するコードが golint に従ってない場合もあったりするようで…。
+
+<ul>
+<li>golint の対象を除外は grep -v で頑張る。</li>
+</ul></li>
+</ul></li>
+<li>songmu さん &gt;
+
+<ul>
+<li>glint には従っている。従えば Go っぽい書き方ができてくると思う。</li>
+</ul></li>
+</ul>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/13.jpg" alt="golang.tokyo-1"><br>
+図6.songmu さん回答中。</p>
+
+<h3 id="q.-webフレームワークとテンプレートエンジンは？ormは？">Q. Webフレームワークとテンプレートエンジンは？ORMは？</h3>
+
+<ul>
+<li>辻さん &gt;
+
+<ul>
+<li>Echo。パフォーマンス重視の選択。</li>
+<li>テンプレートエンジンは&#8230;標準のを使うのは結構ツラかった。フロントエンドは Go では書いてない。</li>
+<li>DB のラッパーは <a href="https://github.com/Masterminds/squirrel">squirrel</a> を使っている。</li>
+</ul></li>
+<li>kaneshin さん &gt;
+
+<ul>
+<li>当初は <a href="https://revel.github.io/">Revel</a> を使っていたが、重量級な感じだったのでとっぱらいたかった。
+
+<ul>
+<li>後に <a href="https://github.com/gin-gonic/gin">Gin</a> で置き換えた。</li>
+<li>router に <a href="https://github.com/gorilla/mux">gorrila/mux</a>。もしくは標準の http。</li>
+</ul></li>
+<li>テンプレートエンジンは標準のがツライ。フロントエンドは SPA を JS で作っている。</li>
+<li>ORM は <a href="https://github.com/go-xorm/xorm">XORM</a>。 一部では <a href="https://github.com/jinzhu/gorm">gorm</a>。</li>
+</ul></li>
+</ul>
+
+<h4 id="ところでフロントエンド事情は…">ところでフロントエンド事情は…</h4>
+
+<ul>
+<li>Go のテンプレートはツライ。</li>
+<li>react とか angular とか使っちゃう。</li>
+</ul>
+
+<p>みな口々に「Go のテンプレートはツライ」と言っていたのが印象的でした…。</p>
+
+<h3 id="q.-エラー処理どうしてますか？pkg/errors？-panic-は？">Q. エラー処理どうしてますか？pkg/errors？ panic は？</h3>
+
+<ul>
+<li>tenntenn さん &gt;
+
+<ul>
+<li>pkg/errors を主に使う。</li>
+</ul></li>
+<li>songmu さん &gt; 
+
+<ul>
+<li>panic はなるべくしないように作る。</li>
+<li>goroutine の中でのエラーは、<a href="https://godoc.org/golang.org/x/sync/errgroup">sync.ErrorGroup</a>。</li>
+</ul></li>
+</ul>
+
+<p><a href="https://godoc.org/golang.org/x/sync/errgroup">sync.ErrorGroup</a> の使い方について、<br>
+ちょうど近頃<a href="http://deeeet.com/writing/2016/10/12/errgroup/">類似トピックの記事 - sync.ErrGroupで複数のgoroutineを制御する</a>をポストされていた deeeet さん (※ e は 4つ) からのコメント。</p>
+
+<ul>
+<li><a href="https://twitter.com/deeeet?lang=ja">deeeet さん</a> &gt;
+
+<ul>
+<li>ErrorGroup は便利。たくさんの処理があって、一個でも失敗したらご破産にしたいときに使う。</li>
+</ul></li>
+<li>kaneshin さん &gt;
+
+<ul>
+<li>error はエラーを上位レイヤーに伝搬させていく思想。</li>
+<li>panic はしっかり使っていく派。起動直後に実行されて失敗したらどうにもならないものとかに対して。</li>
+</ul></li>
+</ul>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/08.jpg" alt="golang.tokyo-1"><br>
+図7. deeeet さん (一番奥)。</p>
+
+<h3 id="q.-git-に上がっているオススメの-go-で書かれたものは？">Q. Git に上がっているオススメの Go で書かれたものは？</h3>
+
+<ul>
+<li>kaneshin さん &gt;
+
+<ul>
+<li><a href="https://github.com/aws/aws-sdk-go">aws-sdk-go</a>。コードジェネレーション部が参考になる。</li>
+<li>リクエストの作り方、リクエストのリトライの仕方。パッケージの構造なども。</li>
+<li><a href="https://github.com/GoogleCloudPlatform/google-cloud-go">google-cloud-go</a> も参考になる。</li>
+<li><a href="https://github.com/google/go-github">go-github</a> も。</li>
+<li><a href="https://github.com/kaneshin/gate">kaneshin/gate</a>。Makefile の使い方がポイント。rake task 的な。</li>
+</ul></li>
+</ul>
+
+<h3 id="q.-ロガーどうしている？">Q. ロガーどうしている？</h3>
+
+<p>ロガーは <a href="https://github.com/Sirupsen/logrus">logrus</a> が定番といった空気でした。</p>
+
+<ul>
+<li>辻さん &gt;
+
+<ul>
+<li><a href="https://github.com/Sirupsen/logrus">logrus</a>。</li>
+<li><a href="https://github.com/uber-go/zap">zap</a> というのもある。使い勝手が特殊な感じだが高速らしい。</li>
+</ul></li>
+<li>大谷さん &gt;
+
+<ul>
+<li>Web アプリではフレームワークのロガーをそのまま使う。</li>
+<li>fluentd でひっかけて Big Query に投げる、等。</li>
+</ul></li>
+</ul>
+
+<h3 id="q.-パッケージ分けどうしているか？パッケージ名、循環-import-問題は？">Q. パッケージ分けどうしているか？パッケージ名、循環 import 問題は？</h3>
+
+<p>パッケージ分けは割と悩むポイントかと思いますが、はたして。</p>
+
+<ul>
+<li>松本さん &gt;
+
+<ul>
+<li>ひとつのサービス内のサブパッケージは2つか3つくらい。
+
+<ul>
+<li>設計上のドメイン軸で切っていく。ニュース記事・ユーザー・&#8230;</li>
+<li>サブパッケージのサブパッケージ、みたいにこまかく切っていくことはあまりない。</li>
+<li>リポジトリ一個一個を小さく保つようにしている。</li>
+</ul></li>
+</ul></li>
+<li>tenntenn さん &gt;
+
+<ul>
+<li><a href="https://blog.golang.org/go1.5">internal package</a> というのもあるが、使うのをやめた。</li>
+<li>別にそこまでしなくても、例えば private とかつけておいて区別さえできればよく、またこうやっとくといざというときにも使える。</li>
+</ul></li>
+</ul>
+
+<p>あとは、以下のような意見も。</p>
+
+<ul>
+<li>Go っぽい感じを意識すると、あんまりパッケージを分けない？</li>
+<li>microservice だと、microservice 同士で重複した処理が出てきたりする。パッケージ化して、service 同士で共有するか？
+
+<ul>
+<li>ロジックを共有すると、変更がお互いに影響してしまうので留意が必要。</li>
+</ul></li>
+</ul>
+
+<h3 id="q.-テスト周り">Q. テスト周り</h3>
+
+<ul>
+<li>songmu さん &gt;
+
+<ul>
+<li>最初は標準を使っていたが、そのうち <a href="https://github.com/stretchr/testify">testify</a> を使うように。</li>
+<li>lestrrat さんの mysql のテストに使うフレームワークを使ったりもしている。<a href="https://github.com/lestrrat/go-test-mysqld">lestrrat/go-test-mysqld</a>。</li>
+</ul></li>
+<li>kaneshin さん &gt;
+
+<ul>
+<li>CI 周りはツラくて常に戦っている。テスト全消化で 30 分かかったりしている。ツラミ。
+
+<ul>
+<li>今の気持ちとしては、DB 周りのテストは消したい。モック使いたい。</li>
+<li>GAE にデプロイするものは、全て Pure Go で動くように設計している。テストしやすいように。</li>
+</ul></li>
+</ul></li>
+<li>deeeet さん &gt; 
+
+<ul>
+<li>フレームワーク使わない派。フレームワークは mini DSL みたいなものだと思っていて、それを覚えるのはつらい。新規メンバーをげんなりさせる原因。</li>
+<li>DB 周りのテストは、interface を使ってモックする。依存している部分を interface で分ける。</li>
+<li>詳しくはここ → <a href="http://deeeet.com/writing/2016/10/25/go-interface-testing/">Golangにおけるinterfaceをつかったテスト技法 | SOTA</a></li>
+</ul></li>
+<li>songmu さん &gt;
+
+<ul>
+<li>DB のテストはモックせずに実際に DB を立ててやるべき派。</li>
+<li>ロジック外の部分の問題も留意するべき。設定ファイルの関係で実際に DB にデータが入らなかったりすることも起こる。</li>
+</ul></li>
+</ul>
+
+<h3 id="q.-デプロイまでのフロート工夫している点。ciとか。">Q. デプロイまでのフロート工夫している点。CIとか。</h3>
+
+<ul>
+<li>kaneshin さん &gt;
+
+<ul>
+<li>ansible。dynamic inventry を使っている。</li>
+</ul></li>
+</ul>
+
+<h4 id="ところで、go-のビルドが遅くなる理由">ところで、Go のビルドが遅くなる理由</h4>
+
+<p>Go のビルドは一般的には早いと言われているが、遅いとしたらそれは何故かと言うと…？</p>
+
+<ul>
+<li>import が煩雑である。依存が連なっていて、フルビルドがかかってしまう場合。</li>
+</ul>
+
+<p>これは例えば、A が B に依存していて、B が C に依存している、なんていうシチュエーションのとき、C を変更したら依存を遡って B も A もビルドが走ってしまう、ということが起こる模様。<br>
+ちょうど C言語の include と同じような感じかな。ヘッダー変えたら全ビルド走っちゃうみたいな。<br>
+個人的には Go でビルド速度にそれほど苦を感じたことはないが、とはいえ、留意されたしである。</p>
+
+<h3 id="q.-pprof-を本番で使っている？モニタリングやチューニングは？">Q. pprof を本番で使っている？モニタリングやチューニングは？</h3>
+
+<ul>
+<li>大谷さん &gt;
+
+<ul>
+<li>pprof は本番では使ってない</li>
+<li>モニタリングは zabbix で監視。プロセスが落ちたら復活させたり。</li>
+<li>チューニング面では、文字列を + で繋がない。とか。</li>
+</ul></li>
+<li>松本さん &gt;
+
+<ul>
+<li>pprof ではなく、<a href="https://github.com/fukata/golang-stats-api-handler">golang-stats-api-handler</a> を使っている。</li>
+<li><a href="https://www.datadoghq.com/">datadog</a> でリソース監視。プロセスが落ちたらすぐ再起動するようになっている。</li>
+<li>個のチューニングではなく、横に並べられる設計でスケールできるようにしておく。札束で殴る。金の弾丸！</li>
+</ul></li>
+</ul>
+
+<h2 id="その他の質問">その他の質問</h2>
+
+<p>概ね、以上のトピックスでディスカッションが行われました。<br>
+他にも、回答は得られませんでしたが、</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/11.jpg" alt="golang.tokyo-1"><br>
+図8. Go言語プログラマの給料はいかほどか…</p>
+
+<p>なんていう質問も出たり。<br>
+ネタも挟みつつ、終始知見に溢れた有意義なディスカッションでありました。</p>
+
+<h2 id="おわりに">おわりに</h2>
+
+<p>運営の方々、登壇の方々、お疲れ様でした！</p>
+
+<p>golang.tokyo #2 も計画されていると噂を聞きますので、<br>
+興味を持たれた方、チェックしてみてはいかがでしょうか。<br>
+Go 言語に興味さえあれば、参加して楽しいかと思います。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-1/07.jpg" alt="golang.tokyo-1"><br>
+図9. 戦利品としてTシャツいただきました！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Atte Fes@mercari]]></title>
     <link href="http://pankona.github.io/blog/2016/04/18/atte-fes/"/>
     <updated>2016-04-18T19:34:12+09:00</updated>
     <id>http://pankona.github.io/blog/2016/04/18/atte-fes</id>
@@ -453,7 +815,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
 
 <p>まずはAPKアップロード成功後の.travis.ymlを載せておく。</p>
 
-<figure class='code'><figcaption><span>.travis.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -504,74 +866,71 @@ Nexus 7 よりも若干薄いかな、と。</p>
 <span class='line-number'>49</span>
 <span class='line-number'>50</span>
 <span class='line-number'>51</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">android</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>language: android
 </span><span class='line'>
-</span><span class='line'><span class="c1"># Handle git submodules yourself</span>
-</span><span class='line'><span class="l-Scalar-Plain">git</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">submodules</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
+</span><span class='line'># Handle git submodules yourself
+</span><span class='line'>git:
+</span><span class='line'>    submodules: false
 </span><span class='line'>
-</span><span class='line'><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">global</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">secure</span><span class="p-Indicator">:</span> <span class="s">&quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;</span>
+</span><span class='line'>env:
+</span><span class='line'>  global:
+</span><span class='line'>    secure: "TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE="
 </span><span class='line'>
-</span><span class='line'><span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="c1"># NDK configuration</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">printenv</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo `pwd`</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">chmod a+x android-ndk-r10d-linux-x86_64.bin</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting</span> <span class="c1"># because log will be too long!</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export NDK_ROOT=`pwd`/android-ndk-r10d</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $NDK_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$NDK_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $PATH</span>
+</span><span class='line'>install:
+</span><span class='line'># NDK configuration
+</span><span class='line'>    - printenv
+</span><span class='line'>    - echo `pwd`
+</span><span class='line'>    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+</span><span class='line'>    - chmod a+x android-ndk-r10d-linux-x86_64.bin
+</span><span class='line'>    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+</span><span class='line'>    - export NDK_ROOT=`pwd`/android-ndk-r10d
+</span><span class='line'>    - echo $NDK_ROOT
+</span><span class='line'>    - export PATH=$PATH:$NDK_ROOT
+</span><span class='line'>    - echo $PATH
 </span><span class='line'>
-</span><span class='line'><span class="c1"># Android SDK configuration</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export ANDROID_SDK_ROOT=/usr/local/android-sdk</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools</span>
+</span><span class='line'># Android SDK configuration
+</span><span class='line'>    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
+</span><span class='line'>    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 </span><span class='line'>
-</span><span class='line'><span class="c1"># git submodule</span>
-</span><span class='line'><span class="c1"># Use sed to replace the SSH URL with the public URL, then initialize submodules</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">sed -i &#39;s/git@github.com:/https:\/\/github.com\//&#39; .gitmodules</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git submodule update --init --recursive</span>
+</span><span class='line'># git submodule
+</span><span class='line'># Use sed to replace the SSH URL with the public URL, then initialize submodules
+</span><span class='line'>    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+</span><span class='line'>    - git submodule update --init --recursive
 </span><span class='line'>
-</span><span class='line'><span class="c1"># cocos setup </span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cd ./cocos2d</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python download-deps.py --remove-download=yes</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python ./setup.py</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$COCOS_CONSOLE_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export COCOS_TEMPLATES_ROOT=`pwd`/templates</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$COCOS_TEMPLATES_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export ANT_ROOT=/usr/share/ant/bin</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$ANT_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">printenv</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cd ..</span>
+</span><span class='line'># cocos setup 
+</span><span class='line'>    - cd ./cocos2d
+</span><span class='line'>    - python download-deps.py --remove-download=yes
+</span><span class='line'>    - python ./setup.py
+</span><span class='line'>    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+</span><span class='line'>    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
+</span><span class='line'>    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
+</span><span class='line'>    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+</span><span class='line'>    - export ANT_ROOT=/usr/share/ant/bin
+</span><span class='line'>    - export PATH=$PATH:$ANT_ROOT
+</span><span class='line'>    - printenv
+</span><span class='line'>    - cd ..
 </span><span class='line'>
-</span><span class='line'><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cocos compile -p android -j 8</span>
+</span><span class='line'>script:
+</span><span class='line'>    - cocos compile -p android -j 8
 </span><span class='line'>
-</span><span class='line'><span class="l-Scalar-Plain">after_success</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $TRAVIS_BRANCH</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $TRAVIS_PULL_REQUEST</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="s">&#39;[</span><span class="nv"> </span><span class="s">&quot;$TRAVIS_BRANCH&quot;</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;master&quot;</span><span class="nv"> </span><span class="s">-a</span><span class="nv"> </span><span class="s">&quot;$TRAVIS_PULL_REQUEST&quot;</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;false&quot;</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">curl</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot;</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;token=${DEPLOYGATE_TOKEN}&quot;</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;message=Deploy</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">Travis</span><span class="nv"> </span><span class="s">CI&quot;</span><span class="nv"> </span><span class="s">https://deploygate.com/api/users/pankona/apps&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>after_success:
+</span><span class='line'>    - echo $TRAVIS_BRANCH
+</span><span class='line'>    - echo $TRAVIS_PULL_REQUEST
+</span><span class='line'>    - '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'</span></code></pre></td></tr></table></div></figure>
 
 <h3 id="前回からの変更点（apkアップロードのために追加した部分）">前回からの変更点（APKアップロードのために追加した部分）</h3>
 
 <p>前回から増えたり変更したりしたのは以下。</p>
 
-<figure class='code'><figcaption><span>.travis.yml (part)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">env</span><span class="p-Indicator">:</span>
-</span><span class='line'>  <span class="l-Scalar-Plain">global</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">secure</span><span class="p-Indicator">:</span> <span class="s">&quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>env:
+</span><span class='line'>  global:
+</span><span class='line'>    secure: "TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE="</span></code></pre></td></tr></table></div></figure>
 
-<figure class='code'><figcaption><span>.travis.yml (part)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="p-Indicator">-</span> <span class="s">&#39;[</span><span class="nv"> </span><span class="s">&quot;$TRAVIS_BRANCH&quot;</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;master&quot;</span><span class="nv"> </span><span class="s">-a</span><span class="nv"> </span><span class="s">&quot;$TRAVIS_PULL_REQUEST&quot;</span><span class="nv"> </span><span class="s">==</span><span class="nv"> </span><span class="s">&quot;false&quot;</span><span class="nv"> </span><span class="s">]</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">curl</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot;</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;token=${DEPLOYGATE_TOKEN}&quot;</span><span class="nv"> </span><span class="s">-F</span><span class="nv"> </span><span class="s">&quot;message=Deploy</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">Travis</span><span class="nv"> </span><span class="s">CI&quot;</span><span class="nv"> </span><span class="s">https://deploygate.com/api/users/pankona/apps&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'</span></code></pre></td></tr></table></div></figure>
 
 <p>後者の部分で、<code>${DEPLOYGATE_TOKEN}</code>という環境変数を参照しているが、これを設定しているのが前者の部分。</p>
 
@@ -670,7 +1029,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
 <p>いかにもやっつけ感満載でありつつ、とりあえずビルドパスするところまでいけた。<br>
 記念に貼り付けておく。もしかして誰かの役に立つことも願いつつ。</p>
 
-<figure class='code'><figcaption><span>.travis.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -712,49 +1071,48 @@ Nexus 7 よりも若干薄いかな、と。</p>
 <span class='line-number'>40</span>
 <span class='line-number'>41</span>
 <span class='line-number'>42</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">android</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>language: android
 </span><span class='line'>
-</span><span class='line'><span class="c1"># Handle git submodules yourself</span>
-</span><span class='line'><span class="l-Scalar-Plain">git</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="l-Scalar-Plain">submodules</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
+</span><span class='line'># Handle git submodules yourself
+</span><span class='line'>git:
+</span><span class='line'>    submodules: false
 </span><span class='line'>
-</span><span class='line'><span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span>
-</span><span class='line'><span class="c1"># NDK configuration</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">printenv</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo `pwd`</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">chmod a+x android-ndk-r10d-linux-x86_64.bin</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting</span> <span class="c1"># because log will be too long!</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export NDK_ROOT=`pwd`/android-ndk-r10d</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $NDK_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$NDK_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo $PATH</span>
+</span><span class='line'>install:
+</span><span class='line'># NDK configuration
+</span><span class='line'>    - printenv
+</span><span class='line'>    - echo `pwd`
+</span><span class='line'>    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+</span><span class='line'>    - chmod a+x android-ndk-r10d-linux-x86_64.bin
+</span><span class='line'>    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+</span><span class='line'>    - export NDK_ROOT=`pwd`/android-ndk-r10d
+</span><span class='line'>    - echo $NDK_ROOT
+</span><span class='line'>    - export PATH=$PATH:$NDK_ROOT
+</span><span class='line'>    - echo $PATH
 </span><span class='line'>
-</span><span class='line'><span class="c1"># Android SDK configuration</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export ANDROID_SDK_ROOT=/usr/local/android-sdk</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools</span>
+</span><span class='line'># Android SDK configuration
+</span><span class='line'>    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
+</span><span class='line'>    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 </span><span class='line'>
-</span><span class='line'><span class="c1"># git submodule</span>
-</span><span class='line'><span class="c1"># Use sed to replace the SSH URL with the public URL, then initialize submodules</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">sed -i &#39;s/git@github.com:/https:\/\/github.com\//&#39; .gitmodules</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git submodule update --init --recursive</span>
+</span><span class='line'># git submodule
+</span><span class='line'># Use sed to replace the SSH URL with the public URL, then initialize submodules
+</span><span class='line'>    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+</span><span class='line'>    - git submodule update --init --recursive
 </span><span class='line'>
-</span><span class='line'><span class="c1"># cocos setup </span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cd ./cocos2d</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python download-deps.py --remove-download=yes</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python ./setup.py</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$COCOS_CONSOLE_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export COCOS_TEMPLATES_ROOT=`pwd`/templates</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$COCOS_TEMPLATES_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export ANT_ROOT=/usr/share/ant/bin</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$ANT_ROOT</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">printenv</span>
+</span><span class='line'># cocos setup 
+</span><span class='line'>    - cd ./cocos2d
+</span><span class='line'>    - python download-deps.py --remove-download=yes
+</span><span class='line'>    - python ./setup.py
+</span><span class='line'>    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+</span><span class='line'>    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
+</span><span class='line'>    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
+</span><span class='line'>    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+</span><span class='line'>    - export ANT_ROOT=/usr/share/ant/bin
+</span><span class='line'>    - export PATH=$PATH:$ANT_ROOT
+</span><span class='line'>    - printenv
 </span><span class='line'>
-</span><span class='line'><span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cd ..</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cocos compile -p android -j 8</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>script:
+</span><span class='line'>    - cd ..
+</span><span class='line'>    - cocos compile -p android -j 8</span></code></pre></td></tr></table></div></figure>
 
 <p>躓き備忘録を以下に記しておく。</p>
 
@@ -779,13 +1137,12 @@ cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたり
 
 <p>上記ymlでいうところの、以下の箇所を実行するとerror 137を報告してビルドが失敗に終わることがあった。</p>
 
-<figure class='code'><figcaption><span>.travi.yaml (part)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">chmod a+x android-ndk-r10d-linux-x86_64.bin</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting</span> <span class="c1"># because log will be too long!</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+</span><span class='line'>- chmod a+x android-ndk-r10d-linux-x86_64.bin
+</span><span class='line'>- ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!</span></code></pre></td></tr></table></div></figure>
 
 <p>解凍時にログをリダイレクトしているが、これをしないとログが大量に出過ぎることが原因でTravis CIに怒られ、ビルドが失敗に終わる。<br>
 それとは別に、解凍にメモリをくいすぎて、いわゆるメモリショートでプロセスが殺されるのがerror 137の原因らしい。。。</p>
@@ -807,11 +1164,10 @@ cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたり
 なのでgitを用いてる部分はhttpsに無理やり書き換えている。以下の部分である。<br>
 涙ぐましい。</p>
 
-<figure class='code'><figcaption><span>.travis.yml (part)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="c1"># Use sed to replace the SSH URL with the public URL, then initialize submodules</span>
-</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">sed -i &#39;s/git@github.com:/https:\/\/github.com\//&#39; .gitmodules</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Use sed to replace the SSH URL with the public URL, then initialize submodules
+</span><span class='line'>    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules</span></code></pre></td></tr></table></div></figure>
 
 <h4 id="環境変数設定を頑張る">環境変数設定を頑張る</h4>
 
@@ -820,19 +1176,18 @@ cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたり
 Travis CIのScript上では効かないので、しかたなく<code>.bashrc</code>に追記されるものと同等の設定を<code>.travis.yml</code>にて実施した。<br>
 以下の部分である。</p>
 
-<figure class='code'><figcaption><span>.travis.yml (part)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$COCOS_CONSOLE_ROOT</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export COCOS_TEMPLATES_ROOT=`pwd`/templates</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$COCOS_TEMPLATES_ROOT</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export ANT_ROOT=/usr/share/ant/bin</span>
-</span><span class='line'><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">export PATH=$PATH:$ANT_ROOT</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+</span><span class='line'>- export PATH=$PATH:$COCOS_CONSOLE_ROOT
+</span><span class='line'>- export COCOS_TEMPLATES_ROOT=`pwd`/templates
+</span><span class='line'>- export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+</span><span class='line'>- export ANT_ROOT=/usr/share/ant/bin
+</span><span class='line'>- export PATH=$PATH:$ANT_ROOT</span></code></pre></td></tr></table></div></figure>
 
 <p>ここまでいくと、Travis CI上で<code>cocos</code>コマンドが使えるようになる。<br>
 <code>cocos compile -p android -j 8</code>でビルド実行。APKが生成される（デバッグ版）はずである。</p>
@@ -1070,25 +1425,23 @@ Octopressに読書メーターのブログパーツを追加する方法。</p>
 <p>中身は上記ブログパーツの内容をコピペしたものだが。<br>
 ブログパーツとして「最近読んだ本」をチョイス。</p>
 
-<figure class='code'><figcaption><span>source/_includes/custom/asides/dokusho_meter.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot;</span> <span class="na">title=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot;</span> <span class="na">border=</span><span class="s">&quot;0&quot;</span> <span class="na">alt=</span><span class="s">&quot;{人の名前}の最近読んだ本&quot;</span><span class="nt">&gt;&lt;/a&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>&lt;a href="http://book.akahoshitakuya.com/u/{人によって違うID}" title="{人の名前}の最近読んだ本"&gt;&lt;img src="http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg" border="0" alt="{人の名前}の最近読んだ本"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
 
 <h4 id="_config.ymlを編集して、サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
 
 <p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
 
-<figure class='code'><figcaption><span>_config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html,
+</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, 
 </span><span class='line'>                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
-</span><span class='line'>                 custom/asides/dokusho_meter.html]
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>                 custom/asides/dokusho_meter.html]</span></code></pre></td></tr></table></div></figure>
 
 <h4 id="deployしたら完了">deployしたら完了</h4>
 
@@ -1501,17 +1854,16 @@ Arch Linux向けです。</p>
 
 <p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
 
-<figure class='code'><figcaption><span>.xinitrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># uim</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span><span class="s1">&#39;uim&#39;</span>
-</span><span class='line'>uim-xim &amp;
-</span><span class='line'><span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span><span class="s1">&#39;@im=uim&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># uim
+</span><span class='line'>export GTK_IM_MODULE='uim'
+</span><span class='line'>export QT_IM_MODULE='uim'
+</span><span class='line'>uim-xim &
+</span><span class='line'>export XMODIFIERS='@im=uim'</span></code></pre></td></tr></table></div></figure>
 
 <h2 id="uimの設定">uimの設定</h2>
 
@@ -1584,87 +1936,6 @@ Arch Linux向けです。</p>
 <p>自分のGithubのリポジトリに日本人を呼び込みたい！と思ったら、READMEに日本語をちょっと混ぜてあげればリーチできる人が増えるかも？<br>
 と思っているがどうか。たぶん、おそらく、きっと、効果あると思われる。つまり自信ない。<br>
 自分のリポジトリ使って実験してみます。そのうち調査結果を書きます。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vaio Pro 13における手のひら検知 on Arch Linux]]></title>
-    <link href="http://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/"/>
-    <updated>2014-05-15T12:25:25+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux</id>
-    <content type="html"><![CDATA[<p>Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。<br>
-概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。<br>
-それは「タッチパッドの手のひら検知」。パームディテクト、Palm Detection、等と呼ばれる機能。</p>
-
-<h3 id="手のひら検知？">手のひら検知？</h3>
-
-<p>もはや手のひら検知について触れる必要もなさそうだが、一応。</p>
-
-<p>Vaio Pro 13のタッチパッドはなかなか大きい。<br>
-これは最近のノートPC、MBPとか他のUltraBookにも採用されていて流行と言ったら流行。<br>
-これ自体は割と私は好みで、二本指、三本指でのスワイプなんかもやりやすくてなかなかいい。</p>
-
-<p>ただ大きいタッチパッドには弊害もあって、キーボードを打ってるときに親指の付け根のあたりで触れちゃうってこと。<br>
-触れちゃうとどうなるかっていうと、クリックした扱いになってしまって、つまりカーソルが飛ぶ。<br>
-編集中に予期せぬ場所にカーソルが飛んでしまって、あれ、これどうなった、みたいなことになる。</p>
-
-<p>それを解決してくれるのが、手のひら検知の仕組み。<br>
-つまり意図したタッチでないと思われるものは無視してくれるというやつで、考えた人凄いと思います。</p>
-
-<h3 id="arch-linux-on-vaio-pro-13の場合">Arch Linux on Vaio Pro 13の場合</h3>
-
-<p>件の手のひら検知を有効にする仕組みがある（デフォルトではオフ）。<br>
-synclient、PalmDetect、あたりでぐぐると結構出てくる。具体的には、<br>
-<code>synclient PalamDetect=1</code> とかってやって手のひら検知を有効にする。する、のだが。</p>
-
-<p>なんか全然効いてない気がするんですけど・・・。ということで調べてみた。<br>
-ほんとに効いてるのかどうかを。</p>
-
-<h3 id="結論からいうと効いてなかった">結論からいうと効いてなかった</h3>
-
-<p>効いてなかったです。ちくしょうめ。やっぱりか。</p>
-
-<p>ドライバのソースコードに簡単にログを仕込んで確認してみたところ、やっぱり効いてなかった。<br>
-Arch Linuxでタッチパッドのドライバーは、Synapticsが使われている（というか大体どこでもSynapticsか）。<br>
-ソースコードはこれ。Githubに公開されている。<a href="git:anongit.freedesktop.org/xorg/driverxf86-input-synaptics">xf86-input-synaptics</a></p>
-
-<p>なんで効かないかと言うと、の前に、ソースコードからどうやって手のひら検知をしているかを調べてみたのでそれをメモ。</p>
-
-<h3 id="どうやって手のひら検知している？">どうやって手のひら検知している？</h3>
-
-<p>以下の3要素を考慮して手のひら検知としている模様。</p>
-
-<ul>
-<li>PalmDetectの設定が有効になっているか（synclient PalmDetect=1 で有効になるやつ）</li>
-<li>PalmMinZがしきい値を超えているか（これも synclient PalmMinZ=XXX で設定できる）</li>
-<li>PalmMinWidthがしきい値を超えているか（これも synclient PalmMinWidth=XXX で設定できる）</li>
-</ul>
-
-<p>PalmMinZ は、どれくらい深く（強く？）タッチパッドが押されたら手のひらと判断するか、のしきい値。<br>
-PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手のひらとみなしましょう、という判断のためのしきい値。</p>
-
-<h3 id="arch-linux-on-vaio-pro-13-が手のひら検知をしてくれない理由">Arch Linux on Vaio Pro 13 が手のひら検知をしてくれない理由</h3>
-
-<p>上記のしきい値のうち、どうやらPalmMinWidthのほうがおかしいっぽくて、<br>
-どんな触り方をしても常に「0」で判定されてしまっている模様。<br>
-ちなみに、SynapticsはPalmMinWidthが0のときは手のひらとして判断しないように実装されている。<br>
-なので、PalmDetect、PalmMinZ、PalmMinWidth、どれをどの値にしても手のひら検知は効かないということである。ちくしょうめ。</p>
-
-<h3 id="どうすれば解決するのか？">どうすれば解決するのか？</h3>
-
-<h4 id="palmminwidthを正しく判定させる方法">PalmMinWidthを正しく判定させる方法</h4>
-
-<p>調査をしているが今のところわからない。。一般ピープルに手が及ぶ範囲なのかどうか。</p>
-
-<h4 id="それ以外の対処法？">それ以外の対処法？</h4>
-
-<p>PalmMinWidthはもう一切判断に含めないようにソースコードを書き換えてみたが、、、<br>
-それってつまりタッチ深度だけで手のひらを検知するということであって、それはまあ微妙な感じ。</p>
-
-<h4 id="つまり">つまり</h4>
-
-<p><strong>残念ながら、手のひら検知がいまいちな件は解決できていない。</strong>なんとかする方法の調査はTo Be Continuedである。<br>
-デュアルブートしているWindowsの側ではできているっぽいので、Arch Linux側でも出来ないことないと信じて。</p>
 ]]></content>
   </entry>
   

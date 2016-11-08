@@ -121,8 +121,7 @@
 
 <p>about.html はこんな感じに。</p>
 
-<figure class='code'><figcaption><span>about.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -130,15 +129,14 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;section&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section>
+</span><span class='line'>  &lt;h1>About Me&lt;/h1>
 </span><span class='line'>  {% if site.gravatar_email %}
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    &lt;img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" />
 </span><span class='line'>  {% endif %}
 </span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
-</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>  &lt;br clear="left">
+</span><span class='line'>&lt;/section></span></code></pre></td></tr></table></div></figure>
 
 <h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
 
@@ -232,7 +230,11 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2016/04/18/atte-fes/">Atte fes@Mercari</a>
+        <a href="/blog/2016/10/25/golangtokyo/">golang.tokyo #1@mercari</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/04/18/atte-fes/">Atte Fes@mercari</a>
       </li>
     
       <li class="post">
@@ -247,10 +249,6 @@
         <a href="/blog/2016/03/29/z370c-appearance/">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -259,11 +257,11 @@
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 108.57142857142857%'>golang(1)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (1)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

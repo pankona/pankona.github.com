@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopressカスタマイズ | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/octopresskasutamaizu/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-04-21T00:40:47+09:00</updated>
+  <updated>2016-11-08T16:35:51+09:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -45,22 +45,20 @@ Octopressに読書メーターのブログパーツを追加する方法。</p>
 
 <p>中身は上記ブログパーツの内容をコピペしたものだが。<br>
 ブログパーツとして「最近読んだ本」をチョイス。</p>
-
-<p><code>html source/_includes/custom/asides/dokusho_meter.html<br>
-&lt;section&gt;<br>
-&lt;a href=&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot; title=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;img src=&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot; border=&quot;0&quot; alt=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;/a&gt;<br>
-&lt;/section&gt;<br>
-</code></p>
+<div class="highlight"><pre><code class="text"><span></span>&lt;section&gt;
+&lt;a href=&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot; title=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;img src=&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot; border=&quot;0&quot; alt=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;/a&gt;
+&lt;/section&gt;
+</code></pre>
+</div>
 
 <h4 id="_config.ymlを編集して、サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
 
 <p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
-
-<p><code>html _config.yml<br>
-default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, <br>
-                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,<br>
-                 custom/asides/dokusho_meter.html]<br>
-</code></p>
+<div class="highlight"><pre><code class="text"><span></span>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, 
+                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
+                 custom/asides/dokusho_meter.html]
+</code></pre>
+</div>
 
 <h4 id="deployしたら完了">deployしたら完了</h4>
 
@@ -124,7 +122,7 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
 
 <p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
 
-<p><code>{% codeblock about.html %}</code><br></p>
+<p><code>{% codeblock %}</code><br></p>
 
 <p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
 
@@ -157,8 +155,7 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <p>about.html はこんな感じに。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>about.html </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -169,18 +166,17 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;br&gt;</span>
-</span><span class='line'><span class="nt">&lt;br&gt;</span>
-</span><span class='line'><span class="nt">&lt;section&gt;&lt;br&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;h1&gt;</span>About Me<span class="nt">&lt;/h1&gt;&lt;br&gt;</span>
-</span><span class='line'>  {% if site.gravatar_email %}<span class="nt">&lt;br&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;{% gravatar_image %}&quot;</span> <span class="na">alt=</span><span class="s">&quot;Gravatar of {{site.author}}&quot;</span> <span class="na">title=</span><span class="s">&quot;Gravatar of {{ site.author }}&quot;</span> <span class="na">align=</span><span class="s">&quot;left&quot;</span> <span class="na">style=</span><span class="s">&quot;margin-right:10px;&quot;</span> <span class="nt">/&gt;&lt;br&gt;</span>
-</span><span class='line'>  {% endif %}<span class="nt">&lt;br&gt;</span>
-</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。<span class="nt">&lt;br&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">&quot;left&quot;</span><span class="nt">&gt;&lt;br&gt;</span>
-</span><span class='line'><span class="nt">&lt;/section&gt;&lt;br&gt;</span>
-</span><span class='line'><span class="nt">&lt;br&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;br>
+</span><span class='line'>&lt;br>
+</span><span class='line'>&lt;section>&lt;br>
+</span><span class='line'>  &lt;h1>About Me&lt;/h1>&lt;br>
+</span><span class='line'>  {% if site.gravatar_email %}&lt;br>
+</span><span class='line'>    &lt;img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" />&lt;br>
+</span><span class='line'>  {% endif %}&lt;br>
+</span><span class='line'>  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。&lt;br>
+</span><span class='line'>  &lt;br clear="left">&lt;br>
+</span><span class='line'>&lt;/section>&lt;br>
+</span><span class='line'>&lt;br></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
 

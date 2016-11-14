@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ArchLinux | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-11-08T16:36:29+09:00</updated>
+  <updated>2016-11-14T14:15:22+00:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -14,10 +14,85 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Linux で 無線LAN の USB ドングルを使う]]></title>
+    <link href="http://pankona.github.io/blog/2016/11/14/usb-wifi-dongle/"/>
+    <updated>2016-11-14T11:14:02+00:00</updated>
+    <id>http://pankona.github.io/blog/2016/11/14/usb-wifi-dongle</id>
+    <content type="html"><![CDATA[<p>Linux と銘打っておりますが、Manjro で試しています。<br>
+本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。</p>
+
+<h2 id="使ったドングル二種">使ったドングル二種</h2>
+
+<p>訳あって二種類のドングルを使いました。いずれも I-O DATA 製。</p>
+
+<ul>
+<li>WN-AC433UM</li>
+<li>WN-G150UMK</li>
+</ul>
+
+<h2 id="wn-ac433um-編">WN-AC433UM 編</h2>
+
+<p>とりあえずぶっ挿してみたところ、無線LAN デバイスとしては認識されなかった。<br>
+つまりデフォルトの Manjro には WN-AC433UM のドライバが入っていなかったということ。<br>
+ドライバを入れていく。</p>
+
+<h3 id="wn-ac433um-は-rtl8192eu-というドライバで動いた">WN-AC433UM は rtl8192eu というドライバで動いた</h3>
+
+<p>rtl8192eu というドライバは <code>yaourt rtl8192eu</code> で一応インストールされるのであるが、<br>
+それだけだと WN-AC433UM は認識されなかった。</p>
+
+<p>WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、<br>
+<code>yaourt rtl8192eu</code> でインストールされるドライバではこれを認識するようになっていない。<br>
+(注: 2016.11.09 時点)</p>
+
+<p>なので、上記 idVendor、idProduct 値を認識するようにソースコードを書き換えた上で、<br>
+ビルド・インストールする必要がある。ソースコードは以下から入手できる。</p>
+
+<p><a href="https://github.com/Mange/rtl8192eu-linux-driver">Mange/rtl8192eu-linux-driver - GitHub</a><br>
+なお、リビジョンは <code>f016814</code> を使った。</p>
+
+<p>os_dep/linux/usb_intf.c に、以下のように追記する。<br>
+(注: 妥当か不明だがとりあえず以下の書き換えでうまくいった)</p>
+
+<p>ビルドし、インストールする。</p>
+
+<p>再起動すると、無線LAN ドングルを NIC として認識するようになった。</p>
+
+<h2 id="wn-g150umk-編">WN-G150UMK 編</h2>
+
+<p>上記 WN-AC433UM を認識させるにあたって散々ドライバをインストールしたせいなのであろうが、<br>
+こちらは挿しただけで認識されてしまった。</p>
+
+<h3 id="wn-g150umk-は-rtl8192cu-というドライバで動いている模様">WN-G150UMK は rtl8192cu というドライバで動いている模様</h3>
+
+<p>もしかしたらドライバをインストールする必要があるかもしれないのでメモしておくと、<br>
+WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>lshw</code> コマンドで確認した。</p>
+
+<h2 id="ちなみに、wn-ac433um-は-5-ghz-にしか対応していない">ちなみに、WN-AC433UM は 5 GHz にしか対応していない</h2>
+
+<p>WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br>
+つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。<br>
+2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、<br>
+ちょっと古めのルーターだったりが該当する。</p>
+
+<p>完全に自分の見落としであるのだが、我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、<br>
+つまりせっかく頑張って WN-AC433UM を Linux に認識させたのであるが、日の目を見なかったのである…。<br>
+悲しい。そんなわけで WN-G150UMK を書い直したが、こちらは快調に動いてます。ナイス。</p>
+
+<h2 id="参考リンク">参考リンク</h2>
+
+<ul>
+<li><a href="http://www.iodata.jp/product/network/adp/wn-ac433um/">WN-AC433UMシリーズ - I-O DATA</a></li>
+<li><a href="http://www.iodata.jp/lib/product/w/4078.htm">WN-G150UMK - I-O DATA</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux]]></title>
-    <link href="http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/"/>
-    <updated>2014-09-15T00:30:08+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox</id>
+    <link href="http://pankona.github.io/blog/2014/09/14/histryback-by-swipe-on-firefox/"/>
+    <updated>2014-09-14T15:30:08+00:00</updated>
+    <id>http://pankona.github.io/blog/2014/09/14/histryback-by-swipe-on-firefox</id>
     <content type="html"><![CDATA[<p>ブラウザはFirefoxを好んで使っている。<br>
 VimperatorとかPentadactylがあるおかげである。</p>
 
@@ -90,9 +165,9 @@ UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方
   
   <entry>
     <title type="html"><![CDATA[日本語入力のための設定メモ for Arch Linux]]></title>
-    <link href="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/"/>
-    <updated>2014-05-28T07:49:23+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/05/28/use-uim-mozc</id>
+    <link href="http://pankona.github.io/blog/2014/05/27/use-uim-mozc/"/>
+    <updated>2014-05-27T22:49:23+00:00</updated>
+    <id>http://pankona.github.io/blog/2014/05/27/use-uim-mozc</id>
     <content type="html"><![CDATA[<p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br>
 具体的な要望としては、</p>
 
@@ -132,13 +207,6 @@ Arch Linux向けです。</p>
 </ul>
 
 <p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
-<div class="highlight"><pre><code class="text"><span></span># uim
-export GTK_IM_MODULE=&#39;uim&#39;
-export QT_IM_MODULE=&#39;uim&#39;
-uim-xim &amp;
-export XMODIFIERS=&#39;@im=uim&#39;
-</code></pre>
-</div>
 
 <h2 id="uimの設定">uimの設定</h2>
 
@@ -174,7 +242,7 @@ export XMODIFIERS=&#39;@im=uim&#39;
   <entry>
     <title type="html"><![CDATA[Vaio Pro 13における手のひら検知 on Arch Linux]]></title>
     <link href="http://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/"/>
-    <updated>2014-05-15T12:25:25+09:00</updated>
+    <updated>2014-05-15T03:25:25+00:00</updated>
     <id>http://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux</id>
     <content type="html"><![CDATA[<p>Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。<br>
 概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。<br>
@@ -255,7 +323,7 @@ PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手の�
   <entry>
     <title type="html"><![CDATA[Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録]]></title>
     <link href="http://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/"/>
-    <updated>2014-05-14T17:59:10+09:00</updated>
+    <updated>2014-05-14T08:59:10+00:00</updated>
     <id>http://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips</id>
     <content type="html"><![CDATA[<h2 id="このポストは">このポストは</h2>
 
@@ -296,11 +364,6 @@ PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手の�
 -- Arch Linuxのインストール。 <code>pacman -S base base-devel</code> とかやる。<br>
 -- genfstab とかそういったことをこまごま行う。<br>
 -- ブートローダのインストール。ブートローダにはgummibootを採用した。</p>
-<div class="highlight"><pre><code class="text"><span></span>mount /dev/sda2 /boot/EFI
-cd /boot/EFI
-gummiboot install
-</code></pre>
-</div>
 
 <p>ここまでで勝手にデュアルブートしてくれたら嬉しかったが、そうはいかなかった（本来はこれだけでOKらしい）。<br>
 Vaioのせいなのか、Windowsのせいなのか。。</p>
@@ -320,9 +383,6 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
 </ul>
 
 <p>-- まず、EFIのパーティションをマウントする。</p>
-<div class="highlight"><pre><code class="text"><span></span>mount /dev/sda2 /mnt/boot/EFI
-</code></pre>
-</div>
 
 <p>-- Windows起動用のファイルとgummiboot起動用のファイルを置き換える。</p>
 

@@ -9,8 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="2016.10.25 に六本木の森タワーメルカリさんにて、golang.tokyo #1 が行われました。 golang.tokyo #1 - connpass 以下に togetter まとまってます。
-メルカリ本社で開催されたGo言語勉強会 golang.tokyo #1 # &hellip;">
+  <meta name="description" content="Linux と銘打っておりますが、Manjro で試しています。
+本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。 使ったドングル二種 訳あって二種類のドングルを使いました。いずれも I-O DATA 製。 WN-AC433UM
+WN-G150UMK WN- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +83,145 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2016/11/14/usb-wifi-dongle/">Linux で 無線LAN の USB ドングルを使う</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-11-14T11:14:02+00:00" pubdate data-updated="true">Nov 14<span>th</span>, 2016</time>
+        
+           | <a href="/blog/2016/11/14/usb-wifi-dongle/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2016/11/14/usb-wifi-dongle/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Linux と銘打っておりますが、Manjro で試しています。<br>
+本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。</p>
+
+<h2 id="使ったドングル二種">使ったドングル二種</h2>
+
+<p>訳あって二種類のドングルを使いました。いずれも I-O DATA 製。</p>
+
+<ul>
+<li>WN-AC433UM</li>
+<li>WN-G150UMK</li>
+</ul>
+
+<h2 id="wn-ac433um-編">WN-AC433UM 編</h2>
+
+<p>とりあえずぶっ挿してみたところ、無線LAN デバイスとしては認識されなかった。<br>
+つまりデフォルトの Manjro には WN-AC433UM のドライバが入っていなかったということ。<br>
+ドライバを入れていく。</p>
+
+<h3 id="wn-ac433um-は-rtl8192eu-というドライバで動いた">WN-AC433UM は rtl8192eu というドライバで動いた</h3>
+
+<p>rtl8192eu というドライバは <code>yaourt rtl8192eu</code> で一応インストールされるのであるが、<br>
+それだけだと WN-AC433UM は認識されなかった。</p>
+
+<p>WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、<br>
+<code>yaourt rtl8192eu</code> でインストールされるドライバではこれを認識するようになっていない。<br>
+(注: 2016.11.09 時点)</p>
+
+<p>なので、上記 idVendor、idProduct 値を認識するようにソースコードを書き換えた上で、<br>
+ビルド・インストールする必要がある。ソースコードは以下から入手できる。</p>
+
+<p><a href="https://github.com/Mange/rtl8192eu-linux-driver">Mange/rtl8192eu-linux-driver - GitHub</a><br>
+なお、リビジョンは <code>f016814</code> を使った。</p>
+
+<p>os_dep/linux/usb_intf.c に、以下のように追記する。<br>
+(注: 妥当か不明だがとりあえず以下の書き換えでうまくいった)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>diff --git a/os_dep/linux/usb_intf.c b/os_dep/linux/usb_intf.c
+</span><span class='line'>index 5a62f24..7138a26 100644
+</span><span class='line'>--- a/os_dep/linux/usb_intf.c
+</span><span class='line'>+++ b/os_dep/linux/usb_intf.c
+</span><span class='line'>@@ -220,6 +220,8 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
+</span><span class='line'>        {USB_DEVICE(0x2357, 0x0109),.driver_info = RTL8192E}, /* TP-Link - Cameo */
+</span><span class='line'>        /*=== PLANEX ===========*/
+</span><span class='line'>        {USB_DEVICE(0x2019, 0xab33),.driver_info = RTL8192E}, /* PLANEX - GW-300S Katana */
+</span><span class='line'>+       /*=== I-O DATA ===========*/
+</span><span class='line'>+       {USB_DEVICE(0x04bb, 0x0959),.driver_info = RTL8192E}, /* I-O DATA */
+</span><span class='line'> #endif
+</span><span class='line'> 
+</span><span class='line'> #ifdef CONFIG_RTL8723B</span></code></pre></td></tr></table></div></figure>
+
+<p>ビルドし、インストールする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd rtl8192eu-linux-driver
+</span><span class='line'>$ make
+</span><span class='line'>$ sudo make install</span></code></pre></td></tr></table></div></figure>
+
+<p>再起動すると、無線LAN ドングルを NIC として認識するようになった。</p>
+
+<h2 id="wn-g150umk-編">WN-G150UMK 編</h2>
+
+<p>上記 WN-AC433UM を認識させるにあたって散々ドライバをインストールしたせいなのであろうが、<br>
+こちらは挿しただけで認識されてしまった。</p>
+
+<h3 id="wn-g150umk-は-rtl8192cu-というドライバで動いている模様">WN-G150UMK は rtl8192cu というドライバで動いている模様</h3>
+
+<p>もしかしたらドライバをインストールする必要があるかもしれないのでメモしておくと、<br>
+WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>lshw</code> コマンドで確認した。</p>
+
+<h2 id="ちなみに、wn-ac433um-は-5-ghz-にしか対応していない">ちなみに、WN-AC433UM は 5 GHz にしか対応していない</h2>
+
+<p>完全に自分の見落としであるのだが、WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br>
+つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。<br>
+2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、<br>
+ちょっと古めのルーターだったりが該当する。</p>
+
+<p>我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、つまり<br>
+せっかく頑張って WN-AC433UM を Linux に認識させたのに使えなかったのである。<br>
+悲しい。そんなわけで WN-G150UMK を書い直したが、こちらは快調に動いてます。ナイス。</p>
+
+<h2 id="参考リンク">参考リンク</h2>
+
+<ul>
+<li><a href="http://www.iodata.jp/product/network/adp/wn-ac433um/">WN-AC433UMシリーズ - I-O DATA</a></li>
+<li><a href="http://www.iodata.jp/lib/product/w/4078.htm">WN-G150UMK - I-O DATA</a></li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2016/10/25/golangtokyo/">golang.tokyo #1@mercari</a></h1>
     
     
@@ -98,7 +238,7 @@
   
 
 
-<time datetime="2016-10-25T19:38:13+09:00" pubdate data-updated="true">Oct 25<span>th</span>, 2016</time>
+<time datetime="2016-10-25T10:38:13+00:00" pubdate data-updated="true">Oct 25<span>th</span>, 2016</time>
         
            | <a href="/blog/2016/10/25/golangtokyo/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2016/10/25/golangtokyo/">Comments</a>
@@ -490,7 +630,7 @@ Go 言語に興味さえあれば、参加して楽しいかと思います。</
   
 
 
-<time datetime="2016-04-18T19:34:12+09:00" pubdate data-updated="true">Apr 18<span>th</span>, 2016</time>
+<time datetime="2016-04-18T10:34:12+00:00" pubdate data-updated="true">Apr 18<span>th</span>, 2016</time>
         
            | <a href="/blog/2016/04/18/atte-fes/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2016/04/18/atte-fes/">Comments</a>
@@ -674,7 +814,7 @@ MVVM でいうところの VM 部分で、共通するGenericな部分 + 型ス�
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/03/31/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/03/30/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a></h1>
     
     
       <p class="meta">
@@ -690,10 +830,10 @@ MVVM でいうところの VM 部分で、共通するGenericな部分 + 型ス�
   
 
 
-<time datetime="2016-03-31T00:36:22+09:00" pubdate data-updated="true">Mar 31<span>st</span>, 2016</time>
+<time datetime="2016-03-30T15:36:22+00:00" pubdate data-updated="true">Mar 30<span>th</span>, 2016</time>
         
-           | <a href="/blog/2016/03/31/z370c-bad-point/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2016/03/31/z370c-bad-point/">Comments</a>
+           | <a href="/blog/2016/03/30/z370c-bad-point/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2016/03/30/z370c-bad-point/">Comments</a>
         
       </p>
     
@@ -787,7 +927,7 @@ ZenClutch は渋め。「ASUS COLLECTION」と印字されている。渋め。<
   
 
 
-<time datetime="2016-03-29T23:53:19+09:00" pubdate data-updated="true">Mar 29<span>th</span>, 2016</time>
+<time datetime="2016-03-29T14:53:19+00:00" pubdate data-updated="true">Mar 29<span>th</span>, 2016</time>
         
            | <a href="/blog/2016/03/29/z370c-good-point/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2016/03/29/z370c-good-point/">Comments</a>
@@ -880,7 +1020,7 @@ Yahoo を表示してみた様子。画面が広いため表示できる情報�
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/03/29/z370c-appearance/">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a></h1>
+      <h1 class="entry-title"><a href="/blog/2016/03/28/z370c-appearance/">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a></h1>
     
     
       <p class="meta">
@@ -896,10 +1036,10 @@ Yahoo を表示してみた様子。画面が広いため表示できる情報�
   
 
 
-<time datetime="2016-03-29T00:40:56+09:00" pubdate data-updated="true">Mar 29<span>th</span>, 2016</time>
+<time datetime="2016-03-28T15:40:56+00:00" pubdate data-updated="true">Mar 28<span>th</span>, 2016</time>
         
-           | <a href="/blog/2016/03/29/z370c-appearance/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2016/03/29/z370c-appearance/">Comments</a>
+           | <a href="/blog/2016/03/28/z370c-appearance/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2016/03/28/z370c-appearance/">Comments</a>
         
       </p>
     
@@ -994,7 +1134,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
   
 
 
-<time datetime="2015-07-31T19:36:04+09:00" pubdate data-updated="true">Jul 31<span>st</span>, 2015</time>
+<time datetime="2015-07-31T10:36:04+00:00" pubdate data-updated="true">Jul 31<span>st</span>, 2015</time>
         
            | <a href="/blog/2015/07/31/code-review-best-practices-jp-translation/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2015/07/31/code-review-best-practices-jp-translation/">Comments</a>
@@ -1056,7 +1196,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
   
 
 
-<time datetime="2015-04-22T19:25:11+09:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2015</time>
+<time datetime="2015-04-22T10:25:11+00:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2015</time>
         
            | <a href="/blog/2015/04/22/travis-ci-with-deploygate/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/">Comments</a>
@@ -1256,7 +1396,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
   
 
 
-<time datetime="2015-04-19T11:26:14+09:00" pubdate data-updated="true">Apr 19<span>th</span>, 2015</time>
+<time datetime="2015-04-19T02:26:14+00:00" pubdate data-updated="true">Apr 19<span>th</span>, 2015</time>
         
            | <a href="/blog/2015/04/19/cocos-with-travisci/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">Comments</a>
@@ -1532,7 +1672,7 @@ Travis CIのScript上では効かないので、しかたなく<code>.bashrc</co
   
 
 
-<time datetime="2015-03-11T20:29:27+09:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
+<time datetime="2015-03-11T11:29:27+00:00" pubdate data-updated="true">Mar 11<span>th</span>, 2015</time>
         
            | <a href="/blog/2015/03/11/cocos2d-initial/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2015/03/11/cocos2d-initial/">Comments</a>
@@ -1595,52 +1735,6 @@ Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせで�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/28/300hot-per-month/">月間300ヒットを達成していた</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-28T21:44:18+09:00" pubdate data-updated="true">Jan 28<span>th</span>, 2015</time>
-        
-           | <a href="/blog/2015/01/28/300hot-per-month/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2015/01/28/300hot-per-month/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>12月のことであるが、実は月間300ヒットを達成していた。<br>
-うち250ヒットは自分の手によるもの、、、とかそういうことではなく、<br>
-概ね自分以外の方々によって、月間300ヒットを達成できたのである。<br>
-300ヒット。たかが300ヒット。されど300ヒット。 一日平均10人。</p>
-
-<p>これからもほそぼそ、ぼちぼち、書いていこうと思う。<br>
-学んだことをアウトプットするのが大事だと誰か偉い人も言っておった。私もそう思う。<br>
-書いたことによって、誰かひとりでも何かの助けになればと願いつつ。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1664,6 +1758,10 @@ Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせで�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/11/14/usb-wifi-dongle/">Linux で 無線LAN の USB ドングルを使う</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/10/25/golangtokyo/">golang.tokyo #1@mercari</a>
       </li>
     
@@ -1672,15 +1770,11 @@ Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせで�
       </li>
     
       <li class="post">
-        <a href="/blog/2016/03/31/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a>
+        <a href="/blog/2016/03/30/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a>
       </li>
     
       <li class="post">
         <a href="/blog/2016/03/29/z370c-good-point/">ASUS ZenPad 7.0 (Z370C) レビュー その二 : 良いところ編</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/29/z370c-appearance/">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a>
       </li>
     
   </ul>
@@ -1691,11 +1785,11 @@ Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせで�
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 108.57142857142857%'>golang(1)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 142.85714285714286%'>ArchLinux(5)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 108.57142857142857%'>golang(1)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (1)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (5)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (1)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>
@@ -1757,3 +1851,4 @@ Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせで�
 
 </body>
 </html>
+                        

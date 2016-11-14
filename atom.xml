@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-11-08T16:36:29+09:00</updated>
+  <updated>2016-11-14T13:16:58+00:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -14,9 +14,118 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Linux で 無線LAN の USB ドングルを使う]]></title>
+    <link href="http://pankona.github.io/blog/2016/11/14/usb-wifi-dongle/"/>
+    <updated>2016-11-14T11:14:02+00:00</updated>
+    <id>http://pankona.github.io/blog/2016/11/14/usb-wifi-dongle</id>
+    <content type="html"><![CDATA[<p>Linux と銘打っておりますが、Manjro で試しています。<br>
+本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。</p>
+
+<h2 id="使ったドングル二種">使ったドングル二種</h2>
+
+<p>訳あって二種類のドングルを使いました。いずれも I-O DATA 製。</p>
+
+<ul>
+<li>WN-AC433UM</li>
+<li>WN-G150UMK</li>
+</ul>
+
+<h2 id="wn-ac433um-編">WN-AC433UM 編</h2>
+
+<p>とりあえずぶっ挿してみたところ、無線LAN デバイスとしては認識されなかった。<br>
+つまりデフォルトの Manjro には WN-AC433UM のドライバが入っていなかったということ。<br>
+ドライバを入れていく。</p>
+
+<h3 id="wn-ac433um-は-rtl8192eu-というドライバで動いた">WN-AC433UM は rtl8192eu というドライバで動いた</h3>
+
+<p>rtl8192eu というドライバは <code>yaourt rtl8192eu</code> で一応インストールされるのであるが、<br>
+それだけだと WN-AC433UM は認識されなかった。</p>
+
+<p>WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、<br>
+<code>yaourt rtl8192eu</code> でインストールされるドライバではこれを認識するようになっていない。<br>
+(注: 2016.11.09 時点)</p>
+
+<p>なので、上記 idVendor、idProduct 値を認識するようにソースコードを書き換えた上で、<br>
+ビルド・インストールする必要がある。ソースコードは以下から入手できる。</p>
+
+<p><a href="https://github.com/Mange/rtl8192eu-linux-driver">Mange/rtl8192eu-linux-driver - GitHub</a><br>
+なお、リビジョンは <code>f016814</code> を使った。</p>
+
+<p>os_dep/linux/usb_intf.c に、以下のように追記する。<br>
+(注: 妥当か不明だがとりあえず以下の書き換えでうまくいった)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>diff --git a/os_dep/linux/usb_intf.c b/os_dep/linux/usb_intf.c
+</span><span class='line'>index 5a62f24..7138a26 100644
+</span><span class='line'>--- a/os_dep/linux/usb_intf.c
+</span><span class='line'>+++ b/os_dep/linux/usb_intf.c
+</span><span class='line'>@@ -220,6 +220,8 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
+</span><span class='line'>        {USB_DEVICE(0x2357, 0x0109),.driver_info = RTL8192E}, /* TP-Link - Cameo */
+</span><span class='line'>        /*=== PLANEX ===========*/
+</span><span class='line'>        {USB_DEVICE(0x2019, 0xab33),.driver_info = RTL8192E}, /* PLANEX - GW-300S Katana */
+</span><span class='line'>+       /*=== I-O DATA ===========*/
+</span><span class='line'>+       {USB_DEVICE(0x04bb, 0x0959),.driver_info = RTL8192E}, /* I-O DATA */
+</span><span class='line'> #endif
+</span><span class='line'> 
+</span><span class='line'> #ifdef CONFIG_RTL8723B</span></code></pre></td></tr></table></div></figure>
+
+<p>ビルドし、インストールする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd rtl8192eu-linux-driver
+</span><span class='line'>$ make
+</span><span class='line'>$ sudo make install</span></code></pre></td></tr></table></div></figure>
+
+<p>再起動すると、無線LAN ドングルを NIC として認識するようになった。</p>
+
+<h2 id="wn-g150umk-編">WN-G150UMK 編</h2>
+
+<p>上記 WN-AC433UM を認識させるにあたって散々ドライバをインストールしたせいなのであろうが、<br>
+こちらは挿しただけで認識されてしまった。</p>
+
+<h3 id="wn-g150umk-は-rtl8192cu-というドライバで動いている模様">WN-G150UMK は rtl8192cu というドライバで動いている模様</h3>
+
+<p>もしかしたらドライバをインストールする必要があるかもしれないのでメモしておくと、<br>
+WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>lshw</code> コマンドで確認した。</p>
+
+<h2 id="ちなみに、wn-ac433um-は-5-ghz-にしか対応していない">ちなみに、WN-AC433UM は 5 GHz にしか対応していない</h2>
+
+<p>完全に自分の見落としであるのだが、WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br>
+つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。<br>
+2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、<br>
+ちょっと古めのルーターだったりが該当する。</p>
+
+<p>我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、つまり<br>
+せっかく頑張って WN-AC433UM を Linux に認識させたのに使えなかったのである。<br>
+悲しい。そんなわけで WN-G150UMK を書い直したが、こちらは快調に動いてます。ナイス。</p>
+
+<h2 id="参考リンク">参考リンク</h2>
+
+<ul>
+<li><a href="http://www.iodata.jp/product/network/adp/wn-ac433um/">WN-AC433UMシリーズ - I-O DATA</a></li>
+<li><a href="http://www.iodata.jp/lib/product/w/4078.htm">WN-G150UMK - I-O DATA</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[golang.tokyo #1@mercari]]></title>
     <link href="http://pankona.github.io/blog/2016/10/25/golangtokyo/"/>
-    <updated>2016-10-25T19:38:13+09:00</updated>
+    <updated>2016-10-25T10:38:13+00:00</updated>
     <id>http://pankona.github.io/blog/2016/10/25/golangtokyo</id>
     <content type="html"><![CDATA[<p>2016.10.25 に六本木の森タワーメルカリさんにて、golang.tokyo #1 が行われました。</p>
 
@@ -378,7 +487,7 @@ Go 言語に興味さえあれば、参加して楽しいかと思います。</
   <entry>
     <title type="html"><![CDATA[Atte Fes@mercari]]></title>
     <link href="http://pankona.github.io/blog/2016/04/18/atte-fes/"/>
-    <updated>2016-04-18T19:34:12+09:00</updated>
+    <updated>2016-04-18T10:34:12+00:00</updated>
     <id>http://pankona.github.io/blog/2016/04/18/atte-fes</id>
     <content type="html"><![CDATA[<p><img src="http://pankona.github.io/images/attefes/title.jpg" alt="attefes"></p>
 
@@ -547,9 +656,9 @@ MVVM でいうところの VM 部分で、共通するGenericな部分 + 型ス�
   
   <entry>
     <title type="html"><![CDATA[ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編]]></title>
-    <link href="http://pankona.github.io/blog/2016/03/31/z370c-bad-point/"/>
-    <updated>2016-03-31T00:36:22+09:00</updated>
-    <id>http://pankona.github.io/blog/2016/03/31/z370c-bad-point</id>
+    <link href="http://pankona.github.io/blog/2016/03/30/z370c-bad-point/"/>
+    <updated>2016-03-30T15:36:22+00:00</updated>
+    <id>http://pankona.github.io/blog/2016/03/30/z370c-bad-point</id>
     <content type="html"><![CDATA[<p>前回に引き続き、ZenPad 7.0 (Z370C) のレビューを記事にする。<br>
 今回は、1ヶ月程度使って感じた ZenPad 7.0 に対するフラストレーションについて。<br>
 つまりイマイチな点に触れていく。<br>
@@ -615,7 +724,7 @@ ZenClutch は渋め。「ASUS COLLECTION」と印字されている。渋め。<
   <entry>
     <title type="html"><![CDATA[ASUS ZenPad 7.0 (Z370C) レビュー その二 : 良いところ編]]></title>
     <link href="http://pankona.github.io/blog/2016/03/29/z370c-good-point/"/>
-    <updated>2016-03-29T23:53:19+09:00</updated>
+    <updated>2016-03-29T14:53:19+00:00</updated>
     <id>http://pankona.github.io/blog/2016/03/29/z370c-good-point</id>
     <content type="html"><![CDATA[<p>前回に引き続き、ZenPad 7.0 (Z370C) のレビューを書いていく。<br>
 今回は、1ヶ月程度使って分かってきた ZenPad 7.0 の使用感について。</p>
@@ -693,9 +802,9 @@ Yahoo を表示してみた様子。画面が広いため表示できる情報�
   
   <entry>
     <title type="html"><![CDATA[ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編]]></title>
-    <link href="http://pankona.github.io/blog/2016/03/29/z370c-appearance/"/>
-    <updated>2016-03-29T00:40:56+09:00</updated>
-    <id>http://pankona.github.io/blog/2016/03/29/z370c-appearance</id>
+    <link href="http://pankona.github.io/blog/2016/03/28/z370c-appearance/"/>
+    <updated>2016-03-28T15:40:56+00:00</updated>
+    <id>http://pankona.github.io/blog/2016/03/28/z370c-appearance</id>
     <content type="html"><![CDATA[<p>ZenTour2016 にて ZenPad 7.0 (Z370C) を入手するに至った。<br>
 ASUS様より無料でいただいた形であるが、レビュー記事をしたためることが条件である。</p>
 
@@ -762,7 +871,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
   <entry>
     <title type="html"><![CDATA[Code Review Best Practices を日本語訳した]]></title>
     <link href="http://pankona.github.io/blog/2015/07/31/code-review-best-practices-jp-translation/"/>
-    <updated>2015-07-31T19:36:04+09:00</updated>
+    <updated>2015-07-31T10:36:04+00:00</updated>
     <id>http://pankona.github.io/blog/2015/07/31/code-review-best-practices-jp-translation</id>
     <content type="html"><![CDATA[<p><a href="http://kevinlondon.com/2015/05/05/code-review-best-practices.html">Code Review Best Practices - Kevin London&#39;s blog</a> の日本語訳を作成した。</p>
 
@@ -794,7 +903,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
   <entry>
     <title type="html"><![CDATA[Cocos2d-x + Travis CI + DeployGate]]></title>
     <link href="http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/"/>
-    <updated>2015-04-22T19:25:11+09:00</updated>
+    <updated>2015-04-22T10:25:11+00:00</updated>
     <id>http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate</id>
     <content type="html"><![CDATA[<p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。<br>
 今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。</p>
@@ -964,7 +1073,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
   <entry>
     <title type="html"><![CDATA[Cocos2d-x + Travis CI]]></title>
     <link href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/"/>
-    <updated>2015-04-19T11:26:14+09:00</updated>
+    <updated>2015-04-19T02:26:14+00:00</updated>
     <id>http://pankona.github.io/blog/2015/04/19/cocos-with-travisci</id>
     <content type="html"><![CDATA[<p>引き続きcocos2d-xを使ってブロック崩しを作っている。<br>
 かれこれ２ヶ月あまりが経過した。ほぼ通勤時間でのみ作っている。</p>
@@ -1210,7 +1319,7 @@ Travis CIのScript上では効かないので、しかたなく<code>.bashrc</co
   <entry>
     <title type="html"><![CDATA[Cocos2d-xをやってみている]]></title>
     <link href="http://pankona.github.io/blog/2015/03/11/cocos2d-initial/"/>
-    <updated>2015-03-11T20:29:27+09:00</updated>
+    <updated>2015-03-11T11:29:27+00:00</updated>
     <id>http://pankona.github.io/blog/2015/03/11/cocos2d-initial</id>
     <content type="html"><![CDATA[<p>2015.03.07に娘が生まれました。<br>
 これからも頑張ります。近況を記す。</p>
@@ -1264,7 +1373,7 @@ Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせで�
   <entry>
     <title type="html"><![CDATA[月間300ヒットを達成していた]]></title>
     <link href="http://pankona.github.io/blog/2015/01/28/300hot-per-month/"/>
-    <updated>2015-01-28T21:44:18+09:00</updated>
+    <updated>2015-01-28T12:44:18+00:00</updated>
     <id>http://pankona.github.io/blog/2015/01/28/300hot-per-month</id>
     <content type="html"><![CDATA[<p>12月のことであるが、実は月間300ヒットを達成していた。<br>
 うち250ヒットは自分の手によるもの、、、とかそういうことではなく、<br>
@@ -1280,7 +1389,7 @@ Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせで�
   <entry>
     <title type="html"><![CDATA[Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる]]></title>
     <link href="http://pankona.github.io/blog/2015/01/28/raspi-autologin/"/>
-    <updated>2015-01-28T21:10:39+09:00</updated>
+    <updated>2015-01-28T12:10:39+00:00</updated>
     <id>http://pankona.github.io/blog/2015/01/28/raspi-autologin</id>
     <content type="html"><![CDATA[<p>しばらく愛用のVaio Proをいじる時間がとれなかったもんで、新しい記事をポストできずにおった。<br>
 実におよそ2ヶ月ぶりの新規記事。新年あけましておめでとうございます。<br>
@@ -1345,7 +1454,7 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
   <entry>
     <title type="html"><![CDATA[Raspberry Piにて、リモートからLチカさせてみた]]></title>
     <link href="http://pankona.github.io/blog/2014/11/25/remote-ltika/"/>
-    <updated>2014-11-25T22:16:43+09:00</updated>
+    <updated>2014-11-25T13:16:43+00:00</updated>
     <id>http://pankona.github.io/blog/2014/11/25/remote-ltika</id>
     <content type="html"><![CDATA[<p>Raspberry Piをリモートから制御する第一歩として、<br>
 ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。<br>
@@ -1395,7 +1504,7 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
   <entry>
     <title type="html"><![CDATA[Octopressカスタマイズで読書メーターのブログパーツを追加]]></title>
     <link href="http://pankona.github.io/blog/2014/10/01/dokusho-meter/"/>
-    <updated>2014-10-01T22:41:26+09:00</updated>
+    <updated>2014-10-01T13:41:26+00:00</updated>
     <id>http://pankona.github.io/blog/2014/10/01/dokusho-meter</id>
     <content type="html"><![CDATA[<p>たまにはブログのカスタマイズをしてみる。<br>
 今回は読書メーターのブログパーツを追加してみた。</p>
@@ -1457,9 +1566,9 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
   
   <entry>
     <title type="html"><![CDATA[二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux]]></title>
-    <link href="http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/"/>
-    <updated>2014-09-15T00:30:08+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox</id>
+    <link href="http://pankona.github.io/blog/2014/09/14/histryback-by-swipe-on-firefox/"/>
+    <updated>2014-09-14T15:30:08+00:00</updated>
+    <id>http://pankona.github.io/blog/2014/09/14/histryback-by-swipe-on-firefox</id>
     <content type="html"><![CDATA[<p>ブラウザはFirefoxを好んで使っている。<br>
 VimperatorとかPentadactylがあるおかげである。</p>
 
@@ -1533,7 +1642,7 @@ UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方
   <entry>
     <title type="html"><![CDATA[PiTFTのタッチパネルを動作させる]]></title>
     <link href="http://pankona.github.io/blog/2014/07/23/raspi-touch-panel/"/>
-    <updated>2014-07-23T21:54:58+09:00</updated>
+    <updated>2014-07-23T12:54:58+00:00</updated>
     <id>http://pankona.github.io/blog/2014/07/23/raspi-touch-panel</id>
     <content type="html"><![CDATA[<p>前回に引き続き、PiTFTの話題。</p>
 
@@ -1581,7 +1690,7 @@ evtestを起動したのちにタッチパネルをぐりぐり触ってみる�
   <entry>
     <title type="html"><![CDATA[PiTFTをArch Linux on Raspberry Piで動かすのに苦戦]]></title>
     <link href="http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/"/>
-    <updated>2014-07-17T21:11:11+09:00</updated>
+    <updated>2014-07-17T12:11:11+00:00</updated>
     <id>http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux</id>
     <content type="html"><![CDATA[<p><strong>2014/07/23/Wed 追記</strong></p>
 
@@ -1698,7 +1807,7 @@ PiTFTはきっと動き出す。</p>
   <entry>
     <title type="html"><![CDATA[RaspberryPiで動画を配信しながら写真も撮る]]></title>
     <link href="http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/"/>
-    <updated>2014-06-10T21:49:47+09:00</updated>
+    <updated>2014-06-10T12:49:47+00:00</updated>
     <id>http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming</id>
     <content type="html"><![CDATA[<p>Raspberry Pi＋カメラモジュールを使って、<br>
 - 映像をWebページで配信しつつ。<br>
@@ -1753,7 +1862,7 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
   <entry>
     <title type="html"><![CDATA[Raspberry PiでRailsを動かしてみたときのこと]]></title>
     <link href="http://pankona.github.io/blog/2014/05/29/rails-on-raspi/"/>
-    <updated>2014-05-29T21:02:35+09:00</updated>
+    <updated>2014-05-29T12:02:35+00:00</updated>
     <id>http://pankona.github.io/blog/2014/05/29/rails-on-raspi</id>
     <content type="html"><![CDATA[<p>Raspberry PiにRailsを入れたときのこと。<br>
 あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。<br>
@@ -1811,9 +1920,9 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
   
   <entry>
     <title type="html"><![CDATA[日本語入力のための設定メモ for Arch Linux]]></title>
-    <link href="http://pankona.github.io/blog/2014/05/28/use-uim-mozc/"/>
-    <updated>2014-05-28T07:49:23+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/05/28/use-uim-mozc</id>
+    <link href="http://pankona.github.io/blog/2014/05/27/use-uim-mozc/"/>
+    <updated>2014-05-27T22:49:23+00:00</updated>
+    <id>http://pankona.github.io/blog/2014/05/27/use-uim-mozc</id>
     <content type="html"><![CDATA[<p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br>
 具体的な要望としては、</p>
 
@@ -1896,47 +2005,5 @@ Arch Linux向けです。</p>
 ]]></content>
   </entry>
   
-  <entry>
-    <title type="html"><![CDATA[Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった]]></title>
-    <link href="http://pankona.github.io/blog/2014/05/19/about-google-search/"/>
-    <updated>2014-05-19T21:21:34+09:00</updated>
-    <id>http://pankona.github.io/blog/2014/05/19/about-google-search</id>
-    <content type="html"><![CDATA[<h2 id="自分のページがgoogle検索にヒットしない理由">自分のページがGoogle検索にヒットしない理由</h2>
-
-<p>なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、<br>
-いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、<br>
-いやでもなんで引っかからないんだろう、と思って調査をしていたところ、</p>
-
-<h3 id="githubのリポジトリはgoogle日本の検索に引っかからない">GithubのリポジトリはGoogle日本の検索に引っかからない</h3>
-
-<p>といった記事を見つけた。ほんまかいな？<br>
-もしかしてそのせいでうちのページはGoogleに引っかからないんじゃああるまいか？<br>
-（Github pagesを使って公開しているページなので）</p>
-
-<p>等と考えつつ、調査を続行していったところ、、、</p>
-
-<h3 id="結論からすると、githubのリポジトリはgoogle日本の検索にちゃんと引っかかる。">結論からすると、GithubのリポジトリはGoogle日本の検索にちゃんと引っかかる。</h3>
-
-<p>ただし条件がある模様。それは（おそらく）、</p>
-
-<p><strong>ページ（リポジトリの場合はREADMEかな？）に日本語が含まれていること</strong></p>
-
-<p>つまり、Google日本の検索に引っかからない、というよりは、<br>
-<strong>&quot;日本語のページを検索&quot;</strong>に引っかからない、ということである模様。<br>
-全編英語で書いてたら英語のページと判断して、&quot;日本語のページを検索&quot;には載せない、ってことかなー。<br>
-そして、Google日本の検索は、おそらくデフォルトは&quot;日本語のページを検索&quot;になってる。という話。</p>
-
-<p>加えて、GithubのリポジトリのREADMEなんかは、英語だけで書かれているケースが多い。<br>
-だからGoogle日本を使ってそのまま検索をしていると、Githubのページがあんまり出てこないという現象が。</p>
-
-<p>だので、英語だけで書かれたGithubのページも、検索オプションで言語に依らない検索にしてあげれば、Google日本の検索でも出てきます。</p>
-
-<h3 id="じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？">じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？</h3>
-
-<p>自分のGithubのリポジトリに日本人を呼び込みたい！と思ったら、READMEに日本語をちょっと混ぜてあげればリーチできる人が増えるかも？<br>
-と思っているがどうか。たぶん、おそらく、きっと、効果あると思われる。つまり自信ない。<br>
-自分のリポジトリ使って実験してみます。そのうち調査結果を書きます。</p>
-]]></content>
-  </entry>
-  
 </feed>
+                        

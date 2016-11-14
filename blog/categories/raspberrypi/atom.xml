@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RaspberryPi | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/raspberrypi/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-11-08T16:36:29+09:00</updated>
+  <updated>2016-11-14T14:15:22+00:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる]]></title>
     <link href="http://pankona.github.io/blog/2015/01/28/raspi-autologin/"/>
-    <updated>2015-01-28T21:10:39+09:00</updated>
+    <updated>2015-01-28T12:10:39+00:00</updated>
     <id>http://pankona.github.io/blog/2015/01/28/raspi-autologin</id>
     <content type="html"><![CDATA[<p>しばらく愛用のVaio Proをいじる時間がとれなかったもんで、新しい記事をポストできずにおった。<br>
 実におよそ2ヶ月ぶりの新規記事。新年あけましておめでとうございます。<br>
@@ -81,7 +81,7 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
   <entry>
     <title type="html"><![CDATA[Raspberry Piにて、リモートからLチカさせてみた]]></title>
     <link href="http://pankona.github.io/blog/2014/11/25/remote-ltika/"/>
-    <updated>2014-11-25T22:16:43+09:00</updated>
+    <updated>2014-11-25T13:16:43+00:00</updated>
     <id>http://pankona.github.io/blog/2014/11/25/remote-ltika</id>
     <content type="html"><![CDATA[<p>Raspberry Piをリモートから制御する第一歩として、<br>
 ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。<br>
@@ -131,7 +131,7 @@ Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用い
   <entry>
     <title type="html"><![CDATA[PiTFTのタッチパネルを動作させる]]></title>
     <link href="http://pankona.github.io/blog/2014/07/23/raspi-touch-panel/"/>
-    <updated>2014-07-23T21:54:58+09:00</updated>
+    <updated>2014-07-23T12:54:58+00:00</updated>
     <id>http://pankona.github.io/blog/2014/07/23/raspi-touch-panel</id>
     <content type="html"><![CDATA[<p>前回に引き続き、PiTFTの話題。</p>
 
@@ -179,7 +179,7 @@ evtestを起動したのちにタッチパネルをぐりぐり触ってみる�
   <entry>
     <title type="html"><![CDATA[PiTFTをArch Linux on Raspberry Piで動かすのに苦戦]]></title>
     <link href="http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/"/>
-    <updated>2014-07-17T21:11:11+09:00</updated>
+    <updated>2014-07-17T12:11:11+00:00</updated>
     <id>http://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux</id>
     <content type="html"><![CDATA[<p><strong>2014/07/23/Wed 追記</strong></p>
 
@@ -296,7 +296,7 @@ PiTFTはきっと動き出す。</p>
   <entry>
     <title type="html"><![CDATA[RaspberryPiで動画を配信しながら写真も撮る]]></title>
     <link href="http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/"/>
-    <updated>2014-06-10T21:49:47+09:00</updated>
+    <updated>2014-06-10T12:49:47+00:00</updated>
     <id>http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming</id>
     <content type="html"><![CDATA[<p>Raspberry Pi＋カメラモジュールを使って、<br>
 - 映像をWebページで配信しつつ。<br>

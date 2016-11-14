@@ -9,9 +9,9 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。
-概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。
-それは「タッチパッドの手のひら検知」。パームディテクト、Palm Detection、等と呼ばれる機能。 手のひら検知？ &hellip;">
+  <meta name="description" content="自分のページがGoogle検索にヒットしない理由 なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、
+いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、
+いやでもなんで引っかからないんだろう、と思って調査をしていたところ、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,79 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/05/19/about-google-search/">Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-19T12:21:34+00:00" pubdate data-updated="true">May 19<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/05/19/about-google-search/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/05/19/about-google-search/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="自分のページがgoogle検索にヒットしない理由">自分のページがGoogle検索にヒットしない理由</h2>
+
+<p>なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、<br>
+いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、<br>
+いやでもなんで引っかからないんだろう、と思って調査をしていたところ、</p>
+
+<h3 id="githubのリポジトリはgoogle日本の検索に引っかからない">GithubのリポジトリはGoogle日本の検索に引っかからない</h3>
+
+<p>といった記事を見つけた。ほんまかいな？<br>
+もしかしてそのせいでうちのページはGoogleに引っかからないんじゃああるまいか？<br>
+（Github pagesを使って公開しているページなので）</p>
+
+<p>等と考えつつ、調査を続行していったところ、、、</p>
+
+<h3 id="結論からすると、githubのリポジトリはgoogle日本の検索にちゃんと引っかかる。">結論からすると、GithubのリポジトリはGoogle日本の検索にちゃんと引っかかる。</h3>
+
+<p>ただし条件がある模様。それは（おそらく）、</p>
+
+<p><strong>ページ（リポジトリの場合はREADMEかな？）に日本語が含まれていること</strong></p>
+
+<p>つまり、Google日本の検索に引っかからない、というよりは、<br>
+<strong>&quot;日本語のページを検索&quot;</strong>に引っかからない、ということである模様。<br>
+全編英語で書いてたら英語のページと判断して、&quot;日本語のページを検索&quot;には載せない、ってことかなー。<br>
+そして、Google日本の検索は、おそらくデフォルトは&quot;日本語のページを検索&quot;になってる。という話。</p>
+
+<p>加えて、GithubのリポジトリのREADMEなんかは、英語だけで書かれているケースが多い。<br>
+だからGoogle日本を使ってそのまま検索をしていると、Githubのページがあんまり出てこないという現象が。</p>
+
+<p>だので、英語だけで書かれたGithubのページも、検索オプションで言語に依らない検索にしてあげれば、Google日本の検索でも出てきます。</p>
+
+<h3 id="じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？">じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？</h3>
+
+<p>自分のGithubのリポジトリに日本人を呼び込みたい！と思ったら、READMEに日本語をちょっと混ぜてあげればリーチできる人が増えるかも？<br>
+と思っているがどうか。たぶん、おそらく、きっと、効果あると思われる。つまり自信ない。<br>
+自分のリポジトリ使って実験してみます。そのうち調査結果を書きます。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/">Vaio Pro 13における手のひら検知 on Arch Linux</a></h1>
     
     
@@ -99,7 +172,7 @@
   
 
 
-<time datetime="2014-05-15T12:25:25+09:00" pubdate data-updated="true">May 15<span>th</span>, 2014</time>
+<time datetime="2014-05-15T03:25:25+00:00" pubdate data-updated="true">May 15<span>th</span>, 2014</time>
         
            | <a href="/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/">Comments</a>
@@ -210,7 +283,7 @@ PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手の�
   
 
 
-<time datetime="2014-05-14T17:59:10+09:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time>
+<time datetime="2014-05-14T08:59:10+00:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time>
         
            | <a href="/blog/2014/05/14/arch-windows-multiboot-tips/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/">Comments</a>
@@ -331,7 +404,7 @@ Vaioのせいなのか、Windowsのせいなのか。。</p>
   
 
 
-<time datetime="2014-05-05T23:38:52+09:00" pubdate data-updated="true">May 5<span>th</span>, 2014</time>
+<time datetime="2014-05-05T14:38:52+00:00" pubdate data-updated="true">May 5<span>th</span>, 2014</time>
         
            | <a href="/blog/2014/05/05/raspi-livestream-web/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/05/05/raspi-livestream-web/">Comments</a>
@@ -416,7 +489,7 @@ pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは�
   
 
 
-<time datetime="2014-04-28T21:15:16+09:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+<time datetime="2014-04-28T12:15:16+00:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
         
            | <a href="/blog/2014/04/28/fix-pygments/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/04/28/fix-pygments/">Comments</a>
@@ -496,7 +569,7 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   
 
 
-<time datetime="2014-04-26T20:19:19+09:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+<time datetime="2014-04-26T11:19:19+00:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
         
            | <a href="/blog/2014/04/26/octopress-custom/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/04/26/octopress-custom/">Comments</a>
@@ -578,7 +651,7 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   
 
 
-<time datetime="2014-04-25T21:11:53+09:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
+<time datetime="2014-04-25T12:11:53+00:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
         
            | <a href="/blog/2014/04/25/add-category-list/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/04/25/add-category-list/">Comments</a>
@@ -623,7 +696,7 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   
 
 
-<time datetime="2014-04-24T21:44:52+09:00" pubdate data-updated="true">Apr 24<span>th</span>, 2014</time>
+<time datetime="2014-04-24T12:44:52+00:00" pubdate data-updated="true">Apr 24<span>th</span>, 2014</time>
         
            | <a href="/blog/2014/04/24/start-blog-with-octopress/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/">Comments</a>
@@ -669,7 +742,7 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   
 
 
-<time datetime="2014-04-23T21:05:35+09:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
+<time datetime="2014-04-23T12:05:35+00:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
         
            | <a href="/blog/2014/04/23/second-post/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/04/23/second-post/">Comments</a>
@@ -707,7 +780,7 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   
 
 
-<time datetime="2014-04-23T21:04:21+09:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
+<time datetime="2014-04-23T12:04:21+00:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2014</time>
         
            | <a href="/blog/2014/04/23/first-post/#disqus_thread"
              data-disqus-identifier="http://pankona.github.io/blog/2014/04/23/first-post/">Comments</a>
@@ -747,6 +820,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/11/14/usb-wifi-dongle/">Linux で 無線LAN の USB ドングルを使う</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/10/25/golangtokyo/">golang.tokyo #1@mercari</a>
       </li>
     
@@ -755,15 +832,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
       </li>
     
       <li class="post">
-        <a href="/blog/2016/03/31/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a>
+        <a href="/blog/2016/03/30/z370c-bad-point/">ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編</a>
       </li>
     
       <li class="post">
         <a href="/blog/2016/03/29/z370c-good-point/">ASUS ZenPad 7.0 (Z370C) レビュー その二 : 良いところ編</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/03/29/z370c-appearance/">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a>
       </li>
     
   </ul>
@@ -774,11 +847,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 134.28571428571428%'>ArchLinux(4)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 108.57142857142857%'>golang(1)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 142.85714285714286%'>ArchLinux(5)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 108.57142857142857%'>golang(1)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (4)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (1)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (5)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (1)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>

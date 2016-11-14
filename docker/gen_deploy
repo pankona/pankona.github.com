@@ -6,6 +6,9 @@ docker run \
     -u root \
     -e HOME=/root \
     -p 4000:4000 \
-    pankona/octopress "cd /workspace && bundle exec rake gen_deploy"
+    pankona/octopress "cd /workspace && \
+      git config --global user.email yosuke.akatsuka@gmail.com && \
+      git config --global user.name pankona && \
+      bundle exec rake gen_deploy"
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-11-14T13:16:58+00:00</updated>
+  <updated>2016-12-20T14:37:35+00:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,253 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[GNOMEアプリ上で日本語入力できなくなったときの対処メモ]]></title>
+    <link href="http://pankona.github.io/blog/2016/12/14/jp-input-on-gnome-app/"/>
+    <updated>2016-12-14T02:12:31+00:00</updated>
+    <id>http://pankona.github.io/blog/2016/12/14/jp-input-on-gnome-app</id>
+    <content type="html"><![CDATA[<p>何が原因かハッキリしていないが、Linux をアップデート (パッケージの更新という意味) したときに<br>
+日本語が入力できなくなることがあった。</p>
+
+<p>起きたこととしては、<br>
+* firefox 上では日本語入力可能 (direct input と日本語のトグル可能) 。<br>
+* Slack、chromium の上では日本語入力できない (direct input のみ可能) 。</p>
+
+<p>環境は、<br>
+* Manjaro Linux (2016年12月あたり)<br>
+* fcitx を使用<br>
+* 日本語入力は mozc</p>
+
+<p>方々ググって対処法を見つけたのでメモ。</p>
+
+<h2 id="dconf-editor-で設定を確認し、必要に応じて修正する">dconf Editor で設定を確認し、必要に応じて修正する</h2>
+
+<p>dconf Editor を開き、以下の設定を確認する。<br>
+* <code>/org/gnome/settings-daemon/plugins/xsettings/overrides</code> を参照する<br>
+* 値に <code>{&#39;Gtk/IMModule&#39;: &lt;&#39;fcitx&#39;&gt;}</code> が入っているかどうか</p>
+
+<p>コマンドラインから確認する場合は以下のように入力する。<br>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br>
+<span class='line-number'>2</span><br>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gsettings get org.gnome.settings-daemon.plugins.xsettings overrides<br>
+</span><span class='line'># (期待される出力) {&#39;Gtk/IMModule&#39;: &lt;&#39;fcitx&#39;&gt;}</span></code></pre></td></tr></table></div></figure></p>
+
+<p>入ってなかったら、上記の値をコピペして設定する。<br>
+コマンドラインから設定する場合は以下のように入力する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':&lt;'fcitx'&gt;}"</span></code></pre></td></tr></table></div></figure>
+
+<p>当方の環境ではこれで日本語入力ができる状態になった。</p>
+
+<h2 id="参考サイト">参考サイト</h2>
+
+<ul>
+<li><a href="https://wiki.archlinuxjp.org/index.php/Fcitx#Gnome-Shell">Fcitx - ArchWiki (日本語版)</a>
+
+<ul>
+<li>「Ctrl+Space が GTK のプログラムで機能しない」の項を参照。</li>
+</ul></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[golang.tokyo #2@はてな]]></title>
+    <link href="http://pankona.github.io/blog/2016/12/12/golangtokyo-2/"/>
+    <updated>2016-12-12T10:24:17+00:00</updated>
+    <id>http://pankona.github.io/blog/2016/12/12/golangtokyo-2</id>
+    <content type="html"><![CDATA[<p>2016.12.12 に表参道のはてなさんにて、golang.tokyo #2 が行われました。</p>
+
+<p><a href="https://golangtokyo.connpass.com/event/44807/">golang.tokyo #2 - connpass</a></p>
+
+<p>今回もまたブログ枠にて参加させていただきましたので、<br>
+その内容をレポートしていきます。</p>
+
+<p>発表内容の詳細はスライド (上記 connpass のページから辿れます) を参照いただくのが一番良いと思います。<br>
+本記事ではその他、イベントの雰囲気や私の感想を主にお伝えできればいいかなと思っています。<br>
+それでは行きます。</p>
+
+<hr>
+
+<p>今回の golang.tokyo は 2 回目の開催。<br>
+今後も色々目論まれているようです。楽しみ。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-2/02.jpg" alt="golang.tokyo-2"><br>
+図1. golang.tokyo について</p>
+
+<p>golang.tokyo 2 回目のテーマは <strong>「テスト」</strong> について。</p>
+
+<hr>
+
+<h1 id="テストしやすいgoコードのデザイン-by-deeeet-さん">テストしやすいGoコードのデザイン by deeeet さん</h1>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" data-card-type="article-full" href="https://talks.godoc.org/github.com/tcnksm/talks/2016/12/golang-tokyo/golang-tokyo.slide#1">テストしやすいGoコードのデザイン</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script><br>
+(↑のカードをクリックでスライドに飛びます。)</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-2/07.jpg" alt="golang.tokyo-2"><br>
+図2. 発表中の deeeet さん。</p>
+
+<p>以下、印象に残ったところを抜粋。</p>
+
+<h2 id="deeeet-さんはテストフレームワークを使わない派">deeeet さんはテストフレームワークを使わない派</h2>
+
+<p>テストのフレームワークは使わず、testing パッケージだけで十分であろうとの意見。<br>
+これは、フレームワークは「ミニDSL」であって、導入するひとはまだしも、<br>
+あとからプロジェクトに入ってくる人は学習する部分が増えてしんどくなってしまう、という一面があるからとのこと。<br>
+納得。</p>
+
+<h2 id="テストしやすいコードとは">テストしやすいコードとは</h2>
+
+<p><strong>「Table Driven Test」</strong> がおすすめ。<br>
+* 入出力が理解しやすい<br>
+* テストケース追加が容易<br>
+* 「Table Driven Test に落とし込めるコード」は入出力が明確でテストしやすいコード</p>
+
+<h2 id="テストしにくくなる要素とその対策">テストしにくくなる要素とその対策</h2>
+
+<p>テストしにくくなるというのは「Table Driven Test」がやりにくくなる状況を指す。<br>
+→ 入力以外の要素が出力影響を及ぼしてしまう状況。</p>
+
+<ul>
+<li>グローバル変数 (暗黙の入力)
+
+<ul>
+<li>なるべく関数の引数に入れるようにしてテストしやすくする</li>
+<li>もしくは「デフォルトの値」として <strong>のみ</strong> 使う</li>
+<li>変わらないかもしれない定数っぽい値もなるべく設定可能にする</li>
+<li>環境変数もグローバル変数と同じ</li>
+</ul></li>
+<li>ユーザーの入力 (コマンドを入力→期待通りに動いたか、のテスト)
+
+<ul>
+<li>入力の受取に os.Stdin を暗黙的に使わず io.Reader を使い、テスト時に仮想的な入力を行えるようにする。</li>
+<li>入力に対する出力で、Table Driven にすることができるようになる。</li>
+</ul></li>
+<li>ファイル出力 (ファイル出力された内容が正しいかどうか、のテスト)
+
+<ul>
+<li>実際に書いたあとに開き直して中身を確認するのでもテストは可能だが、大量にやろうと思うと遅くなってしまう。</li>
+<li>入力のときと考え方は同じで、io.Writer を出力先とし、テスト時はオンメモリのバッファに出力できるようにする。</li>
+<li>バッファに出力された内容とその期待結果で、Table Driven することができるようになる。</li>
+</ul></li>
+</ul>
+
+<h1 id="macherelにおけるgoのエコシステムとかテストとか-by-songmu-さん">MacherelにおけるGoのエコシステムとかテストとか by Songmu さん</h1>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" data-card-image="https://mackerel.io/files/images/brand-assets/screenshot-service.png" data-card-type="article-full" href="http://songmu.github.io/slides/golangtokyo-2/">MackerelにおけるGoのエコシステムとかテストとか</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script><br>
+(↑のカードをクリックでスライドに飛びます。)</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-2/09.jpg" alt="golang.tokyo-2"><br>
+図3. 発表中の songmu さん</p>
+
+<h2 id="mackerel-のエコシステム周りの話">Mackerel のエコシステム周りの話</h2>
+
+<ul>
+<li>ソースをオープンにしてパッチ受け入れるようにした。
+
+<ul>
+<li>ホスト先は GitHub。contribute してもらいやすい。</li>
+<li>pull request に対するレビュー体制、CI が必要。</li>
+<li>Travis CI、Circle CI を使っている。CI の内容は以下のようなもの。
+
+<ul>
+<li>go vet、 golint go test</li>
+<li>coverage 計測</li>
+<li>cross build 可能か</li>
+</ul></li>
+</ul></li>
+<li>ちなみに Changelog はプルリクエストの情報から自動生成している。</li>
+</ul>
+
+<h2 id="ミドルウェアのテスト">ミドルウェアのテスト</h2>
+
+<ul>
+<li>実際にテスト時に実行する
+
+<ul>
+<li>DB ならばモックせずに実際に DB を立ててデータを入れて確認をする、のような。</li>
+<li>モックや interface でのテストでは気づけない部分もあるので、実際にやってテストする。</li>
+</ul></li>
+</ul>
+
+<hr>
+
+<h1 id="休憩">休憩</h1>
+
+<p>deeeet さん、songmu さんの発表のあと、いったん休憩に。<br>
+休憩ではピザとビールが振る舞われまして、はてなさんにスポンサーしていただいたとのこと。<br>
+ありがたくいただきました。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-2/11_rotated.jpg" alt="golang.tokyo-2"><br>
+図4. ピザとビールをはてなさんから振る舞っていただく。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-2/12.jpg" alt="golang.tokyo-2"><br>
+図5. 会場遠景。芝生です。</p>
+
+<p><img src="http://pankona.github.io/images/golang.tokyo-2/13.jpg" alt="golang.tokyo-2"><br>
+図6. deeeet さんにむらがる Gophers (私もこのあとむらがりました) 。</p>
+
+<p>勉強会の真ん中にこういう親睦会的なノリの時間が設けられるのは珍しいかな？<br>
+なんだか新鮮でした。参加者の方とも少しだけお話できたりしました。<br>
+勉強会終わってからの親睦会だと参加できないケースが多い私のようなものにとっては、会の真ん中にこういうのやってもらうのもいいかもしれない。</p>
+
+<hr>
+
+<h1 id="ここから-lt-コーナー">ここから LT コーナー</h1>
+
+<p>ピザとビールで温まってきたところで LT 開始。</p>
+
+<h2 id="timakin-さん">timakin さん</h2>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/timakin/plain-db-import-with-go">Plain db import with Go</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script></p>
+
+<ul>
+<li><a href="https://github.com/timakin/gopli">timakin/gopli</a>
+
+<ul>
+<li>開発環境を本番環境に近づけるやつ。本番データをローカルに簡単にもってくる。</li>
+</ul></li>
+</ul>
+
+<h2 id="osamingo-さん">osamingo さん</h2>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/osamingo/go-deshi-meru-json-rpc-ru-men">Go で始める JSON-RPC 入門</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script></p>
+
+<ul>
+<li>JSON-RPC！</li>
+</ul>
+
+<h2 id="kazuhiratogo-さん">KazuhiraTogo さん</h2>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/ktogo/continuous-deployment-with-go-on-aws-ecs">Continuous Deployment with Go on AWS ECS</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script></p>
+
+<ul>
+<li>デプロイをとことん自動化した話。</li>
+<li>本番とローカルで同じ環境を → Docker を使う。</li>
+<li>Circle CI 上の docker は Ubuntu。本番は Alpine。環境の違いが問題に。 → Docker on Docker にして解決した。</li>
+</ul>
+
+<hr>
+
+<p>以上の内容でした。せめて雰囲気くらい伝わればいいですが。<br>
+いずれの発表もとても内容が濃くて、勉強になりっぱなしでした。感謝。<br>
+ひとまず Table Driven Test ですかね。取り入れてなかったのでやってみようか等と思い。</p>
+
+<p>感謝といえば、運営サイドのこと。<br>
+ほぼトラブルなしでスムーズに進んだのは、十分に準備してくれていたということだと思います。<br>
+だいたいマイクの電池が切れたりスライドがうまく映らなかったり、そういうの対策しようがなくてしょうがないところもあるんですが、<br>
+今回に関してはそういうのほぼほぼなくて、というかマイクの音量とか超ちょうど良くて、本当に細かい配慮を感じました。多謝。</p>
+
+<p>次回もまた来年に予定されているようです。楽しみにしています！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux で 無線LAN の USB ドングルを使う]]></title>
@@ -104,13 +351,13 @@ WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>l
 
 <h2 id="ちなみに、wn-ac433um-は-5-ghz-にしか対応していない">ちなみに、WN-AC433UM は 5 GHz にしか対応していない</h2>
 
-<p>完全に自分の見落としであるのだが、WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br>
+<p>WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br>
 つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。<br>
 2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、<br>
 ちょっと古めのルーターだったりが該当する。</p>
 
-<p>我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、つまり<br>
-せっかく頑張って WN-AC433UM を Linux に認識させたのに使えなかったのである。<br>
+<p>完全に自分の見落としであるのだが、我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、<br>
+つまりせっかく頑張って WN-AC433UM を Linux に認識させたのであるが、日の目を見なかったのである…。<br>
 悲しい。そんなわけで WN-G150UMK を書い直したが、こちらは快調に動いてます。ナイス。</p>
 
 <h2 id="参考リンク">参考リンク</h2>
@@ -1859,151 +2106,4 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
 ]]></content>
   </entry>
   
-  <entry>
-    <title type="html"><![CDATA[Raspberry PiでRailsを動かしてみたときのこと]]></title>
-    <link href="http://pankona.github.io/blog/2014/05/29/rails-on-raspi/"/>
-    <updated>2014-05-29T12:02:35+00:00</updated>
-    <id>http://pankona.github.io/blog/2014/05/29/rails-on-raspi</id>
-    <content type="html"><![CDATA[<p>Raspberry PiにRailsを入れたときのこと。<br>
-あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。<br>
-（ちなみにRaspberry Piで動いているOSはArch Linuxです。）</p>
-
-<h2 id="第一の関門-railsのインストール">第一の関門 Railsのインストール</h2>
-
-<p>Raspberry Piにsshで接続し、<code>gem install rails</code> とやるだけでRailsのインストールが始まる。<br>
-簡単、、、なのだがこれがなかなか終わらない。しかしこれはただ単純に待てばいいので難しいことは何もない。<br>
-終わるまで3時間程度。</p>
-
-<p>sshで接続してる場合、ほっとくとタイムアウトしてしまうと思われる。<br>
-その場合は、screen というので対策できる。nohup というのもある。<br>
-とにかく長時間放置でタイムアウトしちゃってもいい（ログアウトしちゃってもいい）対策は必要。</p>
-
-<h2 id="第二の関門-bundle-install">第二の関門 bundle install</h2>
-
-<p>Railsアプリを動かす前準備で <code>bundle install</code> 。やると思います。<br>
-これがまた死ぬほど時間かかる上に、インストール中に、</p>
-
-<p>killed</p>
-
-<p>とだけ出て終了しちゃう。当然だが bundle install は終わってない。<br>
-こっちのが問題だった。</p>
-
-<h3 id="killed-されちゃうのはメモリ不足のため">killed されちゃうのはメモリ不足のため</h3>
-
-<p>bundle install で Killed になっちゃうのは、メモリ不足のための模様。<br>
-これは、スワップ領域を設定してあげることで回避できた。<br>
-スワップ領域設定の方法については、例によってArch LinuxのWikiを参照した。<br>
-何でも載ってるね！ちなみ参照したページは<a href="https://wiki.archlinux.org/index.php/Swap_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">これ - Swap （日本語） - ArchWiki</a>。</p>
-
-<h3 id="killed-されなくなったけど、、、超時間かかる">killed されなくなったけど、、、超時間かかる</h3>
-
-<p>killed されなくなったのはいいけど、Railsのインストールのときと同じく、やたら時間がかかる。。。<br>
-9000秒くらいかかったので、実に3時間弱くらい。</p>
-
-<p>なんで時間かかるかというと、まず、 <strong>therubyracer</strong> をインストールしようとしてるのが原因。<br>
-これ自体はいれたかったのでいいんだけど、どうやらこいつを入れるのに伴って、 <strong>libv8</strong> というのが入る模様。<br>
-そんでこれがどうやら <strong>ソースとってきてビルドしている</strong> ようなのである。Raspberry Piになんてことさせるんや。。。<br>
-最近の割とパワーのあるPCなら10分程度で終わるらしいのだが。</p>
-
-<h2 id="まとめると">まとめると</h2>
-
-<p>RailsをRaspberry Piにインストールするためには、</p>
-
-<ul>
-<li>スワップ領域を拡大する（bundle install 中に killed されちゃうならば）</li>
-<li>あとはひたすら待つ。トータルで6時間くらい待つ。</li>
-</ul>
-
-<p>ちなみにRailsの起動がまたすっとろい。webrickじゃなくてthinにするとちょっとだけ早くなる気がする、とか。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[日本語入力のための設定メモ for Arch Linux]]></title>
-    <link href="http://pankona.github.io/blog/2014/05/27/use-uim-mozc/"/>
-    <updated>2014-05-27T22:49:23+00:00</updated>
-    <id>http://pankona.github.io/blog/2014/05/27/use-uim-mozc</id>
-    <content type="html"><![CDATA[<p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br>
-具体的な要望としては、</p>
-
-<ul>
-<li>mozcを使いたい</li>
-<li>Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする）</li>
-</ul>
-
-<p>という二点なのだが、後者の「Alt + Space」というキーバインドを設定する方法がわからず。。。<br>
-きっとやり方があるというか、いままでごまかしごまかしやってきたのだが、<br>
-ついに気持ち悪さが先に立って、「やめてやるわ！」となったところ。</p>
-
-<p>で、IMとしてUIMを使ってみた。uim-mozc。<br>
-そしたらいともたやすく Alt + Space でのトグルが設定できちゃったもんだから拍子抜けというか。<br>
-はじめからこれ使ってれば良かったね！しばらくこれでいきます。uim-mozc。</p>
-
-<p>備忘録的に、設定方法のメモ。<br>
-Arch Linux向けです。</p>
-
-<h2 id="基本的にはwiki参照">基本的にはWiki参照</h2>
-
-<p>ブログに書いた内容というのはいずれ時代遅れになるので、、、<br>
-やはり、Arch Wikiの<a href="https://wiki.archlinux.org/index.php/Input_Japanese_using_uim_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">uim-mozcの設定方法</a>を参照するのが確実。<br>
-うちもこれでいけた。</p>
-
-<h2 id="インストールしたパッケージ">インストールしたパッケージ</h2>
-
-<ul>
-<li>uim</li>
-<li>uim-mozc</li>
-</ul>
-
-<h2 id="設定箇所">設定箇所</h2>
-
-<ul>
-<li>.xinitrc の記載</li>
-</ul>
-
-<p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># uim
-</span><span class='line'>export GTK_IM_MODULE='uim'
-</span><span class='line'>export QT_IM_MODULE='uim'
-</span><span class='line'>uim-xim &
-</span><span class='line'>export XMODIFIERS='@im=uim'</span></code></pre></td></tr></table></div></figure>
-
-<h2 id="uimの設定">uimの設定</h2>
-
-<p><code>uim-pref-gtk</code>で設定画面を出し、色々設定する。</p>
-
-<ul>
-<li>「Global settings」の設定。</li>
-</ul>
-
-<p>&#8211; Specify Default IMにチェックを入れる。<br>
-  &#8211; Default input method を Mozc にする。</p>
-
-<ul>
-<li>「Mozc」の設定。</li>
-</ul>
-
-<p>&#8211; Default Input modeはDirect Inputに。<br>
-  &#8211; ついでにVIM協調モードも有効にしておく。</p>
-
-<ul>
-<li>「Mozc key bindings」の設定。</li>
-</ul>
-
-<p>&#8211; [Mozc] on/off、両方に&quot;&lt;Alt&gt;space&quot;を設定。</p>
-
-<h3 id="ここまでで">ここまでで</h3>
-
-<p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br>
-チャンスがあれば、他のIMも試してみよっかな。</p>
-]]></content>
-  </entry>
-  
 </feed>
-                        

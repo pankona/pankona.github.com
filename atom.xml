@@ -4,7 +4,7 @@
   <title><![CDATA[make clean; make]]></title>
   <link href="http://pankona.github.io/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2016-12-20T14:48:13+00:00</updated>
+  <updated>2016-12-20T14:49:58+00:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -65,7 +65,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[golang.tokyo #2@はてな]]></title>
+    <title type="html"><![CDATA[golang.tokyo#2@はてな]]></title>
     <link href="http://pankona.github.io/blog/2016/12/12/golangtokyo-2/"/>
     <updated>2016-12-12T10:24:17+00:00</updated>
     <id>http://pankona.github.io/blog/2016/12/12/golangtokyo-2</id>

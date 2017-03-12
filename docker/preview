@@ -3,8 +3,8 @@
 docker run \
     -it \
     -v `pwd`/..:/workspace \
-    -u root \
-    -e HOME=/root \
+    -u docker \
+    -e HOME=/home/docker \
     -p 4000:4000 \
     pankona/octopress "cd /workspace && bundle exec rake preview"
 

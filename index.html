@@ -9,10 +9,8 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="何が原因かハッキリしていないが、Linux をアップデート (パッケージの更新という意味) したときに
-日本語が入力できなくなることがあった。 起きたこととしては、
-* firefox 上では日本語入力可能 (direct input と日本語のトグル可能) 。
-* Slack、chromium &hellip;">
+  <meta name="description" content="2017.03.01 に eureka さんにて、golang.tokyo #4 が行われました。 golang.tokyo #4 - connpass 今回もまた大盛況で一般参加枠は倍率3倍くらいの抽選となっていましたが、
+たまたまブログ枠が空いているところに遭遇してしまったため、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +76,211 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/03/01/golangtokyo-4/">golang.tokyo#4@eureka</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-03-01T10:31:27+00:00" pubdate data-updated="true">Mar 1<span>st</span>, 2017</time>
+        
+           | <a href="/blog/2017/03/01/golangtokyo-4/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2017/03/01/golangtokyo-4/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2017.03.01 に eureka さんにて、golang.tokyo #4 が行われました。</p>
+
+<p><a href="https://golangtokyo.connpass.com/event/50714/">golang.tokyo #4 - connpass</a></p>
+
+<p>今回もまた大盛況で一般参加枠は倍率3倍くらいの抽選となっていましたが、<br>
+たまたまブログ枠が空いているところに遭遇してしまったため、またしてもブログ枠として<br>
+参加させていただきました。内容をレポートしていきます。</p>
+
+<p>発表内容の詳細は、実際発表に用いられたスライド (上記 connpass のページから辿れます) を参照いただくのが一番良いと思いますので、<br>
+本記事ではその他、イベントの雰囲気や私の感想を主にお伝えしていくような体になります。<br>
+それではいきます。今回のテーマは <strong>「concurrency」</strong> 。</p>
+
+<hr>
+
+<h1 id="concurrency-for-distributed-web-crawlers-by-puhitaku-さん">Concurrency for distributed Web crawlers by puhitaku さん</h1>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/puhitaku/concurrency-for-distributed-web-crawlers">Concurrency for distributed Web crawlers</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script></p>
+
+<p>(↑のカードをクリックでスライドに飛びます。)</p>
+
+<h2 id="appstore-と-google-play-をクロールして欲しい情報を収集するやつ">AppStore と Google Play をクロールして欲しい情報を収集するやつ</h2>
+
+<ul>
+<li><p>クロール対象はシングルドメイン。だが対象となるアプリが多い (100k以上) 。</p>
+
+<ul>
+<li>同一IPからあんまりひどいことするとバンされたりする&#8230;。</li>
+<li>とはいえあんまりちんたらやってるわけにもいかない。24時間以内にクロールし終わる必要がある。</li>
+</ul></li>
+<li><p>Commander と Crawler</p>
+
+<ul>
+<li>AWS EC2 Container Service を使っている。</li>
+<li>一日30弱くらいのインスタンスを立ち上げて並列でクローリングする。</li>
+</ul></li>
+<li><p>1 アプリあたりのクロール時間が見積もれないと困る。</p>
+
+<ul>
+<li>1 アプリあたりのクロール速度は割とまちまち。終わるの待ってたらクロール量が安定しない。</li>
+<li>一個あたりのクロールを goroutine で行う。</li>
+<li>規定時間を設ける。規定時間より超過した場合、終わってなくても次のタスクをスタートさせる。</li>
+<li>という戦略で、時間あたりのクロール数を見積もれるという寸法。</li>
+</ul></li>
+<li><p>落とし穴シリーズ</p>
+
+<ul>
+<li>TCPコネクションを使い果たす問題。並列に行われるクロールの数が多すぎると TCP コネクションを使い果たしてしまう…。</li>
+<li>この問題は、make(chan int, 100) みたくして、Channel が保持する値の数を制限することで対応。</li>
+</ul></li>
+</ul>
+
+<hr>
+
+<h1 id="goのスケジューラー実装とハマりポイント-by-niconegoto-さん">Goのスケジューラー実装とハマりポイント by niconegoto さん</h1>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" data-card-type="article-full" href="https://talks.godoc.org/github.com/niconegoto/talks/concurrency.slide#1">Goのスケジューラー実装とハマりポイント</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script></p>
+
+<p>Goroutine の内部実装について。</p>
+
+<h2 id="goroutine-の実装デザイン">Goroutine の実装デザイン</h2>
+
+<ul>
+<li>runtime を読む。</li>
+<li><p><a href="https://golang.org/pkg/runtime">https://golang.org/pkg/runtime</a></p></li>
+<li><p>M、G、P という文字が頻繁に出てくる。それらの意味は、</p>
+
+<ul>
+<li>M &#8230; Machine</li>
+<li>G &#8230; Goroutine</li>
+<li>P &#8230; Processor</li>
+</ul></li>
+</ul>
+
+<h2 id="スケジューラーのハマりどころ">スケジューラーのハマりどころ</h2>
+
+<ul>
+<li>C 言語の pthread なんかと同じで、goroutine もコンテキストスイッチを考慮する必要がある。</li>
+<li><a href="https://morsmachine.dk/go-scheduler">Morsing&#39;s Blog</a> に詳しいこと書いてある。</li>
+</ul>
+
+<h1 id="ridge-a-framework-like-gae/go-on-aws-by-fujiwara-さん">Ridge a framework like GAE/Go on AWS by fujiwara さん</h1>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/fujiwara3/go-on-aws">Ridge - A framework like GAE/Go on AWS</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script></p>
+
+<p>Go で書いた HTTP Server を AWS Lambda で動かす…！</p>
+
+<h2 id="ridge-の紹介">Ridge の紹介</h2>
+
+<ul>
+<li><a href="https://github.com/fujiwara/ridge">Ridge</a></li>
+<li>実質、GAE/Go みたいなことを AWS Lambda で実現できる</li>
+<li>裏で goroutine を延々動かしておくみたいなことはできない。Lambda はレスポンス返し終わると寝てしまう。
+
+<ul>
+<li>次のリクエストが来たら起きて続きの処理が行われていく</li>
+</ul></li>
+<li><p>頻繁にアクセスがなく、レイテンシ要求がシビアでないようなものに向く</p>
+
+<ul>
+<li>サービスが終了したゲームの告知 API とか。POST を受けて JSON を返す、という処理を EC2 使わないで行う。</li>
+</ul></li>
+<li><p>EC2 使わず、それでいてリクエスト数が多ければスケールする、ということで用途が合えば非常にリーズナブルにできる印象。</p></li>
+</ul>
+
+<hr>
+
+<h1 id="ライブコーディング-by-kaneshin-さん">ライブコーディング by kaneshin さん</h1>
+
+<p><img src="/images/golang.tokyo-4/1.jpg" alt="golang.tokyo-4"><br>
+写真1. ライブコーディング直前の kaneshin さん</p>
+
+<ul>
+<li>tail コマンドを作る&#8230;!</li>
+<li><a href="https://gist.github.com/kaneshin/a398720b8e20722a83bc6903e4017435">完成したものはこちら</a></li>
+</ul>
+
+<h2 id="ポイント-(と思ったところ)">ポイント (と思ったところ)</h2>
+
+<ul>
+<li>kaneshin さんは vim + vim-go プラグインを使って Go を書いている模様。</li>
+<li>channel をバッファのように扱っている。</li>
+<li>入力を待ち受ける goroutine と、出力を担当する goroutine とで 2 並列。
+今回のテーマにあった良い題材であると感じた。</li>
+</ul>
+
+<hr>
+
+<h1 id="嫁に怒られずに-go-を書く技術-by-teitei_tk">嫁に怒られずに Go を書く技術 by teitei_tk</h1>
+
+<p><a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/teitei/jia-ninu-rarezunigowoshu-kuji-shu">嫁に怒られずにGoを書く技術</a><br>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script></p>
+
+<p>「嫁のため」という免罪符を得て開発していくスタイル</p>
+
+<ul>
+<li>LINE に天気予報だったりを投稿する。</li>
+<li>つまり生活に役立つというか家内に益があれば良いということ。</li>
+<li>夫婦円満を願ってやまない。</li>
+</ul>
+
+<hr>
+
+<h1 id="gogland-by-sergey-ignatov-さん">Gogland by Sergey Ignatov さん</h1>
+
+<p><img src="/images/golang.tokyo-4/2.jpg" alt="golang.tokyo-4"><br>
+写真2. Gogland の開発者 Sergey Ignatov さん</p>
+
+<p>JetBrains から Sergey Ignatov さんが来てくれて、Gogland の紹介をしてくれたぞ！</p>
+
+<ul>
+<li>function の定義に飛んで実装を確認する必要はなく、小窓で出せるような機能がある。便利そう。</li>
+<li>引数のサジェストが賢い。ファジーサーチ的に動きつつ、型が合わないものはサジェストされない、等。</li>
+<li>保存時に go fmt、 go import する機能も最近対応された。</li>
+<li>2017年3月現在は EAP 版だが、年末くらいには EAP が取れて正式版になるような予定らしい。</li>
+<li>意見・要望があったら <a href="https://youtrack.jetbrains.com/issues/GO">issue tracker</a> へ！</li>
+</ul>
+
+<hr>
+
+<p>ざっくりですが、かいつまんで golang.tokyo 4 回目の様子を紹介いたしました。<br>
+休憩時間にはビールも振る舞われたりして、無料でいいんですかという気持ちになります。<br>
+いつもありがとうございます。</p>
+
+<p>次回もまた 4 月くらいに実施されるようなので、都合が合えば参加させていただこうかと思います。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1484,206 +1687,6 @@ Nexus 7 よりも若干薄いかな、と。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x + Travis CI + DeployGate</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-04-22T10:25:11+00:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2015</time>
-        
-           | <a href="/blog/2015/04/22/travis-ci-with-deploygate/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。<br>
-今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。</p>
-
-<h2 id="だいたいのやり方">だいたいのやり方</h2>
-
-<ul>
-<li>ビルドが成功したら<code>curl</code>コマンドにてDeployGateにAPKをアップロードする。</li>
-<li>アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。</li>
-<li>API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
-
-<ul>
-<li>暗号化には<code>travis</code>コマンドを用いる。</li>
-</ul></li>
-</ul>
-
-<h2 id="ちょっと細かいやり方">ちょっと細かいやり方</h2>
-
-<p>まずはAPKアップロード成功後の.travis.ymlを載せておく。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>language: android
-</span><span class='line'>
-</span><span class='line'># Handle git submodules yourself
-</span><span class='line'>git:
-</span><span class='line'>    submodules: false
-</span><span class='line'>
-</span><span class='line'>env:
-</span><span class='line'>  global:
-</span><span class='line'>    secure: "TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE="
-</span><span class='line'>
-</span><span class='line'>install:
-</span><span class='line'># NDK configuration
-</span><span class='line'>    - printenv
-</span><span class='line'>    - echo `pwd`
-</span><span class='line'>    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
-</span><span class='line'>    - chmod a+x android-ndk-r10d-linux-x86_64.bin
-</span><span class='line'>    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
-</span><span class='line'>    - export NDK_ROOT=`pwd`/android-ndk-r10d
-</span><span class='line'>    - echo $NDK_ROOT
-</span><span class='line'>    - export PATH=$PATH:$NDK_ROOT
-</span><span class='line'>    - echo $PATH
-</span><span class='line'>
-</span><span class='line'># Android SDK configuration
-</span><span class='line'>    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
-</span><span class='line'>    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
-</span><span class='line'>
-</span><span class='line'># git submodule
-</span><span class='line'># Use sed to replace the SSH URL with the public URL, then initialize submodules
-</span><span class='line'>    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-</span><span class='line'>    - git submodule update --init --recursive
-</span><span class='line'>
-</span><span class='line'># cocos setup 
-</span><span class='line'>    - cd ./cocos2d
-</span><span class='line'>    - python download-deps.py --remove-download=yes
-</span><span class='line'>    - python ./setup.py
-</span><span class='line'>    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
-</span><span class='line'>    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
-</span><span class='line'>    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
-</span><span class='line'>    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
-</span><span class='line'>    - export ANT_ROOT=/usr/share/ant/bin
-</span><span class='line'>    - export PATH=$PATH:$ANT_ROOT
-</span><span class='line'>    - printenv
-</span><span class='line'>    - cd ..
-</span><span class='line'>
-</span><span class='line'>script:
-</span><span class='line'>    - cocos compile -p android -j 8
-</span><span class='line'>
-</span><span class='line'>after_success:
-</span><span class='line'>    - echo $TRAVIS_BRANCH
-</span><span class='line'>    - echo $TRAVIS_PULL_REQUEST
-</span><span class='line'>    - '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'</span></code></pre></td></tr></table></div></figure>
-
-<h3 id="前回からの変更点（apkアップロードのために追加した部分）">前回からの変更点（APKアップロードのために追加した部分）</h3>
-
-<p>前回から増えたり変更したりしたのは以下。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>env:
-</span><span class='line'>  global:
-</span><span class='line'>    secure: "TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE="</span></code></pre></td></tr></table></div></figure>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>- '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'</span></code></pre></td></tr></table></div></figure>
-
-<p>後者の部分で、<code>${DEPLOYGATE_TOKEN}</code>という環境変数を参照しているが、これを設定しているのが前者の部分。</p>
-
-<h3 id="deploygate_tokenの暗号化">DEPLOYGATE_TOKENの暗号化</h3>
-
-<p>以下のコマンドでDeployGateのAPI Keyを暗号化する。</p>
-
-<p><code>$ gem install travis</code> # travisコマンドを使えるようにする。<br>
-<code>$ travis encrypt DEPLOYGATE_TOKEN={My DeployGate API Key}</code> # DeployGateで確認したAPI Keyを暗号化するコマンド（中括弧はいらない）。</p>
-
-<p>このコマンドで得られた文字列をそのまま.travis.ymlに貼っつければOKである。</p>
-
-<h3 id="いつアップロードするか">いつアップロードするか</h3>
-
-<p>以下の条件を満たした場合のみ、APKのアップロードを行うようにした。<br>
-これは、Pull Requestがmasterにマージされたとき、を意味している（つもり）。<br>
-<code>&quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ]</code></p>
-
-<p>これをやっとかないと、ブランチにコミットをPUSHしたタイミングだったりPull Requestを作ったタイミングだったり、でアップロードが走る。<br>
-個人的にはやり過ぎ感があったので、APKはmasterからだけ作ればいいやという制限を施した。</p>
-
-<h3 id="これがそこそこ楽だと思います">これがそこそこ楽だと思います</h3>
-
-<p>AndroidアプリにAPKをいちいち頑張って転送しなくても、開発中アプリをインストールすることができるようになった。<br>
-ちなみに、アップロードされたAPKはDeployGateアプリ経由で取得することになる。</p>
-
-<p>今回はここまで。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1707,6 +1710,10 @@ Nexus 7 よりも若干薄いかな、と。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/03/01/golangtokyo-4/">golang.tokyo#4@eureka</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/14/jp-input-on-gnome-app/">GNOMEアプリ上で日本語入力できなくなったときの対処メモ</a>
       </li>
     
@@ -1722,10 +1729,6 @@ Nexus 7 よりも若干薄いかな、と。</p>
         <a href="/blog/2016/10/25/golangtokyo/">golang.tokyo #1@mercari</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/04/18/atte-fes/">Atte Fes@mercari</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1734,11 +1737,11 @@ Nexus 7 よりも若干薄いかな、と。</p>
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 151.42857142857144%'>ArchLinux(6)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 117.14285714285714%'>golang(2)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 151.42857142857144%'>ArchLinux(6)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 125.71428571428572%'>golang(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (6)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (2)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (6)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>
@@ -1750,7 +1753,7 @@ Nexus 7 よりも若干薄いかな、と。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - pankona -
+  Copyright &copy; 2017 - pankona -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

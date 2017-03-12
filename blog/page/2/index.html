@@ -9,11 +9,8 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="引き続きcocos2d-xを使ってブロック崩しを作っている。
-かれこれ２ヶ月あまりが経過した。ほぼ通勤時間でのみ作っている。 いまのところの作業の流れとしては、
-* まずLinux向けにビルドして動作確認
-* 問題なさそうであれば、Android向けのビルドを実施
-* &hellip;">
+  <meta name="description" content="前回の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。
+今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。 だいたいのやり方 ビルドが成功したらcurlコマンドにてDeployGateにAPKをアップロードする &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +76,206 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x + Travis CI + DeployGate</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-22T10:25:11+00:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2015</time>
+        
+           | <a href="/blog/2015/04/22/travis-ci-with-deploygate/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。<br>
+今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。</p>
+
+<h2 id="だいたいのやり方">だいたいのやり方</h2>
+
+<ul>
+<li>ビルドが成功したら<code>curl</code>コマンドにてDeployGateにAPKをアップロードする。</li>
+<li>アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。</li>
+<li>API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
+
+<ul>
+<li>暗号化には<code>travis</code>コマンドを用いる。</li>
+</ul></li>
+</ul>
+
+<h2 id="ちょっと細かいやり方">ちょっと細かいやり方</h2>
+
+<p>まずはAPKアップロード成功後の.travis.ymlを載せておく。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>language: android
+</span><span class='line'>
+</span><span class='line'># Handle git submodules yourself
+</span><span class='line'>git:
+</span><span class='line'>    submodules: false
+</span><span class='line'>
+</span><span class='line'>env:
+</span><span class='line'>  global:
+</span><span class='line'>    secure: "TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE="
+</span><span class='line'>
+</span><span class='line'>install:
+</span><span class='line'># NDK configuration
+</span><span class='line'>    - printenv
+</span><span class='line'>    - echo `pwd`
+</span><span class='line'>    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+</span><span class='line'>    - chmod a+x android-ndk-r10d-linux-x86_64.bin
+</span><span class='line'>    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+</span><span class='line'>    - export NDK_ROOT=`pwd`/android-ndk-r10d
+</span><span class='line'>    - echo $NDK_ROOT
+</span><span class='line'>    - export PATH=$PATH:$NDK_ROOT
+</span><span class='line'>    - echo $PATH
+</span><span class='line'>
+</span><span class='line'># Android SDK configuration
+</span><span class='line'>    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
+</span><span class='line'>    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
+</span><span class='line'>
+</span><span class='line'># git submodule
+</span><span class='line'># Use sed to replace the SSH URL with the public URL, then initialize submodules
+</span><span class='line'>    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+</span><span class='line'>    - git submodule update --init --recursive
+</span><span class='line'>
+</span><span class='line'># cocos setup 
+</span><span class='line'>    - cd ./cocos2d
+</span><span class='line'>    - python download-deps.py --remove-download=yes
+</span><span class='line'>    - python ./setup.py
+</span><span class='line'>    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+</span><span class='line'>    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
+</span><span class='line'>    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
+</span><span class='line'>    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+</span><span class='line'>    - export ANT_ROOT=/usr/share/ant/bin
+</span><span class='line'>    - export PATH=$PATH:$ANT_ROOT
+</span><span class='line'>    - printenv
+</span><span class='line'>    - cd ..
+</span><span class='line'>
+</span><span class='line'>script:
+</span><span class='line'>    - cocos compile -p android -j 8
+</span><span class='line'>
+</span><span class='line'>after_success:
+</span><span class='line'>    - echo $TRAVIS_BRANCH
+</span><span class='line'>    - echo $TRAVIS_PULL_REQUEST
+</span><span class='line'>    - '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'</span></code></pre></td></tr></table></div></figure>
+
+<h3 id="前回からの変更点（apkアップロードのために追加した部分）">前回からの変更点（APKアップロードのために追加した部分）</h3>
+
+<p>前回から増えたり変更したりしたのは以下。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>env:
+</span><span class='line'>  global:
+</span><span class='line'>    secure: "TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE="</span></code></pre></td></tr></table></div></figure>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'</span></code></pre></td></tr></table></div></figure>
+
+<p>後者の部分で、<code>${DEPLOYGATE_TOKEN}</code>という環境変数を参照しているが、これを設定しているのが前者の部分。</p>
+
+<h3 id="deploygate_tokenの暗号化">DEPLOYGATE_TOKENの暗号化</h3>
+
+<p>以下のコマンドでDeployGateのAPI Keyを暗号化する。</p>
+
+<p><code>$ gem install travis</code> # travisコマンドを使えるようにする。<br>
+<code>$ travis encrypt DEPLOYGATE_TOKEN={My DeployGate API Key}</code> # DeployGateで確認したAPI Keyを暗号化するコマンド（中括弧はいらない）。</p>
+
+<p>このコマンドで得られた文字列をそのまま.travis.ymlに貼っつければOKである。</p>
+
+<h3 id="いつアップロードするか">いつアップロードするか</h3>
+
+<p>以下の条件を満たした場合のみ、APKのアップロードを行うようにした。<br>
+これは、Pull Requestがmasterにマージされたとき、を意味している（つもり）。<br>
+<code>&quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ]</code></p>
+
+<p>これをやっとかないと、ブランチにコミットをPUSHしたタイミングだったりPull Requestを作ったタイミングだったり、でアップロードが走る。<br>
+個人的にはやり過ぎ感があったので、APKはmasterからだけ作ればいいやという制限を施した。</p>
+
+<h3 id="これがそこそこ楽だと思います">これがそこそこ楽だと思います</h3>
+
+<p>AndroidアプリにAPKをいちいち頑張って転送しなくても、開発中アプリをインストールすることができるようになった。<br>
+ちなみに、アップロードされたAPKはDeployGateアプリ経由で取得することになる。</p>
+
+<p>今回はここまで。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1084,91 +1281,6 @@ PiTFTはきっと動き出す。</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/10/raspi-photo-during-streaming/">RaspberryPiで動画を配信しながら写真も撮る</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-10T12:49:47+00:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/06/10/raspi-photo-during-streaming/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Raspberry Pi＋カメラモジュールを使って、<br>
-- 映像をWebページで配信しつつ。<br>
-- いま写してる絵を保存する（写真を撮るみたいな）。写真を撮るボタンもWebページに備える。<br>
-- 撮った写真はRaspberry Piにとりあえず保存しておいて、Webページ越しに確認できる。<br>
-というのをやってみた。<br>
-例によっていくつか躓いた点があるので、備忘録的に記しておく。</p>
-
-<h3 id="raspistillでの静止画撮影とmjpg-streamerでの動画配信は同時に行えない？">raspistillでの静止画撮影とmjpg-streamerでの動画配信は同時に行えない？</h3>
-
-<p>どうやらそのようである。最初は、<br>
-「Webページ上にボタンを用意し、押されたら <code>raspistill</code> コマンドを発行する。」というやり方でやろうと思ったので当てが外れた感じ。<br>
-mjpg-streamerで動画を配信する状態になっている状態でraspistillコマンドを実行すると、エラーが吐かれてしまってうまくいかない。<br>
-mjpg-streamerにカメラデバイスを専有されてしまっているとか、そういう雰囲気でうまくいかないんだろうと予想。</p>
-
-<h3 id="mjpg-streamerのsnapshot機能を使う">mjpg-streamerのsnapshot機能を使う</h3>
-
-<p>ではどうするかと言うと、mjpg-streamerには静止画を撮影する機能があるので、これを使ってみた。<br>
-<a href="https://code.google.com/p/mjpg-streamer/">mjpg-streamerのプロジェクトのページ</a>に少しサンプルがあって、例えば、mjpg-streamerを動作させている状態でもって、<br>
-<code>http://[Raspberry PiのIPアドレス]:8080/?action=stream</code> というURLにアクセスすれば動画配信になり、<br>
-<code>http://[Raspberry PiのIPアドレス]:8080/?action=snapshot</code> というURLにアクセスすれば、静止画の撮影になる。<br>
-これらは、同時に行うことができる。つまり、これをうまく使えば動画を配信しながら静止画の撮影ができるのでは、と。</p>
-
-<h3 id="wgetで画像を保存する">wgetで画像を保存する</h3>
-
-<p>Webページ上にボタンを用意しておくところまでは同じで、ボタンが押されたら <code>raspistill</code> の代わりに、<code>wget</code> を発行する。<br>
-例） <code>wget -O /tmp/picture.jpg http://[Raspberry PiのIPアドレス]:8080/?action=snapshot</code><br>
-上記の例では、/tmp/picture.jpgという名前でmjpg-streamerが出力している動画のスナップショットが保存される。<br>
-なので一応、動画配信しながら写真を撮る、という目的は達成できた。</p>
-
-<p>できた、が、、、<br>
-動画配信中の画像をそのまま静止画にするだけなので、例えば静止画の画質を動画のものより良くする、とか、画像サイズを変更する、アス比を変更する、とかできない。<br>
-あくまで動画を一枚切り取っただけ、という感じ。まあ及第点か。。</p>
-
-<h3 id="撮った画像を確認するためにrailsアプリを作った">撮った画像を確認するためにRailsアプリを作った</h3>
-
-<p>Raspberry PiでRailsなんてどうなのか。でもちょっと作ってみた。<br>
-目下作り途中だが。とりあえず動いてるのを見るのは楽しい。<br>
-<a href="https://github.com/pankona/raspi_camera_server">https://github.com/pankona/raspi_camera_server</a></p>
-
-<ul>
-<li>あらかじめmjpg-streamerを起動した状態で、上記Railsアプリを動かす</li>
-<li>Railsアプリに何かからアクセスすると、動画が配信されている状態を確認できる</li>
-<li>動画をクリックすると、スナップショットが保存される。</li>
-<li>保存されたスナップショットは、動画下部に小さく表示される。</li>
-</ul>
-
-<p>みたいなもの。テスト書いたりして改善していこう。。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1194,6 +1306,10 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/03/01/golangtokyo-4/">golang.tokyo#4@eureka</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/14/jp-input-on-gnome-app/">GNOMEアプリ上で日本語入力できなくなったときの対処メモ</a>
       </li>
     
@@ -1209,10 +1325,6 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
         <a href="/blog/2016/10/25/golangtokyo/">golang.tokyo #1@mercari</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/04/18/atte-fes/">Atte Fes@mercari</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1221,11 +1333,11 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 151.42857142857144%'>ArchLinux(6)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 117.14285714285714%'>golang(2)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 151.42857142857144%'>ArchLinux(6)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 125.71428571428572%'>golang(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (6)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (2)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (6)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>
@@ -1237,7 +1349,7 @@ mjpg-streamerにカメラデバイスを専有されてしまっているとか�
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - pankona -
+  Copyright &copy; 2017 - pankona -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

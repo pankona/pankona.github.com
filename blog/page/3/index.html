@@ -9,9 +9,10 @@
   <meta name="author" content="pankona">
 
   
-  <meta name="description" content="Raspberry PiにRailsを入れたときのこと。
-あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。
-（ちなみにRaspberry Piで動いているOSはArch Linuxです。） 第一の関門 Railsのインストール Raspberry Piにsshで接続し、gem &hellip;">
+  <meta name="description" content="Raspberry Pi＋カメラモジュールを使って、
+- 映像をWebページで配信しつつ。
+- いま写してる絵を保存する（写真を撮るみたいな）。写真を撮るボタンもWebページに備える。
+- 撮った写真はRaspberry Piにとりあえず保存しておいて、Webページ越しに確認できる。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,91 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/10/raspi-photo-during-streaming/">RaspberryPiで動画を配信しながら写真も撮る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-10T12:49:47+00:00" pubdate data-updated="true">Jun 10<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/06/10/raspi-photo-during-streaming/#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Raspberry Pi＋カメラモジュールを使って、<br>
+- 映像をWebページで配信しつつ。<br>
+- いま写してる絵を保存する（写真を撮るみたいな）。写真を撮るボタンもWebページに備える。<br>
+- 撮った写真はRaspberry Piにとりあえず保存しておいて、Webページ越しに確認できる。<br>
+というのをやってみた。<br>
+例によっていくつか躓いた点があるので、備忘録的に記しておく。</p>
+
+<h3 id="raspistillでの静止画撮影とmjpg-streamerでの動画配信は同時に行えない？">raspistillでの静止画撮影とmjpg-streamerでの動画配信は同時に行えない？</h3>
+
+<p>どうやらそのようである。最初は、<br>
+「Webページ上にボタンを用意し、押されたら <code>raspistill</code> コマンドを発行する。」というやり方でやろうと思ったので当てが外れた感じ。<br>
+mjpg-streamerで動画を配信する状態になっている状態でraspistillコマンドを実行すると、エラーが吐かれてしまってうまくいかない。<br>
+mjpg-streamerにカメラデバイスを専有されてしまっているとか、そういう雰囲気でうまくいかないんだろうと予想。</p>
+
+<h3 id="mjpg-streamerのsnapshot機能を使う">mjpg-streamerのsnapshot機能を使う</h3>
+
+<p>ではどうするかと言うと、mjpg-streamerには静止画を撮影する機能があるので、これを使ってみた。<br>
+<a href="https://code.google.com/p/mjpg-streamer/">mjpg-streamerのプロジェクトのページ</a>に少しサンプルがあって、例えば、mjpg-streamerを動作させている状態でもって、<br>
+<code>http://[Raspberry PiのIPアドレス]:8080/?action=stream</code> というURLにアクセスすれば動画配信になり、<br>
+<code>http://[Raspberry PiのIPアドレス]:8080/?action=snapshot</code> というURLにアクセスすれば、静止画の撮影になる。<br>
+これらは、同時に行うことができる。つまり、これをうまく使えば動画を配信しながら静止画の撮影ができるのでは、と。</p>
+
+<h3 id="wgetで画像を保存する">wgetで画像を保存する</h3>
+
+<p>Webページ上にボタンを用意しておくところまでは同じで、ボタンが押されたら <code>raspistill</code> の代わりに、<code>wget</code> を発行する。<br>
+例） <code>wget -O /tmp/picture.jpg http://[Raspberry PiのIPアドレス]:8080/?action=snapshot</code><br>
+上記の例では、/tmp/picture.jpgという名前でmjpg-streamerが出力している動画のスナップショットが保存される。<br>
+なので一応、動画配信しながら写真を撮る、という目的は達成できた。</p>
+
+<p>できた、が、、、<br>
+動画配信中の画像をそのまま静止画にするだけなので、例えば静止画の画質を動画のものより良くする、とか、画像サイズを変更する、アス比を変更する、とかできない。<br>
+あくまで動画を一枚切り取っただけ、という感じ。まあ及第点か。。</p>
+
+<h3 id="撮った画像を確認するためにrailsアプリを作った">撮った画像を確認するためにRailsアプリを作った</h3>
+
+<p>Raspberry PiでRailsなんてどうなのか。でもちょっと作ってみた。<br>
+目下作り途中だが。とりあえず動いてるのを見るのは楽しい。<br>
+<a href="https://github.com/pankona/raspi_camera_server">https://github.com/pankona/raspi_camera_server</a></p>
+
+<ul>
+<li>あらかじめmjpg-streamerを起動した状態で、上記Railsアプリを動かす</li>
+<li>Railsアプリに何かからアクセスすると、動画が配信されている状態を確認できる</li>
+<li>動画をクリックすると、スナップショットが保存される。</li>
+<li>保存されたスナップショットは、動画下部に小さく表示される。</li>
+</ul>
+
+<p>みたいなもの。テスト書いたりして改善していこう。。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -881,52 +967,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/24/start-blog-with-octopress/">Octopressでブログを始めてみる</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-24T12:44:52+00:00" pubdate data-updated="true">Apr 24<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/04/24/start-blog-with-octopress/#disqus_thread"
-             data-disqus-identifier="http://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ちょっと長めの通勤時間を有効活用するため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。<br>
-マークダウンの書き方すらよくわかっていないが、徐々にいろいろと進歩させていこうと思う。</p>
-
-<p>私は一応プログラマをやっている。なので色々困ったことにでくわし、そのたびに解決方法を調べつつ業務にあたっている。<br>
-きっと私が困ったところは、おそらく世の中の誰かが同じように困っているであろうと信じ、本ブログがその助けになることを願うと共に、<br>
-基本的には日々の調査結果なんかをここにアウトプットしていきたいと思っている。</p>
-
-<p>細く、長く、続けて行ければ。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -952,6 +992,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/03/01/golangtokyo-4/">golang.tokyo#4@eureka</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/12/14/jp-input-on-gnome-app/">GNOMEアプリ上で日本語入力できなくなったときの対処メモ</a>
       </li>
     
@@ -967,10 +1011,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
         <a href="/blog/2016/10/25/golangtokyo/">golang.tokyo #1@mercari</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2016/04/18/atte-fes/">Atte Fes@mercari</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -979,11 +1019,11 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 151.42857142857144%'>ArchLinux(6)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 117.14285714285714%'>golang(2)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 151.42857142857144%'>ArchLinux(6)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 125.71428571428572%'>golang(3)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (6)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (2)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (6)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (3)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
 </section>
 <section>
 <a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>
@@ -995,7 +1035,7 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - pankona -
+  Copyright &copy; 2017 - pankona -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

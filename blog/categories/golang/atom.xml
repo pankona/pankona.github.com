@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Golang | make clean; make]]></title>
   <link href="http://pankona.github.io/blog/categories/golang/atom.xml" rel="self"/>
   <link href="http://pankona.github.io/"/>
-  <updated>2017-03-12T15:36:17+00:00</updated>
+  <updated>2017-06-14T16:26:52+00:00</updated>
   <id>http://pankona.github.io/</id>
   <author>
     <name><![CDATA[pankona]]></name>
@@ -12,6 +12,220 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[golang.tokyo#6@DeNA]]></title>
+    <link href="http://pankona.github.io/blog/2017/06/01/golang-tokyo-6/"/>
+    <updated>2017-06-01T10:34:21+00:00</updated>
+    <id>http://pankona.github.io/blog/2017/06/01/golang-tokyo-6</id>
+    <content type="html"><![CDATA[<p>(画像をあとから追加します。)</p>
+
+<p>2017.06.01 に DeNA さんにて、golang.tokyo #6 が行われました。</p>
+
+<p><a href="https://golangtokyo.connpass.com/event/57168/">golang.tokyo #6 - connpass</a></p>
+
+<p>開幕は DeNA の方のお話だったんですが、何やら DeNA では Go エンジニアを色々募集しているようです！<br>
+サーバーのみならず、色んなフィールドで Go を使っているとのことです。</p>
+
+<p>[画像]</p>
+
+<p>出遅れて私はありつけなかったですが、開幕前からおビールとお寿司が振る舞われています！<br>
+今日も大勢の方が参加されております。</p>
+
+<h1 id="gopher-fest-2017-に参加した話-by-tenntenn-さん">Gopher Fest 2017 に参加した話 by tenntenn さん</h1>
+
+<ul>
+<li>mercari テックブログ にて既にまとめられている tenntenn さんの記事もあります。
+(<a href="http://tech.mercari.com/entry/gopherfest2017_report">http://tech.mercari.com/entry/gopherfest2017_report</a>)</li>
+</ul>
+
+<p>今日は参加レポートをしてくれました。<br>
+主に 2017年8月上旬あたりにリリースされそうな Go 1.9 の話。</p>
+
+<p>スライドはこちら。<br>
+<a href="https://www.slideshare.net/takuyaueda967/gopher-fest-2017">https://www.slideshare.net/takuyaueda967/gopher-fest-2017</a></p>
+
+<p>以下、話の中で気になって点のピックアップ。</p>
+
+<h2 id="言語仕様の拡張---alias-の追加">言語仕様の拡張 - Alias の追加</h2>
+
+<p>型にエイリアスが張れるようになるとのこと。<br>
+以下のような書き方ができるようになる。<br>
+<code><br>
+type Applicant = http.Client<br>
+</code></p>
+
+<p>この場合、Applicant と http.Client は等価。</p>
+
+<p>いつこれが役立つかというと、型をリネームするようなリファクタリングを行うとき。<br>
+以下の手法だとうまく行かない。</p>
+
+<p>(パターン1) 新しい型を作って順次移行する場合</p>
+
+<ul>
+<li>Applicant は Client に生えていたメソッドを引き継げない。</li>
+<li>キャストは可能。</li>
+</ul>
+
+<p>(パターン2) 埋め込みを使う場合</p>
+
+<ul>
+<li>Applicant は Client に生えていたメソッドを引き継げる</li>
+<li>しかしキャストはできない</li>
+</ul>
+
+<p>型エイリアスを用いると、</p>
+
+<ul>
+<li>両者等価なのでキャスト不要で交換可能</li>
+<li>メソッドもそのまま使える、が、エイリアス側に生やすことはできない</li>
+</ul>
+
+<h4 id="参考">参考</h4>
+
+<ul>
+<li>安全にリファクタリングするには？<br>
+<a href="https://talks.golang.org/2016/refactor.article">codebase refactoring (with help from Go) by rsc</a></li>
+</ul>
+
+<h2 id="ライブラリへの変更">ライブラリへの変更</h2>
+
+<h3 id="ビット演算ライブラリ">ビット演算ライブラリ</h3>
+
+<p><a href="http://tip.golang.org/pkg/math/bits/">http://tip.golang.org/pkg/math/bits/</a><br>
+各種ビット演算用の某がそろっております。</p>
+
+<h3 id="sync.map">sync.Map</h3>
+
+<p>スレッドセーフなマップが追加に。<br>
+しかも make しないで 0 値のまま使えるらしく便利。</p>
+
+<h3 id="os.exec-環境変数をコードで上書きできるように">os.Exec 環境変数をコードで上書きできるように</h3>
+
+<p>環境変数で指定されている値をコード上で上書きできなかった。<br>
+Go 1.9 からは後勝ち。より直感的な動作になる。コードで上書きできるように！</p>
+
+<p>などなど。<br>
+スライドには出ていませんでしたが、個人的には mips32 向けの softfloat サポートがどうなったか気になります。Go 1.9 でサポートされるんだったような。</p>
+
+<p>次は DeNA の方。</p>
+
+<h1 id="初めて-golang-で大規模-microservices-を作り得た教訓-by-yuichi-murata">初めて Golang で大規模 Microservices を作り得た教訓 by Yuichi MURATA</h1>
+
+<p>DeNA の方です。<br>
+AndApp を作ったときに得られた教訓の話。</p>
+
+<p>Gin と Echo をさまよった話でさまざま苦労なさったそうな。<br>
+失敗談をメインに話してくださったので、そういうのは割と貴重と思います。</p>
+
+<p>スライドはこちら。<br>
+<a href="https://www.slideshare.net/yuichi1004/golangtokyo-6-in-japanese">https://www.slideshare.net/yuichi1004/golangtokyo-6-in-japanese</a></p>
+
+<h2 id="教訓1.-go-でフレームワークに拘ることはない。">教訓1. Go でフレームワークに拘ることはない。</h2>
+
+<ul>
+<li>Gin を使って開発を始める。</li>
+<li>ちょっと困ったことがあって、一部で別のフレームワーク (Echo) を使い始める</li>
+<li>両対応しつつ、また Echo 自身の開発がホットなせいで設計がどんどん変わってしまう</li>
+</ul>
+
+<p>というようなことで、聞いているだけでしんどい気持ちでいっぱいでしたが、<br>
+結論としては、フレームワークに頼らずに net/http 使っとくのが一番や、という話でした。<br>
+ツールに振り回されるとツライですね。納得。</p>
+
+<h2 id="教訓2.-interface-を尊重する---エラーの型の話">教訓2. Interface を尊重する - エラーの型の話</h2>
+
+<p>独自エラー型と error インターフェースを混在させると起こり得る罠。<br>
+独自 error は nil 扱いされない問題。<br>
+素直に error インターフェースの利用に統一するべきだという結論。</p>
+
+<p>エラーの種類によって分岐したいとき等、結構ひとによってやり方がまちまちだという気がするので、<br>
+なにがしかデファクトスタンダードなやり方が示されていると良い気がしますね。</p>
+
+<p>ちなみに、自分が書くときの「エラーで分岐」については、<br>
+deeeet さんの <a href="http://deeeet.com/writing/2016/04/25/go-pkg-errors/">Golangのエラー処理とpkg/errors</a> で記載されているやり方に従っている。</p>
+
+<h2 id="regex-compile-/-reflection-の遅さ">regex compile / reflection の遅さ</h2>
+
+<p>JSON Schema でバリデーション。<br>
+OSS として扱った二種の速度の話。</p>
+
+<ul>
+<li>gojsonschema
+
+<ul>
+<li>validation のたびに parse &amp; compile するので遅い</li>
+</ul></li>
+<li>go-jsval
+
+<ul>
+<li>こちらは速い</li>
+</ul></li>
+</ul>
+
+<p>regex / reflection 等の処理は遅いので、使うときは意識しないといけない</p>
+
+<h2 id="結論">結論</h2>
+
+<ul>
+<li>Go の哲学。シンプルなアプローチを。</li>
+<li>「コンパイルする言語だから速い」と過信せず、パフォーマンスに気を配ろう。</li>
+</ul>
+
+<p>以下、LT。</p>
+
+<h1 id="ゲーム開発で必要な-by-@konboi">ゲーム開発で必要な by @konboi</h1>
+
+<p>カヤックの方。<br>
+<a href="https://speakerdeck.com/konboi/gemukai-fa-nihaqian-kasenai-arewosiyututojian-ru">スライドはこちら</a></p>
+
+<h2 id="csv-の話">CSV の話</h2>
+
+<p>データの形によっては非常に見にくいCSV。<br>
+いい感じに整形してくれるツールを作った！<br>
+<a href="github.com/Konboi/csviewer">csvviewer</a></p>
+
+<p>スターしておきました。</p>
+
+<h1 id="go-code-review-comments-を読もう-by-knsh14">Go code Review Comments を読もう by knsh14</h1>
+
+<p>KLabの方。スライドはこちら。<br>
+<a href="https://speakerdeck.com/knsh14/go-code-review-comment-wofan-yi-sitahua">https://speakerdeck.com/knsh14/go-code-review-comment-wofan-yi-sitahua</a></p>
+
+<p>こういう記事があって、Effective Go 簡易版というか、Go のお作法初級編みたく書かれている。<br>
+<a href="https://github.com/golang/go/wiki/CodeReviewComments">Go Code review comments</a></p>
+
+<p>それを日本語訳した！<br>
+* <a href="http://qiita.com/knsh14/items/8b73b31822c109d4c497">Qiita の記事はこちら</a></p>
+
+<p>初学者のみならず、ある程度経験がある人でも読んで損はないと思いました。<br>
+認識を改めるというかね。ちなみに社内勉強会で使わせていただきました、感謝！</p>
+
+<h1 id="scala-から-go-にきた話-by-james-さん">Scala から Go にきた話 by James さん</h1>
+
+<p>エウレカの方。<br>
+スライドは発見できませんでした…。</p>
+
+<p>Scala が好きということは分かりました。<br>
+悲しいアリクイかわいい。</p>
+
+<h1 id="crypto-in-go-by-suzuki-kengo-さん">Crypto in Go by suzuki kengo さん</h1>
+
+<p>マネーフォワードの方。</p>
+
+<p>資料はこちら。アライさんですね。<br>
+<a href="https://paper.dropbox.com/doc/Crypto-in-Go-cWLX9XxHQm6bAPqrZYkjt">https://paper.dropbox.com/doc/Crypto-in-Go-cWLX9XxHQm6bAPqrZYkjt</a></p>
+
+<p>難しい。</p>
+
+<h1 id="まとめ">まとめ</h1>
+
+<p>ということで今回も参加させていただきました、ありがとうございました。<br>
+失敗談というかアンチパターンというか、そういう話が聞けたのは大きな収穫でした。</p>
+
+<p>また次回開催も楽しみにしています。 </p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[golang.tokyo#4@eureka]]></title>

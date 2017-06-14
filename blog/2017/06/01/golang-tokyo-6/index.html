@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>golang.tokyo#6@DeNA - make clean; make</title>
+  <meta name="author" content="pankona">
+
+  
+  <meta name="description" content="(画像をあとから追加します。) 2017.06.01 に DeNA さんにて、golang.tokyo #6 が行われました。 golang.tokyo #6 - connpass 開幕は DeNA の方のお話だったんですが、何やら DeNA では Go エンジニアを色々募集しているようです！ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pankona.github.io/blog/2017/06/01/golang-tokyo-6">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="make clean; make" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-48476608-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">make clean; make</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pankona.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">golang.tokyo#6@DeNA</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-06-01T10:34:21+00:00" pubdate data-updated="true">Jun 1<span>st</span>, 2017</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://pankona.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>(画像をあとから追加します。)</p>
+
+<p>2017.06.01 に DeNA さんにて、golang.tokyo #6 が行われました。</p>
+
+<p><a href="https://golangtokyo.connpass.com/event/57168/">golang.tokyo #6 - connpass</a></p>
+
+<p>開幕は DeNA の方のお話だったんですが、何やら DeNA では Go エンジニアを色々募集しているようです！<br>
+サーバーのみならず、色んなフィールドで Go を使っているとのことです。</p>
+
+<p>[画像]</p>
+
+<p>出遅れて私はありつけなかったですが、開幕前からおビールとお寿司が振る舞われています！<br>
+今日も大勢の方が参加されております。</p>
+
+<h1 id="gopher-fest-2017-に参加した話-by-tenntenn-さん">Gopher Fest 2017 に参加した話 by tenntenn さん</h1>
+
+<ul>
+<li>mercari テックブログ にて既にまとめられている tenntenn さんの記事もあります。
+(<a href="http://tech.mercari.com/entry/gopherfest2017_report">http://tech.mercari.com/entry/gopherfest2017_report</a>)</li>
+</ul>
+
+<p>今日は参加レポートをしてくれました。<br>
+主に 2017年8月上旬あたりにリリースされそうな Go 1.9 の話。</p>
+
+<p>スライドはこちら。<br>
+<a href="https://www.slideshare.net/takuyaueda967/gopher-fest-2017">https://www.slideshare.net/takuyaueda967/gopher-fest-2017</a></p>
+
+<p>以下、話の中で気になって点のピックアップ。</p>
+
+<h2 id="言語仕様の拡張---alias-の追加">言語仕様の拡張 - Alias の追加</h2>
+
+<p>型にエイリアスが張れるようになるとのこと。<br>
+以下のような書き方ができるようになる。<br>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br>
+</pre></td><td class='code'><pre><code class=''><span class='line'>type Applicant = http.Client</span></code></pre></td></tr></table></div></figure></p>
+
+<p>この場合、Applicant と http.Client は等価。</p>
+
+<p>いつこれが役立つかというと、型をリネームするようなリファクタリングを行うとき。<br>
+以下の手法だとうまく行かない。</p>
+
+<p>(パターン1) 新しい型を作って順次移行する場合</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>type Applicant Client</span></code></pre></td></tr></table></div></figure>
+
+<ul>
+<li>Applicant は Client に生えていたメソッドを引き継げない。</li>
+<li>キャストは可能。</li>
+</ul>
+
+<p>(パターン2) 埋め込みを使う場合</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>type Applicant struct { Client }</span></code></pre></td></tr></table></div></figure>
+
+<ul>
+<li>Applicant は Client に生えていたメソッドを引き継げる</li>
+<li>しかしキャストはできない</li>
+</ul>
+
+<p>型エイリアスを用いると、</p>
+
+<ul>
+<li>両者等価なのでキャスト不要で交換可能</li>
+<li>メソッドもそのまま使える、が、エイリアス側に生やすことはできない</li>
+</ul>
+
+<h4 id="参考">参考</h4>
+
+<ul>
+<li>安全にリファクタリングするには？<br>
+<a href="https://talks.golang.org/2016/refactor.article">codebase refactoring (with help from Go) by rsc</a></li>
+</ul>
+
+<h2 id="ライブラリへの変更">ライブラリへの変更</h2>
+
+<h3 id="ビット演算ライブラリ">ビット演算ライブラリ</h3>
+
+<p><a href="http://tip.golang.org/pkg/math/bits/">http://tip.golang.org/pkg/math/bits/</a><br>
+各種ビット演算用の某がそろっております。</p>
+
+<h3 id="sync.map">sync.Map</h3>
+
+<p>スレッドセーフなマップが追加に。<br>
+しかも make しないで 0 値のまま使えるらしく便利。</p>
+
+<h3 id="os.exec-環境変数をコードで上書きできるように">os.Exec 環境変数をコードで上書きできるように</h3>
+
+<p>環境変数で指定されている値をコード上で上書きできなかった。<br>
+Go 1.9 からは後勝ち。より直感的な動作になる。コードで上書きできるように！</p>
+
+<p>などなど。<br>
+スライドには出ていませんでしたが、個人的には mips32 向けの softfloat サポートがどうなったか気になります。Go 1.9 でサポートされるんだったような。</p>
+
+<p>次は DeNA の方。</p>
+
+<h1 id="初めて-golang-で大規模-microservices-を作り得た教訓-by-yuichi-murata">初めて Golang で大規模 Microservices を作り得た教訓 by Yuichi MURATA</h1>
+
+<p>DeNA の方です。<br>
+AndApp を作ったときに得られた教訓の話。</p>
+
+<p>Gin と Echo をさまよった話でさまざま苦労なさったそうな。<br>
+失敗談をメインに話してくださったので、そういうのは割と貴重と思います。</p>
+
+<p>スライドはこちら。<br>
+<a href="https://www.slideshare.net/yuichi1004/golangtokyo-6-in-japanese">https://www.slideshare.net/yuichi1004/golangtokyo-6-in-japanese</a></p>
+
+<h2 id="教訓1.-go-でフレームワークに拘ることはない。">教訓1. Go でフレームワークに拘ることはない。</h2>
+
+<ul>
+<li>Gin を使って開発を始める。</li>
+<li>ちょっと困ったことがあって、一部で別のフレームワーク (Echo) を使い始める</li>
+<li>両対応しつつ、また Echo 自身の開発がホットなせいで設計がどんどん変わってしまう</li>
+</ul>
+
+<p>というようなことで、聞いているだけでしんどい気持ちでいっぱいでしたが、<br>
+結論としては、フレームワークに頼らずに net/http 使っとくのが一番や、という話でした。<br>
+ツールに振り回されるとツライですね。納得。</p>
+
+<h2 id="教訓2.-interface-を尊重する---エラーの型の話">教訓2. Interface を尊重する - エラーの型の話</h2>
+
+<p>独自エラー型と error インターフェースを混在させると起こり得る罠。<br>
+独自 error は nil 扱いされない問題。<br>
+素直に error インターフェースの利用に統一するべきだという結論。</p>
+
+<p>エラーの種類によって分岐したいとき等、結構ひとによってやり方がまちまちだという気がするので、<br>
+なにがしかデファクトスタンダードなやり方が示されていると良い気がしますね。</p>
+
+<p>ちなみに、自分が書くときの「エラーで分岐」については、<br>
+deeeet さんの <a href="http://deeeet.com/writing/2016/04/25/go-pkg-errors/">Golangのエラー処理とpkg/errors</a> で記載されているやり方に従っている。</p>
+
+<h2 id="regex-compile-/-reflection-の遅さ">regex compile / reflection の遅さ</h2>
+
+<p>JSON Schema でバリデーション。<br>
+OSS として扱った二種の速度の話。</p>
+
+<ul>
+<li>gojsonschema
+
+<ul>
+<li>validation のたびに parse &amp; compile するので遅い</li>
+</ul></li>
+<li>go-jsval
+
+<ul>
+<li>こちらは速い</li>
+</ul></li>
+</ul>
+
+<p>regex / reflection 等の処理は遅いので、使うときは意識しないといけない</p>
+
+<h2 id="結論">結論</h2>
+
+<ul>
+<li>Go の哲学。シンプルなアプローチを。</li>
+<li>「コンパイルする言語だから速い」と過信せず、パフォーマンスに気を配ろう。</li>
+</ul>
+
+<p>以下、LT。</p>
+
+<h1 id="ゲーム開発で必要な-by-@konboi">ゲーム開発で必要な by @konboi</h1>
+
+<p>カヤックの方。<br>
+<a href="https://speakerdeck.com/konboi/gemukai-fa-nihaqian-kasenai-arewosiyututojian-ru">スライドはこちら</a></p>
+
+<h2 id="csv-の話">CSV の話</h2>
+
+<p>データの形によっては非常に見にくいCSV。<br>
+いい感じに整形してくれるツールを作った！<br>
+<a href="github.com/Konboi/csviewer">csvviewer</a></p>
+
+<p>スターしておきました。</p>
+
+<h1 id="go-code-review-comments-を読もう-by-knsh14">Go code Review Comments を読もう by knsh14</h1>
+
+<p>KLabの方。スライドはこちら。<br>
+<a href="https://speakerdeck.com/knsh14/go-code-review-comment-wofan-yi-sitahua">https://speakerdeck.com/knsh14/go-code-review-comment-wofan-yi-sitahua</a></p>
+
+<p>こういう記事があって、Effective Go 簡易版というか、Go のお作法初級編みたく書かれている。<br>
+<a href="https://github.com/golang/go/wiki/CodeReviewComments">Go Code review comments</a></p>
+
+<p>それを日本語訳した！<br>
+* <a href="http://qiita.com/knsh14/items/8b73b31822c109d4c497">Qiita の記事はこちら</a></p>
+
+<p>初学者のみならず、ある程度経験がある人でも読んで損はないと思いました。<br>
+認識を改めるというかね。ちなみに社内勉強会で使わせていただきました、感謝！</p>
+
+<h1 id="scala-から-go-にきた話-by-james-さん">Scala から Go にきた話 by James さん</h1>
+
+<p>エウレカの方。<br>
+スライドは発見できませんでした…。</p>
+
+<p>Scala が好きということは分かりました。<br>
+悲しいアリクイかわいい。</p>
+
+<h1 id="crypto-in-go-by-suzuki-kengo-さん">Crypto in Go by suzuki kengo さん</h1>
+
+<p>マネーフォワードの方。</p>
+
+<p>資料はこちら。アライさんですね。<br>
+<a href="https://paper.dropbox.com/doc/Crypto-in-Go-cWLX9XxHQm6bAPqrZYkjt">https://paper.dropbox.com/doc/Crypto-in-Go-cWLX9XxHQm6bAPqrZYkjt</a></p>
+
+<p>難しい。</p>
+
+<h1 id="まとめ">まとめ</h1>
+
+<p>ということで今回も参加させていただきました、ありがとうございました。<br>
+失敗談というかアンチパターンというか、そういう話が聞けたのは大きな収穫でした。</p>
+
+<p>また次回開催も楽しみにしています。 </p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">pankona</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-06-01T10:34:21+00:00" pubdate data-updated="true">Jun 1<span>st</span>, 2017</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/golang/'>golang</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pankona.github.io/blog/2017/06/01/golang-tokyo-6/" data-via="" data-counturl="http://pankona.github.io/blog/2017/06/01/golang-tokyo-6/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <!-- hatena bookmark -->
+  <a href="http://b.hatena.ne.jp/entry/http://pankona.github.io/blog/2017/06/01/golang-tokyo-6/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/03/01/golangtokyo-4/" title="Previous Post: golang.tokyo#4@eureka">&laquo; golang.tokyo#4@eureka</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  
+    <img src="http://www.gravatar.com/avatar/20c3394adc3ea5485023625de24b8486" alt="Gravatar of pankona " title="Gravatar of pankona" align="left" style="margin-right:10px;" />
+  
+  名前は pankona です。Manjaro on Vaio Pro 13 で日々遊んでます。西武新宿線ユーザ。Go 言語好き。
+  <br clear="left">
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/06/01/golang-tokyo-6/">golang.tokyo#6@DeNA</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/03/01/golangtokyo-4/">golang.tokyo#4@eureka</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/14/jp-input-on-gnome-app/">GNOMEアプリ上で日本語入力できなくなったときの対処メモ</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/12/12/golangtokyo-2/">golang.tokyo#2@はてな</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/11/14/usb-wifi-dongle/">Linux で 無線LAN の USB ドングルを使う</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/archlinux' style='font-size: 151.42857142857144%'>ArchLinux(6)</a> <a href='/blog/categories/cocos2d-x' style='font-size: 125.71428571428572%'>cocos2d-x(3)</a> <a href='/blog/categories/golang' style='font-size: 134.28571428571428%'>golang(4)</a> <a href='/blog/categories/octopresskasutamaizu' style='font-size: 134.28571428571428%'>Octopressカスタマイズ(4)</a> <a href='/blog/categories/raspberrypi' style='font-size: 160.0%'>RaspberryPi(7)</a> <a href='/blog/categories/sofalseta' style='font-size: 134.28571428571428%'>その他(4)</a> <a href='/blog/categories/gazietuto' style='font-size: 125.71428571428572%'>ガジェット(3)</a> </span>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/archlinux/'>ArchLinux (6)</a></li><li><a href='/blog/categories/cocos2d-x/'>cocos2d-x (3)</a></li><li><a href='/blog/categories/golang/'>golang (4)</a></li><li><a href='/blog/categories/octopresskasutamaizu/'>Octopressカスタマイズ (4)</a></li><li><a href='/blog/categories/raspberrypi/'>RaspberryPi (7)</a></li><li><a href='/blog/categories/sofalseta/'>その他 (4)</a></li><li><a href='/blog/categories/gazietuto/'>ガジェット (3)</a></li></ul>
+</section>
+<section>
+<a href="http://bookmeter.com/u/508456" title="pankonaの最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/508456.jpg" border="0" alt="pankonaの最近読んだ本"></a>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - pankona -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pankona-mcm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://pankona.github.io/blog/2017/06/01/golang-tokyo-6/';
+        var disqus_url = 'http://pankona.github.io/blog/2017/06/01/golang-tokyo-6/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

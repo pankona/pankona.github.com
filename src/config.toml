@@ -3,6 +3,8 @@ title = "make clean; make"
 theme = "material-design"
 hasCJKLanguage = true
 author = "pankona"
+pygmentscodefences = true
+pygmentsstyle = "monokai"
 
 [outputFormats]
 [outputFormats.RSS]

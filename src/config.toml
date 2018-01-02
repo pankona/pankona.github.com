@@ -1,0 +1,18 @@
+baseURL = "https://pankona.github.io"
+title = "make clean; make"
+theme = "material-design"
+hasCJKLanguage = true
+author = "pankona"
+
+[outputFormats]
+[outputFormats.RSS]
+mediaType = "application/rss"
+baseName = "atom"
+
+[params]
+  twitter = "@gohan_pan_gohan"
+  github = "pankona"
+  googleAnalyticsUserID = "UA-48476608-2"
+
+[permalinks]
+  posts = "/blog/:year/:month/:day/:title/"

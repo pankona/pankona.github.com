@@ -1,0 +1,39 @@
+current directory: /workspace/vendor/bundle/ruby/2.3.0/gems/thin-1.6.2/ext/thin_parser
+/root/.rbenv/versions/2.3.1/bin/ruby -r ./siteconf20161212-59-aie9bb.rb extconf.rb
+checking for main() in -lc... yes
+creating Makefile
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /workspace/vendor/bundle/ruby/2.3.0/extensions/x86_64-linux/2.3.0-static/thin-1.6.2/mkmf.log
+
+current directory: /workspace/vendor/bundle/ruby/2.3.0/gems/thin-1.6.2/ext/thin_parser
+make "DESTDIR=" clean
+
+current directory: /workspace/vendor/bundle/ruby/2.3.0/gems/thin-1.6.2/ext/thin_parser
+make "DESTDIR="
+compiling thin.c
+thin.c: In function ‘Thin_HttpParser_alloc’:
+thin.c:242:3: warning: implicit declaration of function ‘thin_http_parser_init’ [-Wimplicit-function-declaration]
+   thin_http_parser_init(hp);
+   ^
+thin.c: In function ‘Thin_HttpParser_finish’:
+thin.c:294:3: warning: implicit declaration of function ‘thin_http_parser_finish’ [-Wimplicit-function-declaration]
+   thin_http_parser_finish(http);
+   ^
+thin.c:296:10: warning: implicit declaration of function ‘thin_http_parser_is_finished’ [-Wimplicit-function-declaration]
+   return thin_http_parser_is_finished(http) ? Qtrue : Qfalse;
+          ^
+thin.c: In function ‘Thin_HttpParser_execute’:
+thin.c:334:5: warning: implicit declaration of function ‘thin_http_parser_execute’ [-Wimplicit-function-declaration]
+     thin_http_parser_execute(http, dptr, dlen, from);
+     ^
+thin.c:338:8: warning: implicit declaration of function ‘thin_http_parser_has_error’ [-Wimplicit-function-declaration]
+     if(thin_http_parser_has_error(http)) {
+        ^
+compiling parser.c
+linking shared-object thin_parser.so
+
+current directory: /workspace/vendor/bundle/ruby/2.3.0/gems/thin-1.6.2/ext/thin_parser
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 thin_parser.so ./.gem.20161212-59-1czys8f

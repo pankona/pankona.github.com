@@ -17,7 +17,7 @@ baseName = "atom"
   twitterName = "@gohan_pan_gohan"
   twitter = ""
   githubName = "pankona"
-  googleAnalyticsUserID = "UA-48476608-2"
+  google_analytics = "UA-48476608-2"
 
 [permalinks]
   posts = "/blog/:year/:month/:day/:filename/"

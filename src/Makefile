@@ -1,8 +1,8 @@
 
 all:
 	hugo
-	rm -rf $(CURDIR)/../docs
-	mv public $(CURDIR)/../docs
+	rm -rf $(CURDIR)/../public/*
+	mv public/* $(CURDIR)/../public/.
 
 serve:
 	hugo server -D

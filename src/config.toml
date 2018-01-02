@@ -15,9 +15,12 @@ baseName = "atom"
 [params]
   description = "Demo site for a hugo theme"
   twitterName = "@gohan_pan_gohan"
+  twitter = ""
   githubName = "pankona"
   googleAnalyticsUserID = "UA-48476608-2"
 
 [permalinks]
   posts = "/blog/:year/:month/:day/:filename/"
 
+[blackfriday]
+  extensions = ["hardLineBreak"]

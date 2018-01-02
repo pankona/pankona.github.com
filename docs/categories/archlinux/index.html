@@ -83,24 +83,24 @@
                     <div class="post-description">
                         
 
-<p>何が原因かハッキリしていないが、Linux をアップデート (パッケージの更新という意味) したときに
+<p>何が原因かハッキリしていないが、Linux をアップデート (パッケージの更新という意味) したときに<br />
 日本語が入力できなくなることがあった。</p>
 
-<p>起きたこととしては、
-* firefox 上では日本語入力可能 (direct input と日本語のトグル可能) 。
+<p>起きたこととしては、<br />
+* firefox 上では日本語入力可能 (direct input と日本語のトグル可能) 。<br />
 * Slack、chromium の上では日本語入力できない (direct input のみ可能) 。</p>
 
-<p>環境は、
-* Manjaro Linux (2016年12月あたり)
-* fcitx を使用
+<p>環境は、<br />
+* Manjaro Linux (2016年12月あたり)<br />
+* fcitx を使用<br />
 * 日本語入力は mozc</p>
 
 <p>方々ググって対処法を見つけたのでメモ。</p>
 
 <h2 id="dconf-editor-で設定を確認し-必要に応じて修正する">dconf Editor で設定を確認し、必要に応じて修正する</h2>
 
-<p>dconf Editor を開き、以下の設定を確認する。
-* <code>/org/gnome/settings-daemon/plugins/xsettings/overrides</code> を参照する
+<p>dconf Editor を開き、以下の設定を確認する。<br />
+* <code>/org/gnome/settings-daemon/plugins/xsettings/overrides</code> を参照する<br />
 * 値に <code>{'Gtk/IMModule': &lt;'fcitx'&gt;}</code> が入っているかどうか</p>
 
 <p>コマンドラインから確認する場合は以下のように入力する。</p>
@@ -109,7 +109,7 @@
 # (期待される出力) {'Gtk/IMModule': &lt;'fcitx'&gt;}
 </code></pre>
 
-<p>入ってなかったら、上記の値をコピペして設定する。
+<p>入ってなかったら、上記の値をコピペして設定する。<br />
 コマンドラインから設定する場合は以下のように入力する。</p>
 
 <pre><code>$ gsettings set org.gnome.settings-daemon.plugins.xsettings overrides &quot;{'Gtk/IMModule':&lt;'fcitx'&gt;}&quot;
@@ -120,10 +120,10 @@
 <h2 id="参考サイト">参考サイト</h2>
 
 <ul>
-<li><a href="https://wiki.archlinuxjp.org/index.php/Fcitx#Gnome-Shell">Fcitx - ArchWiki (日本語版)</a>
+<li><a href="https://wiki.archlinuxjp.org/index.php/Fcitx#Gnome-Shell">Fcitx - ArchWiki (日本語版)</a><br />
 
 <ul>
-<li>「Ctrl+Space が GTK のプログラムで機能しない」の項を参照。</li>
+<li>「Ctrl+Space が GTK のプログラムで機能しない」の項を参照。<br /></li>
 </ul></li>
 </ul>
 
@@ -149,7 +149,7 @@
                     <div class="post-description">
                         
 
-<p>Linux と銘打っておりますが、Manjro で試しています。
+<p>Linux と銘打っておりますが、Manjro で試しています。<br />
 本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。</p>
 
 <h2 id="使ったドングル二種">使ったドングル二種</h2>
@@ -157,32 +157,33 @@
 <p>訳あって二種類のドングルを使いました。いずれも I-O DATA 製。</p>
 
 <ul>
-<li>WN-AC433UM</li>
-<li>WN-G150UMK</li>
+<li>WN-AC433UM<br /></li>
+<li>WN-G150UMK<br />
+<br /></li>
 </ul>
 
 <h2 id="wn-ac433um-編">WN-AC433UM 編</h2>
 
-<p>とりあえずぶっ挿してみたところ、無線LAN デバイスとしては認識されなかった。
-つまりデフォルトの Manjro には WN-AC433UM のドライバが入っていなかったということ。
+<p>とりあえずぶっ挿してみたところ、無線LAN デバイスとしては認識されなかった。<br />
+つまりデフォルトの Manjro には WN-AC433UM のドライバが入っていなかったということ。<br />
 ドライバを入れていく。</p>
 
 <h3 id="wn-ac433um-は-rtl8192eu-というドライバで動いた">WN-AC433UM は rtl8192eu というドライバで動いた</h3>
 
-<p>rtl8192eu というドライバは <code>yaourt rtl8192eu</code> で一応インストールされるのであるが、
+<p>rtl8192eu というドライバは <code>yaourt rtl8192eu</code> で一応インストールされるのであるが、<br />
 それだけだと WN-AC433UM は認識されなかった。</p>
 
-<p>WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、
-<code>yaourt rtl8192eu</code> でインストールされるドライバではこれを認識するようになっていない。
+<p>WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、<br />
+<code>yaourt rtl8192eu</code> でインストールされるドライバではこれを認識するようになっていない。<br />
 (注: 2016.11.09 時点)</p>
 
-<p>なので、上記 idVendor、idProduct 値を認識するようにソースコードを書き換えた上で、
+<p>なので、上記 idVendor、idProduct 値を認識するようにソースコードを書き換えた上で、<br />
 ビルド・インストールする必要がある。ソースコードは以下から入手できる。</p>
 
-<p><a href="https://github.com/Mange/rtl8192eu-linux-driver">Mange/rtl8192eu-linux-driver - GitHub</a>
+<p><a href="https://github.com/Mange/rtl8192eu-linux-driver">Mange/rtl8192eu-linux-driver - GitHub</a><br />
 なお、リビジョンは <code>f016814</code> を使った。</p>
 
-<p>os_dep/linux/usb_intf.c に、以下のように追記する。
+<p>os_dep/linux/usb_intf.c に、以下のように追記する。<br />
 (注: 妥当か不明だがとりあえず以下の書き換えでうまくいった)</p>
 
 <pre><code>diff --git a/os_dep/linux/usb_intf.c b/os_dep/linux/usb_intf.c
@@ -211,30 +212,30 @@ $ sudo make install
 
 <h2 id="wn-g150umk-編">WN-G150UMK 編</h2>
 
-<p>上記 WN-AC433UM を認識させるにあたって散々ドライバをインストールしたせいなのであろうが、
+<p>上記 WN-AC433UM を認識させるにあたって散々ドライバをインストールしたせいなのであろうが、<br />
 こちらは挿しただけで認識されてしまった。</p>
 
 <h3 id="wn-g150umk-は-rtl8192cu-というドライバで動いている模様">WN-G150UMK は rtl8192cu というドライバで動いている模様</h3>
 
-<p>もしかしたらドライバをインストールする必要があるかもしれないのでメモしておくと、
+<p>もしかしたらドライバをインストールする必要があるかもしれないのでメモしておくと、<br />
 WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>lshw</code> コマンドで確認した。</p>
 
 <h2 id="ちなみに-wn-ac433um-は-5-ghz-にしか対応していない">ちなみに、WN-AC433UM は 5 GHz にしか対応していない</h2>
 
-<p>WN-AC433UM は 5GHz 帯「のみ」に対応しており、
-つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。
-2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、
+<p>WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br />
+つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。<br />
+2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、<br />
 ちょっと古めのルーターだったりが該当する。</p>
 
-<p>完全に自分の見落としであるのだが、我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、
-つまりせっかく頑張って WN-AC433UM を Linux に認識させたのであるが、日の目を見なかったのである…。
+<p>完全に自分の見落としであるのだが、我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、<br />
+つまりせっかく頑張って WN-AC433UM を Linux に認識させたのであるが、日の目を見なかったのである…。<br />
 悲しい。そんなわけで WN-G150UMK を書い直したが、こちらは快調に動いてます。ナイス。</p>
 
 <h2 id="参考リンク">参考リンク</h2>
 
 <ul>
-<li><a href="http://www.iodata.jp/product/network/adp/wn-ac433um/">WN-AC433UMシリーズ - I-O DATA</a></li>
-<li><a href="http://www.iodata.jp/lib/product/w/4078.htm">WN-G150UMK - I-O DATA</a></li>
+<li><a href="http://www.iodata.jp/product/network/adp/wn-ac433um/">WN-AC433UMシリーズ - I-O DATA</a><br /></li>
+<li><a href="http://www.iodata.jp/lib/product/w/4078.htm">WN-G150UMK - I-O DATA</a><br /></li>
 </ul>
 
                     </div>
@@ -259,23 +260,23 @@ WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>l
                     <div class="post-description">
                         
 
-<p>ブラウザはFirefoxを好んで使っている。
+<p>ブラウザはFirefoxを好んで使っている。<br />
 VimperatorとかPentadactylがあるおかげである。</p>
 
 <p>いままで放置していた問題があって、それは二本指スワイプの挙動設定。</p>
 
-<p>二本指で左右にスワイプしたときに、ヒストリーバック・ヒストリーフォワード、
-いわゆる「戻る」「進む」をやってほしいんだけど、これの設定がいまいちわからず、放置していた。
+<p>二本指で左右にスワイプしたときに、ヒストリーバック・ヒストリーフォワード、<br />
+いわゆる「戻る」「進む」をやってほしいんだけど、これの設定がいまいちわからず、放置していた。<br />
 ようやく設定方法がわかったので記しておく。そっこー忘れそうであるので。</p>
 
-<p>ちなみに、「on Arch Linux」と題しているが、おそらくArchに限らないLinux全般の話ではないかと想像。
+<p>ちなみに、「on Arch Linux」と題しているが、おそらくArchに限らないLinux全般の話ではないかと想像。<br />
 UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方向二本指スワイプが仕事をしてくれなかったので。</p>
 
 <p>では、以下設定手順。</p>
 
 <h2 id="synclientの確認と設定">synclientの確認と設定</h2>
 
-<p>そもそもタッチパッドのドライバーレベルで横方向スクロールが無効になっている可能性がある。というかなってた。
+<p>そもそもタッチパッドのドライバーレベルで横方向スクロールが無効になっている可能性がある。というかなってた。<br />
 なので、確認方法と設定変更方法。</p>
 
 <h4 id="synclientコマンドを打って水平方向二本指スクロールの設定を確認する">synclientコマンドを打って水平方向二本指スクロールの設定を確認する</h4>
@@ -284,7 +285,7 @@ UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方
 
 <p><code>$ synclient</code></p>
 
-<p>ずらずらっと出てくる内容のうち、<code>HorizTwoFingerScroll</code> が確認対象の項目。
+<p>ずらずらっと出てくる内容のうち、<code>HorizTwoFingerScroll</code> が確認対象の項目。<br />
 値が「0」だったら無効になっている。有効にしない限り、いくら頑張って横スワイプしても効かない。</p>
 
 <h4 id="synclientコマンドで水平方向二本指スクロールを有効にする">synclientコマンドで水平方向二本指スクロールを有効にする</h4>
@@ -297,34 +298,34 @@ UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方
 
 <h2 id="firefoxの設定">Firefoxの設定</h2>
 
-<p>さらにFirefoxの設定を変えてやる必要がある。
+<p>さらにFirefoxの設定を変えてやる必要がある。<br />
 設定内容は<a href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics - Arch Linux Wiki</a>、Firefox 17.0 and laterの項を参考にした。</p>
 
 <p>about:configを開く。設定内容は以下。</p>
 
 <h4 id="マウスホイールのアクションを変更する">マウスホイールのアクションを変更する</h4>
 
-<p><code>mousewheel.default.action.override_x = 2</code> とした。
+<p><code>mousewheel.default.action.override_x = 2</code> とした。<br />
 あんまりよく調べていないが、「2」が戻るアクションに対応している数字らしい。</p>
 
 <h4 id="スワイプ方向を逆にする">スワイプ方向を逆にする</h4>
 
-<p>デフォルトでは、左スワイプが「進む」、右スワイプが「戻る」になっている。
+<p>デフォルトでは、左スワイプが「進む」、右スワイプが「戻る」になっている。<br />
 逆な気がする。設定してこれを逆転させる。</p>
 
 <p><code>mousewheel.default.delta_multiplier_x = -100</code> とした。</p>
 
 <h4 id="感度を落とす">感度を落とす</h4>
 
-<p>デフォルトではものすごく感度がよい。
-良すぎてしまって縦スワイプがちょっと横にぶれただけで戻ったり進んだりする。
+<p>デフォルトではものすごく感度がよい。<br />
+良すぎてしまって縦スワイプがちょっと横にぶれただけで戻ったり進んだりする。<br />
 やりにくいので感度を落とす。</p>
 
 <p><code>mousewheel.default.delta_multiplier_x = -10</code> とした。</p>
 
 <h2 id="ここまでやって">ここまでやって</h2>
 
-<p>とりあえず望む形（二本指で左スワイプで戻る、右スワイプで進む）に設定できた。結構ハードルあった。。
+<p>とりあえず望む形（二本指で左スワイプで戻る、右スワイプで進む）に設定できた。結構ハードルあった。。<br />
 ちなみにこれ、Mac OS向けFirefoxならデフォルトの挙動な模様。何の差なのか。。。</p>
 
                     </div>
@@ -349,42 +350,45 @@ UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方
                     <div class="post-description">
                         
 
-<p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。
+<p>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。<br />
 具体的な要望としては、</p>
 
 <ul>
-<li>mozcを使いたい</li>
-<li>Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする）</li>
+<li>mozcを使いたい<br /></li>
+<li>Alt + Space でIMEを切り替えたい（Direct Inputと日本語入力をトグルする）<br />
+<br /></li>
 </ul>
 
-<p>という二点なのだが、後者の「Alt + Space」というキーバインドを設定する方法がわからず。。。
-きっとやり方があるというか、いままでごまかしごまかしやってきたのだが、
+<p>という二点なのだが、後者の「Alt + Space」というキーバインドを設定する方法がわからず。。。<br />
+きっとやり方があるというか、いままでごまかしごまかしやってきたのだが、<br />
 ついに気持ち悪さが先に立って、「やめてやるわ！」となったところ。</p>
 
-<p>で、IMとしてUIMを使ってみた。uim-mozc。
-そしたらいともたやすく Alt + Space でのトグルが設定できちゃったもんだから拍子抜けというか。
+<p>で、IMとしてUIMを使ってみた。uim-mozc。<br />
+そしたらいともたやすく Alt + Space でのトグルが設定できちゃったもんだから拍子抜けというか。<br />
 はじめからこれ使ってれば良かったね！しばらくこれでいきます。uim-mozc。</p>
 
-<p>備忘録的に、設定方法のメモ。
+<p>備忘録的に、設定方法のメモ。<br />
 Arch Linux向けです。</p>
 
 <h2 id="基本的にはwiki参照">基本的にはWiki参照</h2>
 
-<p>ブログに書いた内容というのはいずれ時代遅れになるので、、、
-やはり、Arch Wikiの<a href="https://wiki.archlinux.org/index.php/Input_Japanese_using_uim_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">uim-mozcの設定方法</a>を参照するのが確実。
+<p>ブログに書いた内容というのはいずれ時代遅れになるので、、、<br />
+やはり、Arch Wikiの<a href="https://wiki.archlinux.org/index.php/Input_Japanese_using_uim_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">uim-mozcの設定方法</a>を参照するのが確実。<br />
 うちもこれでいけた。</p>
 
 <h2 id="インストールしたパッケージ">インストールしたパッケージ</h2>
 
 <ul>
-<li>uim</li>
-<li>uim-mozc</li>
+<li>uim<br /></li>
+<li>uim-mozc<br />
+<br /></li>
 </ul>
 
 <h2 id="設定箇所">設定箇所</h2>
 
 <ul>
-<li>.xinitrc の記載</li>
+<li>.xinitrc の記載<br />
+<br /></li>
 </ul>
 
 <p>.xinitrcに以下を追記。uimを使う設定ですな。</p>
@@ -401,28 +405,31 @@ export XMODIFIERS='@im=uim'
 <p><code>uim-pref-gtk</code>で設定画面を出し、色々設定する。</p>
 
 <ul>
-<li>「Global settings」の設定。</li>
+<li>「Global settings」の設定。<br />
+<br /></li>
 </ul>
 
-<p>&ndash; Specify Default IMにチェックを入れる。
+<p>&ndash; Specify Default IMにチェックを入れる。<br />
   &ndash; Default input method を Mozc にする。</p>
 
 <ul>
-<li>「Mozc」の設定。</li>
+<li>「Mozc」の設定。<br />
+<br /></li>
 </ul>
 
-<p>&ndash; Default Input modeはDirect Inputに。
+<p>&ndash; Default Input modeはDirect Inputに。<br />
   &ndash; ついでにVIM協調モードも有効にしておく。</p>
 
 <ul>
-<li>「Mozc key bindings」の設定。</li>
+<li>「Mozc key bindings」の設定。<br />
+<br /></li>
 </ul>
 
 <p>&ndash; [Mozc] on/off、両方に&rdquo;&lt;Alt&gt;space&rdquo;を設定。</p>
 
 <h3 id="ここまでで">ここまでで</h3>
 
-<p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。
+<p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br />
 チャンスがあれば、他のIMも試してみよっかな。</p>
 
                     </div>
@@ -447,40 +454,40 @@ export XMODIFIERS='@im=uim'
                     <div class="post-description">
                         
 
-<p>Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。
-概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。
+<p>Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。<br />
+概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。<br />
 それは「タッチパッドの手のひら検知」。パームディテクト、Palm Detection、等と呼ばれる機能。</p>
 
 <h3 id="手のひら検知">手のひら検知？</h3>
 
 <p>もはや手のひら検知について触れる必要もなさそうだが、一応。</p>
 
-<p>Vaio Pro 13のタッチパッドはなかなか大きい。
-これは最近のノートPC、MBPとか他のUltraBookにも採用されていて流行と言ったら流行。
+<p>Vaio Pro 13のタッチパッドはなかなか大きい。<br />
+これは最近のノートPC、MBPとか他のUltraBookにも採用されていて流行と言ったら流行。<br />
 これ自体は割と私は好みで、二本指、三本指でのスワイプなんかもやりやすくてなかなかいい。</p>
 
-<p>ただ大きいタッチパッドには弊害もあって、キーボードを打ってるときに親指の付け根のあたりで触れちゃうってこと。
-触れちゃうとどうなるかっていうと、クリックした扱いになってしまって、つまりカーソルが飛ぶ。
+<p>ただ大きいタッチパッドには弊害もあって、キーボードを打ってるときに親指の付け根のあたりで触れちゃうってこと。<br />
+触れちゃうとどうなるかっていうと、クリックした扱いになってしまって、つまりカーソルが飛ぶ。<br />
 編集中に予期せぬ場所にカーソルが飛んでしまって、あれ、これどうなった、みたいなことになる。</p>
 
-<p>それを解決してくれるのが、手のひら検知の仕組み。
+<p>それを解決してくれるのが、手のひら検知の仕組み。<br />
 つまり意図したタッチでないと思われるものは無視してくれるというやつで、考えた人凄いと思います。</p>
 
 <h3 id="arch-linux-on-vaio-pro-13の場合">Arch Linux on Vaio Pro 13の場合</h3>
 
-<p>件の手のひら検知を有効にする仕組みがある（デフォルトではオフ）。
-synclient、PalmDetect、あたりでぐぐると結構出てくる。具体的には、
+<p>件の手のひら検知を有効にする仕組みがある（デフォルトではオフ）。<br />
+synclient、PalmDetect、あたりでぐぐると結構出てくる。具体的には、<br />
 <code>synclient PalamDetect=1</code> とかってやって手のひら検知を有効にする。する、のだが。</p>
 
-<p>なんか全然効いてない気がするんですけど・・・。ということで調べてみた。
+<p>なんか全然効いてない気がするんですけど・・・。ということで調べてみた。<br />
 ほんとに効いてるのかどうかを。</p>
 
 <h3 id="結論からいうと効いてなかった">結論からいうと効いてなかった</h3>
 
 <p>効いてなかったです。ちくしょうめ。やっぱりか。</p>
 
-<p>ドライバのソースコードに簡単にログを仕込んで確認してみたところ、やっぱり効いてなかった。
-Arch Linuxでタッチパッドのドライバーは、Synapticsが使われている（というか大体どこでもSynapticsか）。
+<p>ドライバのソースコードに簡単にログを仕込んで確認してみたところ、やっぱり効いてなかった。<br />
+Arch Linuxでタッチパッドのドライバーは、Synapticsが使われている（というか大体どこでもSynapticsか）。<br />
 ソースコードはこれ。Githubに公開されている。<a href="git:anongit.freedesktop.org/xorg/driverxf86-input-synaptics">xf86-input-synaptics</a></p>
 
 <p>なんで効かないかと言うと、の前に、ソースコードからどうやって手のひら検知をしているかを調べてみたのでそれをメモ。</p>
@@ -490,19 +497,20 @@ Arch Linuxでタッチパッドのドライバーは、Synapticsが使われて�
 <p>以下の3要素を考慮して手のひら検知としている模様。</p>
 
 <ul>
-<li>PalmDetectの設定が有効になっているか（synclient PalmDetect=1 で有効になるやつ）</li>
-<li>PalmMinZがしきい値を超えているか（これも synclient PalmMinZ=XXX で設定できる）</li>
-<li>PalmMinWidthがしきい値を超えているか（これも synclient PalmMinWidth=XXX で設定できる）</li>
+<li>PalmDetectの設定が有効になっているか（synclient PalmDetect=1 で有効になるやつ）<br /></li>
+<li>PalmMinZがしきい値を超えているか（これも synclient PalmMinZ=XXX で設定できる）<br /></li>
+<li>PalmMinWidthがしきい値を超えているか（これも synclient PalmMinWidth=XXX で設定できる）<br />
+<br /></li>
 </ul>
 
-<p>PalmMinZ は、どれくらい深く（強く？）タッチパッドが押されたら手のひらと判断するか、のしきい値。
+<p>PalmMinZ は、どれくらい深く（強く？）タッチパッドが押されたら手のひらと判断するか、のしきい値。<br />
 PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手のひらとみなしましょう、という判断のためのしきい値。</p>
 
 <h3 id="arch-linux-on-vaio-pro-13-が手のひら検知をしてくれない理由">Arch Linux on Vaio Pro 13 が手のひら検知をしてくれない理由</h3>
 
-<p>上記のしきい値のうち、どうやらPalmMinWidthのほうがおかしいっぽくて、
-どんな触り方をしても常に「0」で判定されてしまっている模様。
-ちなみに、SynapticsはPalmMinWidthが0のときは手のひらとして判断しないように実装されている。
+<p>上記のしきい値のうち、どうやらPalmMinWidthのほうがおかしいっぽくて、<br />
+どんな触り方をしても常に「0」で判定されてしまっている模様。<br />
+ちなみに、SynapticsはPalmMinWidthが0のときは手のひらとして判断しないように実装されている。<br />
 なので、PalmDetect、PalmMinZ、PalmMinWidth、どれをどの値にしても手のひら検知は効かないということである。ちくしょうめ。</p>
 
 <h3 id="どうすれば解決するのか">どうすれば解決するのか？</h3>
@@ -513,12 +521,12 @@ PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手の�
 
 <h4 id="それ以外の対処法">それ以外の対処法？</h4>
 
-<p>PalmMinWidthはもう一切判断に含めないようにソースコードを書き換えてみたが、、、
+<p>PalmMinWidthはもう一切判断に含めないようにソースコードを書き換えてみたが、、、<br />
 それってつまりタッチ深度だけで手のひらを検知するということであって、それはまあ微妙な感じ。</p>
 
 <h4 id="つまり">つまり</h4>
 
-<p><strong>残念ながら、手のひら検知がいまいちな件は解決できていない。</strong>なんとかする方法の調査はTo Be Continuedである。
+<p><strong>残念ながら、手のひら検知がいまいちな件は解決できていない。</strong>なんとかする方法の調査はTo Be Continuedである。<br />
 デュアルブートしているWindowsの側ではできているっぽいので、Arch Linux側でも出来ないことないと信じて。</p>
 
                     </div>

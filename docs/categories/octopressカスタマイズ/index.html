@@ -83,13 +83,13 @@
                     <div class="post-description">
                         
 
-<p>たまにはブログのカスタマイズをしてみる。
+<p>たまにはブログのカスタマイズをしてみる。<br />
 今回は読書メーターのブログパーツを追加してみた。</p>
 
-<p>サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。
+<p>サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。<br />
 文字ばっかだったブログにちょっと賑やかし感があって良い。</p>
 
-<p>例によって備忘録的にやり方を残しておく。
+<p>例によって備忘録的にやり方を残しておく。<br />
 Octopressに読書メーターのブログパーツを追加する方法。</p>
 
 <h3 id="読書メーターのアカウントを取得する">読書メーターのアカウントを取得する</h3>
@@ -98,8 +98,8 @@ Octopressに読書メーターのブログパーツを追加する方法。</p>
 
 <h3 id="ブログパーツを選ぶ">ブログパーツを選ぶ</h3>
 
-<p>読書メーターにログイン後、マイページに行ってみると、
-<strong>「ブログパーツ」</strong>と書いてあるところがある。
+<p>読書メーターにログイン後、マイページに行ってみると、<br />
+<strong>「ブログパーツ」</strong>と書いてあるところがある。<br />
 そこを見ると各種ブログパーツを見つけることが出来る。</p>
 
 <h3 id="octopressをカスタマイズして-サイドバーに出るように">Octopressをカスタマイズして、サイドバーに出るように</h3>
@@ -108,7 +108,7 @@ Octopressに読書メーターのブログパーツを追加する方法。</p>
 
 <h4 id="読書メーター用のhtmlを書く">読書メーター用のHTMLを書く。</h4>
 
-<p>中身は上記ブログパーツの内容をコピペしたものだが。
+<p>中身は上記ブログパーツの内容をコピペしたものだが。<br />
 ブログパーツとして「最近読んだ本」をチョイス。</p>
 
 <pre><code>&lt;section&gt;
@@ -131,8 +131,8 @@ Octopressに読書メーターのブログパーツを追加する方法。</p>
 
 <h3 id="ここまでで">ここまでで</h3>
 
-<p>最近読んだ本がサイドバーに表示されるように。
-ITっぽい本を並べたりすると、なんとなく技術的なブログな雰囲気が出て、
+<p>最近読んだ本がサイドバーに表示されるように。<br />
+ITっぽい本を並べたりすると、なんとなく技術的なブログな雰囲気が出て、<br />
 とてもいいんではないでしょうか。</p>
 
                     </div>
@@ -163,29 +163,29 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
 
 <p>具体的にどのようにうまく表示されないかというと、</p>
 
-<p>{% codeblock %}
-{% raw %}
-{% hogehoge %}
-{% endraw %}
+<p>{% codeblock %}<br />
+{% raw %}<br />
+{% hogehoge %}<br />
+{% endraw %}<br />
 {% endcodeblock %}</p>
 
-<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br>
+<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br><br />
 コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
 
 <p>結果として、</p>
 
-<p>{% codeblock %}
-{% raw %}
-{\% codeblock %}
-{\% raw %}
-{% hogehoge %}
-{\% endraw %}
-{\% endcodeblock %}
-{% endraw %}
+<p>{% codeblock %}<br />
+{% raw %}<br />
+{\% codeblock %}<br />
+{\% raw %}<br />
+{% hogehoge %}<br />
+{\% endraw %}<br />
+{\% endcodeblock %}<br />
+{% endraw %}<br />
 {% endcodeblock %}</p>
 
-<p>というので書くことができた。raw ~ endraw というのを使う。<br>
-ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br>
+<p>というので書くことができた。raw ~ endraw というのを使う。<br><br />
+ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br><br />
 ネストさせるのはどうやればいいのかな？</p>
 
 <h2 id="fenced-code-block-にファイル名が表示できない">Fenced Code Block にファイル名が表示できない</h2>
@@ -196,10 +196,10 @@ ITっぽい本を並べたりすると、なんとなく技術的なブログな
 
 <p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
 
-<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br>
+<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br><br />
 PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
 
-<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。
+<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。<br />
 <a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments - Nonsense By Me</a></p>
 
                     </div>
@@ -228,39 +228,39 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
 
-<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
+<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br />
 自分のブログ感が出て良い。</p>
 
 <p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
 
 <p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
 
-<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、
+<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br />
 それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
 
 <p>about.html はこんな感じに。</p>
 
-<p>{% codeblock %}
-{% raw %}
-<section>
-  <h1>About Me</h1>
-  {% if site.gravatar_email %}
-    <img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" />
-  {% endif %}
-  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
-  <br clear="left">
-</section>
-{% endraw %}
+<p>{% codeblock %}<br />
+{% raw %}<br />
+<section><br />
+  <h1>About Me</h1><br />
+  {% if site.gravatar_email %}<br />
+    <img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" /><br />
+  {% endif %}<br />
+  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。<br />
+  <br clear="left"><br />
+</section><br />
+{% endraw %}<br />
 {% endcodeblock %}</p>
 
 <h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
 
-<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br>
+<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br />
 設定方法をざっくり書いておくと、</p>
 
-<p><span>
-1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる
-2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する
+<p><span><br />
+1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br />
+2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br />
 </span></p>
 
 <p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
@@ -285,10 +285,10 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
                     </header>
 
                     <div class="post-description">
-                        <p>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。
+                        <p>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。<br />
 見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。</p>
 
-<p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。
+<p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。<br />
 <a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
 
 <p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>

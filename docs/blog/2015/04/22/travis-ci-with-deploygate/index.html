@@ -79,18 +79,19 @@
                     <div class="post-description">
                         
 
-<p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。
+<p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。<br />
 今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。</p>
 
 <h2 id="だいたいのやり方">だいたいのやり方</h2>
 
 <ul>
-<li>ビルドが成功したら<code>curl</code>コマンドにてDeployGateにAPKをアップロードする。</li>
-<li>アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。</li>
-<li>API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
+<li>ビルドが成功したら<code>curl</code>コマンドにてDeployGateにAPKをアップロードする。<br /></li>
+<li>アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。<br /></li>
+<li>API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。<br />
 
 <ul>
-<li>暗号化には<code>travis</code>コマンドを用いる。</li>
+<li>暗号化には<code>travis</code>コマンドを用いる。<br />
+<br /></li>
 </ul></li>
 </ul>
 
@@ -169,23 +170,23 @@ after_success:
 
 <p>以下のコマンドでDeployGateのAPI Keyを暗号化する。</p>
 
-<p><code>$ gem install travis</code> # travisコマンドを使えるようにする。
+<p><code>$ gem install travis</code> # travisコマンドを使えるようにする。<br />
 <code>$ travis encrypt DEPLOYGATE_TOKEN={My DeployGate API Key}</code> # DeployGateで確認したAPI Keyを暗号化するコマンド（中括弧はいらない）。</p>
 
 <p>このコマンドで得られた文字列をそのまま.travis.ymlに貼っつければOKである。</p>
 
 <h3 id="いつアップロードするか">いつアップロードするか</h3>
 
-<p>以下の条件を満たした場合のみ、APKのアップロードを行うようにした。
-これは、Pull Requestがmasterにマージされたとき、を意味している（つもり）。
+<p>以下の条件を満たした場合のみ、APKのアップロードを行うようにした。<br />
+これは、Pull Requestがmasterにマージされたとき、を意味している（つもり）。<br />
 <code>&quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ]</code></p>
 
-<p>これをやっとかないと、ブランチにコミットをPUSHしたタイミングだったりPull Requestを作ったタイミングだったり、でアップロードが走る。
+<p>これをやっとかないと、ブランチにコミットをPUSHしたタイミングだったりPull Requestを作ったタイミングだったり、でアップロードが走る。<br />
 個人的にはやり過ぎ感があったので、APKはmasterからだけ作ればいいやという制限を施した。</p>
 
 <h3 id="これがそこそこ楽だと思います">これがそこそこ楽だと思います</h3>
 
-<p>AndroidアプリにAPKをいちいち頑張って転送しなくても、開発中アプリをインストールすることができるようになった。
+<p>AndroidアプリにAPKをいちいち頑張って転送しなくても、開発中アプリをインストールすることができるようになった。<br />
 ちなみに、アップロードされたAPKはDeployGateアプリ経由で取得することになる。</p>
 
 <p>今回はここまで。</p>

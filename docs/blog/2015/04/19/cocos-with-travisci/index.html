@@ -79,32 +79,32 @@
                     <div class="post-description">
                         
 
-<p>引き続きcocos2d-xを使ってブロック崩しを作っている。
+<p>引き続きcocos2d-xを使ってブロック崩しを作っている。<br />
 かれこれ２ヶ月あまりが経過した。ほぼ通勤時間でのみ作っている。</p>
 
-<p>いまのところの作業の流れとしては、
-* まずLinux向けにビルドして動作確認
-* 問題なさそうであれば、Android向けのビルドを実施
+<p>いまのところの作業の流れとしては、<br />
+* まずLinux向けにビルドして動作確認<br />
+* 問題なさそうであれば、Android向けのビルドを実施<br />
 * なんとかして実機にAPKを移し、インストールする</p>
 
-<p>という手順なのであるが、実機へのデプロイがなかなか面倒である。
-基本的に電車内なので、ケーブルをスマホとPCに繋いで〜、というひと手間がなかなか面倒である。
+<p>という手順なのであるが、実機へのデプロイがなかなか面倒である。<br />
+基本的に電車内なので、ケーブルをスマホとPCに繋いで〜、というひと手間がなかなか面倒である。<br />
 すると端末間のファイル共有だったり、原始的にメール越しにAPK共有、等があるが、、、やはり面倒である。</p>
 
-<p>デプロイもっと楽にする手段としてDeployGateさんを使わせてもらうという手がある。
+<p>デプロイもっと楽にする手段としてDeployGateさんを使わせてもらうという手がある。<br />
 これを用いると、変更をコミットするとそれだけで最新版APKがメールで送られてくるっていうようになるようである。</p>
 
-<p>なので今回はこれを導入してみることにした。流れは以下のような感じになる予定である。
-* PC上にてcocos2d-xでアプリ作成。ソースをGithubにPush。
-* Travis CIでビルド。
-* ビルド成果物をTravis CIがDeployGateに送信。
+<p>なので今回はこれを導入してみることにした。流れは以下のような感じになる予定である。<br />
+* PC上にてcocos2d-xでアプリ作成。ソースをGithubにPush。<br />
+* Travis CIでビルド。<br />
+* ビルド成果物をTravis CIがDeployGateに送信。<br />
 * DeployGateがわしのスマホにメールを送信（APK添付）。</p>
 
 <p>以下、長文。</p>
 
 <h2 id="cocos2d-x-travis-ci">cocos2d-x + Travis CI</h2>
 
-<p>CI環境としてTravis CIをチョイスした。無料で使えるからである（Publicなリポジトリ限定かな）。
+<p>CI環境としてTravis CIをチョイスした。無料で使えるからである（Publicなリポジトリ限定かな）。<br />
 初のTravis CI利用ということもあり、なかなかに躓いたというか知らんことが多かったので、備忘録を残す。</p>
 
 <h3 id="そもそもtravis-ciに何をしてもらえるか">そもそもTravis CIに何をしてもらえるか</h3>
@@ -112,14 +112,15 @@
 <p>ちょいちょい試してみたところ、以下のような感じである。</p>
 
 <ul>
-<li>GithubへのPushをトリガーにして自動的にビルド実施。
+<li>GithubへのPushをトリガーにして自動的にビルド実施。<br />
 
 <ul>
-<li>ビルドに限らず、任意のScriptを実行可能。自動テストなんかも行うようにするとなお吉。</li>
-<li>ビルド前処理、後処理、など、割と細かくステージ分けがされている。</li>
+<li>ビルドに限らず、任意のScriptを実行可能。自動テストなんかも行うようにするとなお吉。<br /></li>
+<li>ビルド前処理、後処理、など、割と細かくステージ分けがされている。<br /></li>
 </ul></li>
-<li>ビルド失敗、成功の旨をメールにて通知。</li>
-<li>masterだけでなく、他のブランチへのPushに対しても同様の処理をしてくれる。</li>
+<li>ビルド失敗、成功の旨をメールにて通知。<br /></li>
+<li>masterだけでなく、他のブランチへのPushに対しても同様の処理をしてくれる。<br />
+<br /></li>
 </ul>
 
 <p>ざっくりだがこんな感じだろうと。無料で使えるにしては十分かな。</p>
@@ -129,17 +130,18 @@
 <p>設定手順はこんな感じ。</p>
 
 <ol>
-<li>Travis CIのWebサイトにて、監視してほしいリポジトリの設定をする。</li>
-<li>リポジトリのトップに .travis.yml を置く。</li>
-<li>あとはソースをプッシュするだけ。</li>
+<li>Travis CIのWebサイトにて、監視してほしいリポジトリの設定をする。<br /></li>
+<li>リポジトリのトップに .travis.yml を置く。<br /></li>
+<li>あとはソースをプッシュするだけ。<br />
+<br /></li>
 </ol>
 
-<p>(1)と(3)は別に問題ないと思われる。問題は(2)である。
+<p>(1)と(3)は別に問題ないと思われる。問題は(2)である。<br />
 以下、.travis.ymlの内容について書く。</p>
 
 <h3 id="ビルドパスした-travis-yml-はこれ">ビルドパスした .travis.yml はこれ</h3>
 
-<p>いかにもやっつけ感満載でありつつ、とりあえずビルドパスするところまでいけた。
+<p>いかにもやっつけ感満載でありつつ、とりあえずビルドパスするところまでいけた。<br />
 記念に貼り付けておく。もしかして誰かの役に立つことも願いつつ。</p>
 
 <pre><code>language: android
@@ -190,19 +192,19 @@ script:
 
 <h4 id="travis-ciは何で動いてるんだろ">Travis CIは何で動いてるんだろ</h4>
 
-<p>Ubuntu 14.04（64bit）らしい。
+<p>Ubuntu 14.04（64bit）らしい。<br />
 なので各種Linuxのコマンドは使える。</p>
 
 <h4 id="cocosコマンド使えるようにする">cocosコマンド使えるようにする？</h4>
 
-<p>cocos2d-xの開発では、cocosコマンドによるビルドを使うのが便利である。
+<p>cocos2d-xの開発では、cocosコマンドによるビルドを使うのが便利である。<br />
 ただし、ちょっと環境構築が面倒な一面もある。</p>
 
-<p>上記のymlでは、結果的にcocosコマンドを使える状態にしている。
-「Travis CIはAndroidのビルドをサポートしている」ようなのだが、なのでもしかしたら、
+<p>上記のymlでは、結果的にcocosコマンドを使える状態にしている。<br />
+「Travis CIはAndroidのビルドをサポートしている」ようなのだが、なのでもしかしたら、<br />
 cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたりでなんとかできるのかもしれない。</p>
 
-<p>と思ったのだが、どうやらNativeビルドには対応していないようである（あらかじめ用意されてはいない）。
+<p>と思ったのだが、どうやらNativeビルドには対応していないようである（あらかじめ用意されてはいない）。<br />
 なので、おとなしくcocosコマンドを使う方針で設定してみた。</p>
 
 <h4 id="ndkを解凍するときにtravis-ciがerror-137で終わる">NDKを解凍するときにTravis CIがerror 137で終わる</h4>
@@ -214,24 +216,24 @@ cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたり
     - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
 </code></pre>
 
-<p>解凍時にログをリダイレクトしているが、これをしないとログが大量に出過ぎることが原因でTravis CIに怒られ、ビルドが失敗に終わる。
+<p>解凍時にログをリダイレクトしているが、これをしないとログが大量に出過ぎることが原因でTravis CIに怒られ、ビルドが失敗に終わる。<br />
 それとは別に、解凍にメモリをくいすぎて、いわゆるメモリショートでプロセスが殺されるのがerror 137の原因らしい。。。</p>
 
-<p><code>sudo: required</code> をファイルの冒頭に書いていたのであるが、それを消したらerror 137は解消した。
+<p><code>sudo: required</code> をファイルの冒頭に書いていたのであるが、それを消したらerror 137は解消した。<br />
 意味不明だが、回避策もよくわからないのでもう追っかけるのはやめた。。。</p>
 
 <h4 id="android-sdkはあえて用意しなくていい">Android SDKはあえて用意しなくていい</h4>
 
 <p>NDKは自前で用意する必要があるが、Android SDKはTravis CI側で用意してくれているので、あえて自前で用意しなくてもいい。</p>
 
-<p>というか、Android SDKをダウンロード → Update SDK の流れを実施すると、今度はストレージ容量を圧迫してしまうため、
-後続の処理（git submodule）実行時にストレージ容量不足でビルドが失敗に終わる。
+<p>というか、Android SDKをダウンロード → Update SDK の流れを実施すると、今度はストレージ容量を圧迫してしまうため、<br />
+後続の処理（git submodule）実行時にストレージ容量不足でビルドが失敗に終わる。<br />
 有料にすれば解決するのかな？とりあえずわしの環境ではAndroid SDKを自前で準備することは出来なかった。。</p>
 
 <h4 id="gitスキームを用いているsubmodule取得に失敗する">gitスキームを用いているsubmodule取得に失敗する</h4>
 
-<p>SSH鍵の関係で、gitスキームを用いているsubmoduleの取得に失敗する。
-なのでgitを用いてる部分はhttpsに無理やり書き換えている。以下の部分である。
+<p>SSH鍵の関係で、gitスキームを用いているsubmoduleの取得に失敗する。<br />
+なのでgitを用いてる部分はhttpsに無理やり書き換えている。以下の部分である。<br />
 涙ぐましい。</p>
 
 <pre><code># Use sed to replace the SSH URL with the public URL, then initialize submodules
@@ -240,9 +242,9 @@ cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたり
 
 <h4 id="環境変数設定を頑張る">環境変数設定を頑張る</h4>
 
-<p>cocos2d設定の過程で<code>setup.py</code>を実行するところがあるが、こいつは<code>.bashrc</code>を書き換える。
-<code>.bashrc</code>内に<code>export</code>文がいくつか追加される。本来、<code>source ~/.bashrc</code>等とやれば環境変数が有効になるのであるが、、、
-Travis CIのScript上では効かないので、しかたなく<code>.bashrc</code>に追記されるものと同等の設定を<code>.travis.yml</code>にて実施した。
+<p>cocos2d設定の過程で<code>setup.py</code>を実行するところがあるが、こいつは<code>.bashrc</code>を書き換える。<br />
+<code>.bashrc</code>内に<code>export</code>文がいくつか追加される。本来、<code>source ~/.bashrc</code>等とやれば環境変数が有効になるのであるが、、、<br />
+Travis CIのScript上では効かないので、しかたなく<code>.bashrc</code>に追記されるものと同等の設定を<code>.travis.yml</code>にて実施した。<br />
 以下の部分である。</p>
 
 <pre><code>    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
@@ -253,18 +255,18 @@ Travis CIのScript上では効かないので、しかたなく<code>.bashrc</co
     - export PATH=$PATH:$ANT_ROOT
 </code></pre>
 
-<p>ここまでいくと、Travis CI上で<code>cocos</code>コマンドが使えるようになる。
+<p>ここまでいくと、Travis CI上で<code>cocos</code>コマンドが使えるようになる。<br />
 <code>cocos compile -p android -j 8</code>でビルド実行。APKが生成される（デバッグ版）はずである。</p>
 
-<p>成果物がでてくるところまできたので、Travis CIの設定はひとまず以上とした。
+<p>成果物がでてくるところまできたので、Travis CIの設定はひとまず以上とした。<br />
 おかげさまで、リポジトリにTravis CIバッヂを貼ることができた。</p>
 
 <p><a href="https://github.com/pankona/KonaReflection">https://github.com/pankona/KonaReflection</a></p>
 
 <h4 id="deploygateさんへのデプロイは">DeployGateさんへのデプロイは</h4>
 
-<p>ビルド成功の後、curlコマンドでAPKをDeployGateさんへ送信すればいい模様。
-できたらまた躓きポイントを載せていこうと思う。
+<p>ビルド成功の後、curlコマンドでAPKをDeployGateさんへ送信すればいい模様。<br />
+できたらまた躓きポイントを載せていこうと思う。<br />
 追記：DeployGateさんへのアップロードについては<a href="http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/">次回記事</a>も見てね。</p>
 
 <p>今回はここまで。</p>

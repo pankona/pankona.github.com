@@ -1,0 +1,3 @@
+[submodule "src/themes/material-design"]
+	path = src/themes/material-design
+	url = git@github.com:pankona/material-design.git

@@ -5,10 +5,19 @@
     <link>https://pankona.github.io/posts/</link>
     <description>Recent content in Posts on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 01 Jun 2017 19:34:21 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jan 2018 13:32:34 +0900</lastBuildDate>
     
 	<atom:link href="https://pankona.github.io/posts/atom.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ブログ生成を Octopress から Hugo に移行</title>
+      <link>https://pankona.github.io/blog/2018/01/02/my-first-post-by-hugo/</link>
+      <pubDate>Tue, 02 Jan 2018 13:32:34 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2018/01/02/my-first-post-by-hugo/</guid>
+      <description>いままで本ブログは Octopress を使って生成していたのであるが、 久々に動かしたり別のPCでやったりするときに上手く動かないことがままあり、まあまあストレ</description>
+    </item>
     
     <item>
       <title>golang.tokyo#6@DeNA</title>

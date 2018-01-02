@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts &middot; make clean; make</title>
 
-    <meta name="description" content="Demo site for a hugo theme">
+    <meta name="description" content="">
 
     <meta name="generator" content="Hugo 0.32" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Posts &middot; make clean; make">
-    <meta name="twitter:description" content="Demo site for a hugo theme">
+    <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
     <meta property="og:title" content="Posts &middot; make clean; make">
-    <meta property="og:description" content="Demo site for a hugo theme">
+    <meta property="og:description" content="">
 
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div class="header">
         <hgroup>
             <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
-            <h2 class="brand-tagline"> Demo site for a hugo theme </h2>
+            <h2 class="brand-tagline"></h2>
         </hgroup>
 
         <nav class="nav">
@@ -51,7 +51,7 @@
                 
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://pankona.github.io/index.xml"><i class="fa fa-rss"></i> rss</a>
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> rss</a>
                 </li>
             </ul>
         </nav>
@@ -63,6 +63,69 @@
         <div>
             
             <div class="posts">
+                
+                <h1 class="content-subhead">23 Jul 2014, 21:54</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/07/23/raspi-touch-panel/" class="post-title">PiTFTのタッチパネルを動作させる</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-RaspberryPi" href="https://pankona.github.io/categories/raspberrypi">RaspberryPi</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>前回に引き続き、PiTFTの話題。</p>
+
+<p>前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。<br />
+タッチパネルの設定がまだだったので、手順を簡単に記しておく。</p>
+
+<p>例によって、Raspberry PiにはArch Linuxが載っている前提。</p>
+
+<h3 id="タッチパネルのドライバーをロードする">タッチパネルのドライバーをロードする</h3>
+
+<p>前回、FBTFTがビルトインされているカーネルを以下のコマンドでインストールした。</p>
+
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
+
+<p>これが正しく入っていれば、タッチパネルのドライバもカーネルに含まれているはず。<br />
+ただし、画面に何かを表示させる時と異なり、手動でドライバをロードする必要がある。</p>
+
+<p>以下のコマンドで、タッチパネルのドライバをロードする。</p>
+
+<p>@@@@ 忘れたのであとで追記する @@@@</p>
+
+<p>基本的にはこれだけで動作すると思われる。<br />
+例によって<a href="https://github.com/notro/fbtft/wiki">notroさんのところのWiki</a>に載っている内容だが、<br />
+notroさんのところは充実しすぎて逆に迷う気がするので、備忘録的に残しておくことにする。。</p>
+
+<h3 id="動いているか確かめる方法">動いているか確かめる方法</h3>
+
+<p>evtestを用いて確かめられる。<br />
+evtestを起動したのちにタッチパネルをぐりぐり触ってみると、<br />
+タッチイベントの詳細がコンソールに出力される。</p>
+
+<p>また、正常にドライバがロードされると、<code>/dev/input/touchpanel</code>なるファイルが現れるはずである。<br />
+ちなみにこれはeventXへのシンボリックリンクになっている。<br />
+このファイルの有無でもドライバのロードが正しく行われたか判断できると思われる。</p>
+
+<h3 id="要追記事項">要追記事項</h3>
+
+<ul>
+<li>ドライバロードのコマンドをちゃんと確認する。<br /></li>
+<li>キャリブレーション（回転した画面への対応）の方法。<br /></li>
+</ul>
+
+                    </div>
+                </section>
                 
                 <h1 class="content-subhead">17 Jul 2014, 21:11</h1>
                 <section class="post">
@@ -442,64 +505,6 @@ export XMODIFIERS='@im=uim'
 
 <p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br />
 チャンスがあれば、他のIMも試してみよっかな。</p>
-
-                    </div>
-                </section>
-                
-                <h1 class="content-subhead">19 May 2014, 21:21</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2014/05/19/about-google-search/" class="post-title">Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
-
-<h2 id="自分のページがgoogle検索にヒットしない理由">自分のページがGoogle検索にヒットしない理由</h2>
-
-<p>なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、<br />
-いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、<br />
-いやでもなんで引っかからないんだろう、と思って調査をしていたところ、</p>
-
-<h3 id="githubのリポジトリはgoogle日本の検索に引っかからない">GithubのリポジトリはGoogle日本の検索に引っかからない</h3>
-
-<p>といった記事を見つけた。ほんまかいな？<br />
-もしかしてそのせいでうちのページはGoogleに引っかからないんじゃああるまいか？<br />
-（Github pagesを使って公開しているページなので）</p>
-
-<p>等と考えつつ、調査を続行していったところ、、、</p>
-
-<h3 id="結論からすると-githubのリポジトリはgoogle日本の検索にちゃんと引っかかる">結論からすると、GithubのリポジトリはGoogle日本の検索にちゃんと引っかかる。</h3>
-
-<p>ただし条件がある模様。それは（おそらく）、</p>
-
-<p><strong>ページ（リポジトリの場合はREADMEかな？）に日本語が含まれていること</strong></p>
-
-<p>つまり、Google日本の検索に引っかからない、というよりは、<br />
-<strong>&ldquo;日本語のページを検索&rdquo;</strong>に引っかからない、ということである模様。<br />
-全編英語で書いてたら英語のページと判断して、&rdquo;日本語のページを検索&rdquo;には載せない、ってことかなー。<br />
-そして、Google日本の検索は、おそらくデフォルトは&rdquo;日本語のページを検索&rdquo;になってる。という話。</p>
-
-<p>加えて、GithubのリポジトリのREADMEなんかは、英語だけで書かれているケースが多い。<br />
-だからGoogle日本を使ってそのまま検索をしていると、Githubのページがあんまり出てこないという現象が。</p>
-
-<p>だので、英語だけで書かれたGithubのページも、検索オプションで言語に依らない検索にしてあげれば、Google日本の検索でも出てきます。</p>
-
-<h3 id="じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか">じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？</h3>
-
-<p>自分のGithubのリポジトリに日本人を呼び込みたい！と思ったら、READMEに日本語をちょっと混ぜてあげればリーチできる人が増えるかも？<br />
-と思っているがどうか。たぶん、おそらく、きっと、効果あると思われる。つまり自信ない。<br />
-自分のリポジトリ使って実験してみます。そのうち調査結果を書きます。</p>
 
                     </div>
                 </section>

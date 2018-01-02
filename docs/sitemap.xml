@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://pankona.github.io/blog/2018/01/02/my-first-post-by-hugo/</loc>
+    <lastmod>2018-01-02T13:32:34+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://pankona.github.io/blog/2017/06/01/golangtokyo-6/</loc>
     <lastmod>2017-06-01T19:34:21+09:00</lastmod>
   </url>
@@ -197,6 +202,18 @@
   </url>
   
   <url>
+    <loc>https://pankona.github.io/categories/hugo/</loc>
+    <lastmod>2018-01-02T13:32:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pankona.github.io/categories/octopress/</loc>
+    <lastmod>2018-01-02T13:32:34+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA/</loc>
     <lastmod>2014-10-01T22:41:26+09:00</lastmod>
     <priority>0</priority>
@@ -204,7 +221,7 @@
   
   <url>
     <loc>https://pankona.github.io/posts/</loc>
-    <lastmod>2017-06-01T19:34:21+09:00</lastmod>
+    <lastmod>2018-01-02T13:32:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -221,13 +238,13 @@
   
   <url>
     <loc>https://pankona.github.io/</loc>
-    <lastmod>2017-06-01T19:34:21+09:00</lastmod>
+    <lastmod>2018-01-02T13:32:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96/</loc>
-    <lastmod>2016-04-18T19:34:12+09:00</lastmod>
+    <lastmod>2018-01-02T13:32:34+09:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts &middot; make clean; make</title>
 
-    <meta name="description" content="Demo site for a hugo theme">
+    <meta name="description" content="">
 
     <meta name="generator" content="Hugo 0.32" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Posts &middot; make clean; make">
-    <meta name="twitter:description" content="Demo site for a hugo theme">
+    <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
     <meta property="og:title" content="Posts &middot; make clean; make">
-    <meta property="og:description" content="Demo site for a hugo theme">
+    <meta property="og:description" content="">
 
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div class="header">
         <hgroup>
             <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
-            <h2 class="brand-tagline"> Demo site for a hugo theme </h2>
+            <h2 class="brand-tagline"></h2>
         </hgroup>
 
         <nav class="nav">
@@ -51,7 +51,7 @@
                 
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://pankona.github.io/index.xml"><i class="fa fa-rss"></i> rss</a>
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> rss</a>
                 </li>
             </ul>
         </nav>
@@ -63,6 +63,117 @@
         <div>
             
             <div class="posts">
+                
+                <h1 class="content-subhead">14 Nov 2016, 20:14</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2016/11/14/usb-wifi-dongle/" class="post-title">Linux で 無線LAN の USB ドングルを使う</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-ArchLinux" href="https://pankona.github.io/categories/archlinux">ArchLinux</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Linux と銘打っておりますが、Manjro で試しています。<br />
+本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。</p>
+
+<h2 id="使ったドングル二種">使ったドングル二種</h2>
+
+<p>訳あって二種類のドングルを使いました。いずれも I-O DATA 製。</p>
+
+<ul>
+<li>WN-AC433UM<br /></li>
+<li>WN-G150UMK<br />
+<br /></li>
+</ul>
+
+<h2 id="wn-ac433um-編">WN-AC433UM 編</h2>
+
+<p>とりあえずぶっ挿してみたところ、無線LAN デバイスとしては認識されなかった。<br />
+つまりデフォルトの Manjro には WN-AC433UM のドライバが入っていなかったということ。<br />
+ドライバを入れていく。</p>
+
+<h3 id="wn-ac433um-は-rtl8192eu-というドライバで動いた">WN-AC433UM は rtl8192eu というドライバで動いた</h3>
+
+<p>rtl8192eu というドライバは <code>yaourt rtl8192eu</code> で一応インストールされるのであるが、<br />
+それだけだと WN-AC433UM は認識されなかった。</p>
+
+<p>WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、<br />
+<code>yaourt rtl8192eu</code> でインストールされるドライバではこれを認識するようになっていない。<br />
+(注: 2016.11.09 時点)</p>
+
+<p>なので、上記 idVendor、idProduct 値を認識するようにソースコードを書き換えた上で、<br />
+ビルド・インストールする必要がある。ソースコードは以下から入手できる。</p>
+
+<p><a href="https://github.com/Mange/rtl8192eu-linux-driver">Mange/rtl8192eu-linux-driver - GitHub</a><br />
+なお、リビジョンは <code>f016814</code> を使った。</p>
+
+<p>os_dep/linux/usb_intf.c に、以下のように追記する。<br />
+(注: 妥当か不明だがとりあえず以下の書き換えでうまくいった)</p>
+
+<pre><code>diff --git a/os_dep/linux/usb_intf.c b/os_dep/linux/usb_intf.c
+index 5a62f24..7138a26 100644
+--- a/os_dep/linux/usb_intf.c
++++ b/os_dep/linux/usb_intf.c
+@@ -220,6 +220,8 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
+        {USB_DEVICE(0x2357, 0x0109),.driver_info = RTL8192E}, /* TP-Link - Cameo */
+        /*=== PLANEX ===========*/
+        {USB_DEVICE(0x2019, 0xab33),.driver_info = RTL8192E}, /* PLANEX - GW-300S Katana */
++       /*=== I-O DATA ===========*/
++       {USB_DEVICE(0x04bb, 0x0959),.driver_info = RTL8192E}, /* I-O DATA */
+ #endif
+ 
+ #ifdef CONFIG_RTL8723B
+</code></pre>
+
+<p>ビルドし、インストールする。</p>
+
+<pre><code>$ cd rtl8192eu-linux-driver
+$ make
+$ sudo make install
+</code></pre>
+
+<p>再起動すると、無線LAN ドングルを NIC として認識するようになった。</p>
+
+<h2 id="wn-g150umk-編">WN-G150UMK 編</h2>
+
+<p>上記 WN-AC433UM を認識させるにあたって散々ドライバをインストールしたせいなのであろうが、<br />
+こちらは挿しただけで認識されてしまった。</p>
+
+<h3 id="wn-g150umk-は-rtl8192cu-というドライバで動いている模様">WN-G150UMK は rtl8192cu というドライバで動いている模様</h3>
+
+<p>もしかしたらドライバをインストールする必要があるかもしれないのでメモしておくと、<br />
+WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>lshw</code> コマンドで確認した。</p>
+
+<h2 id="ちなみに-wn-ac433um-は-5-ghz-にしか対応していない">ちなみに、WN-AC433UM は 5 GHz にしか対応していない</h2>
+
+<p>WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br />
+つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。<br />
+2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、<br />
+ちょっと古めのルーターだったりが該当する。</p>
+
+<p>完全に自分の見落としであるのだが、我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、<br />
+つまりせっかく頑張って WN-AC433UM を Linux に認識させたのであるが、日の目を見なかったのである…。<br />
+悲しい。そんなわけで WN-G150UMK を書い直したが、こちらは快調に動いてます。ナイス。</p>
+
+<h2 id="参考リンク">参考リンク</h2>
+
+<ul>
+<li><a href="http://www.iodata.jp/product/network/adp/wn-ac433um/">WN-AC433UMシリーズ - I-O DATA</a><br /></li>
+<li><a href="http://www.iodata.jp/lib/product/w/4078.htm">WN-G150UMK - I-O DATA</a><br /></li>
+</ul>
+
+                    </div>
+                </section>
                 
                 <h1 class="content-subhead">25 Oct 2016, 19:38</h1>
                 <section class="post">
@@ -813,89 +924,6 @@ Yahoo を表示してみた様子。画面が広いため表示できる情報�
 <p>使い方が間違っていなければ（変な期待を持たなければ）、性能がいまいちとはいえ、<br />
 十分快適に使っていけるポテンシャルを持っているという印象でした。<br />
 今回はこのへんで。… 次回はだめな使い方を紹介していく。</p>
-
-                    </div>
-                </section>
-                
-                <h1 class="content-subhead">29 Mar 2016, 00:40</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2016/03/29/z370c-appearance/" class="post-title">ASUS ZenPad 7.0 (Z370C) レビュー その一 : 見た目編</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-ガジェット" href="https://pankona.github.io/categories/%E3%82%AC%E3%82%B8%E3%82%A7%E3%83%83%E3%83%88">ガジェット</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
-
-<p>ZenTour2016 にて ZenPad 7.0 (Z370C) を入手するに至った。<br />
-ASUS様より無料でいただいた形であるが、レビュー記事をしたためることが条件である。</p>
-
-<p>ので、ここから3つ、ZenPad 7.0 (Z370C) のレビューをしていく。<br />
-まず見た目、次に使ってみて良いところ、最後に使ってみて悪いところ、について<br />
-書いていこうと思う。</p>
-
-<p>というわけで、見た目編、行きます。</p>
-
-<h2 id="zenpad-7-0-z370c-を見よ">ZenPad 7.0 (Z370C) を見よ</h2>
-
-<p>こちらが Z370C with ZenClutch である。<br />
-以下はオモテ面。なお、大きさのイメージが伝わりやすいように近くにポンジュースを配置している。</p>
-
-<p><img src="/images/z370c/1.jpg" alt="Z370C" /></p>
-
-<p>今回は本体だけでなく、周辺アクセサリであるカバーもいただいている。<br />
-ZenClutch。結構高いんだよこれ。いやほんとに。値段の甲斐あってか(?)、さながら高級財布のような佇まいである。<br />
-以下はウラ面。</p>
-
-<p><img src="/images/z370c/3.jpg" alt="Z370C" /></p>
-
-<p>この ZenClutch であるが、本革のような雰囲気があり、なんというか、手触りが良い。<br />
-ただ、タブレット本体を使う際にはカバーを開いて本体の背面側に折り返す関係上、<br />
-タブレット使用中はおそらくその手触りの良い部分に触れることがない。滑り止めにもなりそうなのだが。<br />
-少し残念であるが、とはいえ小脇に抱えて持ち歩くにはとても良いことには変わりない。</p>
-
-<h2 id="大きさは持ち運びにはちょうどいい">大きさは持ち運びにはちょうどいい</h2>
-
-<p>ZenPad 7.0 (Z370C) は名の通り 7 インチのタブレット。大きさ的には Nexus 7 シリーズとほぼ同等。<br />
-Nexus 7 よりも若干薄いかな、と。</p>
-
-<p><img src="/images/z370c/4.jpg" alt="Z370C" /></p>
-
-<p>そして軽い。公称値は 272 グラム。ZenClutch を着せているので若干重たくなるとはいえ、やはり軽い。<br />
-このくらいの軽さであれば、かばんに入れておいても全く気にならないレベルであると感じる。</p>
-
-<h2 id="カバーをあけると自動でスリープ復帰">カバーをあけると自動でスリープ復帰</h2>
-
-<p>電源ボタンを押さずともスリープから復帰するのはなかなか快適。<br />
-電源ボタンがへたって故障する心配もない点も大きいと思う。<br />
-ちなみに当然、カバーをしめたら自動でスリープします。これも快適。</p>
-
-<h2 id="ベゼルは狭め">ベゼルは狭め</h2>
-
-<p>ベゼル、特に左右の枠は狭めであると感じた（他のタブレットと比較したわけではないが）。<br />
-以下の画像で伝わるだろうか。</p>
-
-<p><img src="/images/z370c/5.jpg" alt="Z370C" /></p>
-
-<p>この点も見た目のスタイリッシュさに寄与している点ではないだろうか。</p>
-
-<h2 id="見た目に関する総評">見た目に関する総評</h2>
-
-<p>見た目に関しては、高級感があり、大きすぎず、軽く、画面もまあまあ大きく使えていて、良いとこばかりと言っていい。<br />
-値段が1万円台であることを考えると、こと見た目に関してはお値段以上であると思われる。見た目オススメ。</p>
-
-<p>ただ、性能に関してはちょっと色々あるので次回の記事で書こうと思うが、、、<br />
-性能さえもう少しイケていれば、間違いなく誰にでもオススメできる機種だったと思う。惜しい。<br />
-今回はこのへんで。次回は性能について。</p>
 
                     </div>
                 </section>

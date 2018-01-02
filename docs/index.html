@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>make clean; make &middot; make clean; make</title>
 
-    <meta name="description" content="Demo site for a hugo theme">
+    <meta name="description" content="">
 
     <meta name="generator" content="Hugo 0.32" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="make clean; make &middot; make clean; make">
-    <meta name="twitter:description" content="Demo site for a hugo theme">
+    <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
     <meta property="og:title" content="make clean; make &middot; make clean; make">
-    <meta property="og:description" content="Demo site for a hugo theme">
+    <meta property="og:description" content="">
 
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div class="header">
         <hgroup>
             <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
-            <h2 class="brand-tagline"> Demo site for a hugo theme </h2>
+            <h2 class="brand-tagline"></h2>
         </hgroup>
 
         <nav class="nav">
@@ -51,7 +51,7 @@
                 
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://pankona.github.io/index.xml"><i class="fa fa-rss"></i> rss</a>
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> rss</a>
                 </li>
             </ul>
         </nav>
@@ -63,6 +63,65 @@
         <div>
             
             <div class="posts">
+                
+                <h1 class="content-subhead">02 Jan 2018, 13:32</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2018/01/02/my-first-post-by-hugo/" class="post-title">ブログ生成を Octopress から Hugo に移行</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a><a class="post-category post-category-Octopress" href="https://pankona.github.io/categories/octopress">Octopress</a><a class="post-category post-category-Hugo" href="https://pankona.github.io/categories/hugo">Hugo</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>いままで本ブログは Octopress を使って生成していたのであるが、<br />
+久々に動かしたり別のPCでやったりするときに上手く動かないことがままあり、まあまあストレスであった。</p>
+
+<p>ということで、爆速サイトジェネレータとして高名な Hugo を使うように変えてみた。<br />
+なるほど、噂に違わぬ爆速サイトジェネレーティングである。しばらく使ってみよう。</p>
+
+<p>Octopress から Hugo への移行は概ねすんなり済んだ。以下のような作業を行った。<br />
+テーマ選びに大半の時間を費やしたものの、概ね丸一日の作業となった (7.5h くらい)</p>
+
+<ul>
+<li>Hugo の使い方確認 (ドキュメントを見る等して)<br /></li>
+<li>Hugo でサイトを生成し、Octopress 時代に生成したポスト一式をコピー<br />
+
+<ul>
+<li>ファイル名、各ポストのヘッダー等は若干適合しない部分があったので修正を加えた<br /></li>
+</ul></li>
+<li>各記事のパーマリンクを従来サイトと同じになるように設定<br /></li>
+<li>Hugo の設定 (config.toml) に各種サイトの設定を記載 (ブログ名、Twitter、GitHub へのリンク等)<br /></li>
+<li>BlackFriday をちょっとだけ設定し、hardLineBreak が有効になるように<br /></li>
+<li>テーマ選び。ここがめちゃめちゃ時間が掛かった。結局シンプルなの選んである程度カスタマイズする方針に<br />
+<br /></li>
+</ul>
+
+<p>以下はもう少しやっておきたいところ。</p>
+
+<ul>
+<li>フォントがダサい。というか見にくい。のでもうちょっと目に優しいやつを選ぶ<br /></li>
+<li>サイトマップというか記事一覧というか、みたいのが欲しい<br /></li>
+<li>favicon 設定<br /></li>
+<li>about.html 的なやつを置く<br /></li>
+<li>(あまり利用の実績がないが) SNS へのシェアボタンを追加。ツイッターだけ置いておいた。はてぶも欲しい。<br /></li>
+<li>(まったく利用の実績がないが) disqus を置く。利用実績がまったくないところからして置かなくていいかも。優先度低。<br />
+<br />
+<br /></li>
+</ul>
+
+<p>昨年は勉強会レポートと ZenPad レビューと、みたいなどちらかというと受動的な強いられポストが多かったため、<br />
+今年はもっと能動的に日常的に息を吐くように記事を更新していきたい所存。今年もやっていくぞー。</p>
+
+                    </div>
+                </section>
                 
                 <h1 class="content-subhead">01 Jun 2017, 19:34</h1>
                 <section class="post">
@@ -799,117 +858,6 @@ OSS として扱った二種の速度の話。</p>
 他にも、アンケートを集めて次回のネタにしたりしていて (今回のテーマも、前回のアンケートでテストに関することを聞きたいという要望が多かったから、という理由で選んだとのこと)、golang.tokyo 運営すげーなという印象です。すげーな！</p>
 
 <p>次回もまた来年に予定されているようです。楽しみにしています！</p>
-
-                    </div>
-                </section>
-                
-                <h1 class="content-subhead">14 Nov 2016, 20:14</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2016/11/14/usb-wifi-dongle/" class="post-title">Linux で 無線LAN の USB ドングルを使う</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-ArchLinux" href="https://pankona.github.io/categories/archlinux">ArchLinux</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
-
-<p>Linux と銘打っておりますが、Manjro で試しています。<br />
-本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。</p>
-
-<h2 id="使ったドングル二種">使ったドングル二種</h2>
-
-<p>訳あって二種類のドングルを使いました。いずれも I-O DATA 製。</p>
-
-<ul>
-<li>WN-AC433UM<br /></li>
-<li>WN-G150UMK<br />
-<br /></li>
-</ul>
-
-<h2 id="wn-ac433um-編">WN-AC433UM 編</h2>
-
-<p>とりあえずぶっ挿してみたところ、無線LAN デバイスとしては認識されなかった。<br />
-つまりデフォルトの Manjro には WN-AC433UM のドライバが入っていなかったということ。<br />
-ドライバを入れていく。</p>
-
-<h3 id="wn-ac433um-は-rtl8192eu-というドライバで動いた">WN-AC433UM は rtl8192eu というドライバで動いた</h3>
-
-<p>rtl8192eu というドライバは <code>yaourt rtl8192eu</code> で一応インストールされるのであるが、<br />
-それだけだと WN-AC433UM は認識されなかった。</p>
-
-<p>WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、<br />
-<code>yaourt rtl8192eu</code> でインストールされるドライバではこれを認識するようになっていない。<br />
-(注: 2016.11.09 時点)</p>
-
-<p>なので、上記 idVendor、idProduct 値を認識するようにソースコードを書き換えた上で、<br />
-ビルド・インストールする必要がある。ソースコードは以下から入手できる。</p>
-
-<p><a href="https://github.com/Mange/rtl8192eu-linux-driver">Mange/rtl8192eu-linux-driver - GitHub</a><br />
-なお、リビジョンは <code>f016814</code> を使った。</p>
-
-<p>os_dep/linux/usb_intf.c に、以下のように追記する。<br />
-(注: 妥当か不明だがとりあえず以下の書き換えでうまくいった)</p>
-
-<pre><code>diff --git a/os_dep/linux/usb_intf.c b/os_dep/linux/usb_intf.c
-index 5a62f24..7138a26 100644
---- a/os_dep/linux/usb_intf.c
-+++ b/os_dep/linux/usb_intf.c
-@@ -220,6 +220,8 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
-        {USB_DEVICE(0x2357, 0x0109),.driver_info = RTL8192E}, /* TP-Link - Cameo */
-        /*=== PLANEX ===========*/
-        {USB_DEVICE(0x2019, 0xab33),.driver_info = RTL8192E}, /* PLANEX - GW-300S Katana */
-+       /*=== I-O DATA ===========*/
-+       {USB_DEVICE(0x04bb, 0x0959),.driver_info = RTL8192E}, /* I-O DATA */
- #endif
- 
- #ifdef CONFIG_RTL8723B
-</code></pre>
-
-<p>ビルドし、インストールする。</p>
-
-<pre><code>$ cd rtl8192eu-linux-driver
-$ make
-$ sudo make install
-</code></pre>
-
-<p>再起動すると、無線LAN ドングルを NIC として認識するようになった。</p>
-
-<h2 id="wn-g150umk-編">WN-G150UMK 編</h2>
-
-<p>上記 WN-AC433UM を認識させるにあたって散々ドライバをインストールしたせいなのであろうが、<br />
-こちらは挿しただけで認識されてしまった。</p>
-
-<h3 id="wn-g150umk-は-rtl8192cu-というドライバで動いている模様">WN-G150UMK は rtl8192cu というドライバで動いている模様</h3>
-
-<p>もしかしたらドライバをインストールする必要があるかもしれないのでメモしておくと、<br />
-WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>lshw</code> コマンドで確認した。</p>
-
-<h2 id="ちなみに-wn-ac433um-は-5-ghz-にしか対応していない">ちなみに、WN-AC433UM は 5 GHz にしか対応していない</h2>
-
-<p>WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br />
-つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。<br />
-2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、<br />
-ちょっと古めのルーターだったりが該当する。</p>
-
-<p>完全に自分の見落としであるのだが、我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、<br />
-つまりせっかく頑張って WN-AC433UM を Linux に認識させたのであるが、日の目を見なかったのである…。<br />
-悲しい。そんなわけで WN-G150UMK を書い直したが、こちらは快調に動いてます。ナイス。</p>
-
-<h2 id="参考リンク">参考リンク</h2>
-
-<ul>
-<li><a href="http://www.iodata.jp/product/network/adp/wn-ac433um/">WN-AC433UMシリーズ - I-O DATA</a><br /></li>
-<li><a href="http://www.iodata.jp/lib/product/w/4078.htm">WN-G150UMK - I-O DATA</a><br /></li>
-</ul>
 
                     </div>
                 </section>

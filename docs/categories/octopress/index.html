@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Octopress &middot; make clean; make</title>
+
+    <meta name="description" content="">
+
+    <meta name="generator" content="Hugo 0.32" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Octopress &middot; make clean; make">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Octopress &middot; make clean; make">
+    <meta property="og:description" content="">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
+            <h2 class="brand-tagline"></h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/@gohan_pan_gohan"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/pankona "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">02 Jan 2018, 13:32</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2018/01/02/my-first-post-by-hugo/" class="post-title">ブログ生成を Octopress から Hugo に移行</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a><a class="post-category post-category-Octopress" href="https://pankona.github.io/categories/octopress">Octopress</a><a class="post-category post-category-Hugo" href="https://pankona.github.io/categories/hugo">Hugo</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>いままで本ブログは Octopress を使って生成していたのであるが、<br />
+久々に動かしたり別のPCでやったりするときに上手く動かないことがままあり、まあまあストレスであった。</p>
+
+<p>ということで、爆速サイトジェネレータとして高名な Hugo を使うように変えてみた。<br />
+なるほど、噂に違わぬ爆速サイトジェネレーティングである。しばらく使ってみよう。</p>
+
+<p>Octopress から Hugo への移行は概ねすんなり済んだ。以下のような作業を行った。<br />
+テーマ選びに大半の時間を費やしたものの、概ね丸一日の作業となった (7.5h くらい)</p>
+
+<ul>
+<li>Hugo の使い方確認 (ドキュメントを見る等して)<br /></li>
+<li>Hugo でサイトを生成し、Octopress 時代に生成したポスト一式をコピー<br />
+
+<ul>
+<li>ファイル名、各ポストのヘッダー等は若干適合しない部分があったので修正を加えた<br /></li>
+</ul></li>
+<li>各記事のパーマリンクを従来サイトと同じになるように設定<br /></li>
+<li>Hugo の設定 (config.toml) に各種サイトの設定を記載 (ブログ名、Twitter、GitHub へのリンク等)<br /></li>
+<li>BlackFriday をちょっとだけ設定し、hardLineBreak が有効になるように<br /></li>
+<li>テーマ選び。ここがめちゃめちゃ時間が掛かった。結局シンプルなの選んである程度カスタマイズする方針に<br />
+<br /></li>
+</ul>
+
+<p>以下はもう少しやっておきたいところ。</p>
+
+<ul>
+<li>フォントがダサい。というか見にくい。のでもうちょっと目に優しいやつを選ぶ<br /></li>
+<li>サイトマップというか記事一覧というか、みたいのが欲しい<br /></li>
+<li>favicon 設定<br /></li>
+<li>about.html 的なやつを置く<br /></li>
+<li>(あまり利用の実績がないが) SNS へのシェアボタンを追加。ツイッターだけ置いておいた。はてぶも欲しい。<br /></li>
+<li>(まったく利用の実績がないが) disqus を置く。利用実績がまったくないところからして置かなくていいかも。優先度低。<br />
+<br />
+<br /></li>
+</ul>
+
+<p>昨年は勉強会レポートと ZenPad レビューと、みたいなどちらかというと受動的な強いられポストが多かったため、<br />
+今年はもっと能動的に日常的に息を吐くように記事を更新していきたい所存。今年もやっていくぞー。</p>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="https://pankona.github.io/js/all.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

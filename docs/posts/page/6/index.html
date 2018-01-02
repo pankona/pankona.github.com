@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Posts &middot; make clean; make</title>
 
-    <meta name="description" content="Demo site for a hugo theme">
+    <meta name="description" content="">
 
     <meta name="generator" content="Hugo 0.32" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Posts &middot; make clean; make">
-    <meta name="twitter:description" content="Demo site for a hugo theme">
+    <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
     <meta property="og:title" content="Posts &middot; make clean; make">
-    <meta property="og:description" content="Demo site for a hugo theme">
+    <meta property="og:description" content="">
 
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div class="header">
         <hgroup>
             <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
-            <h2 class="brand-tagline"> Demo site for a hugo theme </h2>
+            <h2 class="brand-tagline"></h2>
         </hgroup>
 
         <nav class="nav">
@@ -51,7 +51,7 @@
                 
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://pankona.github.io/index.xml"><i class="fa fa-rss"></i> rss</a>
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> rss</a>
                 </li>
             </ul>
         </nav>
@@ -63,6 +63,64 @@
         <div>
             
             <div class="posts">
+                
+                <h1 class="content-subhead">19 May 2014, 21:21</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/05/19/about-google-search/" class="post-title">Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<h2 id="自分のページがgoogle検索にヒットしない理由">自分のページがGoogle検索にヒットしない理由</h2>
+
+<p>なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、<br />
+いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、<br />
+いやでもなんで引っかからないんだろう、と思って調査をしていたところ、</p>
+
+<h3 id="githubのリポジトリはgoogle日本の検索に引っかからない">GithubのリポジトリはGoogle日本の検索に引っかからない</h3>
+
+<p>といった記事を見つけた。ほんまかいな？<br />
+もしかしてそのせいでうちのページはGoogleに引っかからないんじゃああるまいか？<br />
+（Github pagesを使って公開しているページなので）</p>
+
+<p>等と考えつつ、調査を続行していったところ、、、</p>
+
+<h3 id="結論からすると-githubのリポジトリはgoogle日本の検索にちゃんと引っかかる">結論からすると、GithubのリポジトリはGoogle日本の検索にちゃんと引っかかる。</h3>
+
+<p>ただし条件がある模様。それは（おそらく）、</p>
+
+<p><strong>ページ（リポジトリの場合はREADMEかな？）に日本語が含まれていること</strong></p>
+
+<p>つまり、Google日本の検索に引っかからない、というよりは、<br />
+<strong>&ldquo;日本語のページを検索&rdquo;</strong>に引っかからない、ということである模様。<br />
+全編英語で書いてたら英語のページと判断して、&rdquo;日本語のページを検索&rdquo;には載せない、ってことかなー。<br />
+そして、Google日本の検索は、おそらくデフォルトは&rdquo;日本語のページを検索&rdquo;になってる。という話。</p>
+
+<p>加えて、GithubのリポジトリのREADMEなんかは、英語だけで書かれているケースが多い。<br />
+だからGoogle日本を使ってそのまま検索をしていると、Githubのページがあんまり出てこないという現象が。</p>
+
+<p>だので、英語だけで書かれたGithubのページも、検索オプションで言語に依らない検索にしてあげれば、Google日本の検索でも出てきます。</p>
+
+<h3 id="じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか">じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？</h3>
+
+<p>自分のGithubのリポジトリに日本人を呼び込みたい！と思ったら、READMEに日本語をちょっと混ぜてあげればリーチできる人が増えるかも？<br />
+と思っているがどうか。たぶん、おそらく、きっと、効果あると思われる。つまり自信ない。<br />
+自分のリポジトリ使って実験してみます。そのうち調査結果を書きます。</p>
+
+                    </div>
+                </section>
                 
                 <h1 class="content-subhead">15 May 2014, 12:25</h1>
                 <section class="post">
@@ -397,69 +455,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 <p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。<br />
 <a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments - Nonsense By Me</a></p>
-
-                    </div>
-                </section>
-                
-                <h1 class="content-subhead">26 Apr 2014, 20:19</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2014/04/26/octopress-custom/" class="post-title">OctopressにGravatarの画像が出るようにしてみた</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-Octopressカスタマイズ" href="https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA">Octopressカスタマイズ</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
-
-<p>引き続きOctopressをカスタマイズしていく。</p>
-
-<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
-
-<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。<br />
-自分のブログ感が出て良い。</p>
-
-<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
-
-<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
-
-<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、<br />
-それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
-
-<p>about.html はこんな感じに。</p>
-
-<p>{% codeblock %}<br />
-{% raw %}<br />
-<section><br />
-  <h1>About Me</h1><br />
-  {% if site.gravatar_email %}<br />
-    <img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" /><br />
-  {% endif %}<br />
-  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。<br />
-  <br clear="left"><br />
-</section><br />
-{% endraw %}<br />
-{% endcodeblock %}</p>
-
-<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
-
-<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br><br />
-設定方法をざっくり書いておくと、</p>
-
-<p><span><br />
-1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる<br />
-2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する<br />
-</span></p>
-
-<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
 
                     </div>
                 </section>

@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>make clean; make &middot; make clean; make</title>
 
-    <meta name="description" content="Demo site for a hugo theme">
+    <meta name="description" content="">
 
     <meta name="generator" content="Hugo 0.32" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="make clean; make &middot; make clean; make">
-    <meta name="twitter:description" content="Demo site for a hugo theme">
+    <meta name="twitter:description" content="">
 
     <meta property="og:type" content="article">
     <meta property="og:title" content="make clean; make &middot; make clean; make">
-    <meta property="og:description" content="Demo site for a hugo theme">
+    <meta property="og:description" content="">
 
     <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
 </head>
 <body>
 
@@ -34,7 +34,7 @@
     <div class="header">
         <hgroup>
             <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
-            <h2 class="brand-tagline"> Demo site for a hugo theme </h2>
+            <h2 class="brand-tagline"></h2>
         </hgroup>
 
         <nav class="nav">
@@ -51,7 +51,7 @@
                 
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://pankona.github.io/index.xml"><i class="fa fa-rss"></i> rss</a>
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> rss</a>
                 </li>
             </ul>
         </nav>
@@ -63,6 +63,35 @@
         <div>
             
             <div class="posts">
+                
+                <h1 class="content-subhead">28 Jan 2015, 21:44</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2015/01/28/300hot-per-month/" class="post-title">月間300ヒットを達成していた</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>12月のことであるが、実は月間300ヒットを達成していた。<br />
+うち250ヒットは自分の手によるもの、、、とかそういうことではなく、<br />
+概ね自分以外の方々によって、月間300ヒットを達成できたのである。<br />
+300ヒット。たかが300ヒット。されど300ヒット。 一日平均10人。</p>
+
+<p>これからもほそぼそ、ぼちぼち、書いていこうと思う。<br />
+学んだことをアウトプットするのが大事だと誰か偉い人も言っておった。私もそう思う。<br />
+書いたことによって、誰かひとりでも何かの助けになればと願いつつ。</p>
+
+                    </div>
+                </section>
                 
                 <h1 class="content-subhead">28 Jan 2015, 21:10</h1>
                 <section class="post">
@@ -366,69 +395,6 @@ UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方
 
 <p>とりあえず望む形（二本指で左スワイプで戻る、右スワイプで進む）に設定できた。結構ハードルあった。。<br />
 ちなみにこれ、Mac OS向けFirefoxならデフォルトの挙動な模様。何の差なのか。。。</p>
-
-                    </div>
-                </section>
-                
-                <h1 class="content-subhead">23 Jul 2014, 21:54</h1>
-                <section class="post">
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2014/07/23/raspi-touch-panel/" class="post-title">PiTFTのタッチパネルを動作させる</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-RaspberryPi" href="https://pankona.github.io/categories/raspberrypi">RaspberryPi</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
-
-<p>前回に引き続き、PiTFTの話題。</p>
-
-<p>前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。<br />
-タッチパネルの設定がまだだったので、手順を簡単に記しておく。</p>
-
-<p>例によって、Raspberry PiにはArch Linuxが載っている前提。</p>
-
-<h3 id="タッチパネルのドライバーをロードする">タッチパネルのドライバーをロードする</h3>
-
-<p>前回、FBTFTがビルトインされているカーネルを以下のコマンドでインストールした。</p>
-
-<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
-
-<p>これが正しく入っていれば、タッチパネルのドライバもカーネルに含まれているはず。<br />
-ただし、画面に何かを表示させる時と異なり、手動でドライバをロードする必要がある。</p>
-
-<p>以下のコマンドで、タッチパネルのドライバをロードする。</p>
-
-<p>@@@@ 忘れたのであとで追記する @@@@</p>
-
-<p>基本的にはこれだけで動作すると思われる。<br />
-例によって<a href="https://github.com/notro/fbtft/wiki">notroさんのところのWiki</a>に載っている内容だが、<br />
-notroさんのところは充実しすぎて逆に迷う気がするので、備忘録的に残しておくことにする。。</p>
-
-<h3 id="動いているか確かめる方法">動いているか確かめる方法</h3>
-
-<p>evtestを用いて確かめられる。<br />
-evtestを起動したのちにタッチパネルをぐりぐり触ってみると、<br />
-タッチイベントの詳細がコンソールに出力される。</p>
-
-<p>また、正常にドライバがロードされると、<code>/dev/input/touchpanel</code>なるファイルが現れるはずである。<br />
-ちなみにこれはeventXへのシンボリックリンクになっている。<br />
-このファイルの有無でもドライバのロードが正しく行われたか判断できると思われる。</p>
-
-<h3 id="要追記事項">要追記事項</h3>
-
-<ul>
-<li>ドライバロードのコマンドをちゃんと確認する。<br /></li>
-<li>キャリブレーション（回転した画面への対応）の方法。<br /></li>
-</ul>
 
                     </div>
                 </section>

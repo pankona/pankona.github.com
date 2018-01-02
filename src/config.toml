@@ -13,7 +13,7 @@ mediaType = "application/rss"
 baseName = "atom"
 
 [params]
-  description = "Demo site for a hugo theme"
+  description = ""
   twitterName = "@gohan_pan_gohan"
   twitter = ""
   githubName = "pankona"

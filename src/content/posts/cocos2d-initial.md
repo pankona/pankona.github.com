@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "cocos2d-xをやってみている"
 date: 2015-03-11 20:29:27 +0900
 comments: true

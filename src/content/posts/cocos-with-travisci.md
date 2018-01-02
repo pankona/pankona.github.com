@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "cocos2d-x + Travis CI"
 date: 2015-04-19 11:26:14 +0900
 comments: true

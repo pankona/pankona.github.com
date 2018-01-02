@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "PiTFTのタッチパネルを動作させる"
 date: 2014-07-23 21:54:58 +0900
 comments: true

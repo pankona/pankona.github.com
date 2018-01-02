@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "OctopressにGravatarの画像が出るようにしてみた"
 date: 2014-04-26 20:19:19 +0900
 comments: true

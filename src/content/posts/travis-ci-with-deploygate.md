@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Cocos2d-x + Travis CI + DeployGate"
 date: 2015-04-22 19:25:11 +0900
 comments: true

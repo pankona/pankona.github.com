@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Raspberry Pi + カメラモジュール + Webで配信"
 date: 2014-05-05 23:38:52 +0900
 comments: true

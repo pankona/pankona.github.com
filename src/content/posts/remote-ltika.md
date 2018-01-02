@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Raspberry Piにて、リモートからLチカさせてみた"
 date: 2014-11-25 22:16:43 +0900
 comments: true

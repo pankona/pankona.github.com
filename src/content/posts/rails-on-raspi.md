@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Raspberry PiでRailsを動かしてみたときのこと"
 date: 2014-05-29 21:02:35 +0900
 comments: true

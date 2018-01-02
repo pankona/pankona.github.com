@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "golang.tokyo #1@mercari"
 date: 2016-10-25 19:38:13 +0900
 comments: true

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Octopressでブログを始めてみる"
 date: 2014-04-24 21:44:52 +0900
 comments: true

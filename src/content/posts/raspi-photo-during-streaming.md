@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "RaspberryPiで動画を配信しながら写真も撮る"
 date: 2014-06-10 21:49:47 +0900
 comments: true

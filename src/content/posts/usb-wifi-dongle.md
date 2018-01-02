@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Linux で 無線LAN の USB ドングルを使う"
 date: 2016-11-14 20:14:02 +0900
 comments: true

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "golang.tokyo#2@はてな"
 date: 2016-12-12 19:24:17 +0900
 comments: true

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "golang.tokyo#4@eureka"
 date: 2017-03-01 19:31:27 +0900
 comments: true

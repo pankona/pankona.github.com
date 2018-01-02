@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Vaio Pro 13における手のひら検知 on Arch Linux"
 date: 2014-05-15 12:25:25 +0900
 comments: true

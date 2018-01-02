@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "月間300ヒットを達成していた"
 date: 2015-01-28 21:44:18 +0900
 comments: true

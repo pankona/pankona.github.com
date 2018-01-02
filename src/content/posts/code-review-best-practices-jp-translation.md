@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Code Review Best Practices を日本語訳した"
 date: 2015-07-31 19:36:04 +0900
 comments: true

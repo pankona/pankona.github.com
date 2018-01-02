@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "atte fes@mercari"
 date: 2016-04-18 19:34:12 +0900
 comments: true

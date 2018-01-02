@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録"
 date: 2014-05-14 17:59:10 +0900
 comments: true

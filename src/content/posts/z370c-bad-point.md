@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "ASUS ZenPad 7.0 (Z370C) レビュー その三 : イマイチなところ編"
 date: 2016-03-31 00:36:22 +0900
 comments: true

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "GNOMEアプリ上で日本語入力できなくなったときの対処メモ"
 date: 2016-12-14 11:12:31 +0900
 comments: true

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Octopressカスタマイズ on make clean; make</title>
+    <link>https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA/</link>
+    <description>Recent content in Octopressカスタマイズ on make clean; make</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 01 Oct 2014 22:41:26 +0900</lastBuildDate>
+    
+	<atom:link href="https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Octopressカスタマイズで読書メーターのブログパーツを追加</title>
+      <link>https://pankona.github.io/blog/2014/10/01/dokusho-meter/</link>
+      <pubDate>Wed, 01 Oct 2014 22:41:26 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/10/01/dokusho-meter/</guid>
+      <description>たまにはブログのカスタマイズをしてみる。 今回は読書メーターのブログパーツを追加してみた。 サイドバーに「最近読んだ本」なんてのが現れるようにし</description>
+    </item>
+    
+    <item>
+      <title>Pygmentsがエラーを吐きやがるので修正</title>
+      <link>https://pankona.github.io/blog/2014/04/28/fix-pygments/</link>
+      <pubDate>Mon, 28 Apr 2014 21:15:16 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/04/28/fix-pygments/</guid>
+      <description>Octopressのカスタマイズを続けていく。 Fenced Code Block がうまく表示されない 具体的にどのようにうまく表示されないかというと、 {% codeblock %} {% raw %} {% hogehoge %} {%</description>
+    </item>
+    
+    <item>
+      <title>OctopressにGravatarの画像が出るようにしてみた</title>
+      <link>https://pankona.github.io/blog/2014/04/26/octopress-custom/</link>
+      <pubDate>Sat, 26 Apr 2014 20:19:19 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/04/26/octopress-custom/</guid>
+      <description>引き続きOctopressをカスタマイズしていく。 サイドバーにGravatarの画像を出すように 京都で食べた抹茶パンケーキ（←旨い）の画像を</description>
+    </item>
+    
+    <item>
+      <title>Octopressにタグクラウドとカテゴリリストを追加してみた</title>
+      <link>https://pankona.github.io/blog/2014/04/25/add-category-list/</link>
+      <pubDate>Fri, 25 Apr 2014 21:11:53 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/04/25/add-category-list/</guid>
+      <description>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。 見た目デフォルトのまま</description>
+    </item>
+    
+  </channel>
+</rss>

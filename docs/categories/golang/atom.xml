@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on make clean; make</title>
+    <link>https://pankona.github.io/categories/golang/</link>
+    <description>Recent content in Golang on make clean; make</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 01 Jun 2017 19:34:21 +0900</lastBuildDate>
+    
+	<atom:link href="https://pankona.github.io/categories/golang/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>golang.tokyo#6@DeNA</title>
+      <link>https://pankona.github.io/blog/2017/06/01/golangtokyo-6/</link>
+      <pubDate>Thu, 01 Jun 2017 19:34:21 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2017/06/01/golangtokyo-6/</guid>
+      <description>2017.06.01 に DeNA さんにて、golang.tokyo #6 が行われました。 golang.tokyo #6 - connpass 開幕は DeNA の方のお話だったんですが、何やら DeNA では Go エンジニアを色々募集してい</description>
+    </item>
+    
+    <item>
+      <title>golang.tokyo#4@eureka</title>
+      <link>https://pankona.github.io/blog/2017/03/01/golangtokyo-4/</link>
+      <pubDate>Wed, 01 Mar 2017 19:31:27 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2017/03/01/golangtokyo-4/</guid>
+      <description>2017.03.01 に eureka さんにて、golang.tokyo #4 が行われました。 golang.tokyo #4 - connpass 今回もまた大盛況で一般参加枠は倍率3倍くらいの抽選となっていましたが、 たま</description>
+    </item>
+    
+    <item>
+      <title>golang.tokyo#2@はてな</title>
+      <link>https://pankona.github.io/blog/2016/12/12/golangtokyo-2/</link>
+      <pubDate>Mon, 12 Dec 2016 19:24:17 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2016/12/12/golangtokyo-2/</guid>
+      <description>2016.12.12 に表参道のはてなさんにて、golang.tokyo #2 が行われました。 golang.tokyo #2 - connpass 今回もまたブログ枠にて参加させていただきましたので、 その内容を</description>
+    </item>
+    
+    <item>
+      <title>golang.tokyo #1@mercari</title>
+      <link>https://pankona.github.io/blog/2016/10/25/golangtokyo/</link>
+      <pubDate>Tue, 25 Oct 2016 19:38:13 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2016/10/25/golangtokyo/</guid>
+      <description>2016.10.25 に六本木の森タワーメルカリさんにて、golang.tokyo #1 が行われました。 golang.tokyo #1 - connpass 以下に togetter まとまってます。 メルカリ本社で開催されたGo</description>
+    </item>
+    
+  </channel>
+</rss>

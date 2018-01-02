@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Octopressカスタマイズ &middot; make clean; make</title>
+
+    <meta name="description" content="Demo site for a hugo theme">
+
+    <meta name="generator" content="Hugo 0.32" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Octopressカスタマイズ &middot; make clean; make">
+    <meta name="twitter:description" content="Demo site for a hugo theme">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Octopressカスタマイズ &middot; make clean; make">
+    <meta property="og:description" content="Demo site for a hugo theme">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
+            <h2 class="brand-tagline"> Demo site for a hugo theme </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/@gohan_pan_gohan"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/pankona "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">01 Oct 2014, 22:41</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/10/01/dokusho-meter/" class="post-title">Octopressカスタマイズで読書メーターのブログパーツを追加</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-Octopressカスタマイズ" href="https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA">Octopressカスタマイズ</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>たまにはブログのカスタマイズをしてみる。
+今回は読書メーターのブログパーツを追加してみた。</p>
+
+<p>サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。
+文字ばっかだったブログにちょっと賑やかし感があって良い。</p>
+
+<p>例によって備忘録的にやり方を残しておく。
+Octopressに読書メーターのブログパーツを追加する方法。</p>
+
+<h3 id="読書メーターのアカウントを取得する">読書メーターのアカウントを取得する</h3>
+
+<p><a href="http://book.akahoshitakuya.com/">読書メーターのウェブページ</a>からどうぞ。</p>
+
+<h3 id="ブログパーツを選ぶ">ブログパーツを選ぶ</h3>
+
+<p>読書メーターにログイン後、マイページに行ってみると、
+<strong>「ブログパーツ」</strong>と書いてあるところがある。
+そこを見ると各種ブログパーツを見つけることが出来る。</p>
+
+<h3 id="octopressをカスタマイズして-サイドバーに出るように">Octopressをカスタマイズして、サイドバーに出るように</h3>
+
+<p>ここからはOctopress側の編集。</p>
+
+<h4 id="読書メーター用のhtmlを書く">読書メーター用のHTMLを書く。</h4>
+
+<p>中身は上記ブログパーツの内容をコピペしたものだが。
+ブログパーツとして「最近読んだ本」をチョイス。</p>
+
+<pre><code>&lt;section&gt;
+&lt;a href=&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot; title=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;img src=&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot; border=&quot;0&quot; alt=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;/a&gt;
+&lt;/section&gt;
+</code></pre>
+
+<h4 id="config-ymlを編集して-サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
+
+<p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
+
+<pre><code>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, 
+                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
+                 custom/asides/dokusho_meter.html]
+</code></pre>
+
+<h4 id="deployしたら完了">deployしたら完了</h4>
+
+<p><code>bundle exec rake gen_deploy</code> 的なことをやってデプロイする。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>最近読んだ本がサイドバーに表示されるように。
+ITっぽい本を並べたりすると、なんとなく技術的なブログな雰囲気が出て、
+とてもいいんではないでしょうか。</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">28 Apr 2014, 21:15</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/04/28/fix-pygments/" class="post-title">Pygmentsがエラーを吐きやがるので修正</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-Octopressカスタマイズ" href="https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA">Octopressカスタマイズ</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Octopressのカスタマイズを続けていく。</p>
+
+<h2 id="fenced-code-block-がうまく表示されない">Fenced Code Block がうまく表示されない</h2>
+
+<p>具体的にどのようにうまく表示されないかというと、</p>
+
+<p>{% codeblock %}
+{% raw %}
+{% hogehoge %}
+{% endraw %}
+{% endcodeblock %}</p>
+
+<p>といった表記。％で囲まれてる部分も Fenced Code Block を使って表示してもらいたいところであったが、<br>
+コメントとしてみなされてしまっているようで、表示してもらえないという感じに。</p>
+
+<p>結果として、</p>
+
+<p>{% codeblock %}
+{% raw %}
+{\% codeblock %}
+{\% raw %}
+{% hogehoge %}
+{\% endraw %}
+{\% endcodeblock %}
+{% endraw %}
+{% endcodeblock %}</p>
+
+<p>というので書くことができた。raw ~ endraw というのを使う。<br>
+ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br>
+ネストさせるのはどうやればいいのかな？</p>
+
+<h2 id="fenced-code-block-にファイル名が表示できない">Fenced Code Block にファイル名が表示できない</h2>
+
+<p>Fenced Code Block を書くときに、↓のような書き方をするとコードブロックにちょっとした注釈が出る。</p>
+
+<p><code>{% raw %}{% codeblock %}{% endraw %}</code><br></p>
+
+<p>出るという触れ込みだったのだが、なかなかどうして出なかった。</p>
+
+<p>結論からすると、これはうちのArchlinuxがpython3を使おうとしているためだった。<br>
+PygmentsというやつがPython2.7を求めているところを、違うバージョンのPythonが使われちゃって失敗してた感じ。</p>
+
+<p>修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。
+<a href="http://www.nonsenseby.me/blog/2013/04/13/arch-linux/">Arch Linux, Octopress, and misbehaving Pygments - Nonsense By Me</a></p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">26 Apr 2014, 20:19</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/04/26/octopress-custom/" class="post-title">OctopressにGravatarの画像が出るようにしてみた</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-Octopressカスタマイズ" href="https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA">Octopressカスタマイズ</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>引き続きOctopressをカスタマイズしていく。</p>
+
+<h3 id="サイドバーにgravatarの画像を出すように">サイドバーにGravatarの画像を出すように</h3>
+
+<p>京都で食べた抹茶パンケーキ（←旨い）の画像を載せるように。
+自分のブログ感が出て良い。</p>
+
+<p>以下のGravatarプラグインを使わせてもらいました。多謝。</p>
+
+<p><a href="https://github.com/joet3ch/gravatar-octopress">joet3ch/gravatar-octopress</a></p>
+
+<p>↑を導入すると、Gravatarの画像をimgタグ的にひっぱってこれるようになるので、
+それを参考にしつつ、souce/_include/custom/asides/about.html を編集してった感じ。</p>
+
+<p>about.html はこんな感じに。</p>
+
+<p>{% codeblock %}
+{% raw %}
+<section>
+  <h1>About Me</h1>
+  {% if site.gravatar_email %}
+    <img src="{% gravatar_image %}" alt="Gravatar of {{site.author}}" title="Gravatar of {{ site.author }}" align="left" style="margin-right:10px;" />
+  {% endif %}
+  Arch Linux on Vaio Pro 13で日々遊んでます。Octopressはvimで編集。武蔵野線ユーザ。一応、ソフトウェアエンジニア。
+  <br clear="left">
+</section>
+{% endraw %}
+{% endcodeblock %}</p>
+
+<h3 id="commentをかけるようにdisqusを設定">CommentをかけるようにDisqusを設定</h3>
+
+<p>各ポストにコメントがかけるような感じにしてみた。いかにもブラグらしい。<br>
+設定方法をざっくり書いておくと、</p>
+
+<p><span>
+1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる
+2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する
+</span></p>
+
+<p>次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">25 Apr 2014, 21:11</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/04/25/add-category-list/" class="post-title">Octopressにタグクラウドとカテゴリリストを追加してみた</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-Octopressカスタマイズ" href="https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA">Octopressカスタマイズ</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。
+見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。</p>
+
+<p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。
+<a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
+
+<p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="https://pankona.github.io/js/all.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

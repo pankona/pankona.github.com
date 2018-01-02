@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Raspberrypi on make clean; make</title>
+    <link>https://pankona.github.io/categories/raspberrypi/</link>
+    <description>Recent content in Raspberrypi on make clean; make</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 28 Jan 2015 21:10:39 +0900</lastBuildDate>
+    
+	<atom:link href="https://pankona.github.io/categories/raspberrypi/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる</title>
+      <link>https://pankona.github.io/blog/2015/01/28/raspi-autologin/</link>
+      <pubDate>Wed, 28 Jan 2015 21:10:39 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2015/01/28/raspi-autologin/</guid>
+      <description>しばらく愛用のVaio Proをいじる時間がとれなかったもんで、新しい記事をポストできずにおった。 実におよそ2ヶ月ぶりの新規記事。新年あけまし</description>
+    </item>
+    
+    <item>
+      <title>Raspberry Piにて、リモートからLチカさせてみた</title>
+      <link>https://pankona.github.io/blog/2014/11/25/remote-ltika/</link>
+      <pubDate>Tue, 25 Nov 2014 22:16:43 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/11/25/remote-ltika/</guid>
+      <description>Raspberry Piをリモートから制御する第一歩として、 ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。 いまのところ実にしょう</description>
+    </item>
+    
+    <item>
+      <title>PiTFTのタッチパネルを動作させる</title>
+      <link>https://pankona.github.io/blog/2014/07/23/raspi-touch-panel/</link>
+      <pubDate>Wed, 23 Jul 2014 21:54:58 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/07/23/raspi-touch-panel/</guid>
+      <description>前回に引き続き、PiTFTの話題。 前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。 タッチパネルの設定が</description>
+    </item>
+    
+    <item>
+      <title>PiTFTをArch Linux on Raspberry Piで動かすのに苦戦</title>
+      <link>https://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/</link>
+      <pubDate>Thu, 17 Jul 2014 21:11:11 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/07/17/pitft-on-arch-linux/</guid>
+      <description>2014/07/23/Wed 追記 以下のポストに誤りがあることがわかったので、訂正。 誤っている部分には打ち消し線を入れておく。 PiTFTを購入。 さっそくRaspberr</description>
+    </item>
+    
+    <item>
+      <title>RaspberryPiで動画を配信しながら写真も撮る</title>
+      <link>https://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/</link>
+      <pubDate>Tue, 10 Jun 2014 21:49:47 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/06/10/raspi-photo-during-streaming/</guid>
+      <description>Raspberry Pi＋カメラモジュールを使って、 - 映像をWebページで配信しつつ。 - いま写してる絵を保存する（写真を撮るみたいな）。写真を撮るボタンもWe</description>
+    </item>
+    
+    <item>
+      <title>Raspberry PiでRailsを動かしてみたときのこと</title>
+      <link>https://pankona.github.io/blog/2014/05/29/rails-on-raspi/</link>
+      <pubDate>Thu, 29 May 2014 21:02:35 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/05/29/rails-on-raspi/</guid>
+      <description>Raspberry PiにRailsを入れたときのこと。 あまりすんなりとはいかなかったので、つまづいたところなんかをメモ。 （ちなみにRaspberry Piで動</description>
+    </item>
+    
+    <item>
+      <title>Raspberry Pi &#43; カメラモジュール &#43; Webで配信</title>
+      <link>https://pankona.github.io/blog/2014/05/05/raspi-livestream-web/</link>
+      <pubDate>Mon, 05 May 2014 23:38:52 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/05/05/raspi-livestream-web/</guid>
+      <description>Raspberry Piにカメラモジュールを接続し、映像をWebで配信させてみた。 いろいろ悩んだ点もあったので、やり方の結論をメモしておく。 ちなみに、Rasp</description>
+    </item>
+    
+  </channel>
+</rss>

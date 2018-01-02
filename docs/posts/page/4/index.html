@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts &middot; make clean; make</title>
+
+    <meta name="description" content="Demo site for a hugo theme">
+
+    <meta name="generator" content="Hugo 0.32" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="Posts &middot; make clean; make">
+    <meta name="twitter:description" content="Demo site for a hugo theme">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Posts &middot; make clean; make">
+    <meta property="og:description" content="Demo site for a hugo theme">
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/index.xml" />
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
+            <h2 class="brand-tagline"> Demo site for a hugo theme </h2>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/@gohan_pan_gohan"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/pankona "><i class="fa fa-github-alt"></i> github</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/index.xml"><i class="fa fa-rss"></i> rss</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <h1 class="content-subhead">28 Jan 2015, 21:10</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2015/01/28/raspi-autologin/" class="post-title">Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-RaspberryPi" href="https://pankona.github.io/categories/raspberrypi">RaspberryPi</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>しばらく愛用のVaio Proをいじる時間がとれなかったもんで、新しい記事をポストできずにおった。
+実におよそ2ヶ月ぶりの新規記事。新年あけましておめでとうございます。
+今年もぼちぼちでやっていきます。目指せ100記事。</p>
+
+<h3 id="raspberry-pi起動時に-pitftにipアドレスを表示させる">Raspberry Pi起動時に、PiTFTにIPアドレスを表示させる</h3>
+
+<p>いま自分のとこで扱っているRaspberry Piは、基本的に画面を接続せず、操作はネットワーク越し（SSH）に行う前提にしている。
+そのため、SSHによるログインにあたってはRaspberry PiのIPアドレスを知る等してネットワーク的にリーチする必要がある。</p>
+
+<p>いままではarpをしてみたりpingをブロードキャストに投げてみたり、ホストネームを打ってみたり、色々やっていたのであるが、
+いまひとつうまく行かないことがあって、そのたびにトラブルシューティングのために、結局画面を接続する必要が生じていた。
+実に間抜け感を感じるわけである。</p>
+
+<p>PiTFTをくっつけた、というのはちょっと前の記事で書いたところなのであるが、
+じゃあとりあえず、Raspberry Pi起動時にこいつに現在のIPアドレスを出力してみれば便利なのでは、と思ったのである。
+IPアドレスさえわかれば、だいたいにおいてSSH接続できるしね。</p>
+
+<p>方法は、
+* 自動でログインさせる
+* ログイン時にifconfigし、IPアドレスの部分を抽出しつつ、コンソール（PiTFT）出力
+といった感じ。以下、詳細。</p>
+
+<h3 id="自動ログインさせる">自動ログインさせる</h3>
+
+<p>ちなみに私が扱っているRaspberry PiにはArch Linuxが載っている。
+Raspbian、Pidora等とは設定が違うと思われるので注意されたし。
+Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用いられている。</p>
+
+<p>Systemdにおける自動ログインの設定は、例によってArch Wikiに載っていたのでそれを参照した。
+ここを参照。→  <a href="https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console_(日本語)]x">Automatic login to virtual console</a>
+仮想コンソールの章を、騙されたと思ってそのまま設定し、そんで再起動してやればもう自動ログインできているはずである。</p>
+
+<h3 id="ログイン時にifconfigし-ipアドレス部分を抽出">ログイン時にifconfigし、IPアドレス部分を抽出</h3>
+
+<p>自動ログインできたらあとは簡単で、.bashrcにでもIPアドレス出力用の何かを書いてあげればOKである。
+{% codeblock .bashrc %}
+ifconfig | grep inet
+{% endcodeblock %}
+これでいいや、という感じで書いておいた。</p>
+
+<p>ただ、起動と同時に自動ログイン → IPアドレス表示、だと、IPを取れてないことがあって具合が良くない。
+そのため、上記IPアドレス取得の前に、ちょっとだけsleepなんかを入れてあげるとそのへんは心配がなくなる。
+{% codeblock .bashrc %}
+sleep 5
+ifconfig | grep inet
+{% endcodeblock %}
+こんな具合である。</p>
+
+<h3 id="ipアドレスがわかるようになったがpitftがもったいない感">IPアドレスがわかるようになったがPiTFTがもったいない感</h3>
+
+<p>PiTFTだとちょっとやりすぎなので、もっと小さい画面モジュールでやってもいいと思う。
+というか早く無線化しようね。次の目標は無線化です。それでは。</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">25 Nov 2014, 22:16</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/11/25/remote-ltika/" class="post-title">Raspberry Piにて、リモートからLチカさせてみた</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-RaspberryPi" href="https://pankona.github.io/categories/raspberrypi">RaspberryPi</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>Raspberry Piをリモートから制御する第一歩として、
+ネットワーク越しに、AndroidアプリからLチカさせてみる、をやってみた。
+いまのところ実にしょうもないレベルであるが、最初は誰もがしょうもなかったと言い聞かせつつ、
+やったことを公開しつつ、どんなあんばいだったか記録しておこうと思う。
+ちなみに、ここでいっているLEDとは、Raspberry Piボード上のLED &ldquo;ACT&rdquo; を指している。
+ブレッドボードやらそういった類の何かは使っていない。</p>
+
+<h3 id="構成">構成</h3>
+
+<ul>
+<li>Raspberry Pi （OSはArch Linux） 有線LAN接続
+
+<ul>
+<li>Railsが動いていて、REST APIを公開している。</li>
+<li>REST APIを叩くことで、LEDのON/OFFを制御するスクリプトが動作し、Lチカを実現する。</li>
+</ul></li>
+<li>Androidアプリ
+
+<ul>
+<li>ボタンが2個ついてるだけの超絶シンプルアプリ</li>
+<li>ONボタンを押すとLEDを点けるほうのREST APIを叩きにいく。</li>
+<li>同様に、OFFボタンを押すとLEDを消すREST APIを叩きにいく。</li>
+<li>対向機のIPアドレスはまさかのハードコーディング。</li>
+</ul></li>
+</ul>
+
+<h3 id="ソースコード">ソースコード</h3>
+
+<ul>
+<li>Raspberry Pi側のソースコードは<a href="https://github.com/pankona/raspi_remote_blink">こちら</a>。Railsアプリ。</li>
+<li>Android側のアプリは後ほどアップロード（手元になかった）。</li>
+</ul>
+
+<h3 id="今後に向けてメモ">今後に向けてメモ</h3>
+
+<ul>
+<li>Railsアプリは、スクリプトへのパスがハードコードされていたりしてだいぶ恥ずかしいので、そのうち直す。</li>
+<li>というかファイルI/OすればLチカできることがわかったので、もはやスクリプトを使う必要はなかった。そのうち直す。</li>
+<li>応用して、自動草花への水やり機の作成を目論んでおく。できたら画像と共にアップロードしよう。</li>
+<li>カメラと合わせて、水やりしつつ、草の成長記録をツイッターに投稿する、というのもいいかもしれない。</li>
+<li>ツイッター越しに命令（水やり、写真撮影、等）を発行できるようにしてもいいかもしれない。</li>
+</ul>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">01 Oct 2014, 22:41</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/10/01/dokusho-meter/" class="post-title">Octopressカスタマイズで読書メーターのブログパーツを追加</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-Octopressカスタマイズ" href="https://pankona.github.io/categories/octopress%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA">Octopressカスタマイズ</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>たまにはブログのカスタマイズをしてみる。
+今回は読書メーターのブログパーツを追加してみた。</p>
+
+<p>サイドバーに「最近読んだ本」なんてのが現れるようにしてみた。
+文字ばっかだったブログにちょっと賑やかし感があって良い。</p>
+
+<p>例によって備忘録的にやり方を残しておく。
+Octopressに読書メーターのブログパーツを追加する方法。</p>
+
+<h3 id="読書メーターのアカウントを取得する">読書メーターのアカウントを取得する</h3>
+
+<p><a href="http://book.akahoshitakuya.com/">読書メーターのウェブページ</a>からどうぞ。</p>
+
+<h3 id="ブログパーツを選ぶ">ブログパーツを選ぶ</h3>
+
+<p>読書メーターにログイン後、マイページに行ってみると、
+<strong>「ブログパーツ」</strong>と書いてあるところがある。
+そこを見ると各種ブログパーツを見つけることが出来る。</p>
+
+<h3 id="octopressをカスタマイズして-サイドバーに出るように">Octopressをカスタマイズして、サイドバーに出るように</h3>
+
+<p>ここからはOctopress側の編集。</p>
+
+<h4 id="読書メーター用のhtmlを書く">読書メーター用のHTMLを書く。</h4>
+
+<p>中身は上記ブログパーツの内容をコピペしたものだが。
+ブログパーツとして「最近読んだ本」をチョイス。</p>
+
+<pre><code>&lt;section&gt;
+&lt;a href=&quot;http://book.akahoshitakuya.com/u/{人によって違うID}&quot; title=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;img src=&quot;http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg&quot; border=&quot;0&quot; alt=&quot;{人の名前}の最近読んだ本&quot;&gt;&lt;/a&gt;
+&lt;/section&gt;
+</code></pre>
+
+<h4 id="config-ymlを編集して-サイドバーにパーツを追加">_config.ymlを編集して、サイドバーにパーツを追加</h4>
+
+<p>_config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。</p>
+
+<pre><code>default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, 
+                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
+                 custom/asides/dokusho_meter.html]
+</code></pre>
+
+<h4 id="deployしたら完了">deployしたら完了</h4>
+
+<p><code>bundle exec rake gen_deploy</code> 的なことをやってデプロイする。</p>
+
+<h3 id="ここまでで">ここまでで</h3>
+
+<p>最近読んだ本がサイドバーに表示されるように。
+ITっぽい本を並べたりすると、なんとなく技術的なブログな雰囲気が出て、
+とてもいいんではないでしょうか。</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">15 Sep 2014, 00:30</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/" class="post-title">二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-ArchLinux" href="https://pankona.github.io/categories/archlinux">ArchLinux</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>ブラウザはFirefoxを好んで使っている。
+VimperatorとかPentadactylがあるおかげである。</p>
+
+<p>いままで放置していた問題があって、それは二本指スワイプの挙動設定。</p>
+
+<p>二本指で左右にスワイプしたときに、ヒストリーバック・ヒストリーフォワード、
+いわゆる「戻る」「進む」をやってほしいんだけど、これの設定がいまいちわからず、放置していた。
+ようやく設定方法がわかったので記しておく。そっこー忘れそうであるので。</p>
+
+<p>ちなみに、「on Arch Linux」と題しているが、おそらくArchに限らないLinux全般の話ではないかと想像。
+UbuntuとArch Linux、どちらのFirefoxでもデフォルト設定では横方向二本指スワイプが仕事をしてくれなかったので。</p>
+
+<p>では、以下設定手順。</p>
+
+<h2 id="synclientの確認と設定">synclientの確認と設定</h2>
+
+<p>そもそもタッチパッドのドライバーレベルで横方向スクロールが無効になっている可能性がある。というかなってた。
+なので、確認方法と設定変更方法。</p>
+
+<h4 id="synclientコマンドを打って水平方向二本指スクロールの設定を確認する">synclientコマンドを打って水平方向二本指スクロールの設定を確認する</h4>
+
+<p>以下のコマンドで現在の設定を確認できる。</p>
+
+<p><code>$ synclient</code></p>
+
+<p>ずらずらっと出てくる内容のうち、<code>HorizTwoFingerScroll</code> が確認対象の項目。
+値が「0」だったら無効になっている。有効にしない限り、いくら頑張って横スワイプしても効かない。</p>
+
+<h4 id="synclientコマンドで水平方向二本指スクロールを有効にする">synclientコマンドで水平方向二本指スクロールを有効にする</h4>
+
+<p>上の確認で有効だったらここは飛ばしてOK。無効だった場合、有効にするのは以下のコマンド。</p>
+
+<p><code>$ synclient HorizTwoFingerScroll=1</code></p>
+
+<p>synclientのほうはこれでOK。</p>
+
+<h2 id="firefoxの設定">Firefoxの設定</h2>
+
+<p>さらにFirefoxの設定を変えてやる必要がある。
+設定内容は<a href="https://wiki.archlinux.org/index.php/Touchpad_Synaptics">Touchpad Synaptics - Arch Linux Wiki</a>、Firefox 17.0 and laterの項を参考にした。</p>
+
+<p>about:configを開く。設定内容は以下。</p>
+
+<h4 id="マウスホイールのアクションを変更する">マウスホイールのアクションを変更する</h4>
+
+<p><code>mousewheel.default.action.override_x = 2</code> とした。
+あんまりよく調べていないが、「2」が戻るアクションに対応している数字らしい。</p>
+
+<h4 id="スワイプ方向を逆にする">スワイプ方向を逆にする</h4>
+
+<p>デフォルトでは、左スワイプが「進む」、右スワイプが「戻る」になっている。
+逆な気がする。設定してこれを逆転させる。</p>
+
+<p><code>mousewheel.default.delta_multiplier_x = -100</code> とした。</p>
+
+<h4 id="感度を落とす">感度を落とす</h4>
+
+<p>デフォルトではものすごく感度がよい。
+良すぎてしまって縦スワイプがちょっと横にぶれただけで戻ったり進んだりする。
+やりにくいので感度を落とす。</p>
+
+<p><code>mousewheel.default.delta_multiplier_x = -10</code> とした。</p>
+
+<h2 id="ここまでやって">ここまでやって</h2>
+
+<p>とりあえず望む形（二本指で左スワイプで戻る、右スワイプで進む）に設定できた。結構ハードルあった。。
+ちなみにこれ、Mac OS向けFirefoxならデフォルトの挙動な模様。何の差なのか。。。</p>
+
+                    </div>
+                </section>
+                
+                <h1 class="content-subhead">23 Jul 2014, 21:54</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/07/23/raspi-touch-panel/" class="post-title">PiTFTのタッチパネルを動作させる</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-RaspberryPi" href="https://pankona.github.io/categories/raspberrypi">RaspberryPi</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        
+
+<p>前回に引き続き、PiTFTの話題。</p>
+
+<p>前回でPiTFTにコンソール画面だったりXの画面だったりを出力させるところまでいった。
+タッチパネルの設定がまだだったので、手順を簡単に記しておく。</p>
+
+<p>例によって、Raspberry PiにはArch Linuxが載っている前提。</p>
+
+<h3 id="タッチパネルのドライバーをロードする">タッチパネルのドライバーをロードする</h3>
+
+<p>前回、FBTFTがビルトインされているカーネルを以下のコマンドでインストールした。</p>
+
+<p><code>$ sudo -E REPO_URI=https://github.com/notro/rpi-firmware BRANCH=builtin rpi-update</code></p>
+
+<p>これが正しく入っていれば、タッチパネルのドライバもカーネルに含まれているはず。
+ただし、画面に何かを表示させる時と異なり、手動でドライバをロードする必要がある。</p>
+
+<p>以下のコマンドで、タッチパネルのドライバをロードする。</p>
+
+<p>@@@@ 忘れたのであとで追記する @@@@</p>
+
+<p>基本的にはこれだけで動作すると思われる。
+例によって<a href="https://github.com/notro/fbtft/wiki">notroさんのところのWiki</a>に載っている内容だが、
+notroさんのところは充実しすぎて逆に迷う気がするので、備忘録的に残しておくことにする。。</p>
+
+<h3 id="動いているか確かめる方法">動いているか確かめる方法</h3>
+
+<p>evtestを用いて確かめられる。
+evtestを起動したのちにタッチパネルをぐりぐり触ってみると、
+タッチイベントの詳細がコンソールに出力される。</p>
+
+<p>また、正常にドライバがロードされると、<code>/dev/input/touchpanel</code>なるファイルが現れるはずである。
+ちなみにこれはeventXへのシンボリックリンクになっている。
+このファイルの有無でもドライバのロードが正しく行われたか判断できると思われる。</p>
+
+<h3 id="要追記事項">要追記事項</h3>
+
+<ul>
+<li>ドライバロードのコマンドをちゃんと確認する。</li>
+<li>キャリブレーション（回転した画面への対応）の方法。</li>
+</ul>
+
+                    </div>
+                </section>
+                
+            </div>
+            
+<div class="pagination">
+  <nav role="pagination" class="post-list-pagination">
+      
+      <a href="/posts/page/3/" class="post-list-pagination-item pure-button post-list-pagination-item-prev">
+        <i class="fa fa-angle-double-left"></i>&nbsp;Newer
+      </a>
+      
+    <span class="post-list-pagination-item post-list-pagination-item-current">Page 4 of 7</span>
+    
+      <a href="/posts/page/5/" class="post-list-pagination-item pure-button post-list-pagination-item-next">
+        Older&nbsp;<i class="fa fa-angle-double-right"></i>
+      </a>
+    
+  </nav>
+</div>
+
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script src="https://pankona.github.io/js/all.min.js"></script>
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', '', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

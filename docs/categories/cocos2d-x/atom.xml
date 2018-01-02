@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cocos2d X on make clean; make</title>
+    <link>https://pankona.github.io/categories/cocos2d-x/</link>
+    <description>Recent content in Cocos2d X on make clean; make</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 22 Apr 2015 19:25:11 +0900</lastBuildDate>
+    
+	<atom:link href="https://pankona.github.io/categories/cocos2d-x/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cocos2d-x &#43; Travis CI &#43; DeployGate</title>
+      <link>https://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/</link>
+      <pubDate>Wed, 22 Apr 2015 19:25:11 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/</guid>
+      <description>前回の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。 今回は成果物であるAPKをDeployGate</description>
+    </item>
+    
+    <item>
+      <title>cocos2d-x &#43; Travis CI</title>
+      <link>https://pankona.github.io/blog/2015/04/19/cocos-with-travisci/</link>
+      <pubDate>Sun, 19 Apr 2015 11:26:14 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2015/04/19/cocos-with-travisci/</guid>
+      <description>引き続きcocos2d-xを使ってブロック崩しを作っている。 かれこれ２ヶ月あまりが経過した。ほぼ通勤時間でのみ作っている。 いまのところの作業</description>
+    </item>
+    
+    <item>
+      <title>cocos2d-xをやってみている</title>
+      <link>https://pankona.github.io/blog/2015/03/11/cocos2d-initial/</link>
+      <pubDate>Wed, 11 Mar 2015 20:29:27 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2015/03/11/cocos2d-initial/</guid>
+      <description>2015.03.07に娘が生まれました。 これからも頑張ります。近況を記す。 cocos2d-xを始めてみたのである 昨年末からあまりRaspbe</description>
+    </item>
+    
+  </channel>
+</rss>

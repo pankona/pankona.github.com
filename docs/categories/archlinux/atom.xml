@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Archlinux on make clean; make</title>
+    <link>https://pankona.github.io/categories/archlinux/</link>
+    <description>Recent content in Archlinux on make clean; make</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 14 Dec 2016 11:12:31 +0900</lastBuildDate>
+    
+	<atom:link href="https://pankona.github.io/categories/archlinux/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GNOMEアプリ上で日本語入力できなくなったときの対処メモ</title>
+      <link>https://pankona.github.io/blog/2016/12/14/jp-input-on-gnome-app/</link>
+      <pubDate>Wed, 14 Dec 2016 11:12:31 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2016/12/14/jp-input-on-gnome-app/</guid>
+      <description>何が原因かハッキリしていないが、Linux をアップデート (パッケージの更新という意味) したときに 日本語が入力できなくなることがあった。 起きた</description>
+    </item>
+    
+    <item>
+      <title>Linux で 無線LAN の USB ドングルを使う</title>
+      <link>https://pankona.github.io/blog/2016/11/14/usb-wifi-dongle/</link>
+      <pubDate>Mon, 14 Nov 2016 20:14:02 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2016/11/14/usb-wifi-dongle/</guid>
+      <description>Linux と銘打っておりますが、Manjro で試しています。 本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。 使ったドングル二種 訳あって</description>
+    </item>
+    
+    <item>
+      <title>二本指スワイプに戻る／進むを割り当てる方法 for Firefox on Arch Linux</title>
+      <link>https://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/</link>
+      <pubDate>Mon, 15 Sep 2014 00:30:08 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/09/15/histryback-by-swipe-on-firefox/</guid>
+      <description>ブラウザはFirefoxを好んで使っている。 VimperatorとかPentadactylがあるおかげである。 いままで放置していた問題があっ</description>
+    </item>
+    
+    <item>
+      <title>日本語入力のための設定メモ for Arch Linux</title>
+      <link>https://pankona.github.io/blog/2014/05/28/use-uim-mozc/</link>
+      <pubDate>Wed, 28 May 2014 07:49:23 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/05/28/use-uim-mozc/</guid>
+      <description>IMはずっとibusを使ってきたのだが、なかなか設定に融通が効かないというか、なんというか。 具体的な要望としては、 mozcを使いたい Alt + Space で</description>
+    </item>
+    
+    <item>
+      <title>Vaio Pro 13における手のひら検知 on Arch Linux</title>
+      <link>https://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/</link>
+      <pubDate>Thu, 15 May 2014 12:25:25 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/</guid>
+      <description>Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。 概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。 それ</description>
+    </item>
+    
+    <item>
+      <title>Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録</title>
+      <link>https://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/</link>
+      <pubDate>Wed, 14 May 2014 17:59:10 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/</guid>
+      <description>このポストは Windows8.1に対してWindows Updateしたところ、何だかわからないがデュアルブートしなくなって焦ったため、 直し方</description>
+    </item>
+    
+  </channel>
+</rss>

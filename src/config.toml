@@ -1,8 +1,9 @@
 baseURL = "https://pankona.github.io"
 title = "make clean; make"
-theme = "material-design"
+theme = "purehugo"
 hasCJKLanguage = true
 author = "pankona"
+Paginate = 10
 pygmentscodefences = true
 pygmentsstyle = "monokai"
 
@@ -12,9 +13,11 @@ mediaType = "application/rss"
 baseName = "atom"
 
 [params]
-  twitter = "@gohan_pan_gohan"
-  github = "pankona"
+  description = "Demo site for a hugo theme"
+  twitterName = "@gohan_pan_gohan"
+  githubName = "pankona"
   googleAnalyticsUserID = "UA-48476608-2"
 
 [permalinks]
   posts = "/blog/:year/:month/:day/:filename/"
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>make clean; make</title>
+    <link>localhost:8080/</link>
+    <description>Recent content on make clean; make</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 01 Jun 2017 19:34:21 +0900</lastBuildDate>
+    
+	<atom:link href="localhost:8080/atom.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>golang.tokyo#6@DeNA</title>
+      <link>localhost:8080/blog/2017/06/01/golangtokyo-6/</link>
+      <pubDate>Thu, 01 Jun 2017 19:34:21 +0900</pubDate>
+      
+      <guid>localhost:8080/blog/2017/06/01/golangtokyo-6/</guid>
+      <description>2017.06.01 に DeNA さんにて、golang.tokyo #6 が行われました。 golang.tokyo #6 - connpass 開幕は DeNA の方のお話だったんですが、何やら DeNA では Go エンジニアを色々募集してい</description>
+    </item>
+    
+  </channel>
+</rss>

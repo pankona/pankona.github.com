@@ -12,7 +12,7 @@ categories: ["golang"]
 開幕は DeNA の方のお話だったんですが、何やら DeNA では Go エンジニアを色々募集しているようです！
 サーバーのみならず、色んなフィールドで Go を使っているとのことです。
 
-{{% img-responsive "/images/golang.tokyo-6/3.jpg" %}}
+![golang.tokyo-6](/images/golang.tokyo-6/3.jpg)
 今日も大勢の方が参加されております。
 
 ![golang.tokyo-6](/images/golang.tokyo-6/4.jpg)

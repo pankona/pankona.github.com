@@ -15,7 +15,7 @@ serve:
 	hugo server -D
 
 newpost:
-	hugo new posts/$(post)
+	hugo new posts/$(post).md
 
 edit:
 ifndef EDITOR

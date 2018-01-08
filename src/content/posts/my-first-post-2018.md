@@ -1,7 +1,7 @@
 ---
 title: "DroidKaigi 2018 に向けて"
 date: 2018-01-06T23:09:05+09:00
-categories: [その他]
+categories: [DroidKaigi]
 ---
 
 ## DroidKaigi 2018 に向けての準備

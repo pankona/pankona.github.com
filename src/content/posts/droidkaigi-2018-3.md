@@ -1,7 +1,6 @@
 ---
 title: "gomobile build で JNI から Toast を出せなかった話"
 date: 2018-01-29T08:41:12+09:00
-draft: true
 categories: [DroidKaigi]
 ---
 

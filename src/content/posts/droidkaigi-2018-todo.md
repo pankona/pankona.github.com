@@ -1,5 +1,5 @@
 ---
-title: "Droidkaigi 2018 に向けて (その2)"
+title: "DroidKaigi 2018 に向けて (その2)"
 date: 2018-01-08T23:10:33+09:00
 categories: [DroidKaigi]
 ---

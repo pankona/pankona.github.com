@@ -41,7 +41,7 @@ showToast(uintptr_t java_vm, uintptr_t jni_env, uintptr_t jni_ctx, char* text) {
         "(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;");
 
     // String を生成 ... 3
-    jstring jstr = env->NewStringUTF("hogehoge");
+    jstring jstr = (*env)->NewStringUTF(env, "hogehoge");
 
     // makeText メソッドを呼び出し ... 4
     jobject toastobj = (*env)->CallStaticObjectMethod(env, toast, makeText,
@@ -82,21 +82,49 @@ func (t *t) Show(text string) error {
 ```
 
 上記のコードは、「4」のところが正しく動作しないようである。`toastobj` には NULL が返却される。
-いまのところ原因はよく分かっていないが、`makeText` の第二引数が `CharSequence` であることと、
-そこに `jstring` を渡している、ということで、型があってないというのが原因なのではないかと想像する。
+~~いまのところ原因はよく分かっていないが、`makeText` の第二引数が `CharSequence` であることと、~~
+~~そこに `jstring` を渡している、ということで、型があってないというのが原因なのではないかと想像する。~~
 
-`jstring` は `java/lang/String` と同じものという理解でおり、であれば `CharSequence` として扱っても
-良いのではないかという気がしないでもない (`String` は `CharSequence` のサブクラスなので) のだが、
-事実、正しく動作していないところを鑑みるには、やっぱりダメなんじゃないかという気がしている。
+~~`jstring` は `java/lang/String` と同じものという理解でおり、であれば `CharSequence` として扱っても~~
+~~良いのではないかという気がしないでもない (`String` は `CharSequence` のサブクラスなので) のだが、~~
+~~事実、正しく動作していないところを鑑みるには、やっぱりダメなんじゃないかという気がしている。~~
 
-Java のレイヤでは書ける以下のような例は、
-JNI のレイヤでは表現することができないと思われる。
+~~Java のレイヤでは書ける以下のような例は、~~
+~~JNI のレイヤでは表現することができないと思われる。~~
 
-`CharSequence cs = new String("hogehoge");`
+~~`CharSequence cs = new String("hogehoge");`~~
 
-ちなみに、「AndroidNDKプログラミング第二版」には、JNI から Toast を出す例が掲載されていたが、
-肝心の CharSequence に関しては Java のレイヤで生成されたものを JNI に引き渡す構成になっており、
-もう少し原因究明に届かなかった。
+~~ちなみに、「AndroidNDKプログラミング第二版」には、JNI から Toast を出す例が掲載されていたが、~~
+~~肝心の CharSequence に関しては Java のレイヤで生成されたものを JNI に引き渡す構成になっており、~~
+~~もう少し原因究明に届かなかった。~~
+
+(2018/01/31 追記)
+
+上記は完全にウソだった。勘違いであった。申し訳ございません！
+
+ちゃんとどのようなエラーが (4) で吐かれているか補足してみたところ、以下の例外が投げられていた。
+
+```
+java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
+```
+
+つまり Toast を出そうとはしているようであるが、UI スレッド以外から呼び出すことはできない、ということで
+Toast の出力に失敗しているようである。`CharSequence` は完全に無罪であった。すまん、`CharSequence`。
+
+さて、上記のエラーを解消するためには、Toast を UI スレッド上で実行する必要がある。
+定番のやり方は `Handler` を用いるやり方である。例えば以下のようなやり方。
+
+```java
+activity.runOnUiThread(new Runnable() {
+    public void run() {
+        Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show();
+    }
+});
+```
+
+これを JNI で表現するにはどうすれば良いかを考えれば良い。
+無名クラスとか出てきていてやっぱり無理なんじゃないかっていう気がしているが、
+とりあえず試みてみようとは思う。
 
 ## Java のレイヤに CharSequence をとらないメソッドを定義すればいけるが…
 

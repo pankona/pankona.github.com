@@ -40,7 +40,9 @@ public class MyActivity extends AppCompatActivity {
 つまりは上記と同様の処理を JNI で書いてやれば良い。
 以下のようになる。
 
-### jni を呼び出すパッケージと関数
+### jni パッケージ (Go言語 + C言語)
+
+指定した関数を JNI 上で実行する関数 `RunOnJVM` を定義しているパッケージ。
 
 ```go
 // +build android
@@ -146,7 +148,9 @@ func RunOnJVM(fn func(vm, env, ctx uintptr) error) error {
 }
 ```
 
-### jni パッケージを使ってファイル保存領域を取得するメソッド
+### 上記 jni パッケージを使ってファイル保存領域を取得するメソッド (Go言語 + C言語)
+
+上記 jni パッケージを使って、ファイル保存領域を取得するための関数を jni 上で実行する。
 
 ```go
 // +build android
@@ -225,7 +229,9 @@ func (s *storageAndroid) DirectoryPath() string {
 }
 ```
 
-### DirectoryPath() を呼び出す部分
+### DirectoryPath() を呼び出す部分 (Go言語)
+
+上記で準備した関数を呼び出す部分。
 
 ```go
 func f() {
@@ -233,6 +239,9 @@ func f() {
     fmt.Printf("path to internal storage: %s", dir)
 }
 ```
+
+これで、ファイル保存領域へのディレクトリパスを取得できる。
+あとは、取得したディレクトリパス配下に保存したいものを保存する。
 
 ## (余談) キャッシュディレクトリの取得
 

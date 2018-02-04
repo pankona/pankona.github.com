@@ -6,8 +6,7 @@ categories: [DroidKaigi]
 
 DroidKaigi 2018 では以下の枠で発表する予定。
 
-DAY.01 (Feb 8th, 2018) 14:00-14:30 Room 7
-[gomobile でゲームを作る](https://droidkaigi.jp/2018/timetable?session=17012)
+DAY.01 (Feb 8th, 2018) 14:00-14:30 Room 7 - [gomobile でゲームを作る](https://droidkaigi.jp/2018/timetable?session=17012)
 資料はココ → [gomobile でゲームは作れる](http://pankona.github.io/slides/droidkaigi_2018.html)
 
 ## 発表内容についての徒然

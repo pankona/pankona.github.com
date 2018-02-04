@@ -1,5 +1,5 @@
 ---
-title: "DroidKaigi 2018 向け資料"
+title: "DroidKaigi 2018 向け資料 - gomobile でゲームを作る"
 date: 2018-02-05T00:38:03+09:00
 categories: [DroidKaigi]
 ---

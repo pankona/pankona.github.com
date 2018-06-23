@@ -1,7 +1,6 @@
 ---
 title: "golang.tokyo #14@メルカリ"
 date: 2018-04-16T19:32:07+09:00
-draft: true
 ---
 
 [golang.tokyo #14](https://golangtokyo.connpass.com/event/82723/) に参加してきたのでその内容メモ。

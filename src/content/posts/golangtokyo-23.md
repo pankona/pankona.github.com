@@ -1,7 +1,7 @@
 ---
 title: "golang.tokyo #23 @ DeNA"
 date: 2019-04-24T14:52:59+09:00
-draft: true
+draft: false
 ---
 
 2019 年 4 月 19 日 (金) に行われた golang.tokyo #23 (@DeNA) に参加ました。

@@ -1,5 +1,6 @@
 
 all:
+	git submodule update
 	GO111MODULE=on go get
 	make -C $(CURDIR)/src
 

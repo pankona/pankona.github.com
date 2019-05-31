@@ -1,5 +1,6 @@
 
 all:
+	GO111MODULE=on go get
 	make -C $(CURDIR)/src
 
 serve:

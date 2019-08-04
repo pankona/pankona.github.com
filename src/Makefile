@@ -12,7 +12,7 @@ build:
 	mv public/* $(CURDIR)/../public/.
 
 serve:
-	hugo server -D
+	hugo server -D --disableFastRender
 
 newpost:
 	hugo new posts/$(post).md

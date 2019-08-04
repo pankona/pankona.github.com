@@ -10,5 +10,5 @@ serve:
 deploy:
 	make build -C $(CURDIR)/src
 	cd $(CURDIR)/public; \
-	git add . && git commit -m "Update site" && git push origin master
+	git add . && git commit -m "Update site" && git push origin HEAD:master
 

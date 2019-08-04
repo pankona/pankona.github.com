@@ -6,6 +6,7 @@ author = "pankona"
 Paginate = 5
 pygmentscodefences = true
 pygmentsstyle = "monokai"
+disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [outputFormats]
 [outputFormats.RSS]

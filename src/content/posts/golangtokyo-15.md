@@ -14,7 +14,9 @@ date: 2018-05-30T19:39:48+09:00
 
 ## Effective Streaming in Golang by [avvmoto](https://twitter.com/avvmoto) さん
 
-<iframe id="talk_frame_446760" src="//speakerdeck.com/player/3431ee80147b48b2beabf723612382e5" width="800" height="565" style="border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div style="max-width: 800px">
+<script async class="speakerdeck-embed" data-id="3431ee80147b48b2beabf723612382e5" data-ratio="1.41436464088398" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
 
 <div style="margin-bottom:24px">
   <a href=/images/golang.tokyo-15/10.jpg><img src=/images/golang.tokyo-15/resized_10.jpg /></a>
@@ -26,7 +28,9 @@ io.Reader interface を引き回すことで、**いざ実際に必要になっ�
 
 ## 次世代のコンテナランタイム gVisor を理解する by [niconegoto](https://twitter.com/niconegoto) さん
 
-<iframe id="talk_frame_446448" src="//speakerdeck.com/player/648504c5f1724ee5b97d1f14ca12a4cb" width="850" height="463" style="border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div style="max-width: 800px">
+<script async class="speakerdeck-embed" data-id="648504c5f1724ee5b97d1f14ca12a4cb" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
 
 <div style="margin-bottom:24px">
   <a href=/images/golang.tokyo-15/08.jpg><img src=/images/golang.tokyo-15/resized_08.jpg /></a>
@@ -48,7 +52,9 @@ Google においては、gVisor についていずれ論文で技術的な詳細
 
 ## LT by [@yoshi_xxxxxiiii](https://twitter.com/yoshi_xxxxxiiii) さん from Cluex
 
-<iframe id="talk_frame_446461" src="//speakerdeck.com/player/e4a3aaa06df042cbbcd90cd215ec858d" width="800" height="596" style="border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div style="max-width: 800px">
+<script async class="speakerdeck-embed" data-id="e4a3aaa06df042cbbcd90cd215ec858d" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
 
 <div style="margin-bottom:24px">
   <a href=/images/golang.tokyo-15/04.jpg><img src=/images/golang.tokyo-15/resized_04.jpg /></a>

@@ -2,7 +2,7 @@
 title: "golang.tokyo #1@mercari"
 date: 2016-10-25 19:38:13 +0900
 comments: true
-categories: [golang]
+categories: [go]
 ---
 
 2016.10.25 に六本木の森タワーメルカリさんにて、golang.tokyo #1 が行われました。

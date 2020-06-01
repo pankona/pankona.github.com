@@ -2,7 +2,7 @@
 title: "golang.tokyo#6@DeNA"
 date: 2017-06-01 19:34:21 +0900
 comments: true
-categories: [golang]
+categories: [go]
 ---
 
 2017.06.01 に DeNA さんにて、golang.tokyo #6 が行われました。

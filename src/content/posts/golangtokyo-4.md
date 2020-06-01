@@ -2,7 +2,7 @@
 title: "golang.tokyo#4@eureka"
 date: 2017-03-01 19:31:27 +0900
 comments: true
-categories: [golang]
+categories: [go]
 ---
 
 2017.03.01 に eureka さんにて、golang.tokyo #4 が行われました。

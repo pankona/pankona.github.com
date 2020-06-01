@@ -2,7 +2,7 @@
 title: "golang.tokyo#2@はてな"
 date: 2016-12-12 19:24:17 +0900
 comments: true
-categories: [golang]
+categories: [go]
 ---
 
 2016.12.12 に表参道のはてなさんにて、golang.tokyo #2 が行われました。

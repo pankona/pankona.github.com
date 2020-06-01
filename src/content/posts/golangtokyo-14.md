@@ -18,7 +18,9 @@ date: 2018-04-16T19:32:07+09:00
 
 ## ホリネズミでもわかる Goroutine 入門 by [@inukirom](https://twitter.com/inukirom) さん
 
-<iframe id="talk_frame_438844" src="//speakerdeck.com/player/5611568f65044914bb63fb0d787e0852" width="1000" height="575" style="border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div style="max-width: 800px">
+<script async class="speakerdeck-embed" data-id="5611568f65044914bb63fb0d787e0852" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
 
 <div style="margin-bottom:24px">
   <a href=/images/golang.tokyo-14/05.jpg><img src=/images/golang.tokyo-14/resized_05.jpg /></a>
@@ -91,7 +93,10 @@ for 文の中で goroutine 立てる例。よくある罠。
 
 ## チャネルのしくみ by [@knsh14](https://twitter.com/knsh14) さん
 
-<iframe id="talk_frame_438853" src="//speakerdeck.com/player/3ca3b188d9904775b4281cfee7018c27" width="1000" height="575" style="border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div style="max-width: 800px">
+<script async class="speakerdeck-embed" data-id="3ca3b188d9904775b4281cfee7018c27" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
+
 
 <div style="margin-bottom:24px">
   <a href=/images/golang.tokyo-14/03.jpg><img src=/images/golang.tokyo-14/resized_03.jpg /></a>
@@ -102,7 +107,9 @@ for 文の中で goroutine 立てる例。よくある罠。
 
 ## vgo by [@tanksuzuki](https://twitter.com/tanksuzuki) さん
 
-<iframe id="talk_frame_438880" src="//speakerdeck.com/player/08cee61b8c56450d8ef618b378fcd6a0" width="1000" height="575" style="border:0; padding:0; margin:0; background:transparent;" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<div style="max-width: 800px">
+<script async class="speakerdeck-embed" data-id="08cee61b8c56450d8ef618b378fcd6a0" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
 
 <div style="margin-bottom:24px">
   <a href=/images/golang.tokyo-14/02.jpg><img src=/images/golang.tokyo-14/resized_02.jpg /></a>
@@ -122,7 +129,7 @@ vgo に関してはまだ使うのしんどい一面もあるものの、GOPATH�
 
 ## linter を作る話 by [@dice_zu](https://twitter.com/dice_zu) さん
 
-<iframe src=https://daisuzu.github.io/golang-tokyo-14/#1 width="1000" height="600"></iframe>
+<a href="https://daisuzu.github.io/golang-tokyo-14/#1"><img src=/images/golang.tokyo-14/linter_by_dice_zu.jpg /></a>
 
 <div style="margin-bottom:24px">
   <a href=/images/golang.tokyo-14/01.jpg><img src=/images/golang.tokyo-14/resized_01.jpg /></a>

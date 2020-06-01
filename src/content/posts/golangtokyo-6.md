@@ -23,8 +23,8 @@ categories: [golang]
 
 # Gopher Fest 2017 に参加した話 by tenntenn さん
 
-* mercari テックブログ にて既にまとめられている tenntenn さんの記事もあります。
-(http://tech.mercari.com/entry/gopherfest2017_report)
+* mercari テックブログ にて既にまとめられている [tenntenn さんの記事](http://tech.mercari.com/entry/gopherfest2017_report)もあります。
+
 
 今日は参加レポートをしてくれました。
 主に 2017年8月上旬あたりにリリースされそうな Go 1.9 の話。

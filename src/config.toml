@@ -13,11 +13,12 @@ mediaType = "application/rss"
 baseName = "atom"
 
 [params]
-  description = ""
+  description = "make clean; make"
   twitterName = "@pankona"
   twitter = ""
   githubName = "pankona"
   google_analytics = "UA-48476608-2"
+  image = "https://avatars1.githubusercontent.com/u/6533008?s=460&v=4"
 
 [permalinks]
   posts = "/blog/:year/:month/:day/:filename/"

@@ -3,7 +3,7 @@ title = "make clean; make"
 theme = "purehugo"
 hasCJKLanguage = true
 author = "pankona"
-Paginate = 5
+Paginate = 20
 pygmentscodefences = true
 pygmentsstyle = "monokai"
 

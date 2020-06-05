@@ -41,6 +41,10 @@ categories: [イベント]
 </div>
 
 <div style="max-width: 800px">
+  <script async class="speakerdeck-embed" data-id="2082b04cdee1409f9afed70e5f266f62" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+</div>
+
+<div style="max-width: 800px">
   <iframe width="100%" height="315px" src="https://www.youtube.com/embed/6F-q8stbwrg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 

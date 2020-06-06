@@ -26,3 +26,9 @@ baseName = "atom"
 
 [blackfriday]
   extensions = ["hardLineBreak"]
+
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

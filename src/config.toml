@@ -24,11 +24,8 @@ baseName = "atom"
 [permalinks]
   posts = "/blog/:year/:month/:day/:filename/"
 
-[blackfriday]
-  extensions = ["hardLineBreak"]
-
-
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+      hardWraps = true

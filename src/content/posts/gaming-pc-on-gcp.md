@@ -1,5 +1,5 @@
 ---
-title: "GCP 上にゲーミング PC をこさえてみた"
+title: "GCP 上にゲーミング PC をこさえてみたが 2 日で 800 円だよ"
 date: 2020-06-30T20:44:40+09:00
 draft: false
 categories: ["GCP", "ゲーム"]

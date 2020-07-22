@@ -4,8 +4,9 @@ theme = "purehugo"
 hasCJKLanguage = true
 author = "pankona"
 Paginate = 20
-pygmentscodefences = true
-pygmentsstyle = "monokai"
+pygmentsUseClasses = true
+pygmentsCodefences = true
+pygmentsStyle = "monokai"
 
 [outputFormats]
 [outputFormats.RSS]

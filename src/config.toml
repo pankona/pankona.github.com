@@ -1,5 +1,5 @@
 baseURL = "https://pankona.github.io"
-title = "make clean; make"
+title = "make clean all"
 theme = "purehugo"
 hasCJKLanguage = true
 author = "pankona"

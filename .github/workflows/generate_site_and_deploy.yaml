@@ -1,0 +1,35 @@
+name: generate_site_and_deploy
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    if: github.event.sender.login == 'pankona'
+    runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    steps:
+    - name: setup go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.15.7'
+    - name: clone pankona.github.com
+      uses: actions/checkout@v2
+      with:
+        repository: pankona/pankona.github.com
+        path: pankona.github.com
+    - name: clone hugo
+      uses: actions/checkout@v2
+      with:
+        repository: gohugoio/hugo
+        path: hugo
+    - name: install hugo
+      run: |
+        cd ./hugo
+        go install .
+    - name: generate site and deploy
+      run: |
+        cd pankona.github.com
+        GITHUB_TOKEN=${TOKEN} make deploy
+

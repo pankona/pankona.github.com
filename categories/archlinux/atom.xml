@@ -5,11 +5,7 @@
     <link>https://pankona.github.io/categories/archlinux/</link>
     <description>Recent content in ArchLinux on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 14 Dec 2016 11:12:31 +0900</lastBuildDate>
-    
-	<atom:link href="https://pankona.github.io/categories/archlinux/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 14 Dec 2016 11:12:31 +0900</lastBuildDate><atom:link href="https://pankona.github.io/categories/archlinux/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GNOMEアプリ上で日本語入力できなくなったときの対処メモ</title>
       <link>https://pankona.github.io/blog/2016/12/14/jp-input-on-gnome-app/</link>

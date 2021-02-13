@@ -5,10 +5,15 @@
     <link>https://pankona.github.io/</link>
     <description>Recent content on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 07 Sep 2020 22:09:53 +0900</lastBuildDate>
-    
-	<atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 13 Feb 2021 06:21:00 +0000</lastBuildDate><atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hugo 使っているけどスマホで記事を書きたいと思ったので</title>
+      <link>https://pankona.github.io/blog/2021/02/13/generate-blog-post-from-issue/</link>
+      <pubDate>Sat, 13 Feb 2021 06:21:00 +0000</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2021/02/13/generate-blog-post-from-issue/</guid>
+      <description>GitHub issue をブログ記事に変換する仕組みを GitHub Actions を使ってこしらえてみた。 できたもの https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml 背景 本ブログの生成には hugo という静的サイトジェネレータを使っており、</description>
+    </item>
     
     <item>
       <title>GCP 上にゲーミング PC をこさえて少し運用してみたら毎月およそ 3,000 円 だよ</title>

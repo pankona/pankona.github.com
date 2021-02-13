@@ -7,7 +7,7 @@
 
     <meta name="description" content="Good poem">
 
-    <meta name="generator" content="Hugo 0.72.0" />
+    <meta name="generator" content="Hugo 0.81.0-DEV" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Posts">
@@ -84,6 +84,251 @@
         <div>
             
             <div class="posts">
+                
+                <div class="content-subhead">2018-01-31 16:30:10</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2018/01/31/gomobile_get_files_dir/">gomobile (build) で作るアプリでファイルを保存する</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-go" href="https://pankona.github.io/categories/go">go</a><a class="post-category post-category-gomobile" href="https://pankona.github.io/categories/gomobile">gomobile</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>gomobile という Go 言語で Android/iOS のアプリを作ろうというプロジェクト (準公式) が存在する。<br>
+ページはココ → <a href="https://github.com/golang/go/wiki/Mobile">gomobile の公式 wiki ページ - https://github.com/golang/go/wiki/Mobile</a></p>
+<p><code>gomobile build</code> コマンド一発で Go のソースから APK が生成されるというなかなか豪快なコマンドなのであるが、<br>
+いかんせん色々制限があって、いざ何か作ってみようとするとまあまあハマる。<br>
+どんな苦行があるかは <a href="https://qiita.com/pankona/items/11941a5cfb668e653b4a">手前味噌だが Qiita の記事</a> に何となく記しておいた。</p>
+<p>上記記事には書いてなかったハマりポイントとして、**「ファイルを永続領域に保存する API がない」**というのがある。<br>
+ファイルを保存できないということは、ゲーム作ってて何かセーブデータでも保存しよう、とかそういうことができないってことである。<br>
+割と致命的である。</p>
+<p>ただ、実は gomobile はパッケージ内に JNI を触る実装を持っていて (何故か internal パッケージなので外から触れないが) 、<br>
+それを参考にすれば、cgo 経由で JNI に触ることができる。<br>
+JNI に触れるということは、Java の API に触れるということで、それはすなわち Android SDK の API に触れるということである。<br>
+Go から Android SDK の API に触れるのである。</p>
+<h2 id="android-アプリ作成におけるファイル保存領域の取得">Android アプリ作成におけるファイル保存領域の取得</h2>
+<p>ググればさっさと出てくるが、Android アプリを作る際には以下のようなコードを書くと、<br>
+ファイルを永続保存できる領域へのディレクトリパスを取得できる (アプリアンインストールと共に削除される) 。</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyActivity</span> <span class="kd">extends</span> <span class="n">AppCompatActivity</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span> <span class="n">dir</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getCacheDir</span><span class="o">().</span><span class="na">getAbsolutePath</span><span class="o">();</span>
+        <span class="c1">// dir にはファイル保存可能領域 (internal storage) への絶対パスが入る
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h2 id="gomobile-build-アプリ作成時におけるファイル保存領域の取得">gomobile (build) アプリ作成時におけるファイル保存領域の取得</h2>
+<p>つまりは上記と同様の処理を JNI で書いてやれば良い。<br>
+以下のようになる。</p>
+<h3 id="jni-パッケージ-go言語--c言語">jni パッケージ (Go言語 + C言語)</h3>
+<p>指定した関数を JNI 上で実行する関数 <code>RunOnJVM</code> を定義しているパッケージ。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// +build android
+</span><span class="c1"></span>
+<span class="kn">package</span> <span class="nx">jni</span>
+
+<span class="cm">/*
+</span><span class="cm">#cgo LDFLAGS: -landroid
+</span><span class="cm">#include &lt;jni.h&gt;
+</span><span class="cm">#include &lt;stdlib.h&gt;
+</span><span class="cm">
+</span><span class="cm">JavaVM* current_vm;
+</span><span class="cm">jobject current_ctx;
+</span><span class="cm">
+</span><span class="cm">static char *
+</span><span class="cm">_lockJNI(uintptr_t* envp, int* attachedp) {
+</span><span class="cm">	JNIEnv* env;
+</span><span class="cm">
+</span><span class="cm">	if (current_vm == NULL) {
+</span><span class="cm">		return &#34;no current JVM&#34;;
+</span><span class="cm">	}
+</span><span class="cm">
+</span><span class="cm">	*attachedp = 0;
+</span><span class="cm">	switch ((*current_vm)-&gt;GetEnv(current_vm, (void**)&amp;env, JNI_VERSION_1_6)) {
+</span><span class="cm">	case JNI_OK:
+</span><span class="cm">		break;
+</span><span class="cm">	case JNI_EDETACHED:
+</span><span class="cm">		if ((*current_vm)-&gt;AttachCurrentThread(current_vm, &amp;env, 0) != 0) {
+</span><span class="cm">			return &#34;cannot attach to JVM&#34;;
+</span><span class="cm">		}
+</span><span class="cm">		*attachedp = 1;
+</span><span class="cm">		break;
+</span><span class="cm">	case JNI_EVERSION:
+</span><span class="cm">		return &#34;bad JNI version&#34;;
+</span><span class="cm">	default:
+</span><span class="cm">		return &#34;unknown JNI error from GetEnv&#34;;
+</span><span class="cm">	}
+</span><span class="cm">
+</span><span class="cm">	*envp = (uintptr_t)env;
+</span><span class="cm">	return NULL;
+</span><span class="cm">}
+</span><span class="cm">
+</span><span class="cm">static char *
+</span><span class="cm">_checkException(uintptr_t jnienv) {
+</span><span class="cm">	jthrowable exc;
+</span><span class="cm">	JNIEnv* env = (JNIEnv*)jnienv;
+</span><span class="cm">	if (!(*env)-&gt;ExceptionCheck(env)) {
+</span><span class="cm">		return NULL;
+</span><span class="cm">	}
+</span><span class="cm">
+</span><span class="cm">	exc = (*env)-&gt;ExceptionOccurred(env);
+</span><span class="cm">	(*env)-&gt;ExceptionClear(env);
+</span><span class="cm">
+</span><span class="cm">	jclass clazz = (*env)-&gt;FindClass(env, &#34;java/lang/Throwable&#34;);
+</span><span class="cm">	jmethodID toString = (*env)-&gt;GetMethodID(env, clazz, &#34;toString&#34;, &#34;()Ljava/lang/String;&#34;);
+</span><span class="cm">	jobject msgStr = (*env)-&gt;CallObjectMethod(env, exc, toString);
+</span><span class="cm">	return (char*)(*env)-&gt;GetStringUTFChars(env, msgStr, 0);
+</span><span class="cm">}
+</span><span class="cm">
+</span><span class="cm">void
+</span><span class="cm">_unlockJNI() {
+</span><span class="cm">	(*current_vm)-&gt;DetachCurrentThread(current_vm);
+</span><span class="cm">}
+</span><span class="cm">*/</span>
+<span class="kn">import</span> <span class="s">&#34;C&#34;</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;errors&#34;</span>
+	<span class="s">&#34;runtime&#34;</span>
+	<span class="s">&#34;unsafe&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">RunOnJVM</span><span class="p">(</span><span class="nx">fn</span> <span class="kd">func</span><span class="p">(</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">env</span><span class="p">,</span> <span class="nx">ctx</span> <span class="kt">uintptr</span><span class="p">)</span> <span class="kt">error</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">errch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">error</span><span class="p">)</span>
+	<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">runtime</span><span class="p">.</span><span class="nf">LockOSThread</span><span class="p">()</span>
+		<span class="k">defer</span> <span class="nx">runtime</span><span class="p">.</span><span class="nf">UnlockOSThread</span><span class="p">()</span>
+
+		<span class="nx">env</span> <span class="o">:=</span> <span class="nx">C</span><span class="p">.</span><span class="nf">uintptr_t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+		<span class="nx">attached</span> <span class="o">:=</span> <span class="nx">C</span><span class="p">.</span><span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">errStr</span> <span class="o">:=</span> <span class="nx">C</span><span class="p">.</span><span class="nf">_lockJNI</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">env</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">attached</span><span class="p">);</span> <span class="nx">errStr</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">errch</span> <span class="o">&lt;-</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nf">GoString</span><span class="p">(</span><span class="nx">errStr</span><span class="p">))</span>
+			<span class="k">return</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="nx">attached</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+			<span class="k">defer</span> <span class="nx">C</span><span class="p">.</span><span class="nf">_unlockJNI</span><span class="p">()</span>
+		<span class="p">}</span>
+
+		<span class="nx">vm</span> <span class="o">:=</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">current_vm</span><span class="p">))</span> <span class="c1">// #nosec
+</span><span class="c1"></span>		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">fn</span><span class="p">(</span><span class="nx">vm</span><span class="p">,</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">env</span><span class="p">),</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">current_ctx</span><span class="p">));</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">errch</span> <span class="o">&lt;-</span> <span class="nx">err</span>
+			<span class="k">return</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span> <span class="nx">exc</span> <span class="o">:=</span> <span class="nx">C</span><span class="p">.</span><span class="nf">_checkException</span><span class="p">(</span><span class="nx">env</span><span class="p">);</span> <span class="nx">exc</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">errch</span> <span class="o">&lt;-</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nf">GoString</span><span class="p">(</span><span class="nx">exc</span><span class="p">))</span>
+			<span class="nx">C</span><span class="p">.</span><span class="nf">free</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">exc</span><span class="p">))</span> <span class="c1">// #nosec
+</span><span class="c1"></span>			<span class="k">return</span>
+		<span class="p">}</span>
+		<span class="nx">errch</span> <span class="o">&lt;-</span> <span class="kc">nil</span>
+	<span class="p">}()</span>
+	<span class="k">return</span> <span class="o">&lt;-</span><span class="nx">errch</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="上記-jni-パッケージを使ってファイル保存領域を取得するメソッド-go言語--c言語">上記 jni パッケージを使ってファイル保存領域を取得するメソッド (Go言語 + C言語)</h3>
+<p>上記 jni パッケージを使って、ファイル保存領域を取得するための関数を jni 上で実行する。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// +build android
+</span><span class="c1"></span>
+<span class="kn">package</span> <span class="nx">storage</span>
+
+<span class="cm">/*
+</span><span class="cm">#include &lt;jni.h&gt;
+</span><span class="cm">#include &lt;stdlib.h&gt;
+</span><span class="cm">
+</span><span class="cm">static const char *
+</span><span class="cm">getFilesDir(uintptr_t java_vm, uintptr_t jni_env, uintptr_t jni_ctx) {
+</span><span class="cm">	JNIEnv* env = (JNIEnv*)jni_env;
+</span><span class="cm">	jobject ctx = (jobject)jni_ctx;
+</span><span class="cm">
+</span><span class="cm">	jclass context = (*env)-&gt;FindClass(env, &#34;android/content/Context&#34;);
+</span><span class="cm">	if(context == NULL) {
+</span><span class="cm">		return NULL;
+</span><span class="cm">	}
+</span><span class="cm">	jmethodID getFilesDir = (*env)-&gt;GetMethodID(env, context, &#34;getFilesDir&#34;, &#34;()Ljava/io/File;&#34;);
+</span><span class="cm">	if(getFilesDir == NULL){
+</span><span class="cm">		return NULL;
+</span><span class="cm">	}
+</span><span class="cm">
+</span><span class="cm">	jobject f = (*env)-&gt;CallObjectMethod(env, ctx, getFilesDir);
+</span><span class="cm">	if (f == NULL) {
+</span><span class="cm">		return NULL;
+</span><span class="cm">	}
+</span><span class="cm">
+</span><span class="cm">	jclass file = (*env)-&gt;FindClass(env, &#34;java/io/File&#34;);
+</span><span class="cm">	if (file == NULL) {
+</span><span class="cm">		return NULL;
+</span><span class="cm">	}
+</span><span class="cm">
+</span><span class="cm">	jmethodID getAbsolutePath = (*env)-&gt;GetMethodID(env, file, &#34;getAbsolutePath&#34;, &#34;()Ljava/lang/String;&#34;);
+</span><span class="cm">	if (getAbsolutePath == NULL) {
+</span><span class="cm">		return NULL;
+</span><span class="cm">	}
+</span><span class="cm">
+</span><span class="cm">	jstring path = (jstring)(*env)-&gt;CallObjectMethod(env, f, getAbsolutePath);
+</span><span class="cm">	return (*env)-&gt;GetStringUTFChars(env, path, 0);
+</span><span class="cm">}
+</span><span class="cm">*/</span>
+<span class="kn">import</span> <span class="s">&#34;C&#34;</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;unsafe&#34;</span>
+
+	<span class="s">&#34;github.com/pankona/gomo-simra/simra/internal/jni&#34;</span>
+	<span class="s">&#34;github.com/pankona/gomo-simra/simra/simlog&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">storageAndroid</span> <span class="kd">struct</span><span class="p">{}</span>
+
+<span class="kd">func</span> <span class="nf">NewStorage</span><span class="p">()</span> <span class="nx">Storager</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">storageAndroid</span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">path</span> <span class="kt">string</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="o">*</span><span class="nx">storageAndroid</span><span class="p">)</span> <span class="nf">DirectoryPath</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">path</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">path</span>
+	<span class="p">}</span>
+	<span class="nx">jni</span><span class="p">.</span><span class="nf">RunOnJVM</span><span class="p">(</span>
+		<span class="kd">func</span><span class="p">(</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">env</span><span class="p">,</span> <span class="nx">ctx</span> <span class="kt">uintptr</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+			<span class="nx">cpath</span> <span class="o">:=</span> <span class="nx">C</span><span class="p">.</span><span class="nf">getFilesDir</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nf">uintptr_t</span><span class="p">(</span><span class="nx">vm</span><span class="p">),</span> <span class="nx">C</span><span class="p">.</span><span class="nf">uintptr_t</span><span class="p">(</span><span class="nx">env</span><span class="p">),</span> <span class="nx">C</span><span class="p">.</span><span class="nf">uintptr_t</span><span class="p">(</span><span class="nx">ctx</span><span class="p">))</span>
+			<span class="k">if</span> <span class="nx">cpath</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+				<span class="nx">simlog</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;failed to get FilesDir!&#34;</span><span class="p">)</span>
+			<span class="p">}</span>
+			<span class="nx">path</span> <span class="p">=</span> <span class="nx">C</span><span class="p">.</span><span class="nf">GoString</span><span class="p">(</span><span class="nx">cpath</span><span class="p">)</span>
+			<span class="nx">C</span><span class="p">.</span><span class="nf">free</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">cpath</span><span class="p">))</span> <span class="c1">// #nosec
+</span><span class="c1"></span>			<span class="k">return</span> <span class="kc">nil</span>
+		<span class="p">})</span>
+	<span class="k">return</span> <span class="nx">path</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="directorypath-を呼び出す部分-go言語">DirectoryPath() を呼び出す部分 (Go言語)</h3>
+<p>上記で準備した関数を呼び出す部分。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dir</span> <span class="o">:=</span> <span class="nx">storage</span><span class="p">.</span><span class="nf">NewStorage</span><span class="p">().</span><span class="nf">DirectoryPath</span><span class="p">()</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;path to internal storage: %s&#34;</span><span class="p">,</span> <span class="nx">dir</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div><p>これで、ファイル保存領域へのディレクトリパスを取得できる。<br>
+あとは、取得したディレクトリパス配下に保存したいものを保存する。</p>
+<h2 id="余談-キャッシュディレクトリの取得">(余談) キャッシュディレクトリの取得</h2>
+<p>上記のコードで永続保存が可能な領域へのパスが取得できるので、それはそれで良いのであるが、<br>
+実はもっと手軽にファイル保存が可能な領域へのパスを取得できる方法があり、<br>
+それは環境変数 <code>TMPDIR</code> を参照することである。</p>
+<p>ただし、本値は Android SDK の API で言うところの <code>Context.getCacheDir</code> に相当し、<br>
+Android 端末の状況によっては削除され得る領域であることに気をつける必要がある。<br>
+が、ちょっと保存したいくらいの用途であれば耐えうるような気がする。<br>
+以下のようにして取得する。</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">dir</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;TMPDIR&#34;</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;path to internal storage (for cache): %s&#34;</span><span class="p">,</span> <span class="nx">dir</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+                    </div>
+                </section>
                 
                 <div class="content-subhead">2018-01-29 08:41:12</div>
                 <section >
@@ -2049,68 +2294,6 @@ Vim＋Syntastic＋NeoComplete＋Clang_Complete、といった組み合わせで�
 <p>これからもほそぼそ、ぼちぼち、書いていこうと思う。<br>
 学んだことをアウトプットするのが大事だと誰か偉い人も言っておった。私もそう思う。<br>
 書いたことによって、誰かひとりでも何かの助けになればと願いつつ。</p>
-
-                    </div>
-                </section>
-                
-                <div class="content-subhead">2015-01-28 21:10:39</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2015/01/28/raspi-autologin/">Raspberry Piでログインを自動化、ついでに現在のIP表示させてみる</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-RaspberryPi" href="https://pankona.github.io/categories/raspberrypi">RaspberryPi</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>しばらく愛用のVaio Proをいじる時間がとれなかったもんで、新しい記事をポストできずにおった。<br>
-実におよそ2ヶ月ぶりの新規記事。新年あけましておめでとうございます。<br>
-今年もぼちぼちでやっていきます。目指せ100記事。</p>
-<h3 id="raspberry-pi起動時にpitftにipアドレスを表示させる">Raspberry Pi起動時に、PiTFTにIPアドレスを表示させる</h3>
-<p>いま自分のとこで扱っているRaspberry Piは、基本的に画面を接続せず、操作はネットワーク越し（SSH）に行う前提にしている。<br>
-そのため、SSHによるログインにあたってはRaspberry PiのIPアドレスを知る等してネットワーク的にリーチする必要がある。</p>
-<p>いままではarpをしてみたりpingをブロードキャストに投げてみたり、ホストネームを打ってみたり、色々やっていたのであるが、<br>
-いまひとつうまく行かないことがあって、そのたびにトラブルシューティングのために、結局画面を接続する必要が生じていた。<br>
-実に間抜け感を感じるわけである。</p>
-<p>PiTFTをくっつけた、というのはちょっと前の記事で書いたところなのであるが、<br>
-じゃあとりあえず、Raspberry Pi起動時にこいつに現在のIPアドレスを出力してみれば便利なのでは、と思ったのである。<br>
-IPアドレスさえわかれば、だいたいにおいてSSH接続できるしね。</p>
-<p>方法は、</p>
-<ul>
-<li>自動でログインさせる</li>
-<li>ログイン時にifconfigし、IPアドレスの部分を抽出しつつ、コンソール（PiTFT）出力<br>
-といった感じ。以下、詳細。</li>
-</ul>
-<h3 id="自動ログインさせる">自動ログインさせる</h3>
-<p>ちなみに私が扱っているRaspberry PiにはArch Linuxが載っている。<br>
-Raspbian、Pidora等とは設定が違うと思われるので注意されたし。<br>
-Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用いられている。</p>
-<p>Systemdにおける自動ログインの設定は、例によってArch Wikiに載っていたのでそれを参照した。<br>
-ここを参照。→  <a href="https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console_(%E6%97%A5%E6%9C%AC%E8%AA%9E)%5Dx">Automatic login to virtual console</a><br>
-仮想コンソールの章を、騙されたと思ってそのまま設定し、そんで再起動してやればもう自動ログインできているはずである。</p>
-<h3 id="ログイン時にifconfigしipアドレス部分を抽出">ログイン時にifconfigし、IPアドレス部分を抽出</h3>
-<p>自動ログインできたらあとは簡単で、.bashrcにでもIPアドレス出力用の何かを書いてあげればOKである。<br>
-{% codeblock .bashrc %}<br>
-ifconfig | grep inet<br>
-{% endcodeblock %}<br>
-これでいいや、という感じで書いておいた。</p>
-<p>ただ、起動と同時に自動ログイン → IPアドレス表示、だと、IPを取れてないことがあって具合が良くない。<br>
-そのため、上記IPアドレス取得の前に、ちょっとだけsleepなんかを入れてあげるとそのへんは心配がなくなる。<br>
-{% codeblock .bashrc %}<br>
-sleep 5<br>
-ifconfig | grep inet<br>
-{% endcodeblock %}<br>
-こんな具合である。</p>
-<h3 id="ipアドレスがわかるようになったがpitftがもったいない感">IPアドレスがわかるようになったがPiTFTがもったいない感</h3>
-<p>PiTFTだとちょっとやりすぎなので、もっと小さい画面モジュールでやってもいいと思う。<br>
-というか早く無線化しようね。次の目標は無線化です。それでは。</p>
 
                     </div>
                 </section>

@@ -7,7 +7,7 @@
 
     <meta name="description" content="Good poem">
 
-    <meta name="generator" content="Hugo 0.72.0" />
+    <meta name="generator" content="Hugo 0.81.0-DEV" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="その他">
@@ -84,6 +84,69 @@
         <div>
             
             <div class="posts">
+                
+                <div class="content-subhead">2021-02-13 06:21:00</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2021/02/13/generate-blog-post-from-issue/">hugo 使っているけどスマホで記事を書きたいと思ったので</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>GitHub issue をブログ記事に変換する仕組みを GitHub Actions を使ってこしらえてみた。</p>
+<!-- more -->
+<p>できたもの <a href="https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml">https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml</a></p>
+<h2 id="背景">背景</h2>
+<p>本ブログの生成には hugo という静的サイトジェネレータを使っており、基本的には PC を使って執筆、生成、デプロイまで行うような建付けで運用している。が、ときどきスマホで記事が書けなくて不便だなーと思うことがあり、うまいやり方はないものかと考えていた。</p>
+<p>うすらぼんやり考えていた要件としては、</p>
+<ul>
+<li>スマホでちゃちゃっと記事が書ける</li>
+<li>マークダウンみたいなもので書くことができる</li>
+<li>あわよくば既存の記事を後から編集できる</li>
+</ul>
+<p>みたいなもの。</p>
+<p>hugo にはいわゆるワードプレスみたいな管理画面がない。<a href="https://www.netlifycms.org">Netlify CMS</a> みたいなものを使うと管理画面をこしらえることができるようなことが書いてある気がするけれど、それをまた運用するのも面倒だし、もうちょっと簡単に済ませらんないかなー等と考えていた。</p>
+<h2 id="github-issue-をブログ記事に変換するというやり口">GitHub issue をブログ記事に変換するというやり口</h2>
+<p>ふと、GitHub issue ならばスマホで何となく書くことができ、しかもマークダウンであり、何なら画像貼ったりもできるし、というので要件を満たすものに近いんではないかということに気づいた。なんならもう GitHub issue をそのままブログですって言い張っていく線まで考えたが、せっかく hugo あるし、うまい具合に &ldquo;GitHub issue をブログ記事に変換&rdquo; できたら便利かもなー、ということでちょっと作ってみた。本記事もさっそく GitHub issue からの生成してみている。</p>
+<h2 id="どういったものを作ったか">どういったものを作ったか</h2>
+<p>GitHub Actions で基本的には済ませることができそうだった。</p>
+<ul>
+<li>issue の更新イベントを捕まえて</li>
+<li>ブログのリポジトリをクローン</li>
+<li>issue を取得、hugo が食えるフォーマットに変換し、ブログのリポジトリの所定の位置に配置</li>
+<li>commit して push して pull request にする</li>
+<li>pull request を自分がなんとなくレビューしたらマージ</li>
+<li>マージしたら actions 等を用いて自動的にサイトを生成してデプロイ</li>
+</ul>
+<h2 id="課題">課題</h2>
+<p>なんとなく使えそうだけどもいくらか課題があり、</p>
+<ul>
+<li>issue 変更時には pull request を更新してほしいが、次々 commit を積むというのも難しいので force push にしている
+<ul>
+<li>これは PC での編集と相性が悪いようにも思える (pull request を PC で編集したら issue 側に反映させないといけない気がする)</li>
+</ul>
+</li>
+<li>自分以外が issue を立てたときもブログ記事になってしまう。ﾜﾛｽ
+<ul>
+<li>これは actions 実行の条件として、issue を起票あるいは変更イベントを発行した author が自分であること、というのを入れればよさそう</li>
+<li>(追記) その後、issue を変更した人が &ldquo;pankona&rdquo; でなかったら actions を何もしないで終了するようにしてみた。勝ったか！？</li>
+</ul>
+</li>
+</ul>
+<h2 id="書けよ">書けよ</h2>
+<p>仕組みを作るのはいいがちゃんとブログを書こうな (戒め)</p>
+
+                    </div>
+                </section>
                 
                 <div class="content-subhead">2018-01-02 13:32:34</div>
                 <section >

@@ -5,11 +5,7 @@
     <link>https://pankona.github.io/categories/cocos2d-x/</link>
     <description>Recent content in cocos2d-x on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 22 Apr 2015 19:25:11 +0900</lastBuildDate>
-    
-	<atom:link href="https://pankona.github.io/categories/cocos2d-x/atom.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 22 Apr 2015 19:25:11 +0900</lastBuildDate><atom:link href="https://pankona.github.io/categories/cocos2d-x/atom.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cocos2d-x &#43; Travis CI &#43; DeployGate</title>
       <link>https://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/</link>

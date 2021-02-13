@@ -22,7 +22,7 @@ jobs:
         path: pankona.github.com
     - name: install articlegen
       run: |
-        cd ./pankona/github.com/tool/articlegen
+        cd ./pankona.github.com/tool/articlegen
         go install .
     - name: commit
       run: |

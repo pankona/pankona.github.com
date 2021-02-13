@@ -99,7 +99,11 @@
                     </header>
                     <div class="post-description">
                         <p>GitHub issue をブログ記事に変換する仕組みを GitHub Actions を使ってこしらえてみた。</p>
-<p>できたもの <a href="https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml">https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml</a></p>
+<p>できたもの</p>
+<ul>
+<li><a href="https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml">issue を pull request に変換する GitHub Action</a></li>
+<li>ついでに、<a href="https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_site_and_deploy.yaml">pull request マージ後にサイトをビルド＆デプロイする GitHub Action (手動)</a></li>
+</ul>
 <h2 id="背景">背景</h2>
 <p>本ブログの生成には hugo という静的サイトジェネレータを使っており、基本的には PC を使って執筆、生成、デプロイまで行うような建付けで運用している。が、ときどきスマホで記事が書けなくて不便だなーと思うことがあり、うまいやり方はないものかと考えていた。</p>
 <p>うすらぼんやり考えていた要件としては、</p>

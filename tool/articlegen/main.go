@@ -97,9 +97,13 @@ type Article struct {
 }
 
 func write(w io.Writer, article Article) error {
+	jst, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		return err
+	}
 	data := map[string]interface{}{
 		"Title": article.Title,
-		"Date":  article.Date.Format(time.RFC3339),
+		"Date":  article.Date.In(jst).Format(time.RFC3339),
 		"Draft": article.Draft,
 		"Categories": func() string {
 			ret := make([]string, 0, len(article.Categories))

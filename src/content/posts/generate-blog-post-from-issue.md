@@ -8,7 +8,7 @@ categories: ["その他"]
            
 GitHub issue をブログ記事に変換する仕組みを GitHub Actions を使ってこしらえてみた。
 
-<!-- more -->
+<!--more-->
 
 できたもの https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml
 

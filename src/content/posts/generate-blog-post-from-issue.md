@@ -1,7 +1,7 @@
 
 ---
 title: "hugo 使っているけどスマホで記事を書きたいと思ったので"
-date: 2021-02-13T06:21:00Z
+date: 2021-02-13T15:21:00+09:00
 draft: false
 categories: ["その他"]
 ---
@@ -12,7 +12,7 @@ GitHub issue をブログ記事に変換する仕組みを GitHub Actions を使
 
 できたもの
 - [issue を pull request に変換する GitHub Action](https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml)
-- ついでに、[pull request マージ後にサイトをビルド＆デプロイする GitHub Action (手動)](https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_site_and_deploy.yaml)
+- ついでに [pull request マージ後にサイトをビルド＆デプロイする GitHub Action (手動)](https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_site_and_deploy.yaml)
 
 ## 背景
 

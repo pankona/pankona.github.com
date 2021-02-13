@@ -24,6 +24,10 @@ jobs:
       run: |
         cd ./pankona.github.com/tool/articlegen
         go install .
+    - name: install makepr
+      run: |
+        cd ./pankona.github.com/tool/makepr
+        go install .
     - name: commit
       run: |
         cd pankona.github.com
@@ -46,4 +50,4 @@ jobs:
         cd pankona.github.com
         git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
         git push https://x-access-token:${TOKEN}@github.com/pankona/pankona.github.com.git ${title} -f
-
+        makepr

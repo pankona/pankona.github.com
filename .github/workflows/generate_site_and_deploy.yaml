@@ -29,9 +29,15 @@ jobs:
       run: |
         cd ./hugo
         go install .
+    - name git config
+      run: |
+        git config --global user.email "yosuke.akatsuka@gmail.com"
+        git config --global user.name "pankona"
     - name: generate site and deploy
       run: |
         cd pankona.github.com
-        git config --global user.email "yosuke.akatsuka@gmail.com"
-        git config --global user.name "pankona"
         GITHUB_TOKEN=${TOKEN} make deploy
+    - name: update submodule
+      run: |
+        cd pankona.github.com
+        git add public && git commit -m "update submodule" && git push origin hugo

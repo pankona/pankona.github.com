@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
+	"strings"
 
 	"github.com/google/go-github/v33/github"
 	"golang.org/x/oauth2"
@@ -18,7 +21,6 @@ func main() {
 
 	title := fmt.Sprintf("add a post by %s", *head)
 
-	fmt.Println(*base, *head)
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
@@ -32,9 +34,18 @@ func main() {
 			Head:  head,
 			Base:  base,
 		})
-	if err != nil {
+	var e *github.ErrorResponse
+	if errors.As(err, &e) {
+		for _, v := range e.Errors {
+			if strings.Contains(v.Message, "A pull request already exists") {
+				log.Printf("pull request already exists. do nothing")
+				return
+			}
+		}
+	} else if err != nil {
 		panic(err)
 	}
+
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 201 {
@@ -45,5 +56,5 @@ func main() {
 		panic(fmt.Sprintf("failed to create pull request. status code: %d, body: %s", resp.StatusCode, buf))
 	}
 
-	fmt.Printf("pull request created: %s\n", *pr.IssueURL)
+	log.Printf("pull request created: %s", *pr.IssueURL)
 }

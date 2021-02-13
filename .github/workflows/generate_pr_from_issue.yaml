@@ -15,15 +15,10 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: '^1.15.7'
-    - name: clone blogpost
-      uses: actions/checkout@v2
-      with:
-        repository: pankona/blogpost
-        path: blogpost
-    - name: install blogpost
+    - name: install articlegen
       run: |
-        cd blogpost
-        go install github.com/pankona/blogpost
+        cd tool/articlegen
+        go install .
     - name: clone pankona.github.com
       uses: actions/checkout@v2
       with:
@@ -36,7 +31,7 @@ jobs:
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
         title="${title// /-}"
-        GITHUB_TOKEN=${TOKEN} blogpost --issue-num=${{ github.event.issue.number }} > src/content/posts/${title}.md
+        GITHUB_TOKEN=${TOKEN} articlegen --issue-num=${{ github.event.issue.number }} > src/content/posts/${title}.md
         git config --global user.email "yosuke.akatsuka@gmail.com"
         git config --global user.name "pankona"
         git switch -c ${title}

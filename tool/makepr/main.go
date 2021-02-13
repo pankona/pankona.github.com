@@ -17,6 +17,7 @@ import (
 func main() {
 	base := flag.String("base", "", "specify base to create pull request")
 	head := flag.String("head", "", "specify head to create pull request")
+	body := flag.String("body", "", "specify pull request body to create pull request")
 	flag.Parse()
 
 	title := fmt.Sprintf("add a post by %s", *head)
@@ -33,6 +34,7 @@ func main() {
 			Title: &title,
 			Head:  head,
 			Base:  base,
+			Body:  body,
 		})
 	var e *github.ErrorResponse
 	if errors.As(err, &e) {

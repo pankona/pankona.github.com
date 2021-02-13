@@ -19,6 +19,7 @@ jobs:
       with:
         repository: pankona/pankona.github.com
         path: pankona.github.com
+        submodules: 'recursive'
     - name: clone hugo
       uses: actions/checkout@v2
       with:
@@ -31,5 +32,4 @@ jobs:
     - name: generate site and deploy
       run: |
         cd pankona.github.com
-        GITHUB_TOKEN=${TOKEN} make all
         GITHUB_TOKEN=${TOKEN} make deploy

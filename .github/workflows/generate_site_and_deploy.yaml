@@ -32,4 +32,6 @@ jobs:
     - name: generate site and deploy
       run: |
         cd pankona.github.com
+        git config --global user.email "yosuke.akatsuka@gmail.com"
+        git config --global user.name "pankona"
         GITHUB_TOKEN=${TOKEN} make deploy

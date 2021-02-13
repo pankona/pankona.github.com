@@ -14,7 +14,11 @@ import (
 func main() {
 	base := flag.String("base", "", "specify base to create pull request")
 	head := flag.String("head", "", "specify head to create pull request")
+	flag.Parse()
 
+	title := fmt.Sprintf("add a post by %s", *head)
+
+	fmt.Println(*base, *head)
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
@@ -24,15 +28,16 @@ func main() {
 
 	pr, resp, err := client.PullRequests.Create(context.Background(), "pankona", "pankona.github.com",
 		&github.NewPullRequest{
-			Base: base,
-			Head: head,
+			Title: &title,
+			Head:  head,
+			Base:  base,
 		})
 	if err != nil {
 		panic(err)
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != 201 {
 		buf, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			panic(err)

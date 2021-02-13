@@ -50,4 +50,4 @@ jobs:
         cd pankona.github.com
         git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
         git push https://x-access-token:${TOKEN}@github.com/pankona/pankona.github.com.git ${title} -f
-        GITHUB_TOKEN=${TOKEN} makepr
+        GITHUB_TOKEN=${TOKEN} makepr --base="hugo" --head="${title}"

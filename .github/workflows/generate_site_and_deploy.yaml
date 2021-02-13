@@ -31,5 +31,5 @@ jobs:
     - name: generate site and deploy
       run: |
         cd pankona.github.com
+        GITHUB_TOKEN=${TOKEN} make all
         GITHUB_TOKEN=${TOKEN} make deploy
-

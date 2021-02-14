@@ -5,7 +5,16 @@
     <link>https://pankona.github.io/posts/</link>
     <description>Recent content in Posts on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 13 Feb 2021 15:21:00 +0900</lastBuildDate><atom:link href="https://pankona.github.io/posts/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Feb 2021 11:52:36 +0900</lastBuildDate><atom:link href="https://pankona.github.io/posts/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ゲーミング PC on GCP は月に 7,000 円かかったところで辞めた</title>
+      <link>https://pankona.github.io/blog/2021/02/14/gaming-pc-on-gcp-was-fired/</link>
+      <pubDate>Sun, 14 Feb 2021 11:52:36 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2021/02/14/gaming-pc-on-gcp-was-fired/</guid>
+      <description>&lt;p&gt;正確には 6,800 円くらいだったが！&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>hugo 使っているけどスマホで記事を書きたいと思ったので</title>
       <link>https://pankona.github.io/blog/2021/02/13/generate-blog-post-from-issue/</link>

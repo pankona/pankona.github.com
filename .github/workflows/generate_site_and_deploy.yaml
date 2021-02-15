@@ -3,7 +3,7 @@ name: generate_site_and_deploy
 on:
   workflow_dispatch:
   push:
-    branch:
+    branches:
       - master
 
 jobs:

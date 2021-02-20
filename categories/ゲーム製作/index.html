@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゲーム製作</title>
+
+    <meta name="description" content="Good poem">
+
+    <meta name="generator" content="Hugo 0.82.0-DEV" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="ゲーム製作">
+    <meta name="twitter:description" content="Good poem">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ゲーム製作">
+    <meta property="og:description" content="Good poem">
+    <meta property="og:image" content="https://avatars1.githubusercontent.com/u/6533008?s=460&amp;v=4" />
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/@pankona"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/pankona "><i class="fa fa-github-alt"></i> GitHub</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> RSS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/categories"></i> Categories</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <div class="content-subhead">2021-02-20 23:16:14</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2021/02/20/let-us-create-a-game-part-1/">ゲームを作ろう</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-ゲーム製作" href="https://pankona.github.io/categories/%E3%82%B2%E3%83%BC%E3%83%A0%E8%A3%BD%E4%BD%9C">ゲーム製作</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>時々作りたくなるよね、ということで案を練り始めた。</p>
+<h2 id="なんとなく構想">なんとなく構想</h2>
+<p>構想を練っている。なんとなくの概要は以下のようなもの。</p>
+<ul>
+<li>ローグライクみたいなノリ。Slay the Spire とか buriedbornes のような。</li>
+<li>プレイヤーはダンジョンのような何かに乗り込んでいく。ダンジョンでは戦闘が発生したり、何らかのイベントが起きたりする。定期的にボスが出たりもする。</li>
+<li>深く深く探索することが目的。深度＝スコアでハイスコアを目指す。</li>
+<li>いつでも探索を終わらせることができる。終わらせた時点の深度がスコアになる。</li>
+<li>体力が尽きる等して死ぬとスコアにならない。ご破算。</li>
+<li>探索を中断することもできるが、減った体力が自然に回復したりはしない。サスペンド状態。サスペンドしておけば、その後また同じシチュエーションから再開できる。</li>
+<li>プレイヤーは、深度が同じくらいの位置にいる他のプレイヤーを攻撃することができる。倒すと自分の体力が回復する。負けたら死亡でご破算。相手は回復する。</li>
+<li>中断中は、通りかかった他のプレイヤーを自動的に攻撃することもできる。</li>
+<li>中断はいったんプレイを休憩する目的もありつつ、死にかけてももしかしたらだれかカモが通りかかって回復できるかもしれない、みたいな雰囲気で使うことを想定。</li>
+<li>プレイヤーを倒すと身ぐるみを剥ぐことができる。</li>
+</ul>
+<h2 id="なにが面白いのか">なにが面白いのか</h2>
+<ul>
+<li>繋がりのゆるい非同期なマルチプレイという形で、他人とのインタラクションを楽しむ（殺すか殺されるかしかないが）
+<ul>
+<li>定型文を組み合わせて会話くらいできてもいいかもしれない</li>
+<li>他人をどうにかしないと深く進むことができない設計。もちつもたれつ（殺すか殺されるかしかないが）の人間関係を楽しむ</li>
+<li>他人と会えるかどうかは運になっちゃうし、奥深く行けば行くほど出会いの可能性は低くなるがまあいいのかも</li>
+<li>引き際を誤って虫の息で佇んでいると他人の養分になりがちなので、そういった焦りを楽しむ</li>
+</ul>
+</li>
+<li>誰が深くまで行った、というよりは、ここまで深く進んだ人が現れました、みたいな感じで、共闘のノリにしておくとジレンマが発生していいかもしれない（養分になればなるだけ人類の到達点は伸びるが、先に進むのは自分ではない、みたいな）</li>
+<li>他人を倒して養分を吸いまくったとしても、最終的には探索を &ldquo;終了&rdquo; しないとスコアにならないので、他人の命を奪ったからには進まねばならぬということで終了しにくい気持ちにさせつつ、そうやって戦っていると次第に体力が減って今度は他人の養分になりがち、みたいなのが楽しいのでは（作者が）</li>
+</ul>
+<h2 id="システム構成など">システム構成など</h2>
+<ul>
+<li>ブラウザ上で動く類のゲームにしようかと思っており、フロントエンドと、あとは状態の保存や認証のためにいくらかバックエンドも必要な気がしている。</li>
+<li>フロントエンドはいったん何でもいいことにする（絵にこだわったりは作者のスキルの関係でできないし）。</li>
+<li>認証は Firebase の何かを使うと楽ちんらしいので試してみる。</li>
+<li>バックエンドは&hellip; お金かけないためには GCP の Cloud Functions と DataStore みたいな組み合わせにしとけばとりあえずお金かかんなくて良さそうか、なんて気もしつつ、Cloud Functions に DDoS 食らって破産したりしないよね、みたいな心配がないこともない。まあお金で制限かけとけば大丈夫か&hellip;。</li>
+</ul>
+<h2 id="mvpとりあえずちっさく作る">MVP（とりあえずちっさく作る）</h2>
+<p>MVP といいつつ、&ldquo;とりあえず動く&rdquo; 段として目指す場所を定めておく。</p>
+<ul>
+<li>認証できる。</li>
+<li>ダンジョンを進むことができる。</li>
+<li>終了してスコアを記録できる（名前を記録できる）。あわよくばランキングみたいなものが見れる。</li>
+<li>他のプレイヤー（仮想）がいて、殴ったり殴られたりできる。
+<ul>
+<li>仮想と言っているのは、実際にプレイヤーデータを使うんではなくて、とりあえず作者が用意したカカシを使うということ</li>
+</ul>
+</li>
+</ul>
+<p>こんなところか。ゲームのメインとなる他人とのインタラクション（仮想）を試してみれば、楽しいか楽しくないか、楽しくないとして何が楽しくないか、みたいなこと考えたりできそうな。</p>
+<h2 id="作ろうな">作ろうな</h2>
+<p>こういうのは構成だけで終わること山の如しなので、作ってみような</p>
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://pankona.github.io/js/all.min.js"></script>
+<script type="text/javascript" src="https://pankona.github.io/js/jquery.oembed.js"></script>
+<script>
+$(function(){
+    $("a.embed").oembed();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pankona.github.io/css/jquery.oembed.css"> 
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-48476608-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

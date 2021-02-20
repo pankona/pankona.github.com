@@ -5,7 +5,16 @@
     <link>https://pankona.github.io/</link>
     <description>Recent content on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 14 Feb 2021 11:52:36 +0900</lastBuildDate><atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Feb 2021 23:16:14 +0900</lastBuildDate><atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ゲームを作ろう</title>
+      <link>https://pankona.github.io/blog/2021/02/20/let-us-create-a-game-part-1/</link>
+      <pubDate>Sat, 20 Feb 2021 23:16:14 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2021/02/20/let-us-create-a-game-part-1/</guid>
+      <description>&lt;p&gt;時々作りたくなるよね、ということで案を練り始めた。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>ゲーミング PC on GCP は月に 7,000 円かかったところで辞めた</title>
       <link>https://pankona.github.io/blog/2021/02/14/gaming-pc-on-gcp-was-fired/</link>

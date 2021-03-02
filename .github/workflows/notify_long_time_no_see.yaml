@@ -1,0 +1,38 @@
+name: notify_long_time_no_see
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: github.event.sender.login == 'pankona'
+    runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    steps:
+    - name: setup go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.16'
+    - name: clone pankona.github.com
+      uses: actions/checkout@v2
+      with:
+        repository: pankona/pankona.github.com
+        path: pankona.github.com
+        submodules: 'recursive'
+    - name: install sincelastcommit
+      run: |
+        cd ./pankona.github.com/tool/sincelastcommit
+        go install .
+    - name: check since last commit
+      run: |
+        cd ./pubnkona.github.com/public
+        echo "SINCE_LAST_COMMIT=\"`sincelastcommit`\"" >> $GITHUB_ENV
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_CHANNEL: general
+        SLACK_MESSAGE: ${{ env.SINCE_LAST_COMMIT }}
+        SLACK_USERNAME: pankona
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+

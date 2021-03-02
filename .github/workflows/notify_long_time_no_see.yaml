@@ -2,6 +2,8 @@ name: notify_long_time_no_see
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron:  '0 22 * * *'
 
 jobs:
   build:

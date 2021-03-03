@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-    if: github.event.sender.login == 'pankona'
     runs-on: ubuntu-latest
     env:
       TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
@@ -33,7 +32,7 @@ jobs:
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:
-        SLACK_CHANNEL: general
+        SLACK_CHANNEL: notification
         SLACK_MESSAGE: ${{ env.SINCE_LAST_COMMIT }}
         SLACK_USERNAME: pankona
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

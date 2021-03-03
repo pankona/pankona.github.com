@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
+    <title>ブログを何日書いてないかをリマインドする仕組みを作った - make clean; make</title>
 
     <meta name="description" content="Good poem">
 
     <meta name="generator" content="Hugo 0.82.0-DEV" />
     <meta name="twitter:card" content="summary">
     
-    <meta name="twitter:title" content="Posts">
+    <meta name="twitter:title" content="ブログを何日書いてないかをリマインドする仕組みを作った - make clean; make">
     <meta name="twitter:description" content="Good poem">
 
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Posts">
+    <meta property="og:title" content="ブログを何日書いてないかをリマインドする仕組みを作った - make clean; make">
     <meta property="og:description" content="Good poem">
     <meta property="og:image" content="https://avatars1.githubusercontent.com/u/6533008?s=460&amp;v=4" />
 
@@ -84,91 +84,56 @@
         <div>
             
             <div class="posts">
-                
-                <div class="content-subhead">2014-04-24 21:44:52</div>
-                <section >
+                <h1 class="content-subhead">2021-03-04 00:38:25</h1>
+                <section class="post">
                     <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/">Octopressでブログを始めてみる</a>
-
+                        <a href="https://pankona.github.io/blog/2021/03/04/long-time-no-see-blog-post/" class="post-title">ブログを何日書いてないかをリマインドする仕組みを作った</a>
                         <p class="post-meta">
                             
                             
                                 under 
                                 
-                                
+                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
                             
                         </p>
                     </header>
-
                     <div class="post-description">
-                        <p>ちょっと長めの通勤時間を有効活用するため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。<br>
-マークダウンの書き方すらよくわかっていないが、徐々にいろいろと進歩させていこうと思う。</p>
-<p>私は一応プログラマをやっている。なので色々困ったことにでくわし、そのたびに解決方法を調べつつ業務にあたっている。<br>
-きっと私が困ったところは、おそらく世の中の誰かが同じように困っているであろうと信じ、本ブログがその助けになることを願うと共に、<br>
-基本的には日々の調査結果なんかをここにアウトプットしていきたいと思っている。</p>
-<p>細く、長く、続けて行ければ。</p>
-
+                        <p>今年こそはいっぱいブログ書くんだって宣言するのはいいんだけど、結局なかなかコンスタントに書き続けることができず、気付いたら半年過ぎているみたいな人生を送っている。ので、それを打破すべく「最後にブログを書いてから n 日過ぎました」というリマインダーを仕込むことにしたんだ。</p>
+<p>こんなようなリマインダーがくる。</p>
+<p><img src="https://user-images.githubusercontent.com/6533008/109830663-0b2ca500-7c82-11eb-8c91-65134940b32c.png?s=10" alt="image"></p>
+<p>仕組みは以下。</p>
+<ul>
+<li>最後にコミットした日時を git log を使って確認する</li>
+<li>所定の日数過ぎていたら (7日間とか) Slack に通知する
+<ul>
+<li>ここの最終投稿からの日数計算は Go で CLI を作った</li>
+</ul>
+</li>
+<li>GitHub Actions で cron job を仕込み、毎朝 7:00 に確認するようにする</li>
+</ul>
+<p>できたものはこれ。ちゃんと動いている。<br>
+<a href="https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/notify_long_time_no_see.yaml">https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/notify_long_time_no_see.yaml</a></p>
+<h2 id="そもそも人間-自分を含む-を信じるな">そもそも人間 (自分を含む) を信じるな</h2>
+<p>去年の自分は「ブログをいっぱい書くぞ」って気合を入れたっきりそれで終わりだった。記事は生えてこなかった。<br>
+そもそも、ブログをいっぱい書くぞって気合を入れただけでどうしてブログ記事が生えてくると思った？っていうことである。なんとブログ記事は書かないと生えてこない。書かねばならない。そして人間は書くのを忘れるし、書くことを思い出したとしてもネタがないだの時間がないだの言っていったん頭の片隅に追いやってしまい、そして一晩寝たら忘れている。気合だけで達成しようというのがそもそもあまりにも脆弱であった。</p>
+<p>ということで、やはりマシンに頼らねばならない。こういうリマインドの類などで圧をかけるような仕事はマシンにやらせるに限る。そして GitHub Actions が cron job の役目を果たしてくれるのは本当に便利。これで今年こそブログをいっぱい書くんだ！</p>
                     </div>
-                </section>
-                
-                <div class="content-subhead">2014-04-23 21:05:35</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2014/04/23/second-post/">second post</a>
-
-                        <p class="post-meta">
+                    
+                    <div class="post-share">
+                        <div class="post-share-links">
+                            <h4 style="">Share</h4>
                             
                             
-                                under 
-                                
-                                
                             
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
+                            <a href="#" data-type="twitter" data-url="https://pankona.github.io/blog/2021/03/04/long-time-no-see-blog-post/" data-description="ブログを何日書いてないかをリマインドする仕組みを作った - make clean; make" class="prettySocial fa fa-twitter"></a>
+                            
+                            
+                        </div>
                     </div>
+                    
+                    
                 </section>
-                
-                <div class="content-subhead">2014-04-23 21:04:21</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2014/04/23/first-post/">first post</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        
-                    </div>
-                </section>
-                
             </div>
-            
-<div class="pagination">
-  <nav role="pagination" class="post-list-pagination">
-      
-      <a href="/posts/page/3/" class="post-list-pagination-item pure-button post-list-pagination-item-prev">
-        <i class="fa fa-angle-double-left"></i>&nbsp;Newer
-      </a>
-      
-    <span class="post-list-pagination-item post-list-pagination-item-current">Page 4 of 4</span>
-    
-  </nav>
-</div>
-
-
             <div class="footer">
     <div class="pure-menu pure-menu-horizontal pure-menu-open">
         <ul>

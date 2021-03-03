@@ -85,6 +85,114 @@
             
             <div class="posts">
                 
+                <div class="content-subhead">2015-04-22 19:25:11</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x &#43; Travis CI &#43; DeployGate</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-cocos2d-x" href="https://pankona.github.io/categories/cocos2d-x">cocos2d-x</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。<br>
+今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。</p>
+<h2 id="だいたいのやり方">だいたいのやり方</h2>
+<ul>
+<li>ビルドが成功したら<code>curl</code>コマンドにてDeployGateにAPKをアップロードする。</li>
+<li>アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。</li>
+<li>API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
+<ul>
+<li>暗号化には<code>travis</code>コマンドを用いる。</li>
+</ul>
+</li>
+</ul>
+<h2 id="ちょっと細かいやり方">ちょっと細かいやり方</h2>
+<p>まずはAPKアップロード成功後の.travis.ymlを載せておく。</p>
+<pre><code>language: android
+
+# Handle git submodules yourself
+git:
+    submodules: false
+
+env:
+  global:
+    secure: &quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;
+
+install:
+# NDK configuration
+    - printenv
+    - echo `pwd`
+    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+    - chmod a+x android-ndk-r10d-linux-x86_64.bin
+    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+    - export NDK_ROOT=`pwd`/android-ndk-r10d
+    - echo $NDK_ROOT
+    - export PATH=$PATH:$NDK_ROOT
+    - echo $PATH
+
+# Android SDK configuration
+    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
+    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
+
+# git submodule
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
+
+# cocos setup 
+    - cd ./cocos2d
+    - python download-deps.py --remove-download=yes
+    - python ./setup.py
+    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
+    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
+    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+    - export ANT_ROOT=/usr/share/ant/bin
+    - export PATH=$PATH:$ANT_ROOT
+    - printenv
+    - cd ..
+
+script:
+    - cocos compile -p android -j 8
+
+after_success:
+    - echo $TRAVIS_BRANCH
+    - echo $TRAVIS_PULL_REQUEST
+    - '[ &quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ] &amp;&amp; curl -F &quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot; -F &quot;token=${DEPLOYGATE_TOKEN}&quot; -F &quot;message=Deploy from Travis CI&quot; https://deploygate.com/api/users/pankona/apps'
+</code></pre><h3 id="前回からの変更点apkアップロードのために追加した部分">前回からの変更点（APKアップロードのために追加した部分）</h3>
+<p>前回から増えたり変更したりしたのは以下。</p>
+<pre><code>env:
+  global:
+    secure: &quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;
+</code></pre><pre><code>    - '[ &quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ] &amp;&amp; curl -F &quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot; -F &quot;token=${DEPLOYGATE_TOKEN}&quot; -F &quot;message=Deploy from Travis CI&quot; https://deploygate.com/api/users/pankona/apps'
+</code></pre><p>後者の部分で、<code>${DEPLOYGATE_TOKEN}</code>という環境変数を参照しているが、これを設定しているのが前者の部分。</p>
+<h3 id="deploygate_tokenの暗号化">DEPLOYGATE_TOKENの暗号化</h3>
+<p>以下のコマンドでDeployGateのAPI Keyを暗号化する。</p>
+<p><code>$ gem install travis </code> # travisコマンドを使えるようにする。<br>
+<code>$ travis encrypt DEPLOYGATE_TOKEN={My DeployGate API Key}</code> # DeployGateで確認したAPI Keyを暗号化するコマンド（中括弧はいらない）。</p>
+<p>このコマンドで得られた文字列をそのまま.travis.ymlに貼っつければOKである。</p>
+<h3 id="いつアップロードするか">いつアップロードするか</h3>
+<p>以下の条件を満たした場合のみ、APKのアップロードを行うようにした。<br>
+これは、Pull Requestがmasterにマージされたとき、を意味している（つもり）。<br>
+<code>&quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ]</code></p>
+<p>これをやっとかないと、ブランチにコミットをPUSHしたタイミングだったりPull Requestを作ったタイミングだったり、でアップロードが走る。<br>
+個人的にはやり過ぎ感があったので、APKはmasterからだけ作ればいいやという制限を施した。</p>
+<h3 id="これがそこそこ楽だと思います">これがそこそこ楽だと思います</h3>
+<p>AndroidアプリにAPKをいちいち頑張って転送しなくても、開発中アプリをインストールすることができるようになった。<br>
+ちなみに、アップロードされたAPKはDeployGateアプリ経由で取得することになる。</p>
+<p>今回はここまで。</p>
+
+                    </div>
+                </section>
+                
                 <div class="content-subhead">2015-04-19 11:26:14</div>
                 <section >
                     <header class="post-header">
@@ -1247,33 +1355,6 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 <p>tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。<br>
 <a href="http://rcmdnk.github.io/blog/2013/03/23/octopress/">http://rcmdnk.github.io/blog/2013/03/23/octopress/</a></p>
 <p>次はサイドバーに筆者プロフィールをGravatarと共に載せる、みたいな感じにしてみようかな。</p>
-
-                    </div>
-                </section>
-                
-                <div class="content-subhead">2014-04-24 21:44:52</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2014/04/24/start-blog-with-octopress/">Octopressでブログを始めてみる</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>ちょっと長めの通勤時間を有効活用するため、軽く技術的な内容の備忘録というか、日記をつけてみることにした。<br>
-マークダウンの書き方すらよくわかっていないが、徐々にいろいろと進歩させていこうと思う。</p>
-<p>私は一応プログラマをやっている。なので色々困ったことにでくわし、そのたびに解決方法を調べつつ業務にあたっている。<br>
-きっと私が困ったところは、おそらく世の中の誰かが同じように困っているであろうと信じ、本ブログがその助けになることを願うと共に、<br>
-基本的には日々の調査結果なんかをここにアウトプットしていきたいと思っている。</p>
-<p>細く、長く、続けて行ければ。</p>
 
                     </div>
                 </section>

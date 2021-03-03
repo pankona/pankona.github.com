@@ -3,18 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://pankona.github.io/categories/</loc>
-    <lastmod>2021-03-03T13:53:25+09:00</lastmod>
+    <lastmod>2021-03-04T00:38:25+09:00</lastmod>
+  </url><url>
+    <loc>https://pankona.github.io/</loc>
+    <lastmod>2021-03-04T00:38:25+09:00</lastmod>
+  </url><url>
+    <loc>https://pankona.github.io/posts/</loc>
+    <lastmod>2021-03-04T00:38:25+09:00</lastmod>
+  </url><url>
+    <loc>https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96/</loc>
+    <lastmod>2021-03-04T00:38:25+09:00</lastmod>
+  </url><url>
+    <loc>https://pankona.github.io/blog/2021/03/04/long-time-no-see-blog-post/</loc>
+    <lastmod>2021-03-04T00:38:25+09:00</lastmod>
   </url><url>
     <loc>https://pankona.github.io/categories/em/</loc>
     <lastmod>2021-03-03T13:53:25+09:00</lastmod>
   </url><url>
     <loc>https://pankona.github.io/blog/2021/03/03/em-dialy-2021-03-03/</loc>
-    <lastmod>2021-03-03T13:53:25+09:00</lastmod>
-  </url><url>
-    <loc>https://pankona.github.io/</loc>
-    <lastmod>2021-03-03T13:53:25+09:00</lastmod>
-  </url><url>
-    <loc>https://pankona.github.io/posts/</loc>
     <lastmod>2021-03-03T13:53:25+09:00</lastmod>
   </url><url>
     <loc>https://pankona.github.io/blog/2021/02/20/let-us-create-a-game-part-1/</loc>
@@ -33,9 +39,6 @@
     <lastmod>2021-02-14T11:52:36+09:00</lastmod>
   </url><url>
     <loc>https://pankona.github.io/blog/2021/02/13/generate-blog-post-from-issue/</loc>
-    <lastmod>2021-02-13T15:21:00+09:00</lastmod>
-  </url><url>
-    <loc>https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96/</loc>
     <lastmod>2021-02-13T15:21:00+09:00</lastmod>
   </url><url>
     <loc>https://pankona.github.io/blog/2020/09/07/gaming-pc-on-gcp-2/</loc>

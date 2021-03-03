@@ -85,6 +85,69 @@
             
             <div class="posts">
                 
+                <div class="content-subhead">2018-06-23 17:00:42</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2018/06/23/mashimahi/">強いパスワードのためのフレーズジェネレータを作ってみた</a>
+
+                        <p class="post-meta">
+                            
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>ふと思い立って、フレーズジェネレータなるものを作ってみた。</p>
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">こないだ作ってみた「強そうなパスフレーズ/パスワード生成器 (PhraGen)」に CSS をあててちょっとオシャレにしといたぞ。無駄に日本語への自動翻訳もつけておきたかったが、翻訳部分は無料ではいまいち達成できなそうかなー。<a href="https://t.co/tThQl1mfSe">https://t.co/tThQl1mfSe</a></p>&mdash; パン粉 (@pankona) <a href="https://twitter.com/pankona/status/1010435240714633216?ref_src=twsrc%5Etfw">2018年6月23日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>GAE/Go で作成。<a href="https://strongest-mashimashi.appspot.com/">ココ</a> にホスティング。PhraGen (ふらげん) と命名。</p>
+<h2 id="これは何か">これは何か</h2>
+<p>どこかで聞いた話であるが、いわゆる「強いパスワードというのはどうやって生成するのが良いのか」ということを考えた時に、<br>
+ひとつの手法として**「英語の辞書からランダムで 3 単語ひっぱってきてつなげるのが良い」**というのがあると小耳に挟んだわけである。</p>
+<p>なるほどなるほど、ということで、では試しに作ってみようということで作ってみたのがこれである。</p>
+<h2 id="ちょっとした工夫">ちょっとした工夫</h2>
+<p>完全にランダムな単語をチョイスしたほうがパスワード的には強いのだろうけど、きっとそれは覚えにくいフレーズになってしまうと思われる。<br>
+ということで、ちょっとでも覚えやすいフレーズを生成するために、完全にランダムなチョイスではなく**「形容詞＋形容詞＋名詞」**の順で現れるフレーズを生成するようにしてみた。<br>
+**Super Great Goalkeeper** 的なものが生成されることをイメージしている。</p>
+<h2 id="ジェネレータのしくみなど">ジェネレータのしくみなど</h2>
+<h3 id="oxford-dictionaries-api">Oxford Dictionaries API</h3>
+<p>そもそも英語の辞書のデータをどのように扱えば良いのか。出どころはどこか、ということを探していると以下を見つけた。</p>
+<p><a class="embedly-card" data-card-controls="0" href="https://developer.oxforddictionaries.com/">Oxford Dictionaries API</a></p>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+<p>これは英語辞書で有名な Oxford が提供してくれている (と思われる)、Web API である。<br>
+REST API の形をしていて (なんと Swagger の定義までついている)、ドキュメントの記載通りに叩くことで単語とその意味などを得ることができる。<br>
+形容詞で、&ldquo;super で始まる&rdquo; 5字以上の単語、みたいなクエリでワードリストを取得できるような機能が提供されている。</p>
+<p>これを利用しようということで、まずは提供されている swagger の定義をありがたくお借りしてクライアントライブラリを生成した。<br>
+以下のリポジトリに置いておいた。またいつか使うかもしれない。</p>
+<p><a class="embedly-card" data-card-controls="0" href="https://github.com/pankona/oxford-dict-api-client-go">pankona/oxford-dict-api-client-go</a></p>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+<h3 id="レスポンス遅いけどキャッシュは規約違反">レスポンス遅いけどキャッシュは規約違反</h3>
+<p>ただ、一回のクエリに数秒かかるようなところがあり、PhraGen の裏で動かすにはちょっとしんどい一面がある。<br>
+3 単語から構成されるフレーズを作るということは 3 回リクエストするということであり、つまり 1 フレーズ生成につき 5〜6 秒は待たされてしまう。</p>
+<p>問い合わせてみたところ、規約上、フリーのプランでは Oxford Dictionaries API が吐き出す結果をキャッシュしておくことは禁止とのこと。<br>
+お金を払えば制限つきでキャッシュしておけるということで、検討されたしとのお達しであった。うーむ…。<br>
+※ この点については、近日中にバイオレーションのない形に変更予定。</p>
+<h3 id="ホスティングは-gaeバックエンドは-go">ホスティングは GAE、バックエンドは Go</h3>
+<p>ジェネレータは GAE/Go で作った。ソースコードは以下のリポジトリに格納。</p>
+<p><a class="embedly-card" data-card-controls="0" href="https://github.com/pankona/strongest-mashimashi">pankona/strongest-mashimashi</a></p>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+<p>リポジトリ名に深い意味はなく、なんとなく語呂が良いのでつけておいた。ストロンゲストマシマシ。</p>
+<h3 id="フロントエンドは色々">フロントエンドは色々</h3>
+<p>フロントエンド力がナメクジレベルのパン粉であるが、色々調べつつ、以下の技術要素の利用を試みている。<br>
+特に CSS フレームワーク Bulma のおかげで、PhraGen はまあまあしゃらくさい感じのキレイな見た目になったのではないかと思っている。</p>
+<ul>
+<li>TypeScript</li>
+<li>React</li>
+<li>CSS フレームワークとして Bulma</li>
+</ul>
+<h3 id="使えるのか">使えるのか</h3>
+<p>使えるかどうかよりもそもそも使わなそう。<br>
+でもせっかく作ったので、実際にパスワードの生成のために使ってみる所存。</p>
+
+                    </div>
+                </section>
+                
                 <div class="content-subhead">2018-05-30 19:39:48</div>
                 <section >
                     <header class="post-header">
@@ -2196,114 +2259,6 @@ Nexus 7 よりも若干薄いかな、と。</p>
 確かに、褒めるというかイイネというか＋１というか、をしていくことで、<br>
 いい空気、もっといいコード書いてやろう的なモチベーションアップ、とか そういう効果もあるんじゃないかと思ったりもする。<br>
 ギスギスしがちなコードレビューの現場にはオススメ。私もやっていきます。</p>
-
-                    </div>
-                </section>
-                
-                <div class="content-subhead">2015-04-22 19:25:11</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/">Cocos2d-x &#43; Travis CI &#43; DeployGate</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-cocos2d-x" href="https://pankona.github.io/categories/cocos2d-x">cocos2d-x</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p><a href="http://pankona.github.io/blog/2015/04/19/cocos-with-travisci/">前回</a>の記事にて、cocos2d-xでのアプリ作成とTravis CIを連携させるとこまでいった。<br>
-今回は成果物であるAPKをDeployGateにアップロードするところについて書き留めておく。</p>
-<h2 id="だいたいのやり方">だいたいのやり方</h2>
-<ul>
-<li>ビルドが成功したら<code>curl</code>コマンドにてDeployGateにAPKをアップロードする。</li>
-<li>アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。</li>
-<li>API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
-<ul>
-<li>暗号化には<code>travis</code>コマンドを用いる。</li>
-</ul>
-</li>
-</ul>
-<h2 id="ちょっと細かいやり方">ちょっと細かいやり方</h2>
-<p>まずはAPKアップロード成功後の.travis.ymlを載せておく。</p>
-<pre><code>language: android
-
-# Handle git submodules yourself
-git:
-    submodules: false
-
-env:
-  global:
-    secure: &quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;
-
-install:
-# NDK configuration
-    - printenv
-    - echo `pwd`
-    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
-    - chmod a+x android-ndk-r10d-linux-x86_64.bin
-    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
-    - export NDK_ROOT=`pwd`/android-ndk-r10d
-    - echo $NDK_ROOT
-    - export PATH=$PATH:$NDK_ROOT
-    - echo $PATH
-
-# Android SDK configuration
-    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
-    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
-
-# git submodule
-# Use sed to replace the SSH URL with the public URL, then initialize submodules
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-    - git submodule update --init --recursive
-
-# cocos setup 
-    - cd ./cocos2d
-    - python download-deps.py --remove-download=yes
-    - python ./setup.py
-    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
-    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
-    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
-    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
-    - export ANT_ROOT=/usr/share/ant/bin
-    - export PATH=$PATH:$ANT_ROOT
-    - printenv
-    - cd ..
-
-script:
-    - cocos compile -p android -j 8
-
-after_success:
-    - echo $TRAVIS_BRANCH
-    - echo $TRAVIS_PULL_REQUEST
-    - '[ &quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ] &amp;&amp; curl -F &quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot; -F &quot;token=${DEPLOYGATE_TOKEN}&quot; -F &quot;message=Deploy from Travis CI&quot; https://deploygate.com/api/users/pankona/apps'
-</code></pre><h3 id="前回からの変更点apkアップロードのために追加した部分">前回からの変更点（APKアップロードのために追加した部分）</h3>
-<p>前回から増えたり変更したりしたのは以下。</p>
-<pre><code>env:
-  global:
-    secure: &quot;TeSR8JLJd2Z0erCxcgLinC+me5SfwpgcCNwiTsqXn09erOgos2+mUbVQaSyo7Bw4OF4TmNpejX+jETd/lL4fTiWRDw6NW/cqEelk57fXJ5mmf5ey+tB1EkMFwd8x7Fw2vBe4xtO8KeohI6D1Gtu1qTYU9t9x4bhAd4qL15Y5osE=&quot;
-</code></pre><pre><code>    - '[ &quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ] &amp;&amp; curl -F &quot;file=@./bin/debug/android/KonaReflection-debug.apk&quot; -F &quot;token=${DEPLOYGATE_TOKEN}&quot; -F &quot;message=Deploy from Travis CI&quot; https://deploygate.com/api/users/pankona/apps'
-</code></pre><p>後者の部分で、<code>${DEPLOYGATE_TOKEN}</code>という環境変数を参照しているが、これを設定しているのが前者の部分。</p>
-<h3 id="deploygate_tokenの暗号化">DEPLOYGATE_TOKENの暗号化</h3>
-<p>以下のコマンドでDeployGateのAPI Keyを暗号化する。</p>
-<p><code>$ gem install travis </code> # travisコマンドを使えるようにする。<br>
-<code>$ travis encrypt DEPLOYGATE_TOKEN={My DeployGate API Key}</code> # DeployGateで確認したAPI Keyを暗号化するコマンド（中括弧はいらない）。</p>
-<p>このコマンドで得られた文字列をそのまま.travis.ymlに貼っつければOKである。</p>
-<h3 id="いつアップロードするか">いつアップロードするか</h3>
-<p>以下の条件を満たした場合のみ、APKのアップロードを行うようにした。<br>
-これは、Pull Requestがmasterにマージされたとき、を意味している（つもり）。<br>
-<code>&quot;$TRAVIS_BRANCH&quot; == &quot;master&quot; -a &quot;$TRAVIS_PULL_REQUEST&quot; == &quot;false&quot; ]</code></p>
-<p>これをやっとかないと、ブランチにコミットをPUSHしたタイミングだったりPull Requestを作ったタイミングだったり、でアップロードが走る。<br>
-個人的にはやり過ぎ感があったので、APKはmasterからだけ作ればいいやという制限を施した。</p>
-<h3 id="これがそこそこ楽だと思います">これがそこそこ楽だと思います</h3>
-<p>AndroidアプリにAPKをいちいち頑張って転送しなくても、開発中アプリをインストールすることができるようになった。<br>
-ちなみに、アップロードされたAPKはDeployGateアプリ経由で取得することになる。</p>
-<p>今回はここまで。</p>
 
                     </div>
                 </section>

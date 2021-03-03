@@ -85,6 +85,45 @@
             
             <div class="posts">
                 
+                <div class="content-subhead">2021-03-04 00:38:25</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2021/03/04/long-time-no-see-blog-post/">ブログを何日書いてないかをリマインドする仕組みを作った</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>今年こそはいっぱいブログ書くんだって宣言するのはいいんだけど、結局なかなかコンスタントに書き続けることができず、気付いたら半年過ぎているみたいな人生を送っている。ので、それを打破すべく「最後にブログを書いてから n 日過ぎました」というリマインダーを仕込むことにしたんだ。</p>
+<p>こんなようなリマインダーがくる。</p>
+<p><img src="https://user-images.githubusercontent.com/6533008/109830663-0b2ca500-7c82-11eb-8c91-65134940b32c.png?s=10" alt="image"></p>
+<p>仕組みは以下。</p>
+<ul>
+<li>最後にコミットした日時を git log を使って確認する</li>
+<li>所定の日数過ぎていたら (7日間とか) Slack に通知する
+<ul>
+<li>ここの最終投稿からの日数計算は Go で CLI を作った</li>
+</ul>
+</li>
+<li>GitHub Actions で cron job を仕込み、毎朝 7:00 に確認するようにする</li>
+</ul>
+<p>できたものはこれ。ちゃんと動いている。<br>
+<a href="https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/notify_long_time_no_see.yaml">https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/notify_long_time_no_see.yaml</a></p>
+<h2 id="そもそも人間-自分を含む-を信じるな">そもそも人間 (自分を含む) を信じるな</h2>
+<p>去年の自分は「ブログをいっぱい書くぞ」って気合を入れたっきりそれで終わりだった。記事は生えてこなかった。<br>
+そもそも、ブログをいっぱい書くぞって気合を入れただけでどうしてブログ記事が生えてくると思った？っていうことである。なんとブログ記事は書かないと生えてこない。書かねばならない。そして人間は書くのを忘れるし、書くことを思い出したとしてもネタがないだの時間がないだの言っていったん頭の片隅に追いやってしまい、そして一晩寝たら忘れている。気合だけで達成しようというのがそもそもあまりにも脆弱であった。</p>
+<p>ということで、やはりマシンに頼らねばならない。こういうリマインドの類などで圧をかけるような仕事はマシンにやらせるに限る。そして GitHub Actions が cron job の役目を果たしてくれるのは本当に便利。これで今年こそブログをいっぱい書くんだ！</p>
+                    </div>
+                </section>
+                
                 <div class="content-subhead">2021-03-03 13:53:25</div>
                 <section >
                     <header class="post-header">
@@ -1228,69 +1267,6 @@ main.go  Makefile  server.go  test.wasm  wasm_exec.html  wasm_exec.js
 <li>いまのところまだマージされていないが、上記は既に実装して Gerrit にてレビュー中。</li>
 <li>マージされたら嬉しいね！</li>
 </ul>
-
-                    </div>
-                </section>
-                
-                <div class="content-subhead">2018-06-23 17:00:42</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2018/06/23/mashimahi/">強いパスワードのためのフレーズジェネレータを作ってみた</a>
-
-                        <p class="post-meta">
-                            
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>ふと思い立って、フレーズジェネレータなるものを作ってみた。</p>
-<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">こないだ作ってみた「強そうなパスフレーズ/パスワード生成器 (PhraGen)」に CSS をあててちょっとオシャレにしといたぞ。無駄に日本語への自動翻訳もつけておきたかったが、翻訳部分は無料ではいまいち達成できなそうかなー。<a href="https://t.co/tThQl1mfSe">https://t.co/tThQl1mfSe</a></p>&mdash; パン粉 (@pankona) <a href="https://twitter.com/pankona/status/1010435240714633216?ref_src=twsrc%5Etfw">2018年6月23日</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<p>GAE/Go で作成。<a href="https://strongest-mashimashi.appspot.com/">ココ</a> にホスティング。PhraGen (ふらげん) と命名。</p>
-<h2 id="これは何か">これは何か</h2>
-<p>どこかで聞いた話であるが、いわゆる「強いパスワードというのはどうやって生成するのが良いのか」ということを考えた時に、<br>
-ひとつの手法として**「英語の辞書からランダムで 3 単語ひっぱってきてつなげるのが良い」**というのがあると小耳に挟んだわけである。</p>
-<p>なるほどなるほど、ということで、では試しに作ってみようということで作ってみたのがこれである。</p>
-<h2 id="ちょっとした工夫">ちょっとした工夫</h2>
-<p>完全にランダムな単語をチョイスしたほうがパスワード的には強いのだろうけど、きっとそれは覚えにくいフレーズになってしまうと思われる。<br>
-ということで、ちょっとでも覚えやすいフレーズを生成するために、完全にランダムなチョイスではなく**「形容詞＋形容詞＋名詞」**の順で現れるフレーズを生成するようにしてみた。<br>
-**Super Great Goalkeeper** 的なものが生成されることをイメージしている。</p>
-<h2 id="ジェネレータのしくみなど">ジェネレータのしくみなど</h2>
-<h3 id="oxford-dictionaries-api">Oxford Dictionaries API</h3>
-<p>そもそも英語の辞書のデータをどのように扱えば良いのか。出どころはどこか、ということを探していると以下を見つけた。</p>
-<p><a class="embedly-card" data-card-controls="0" href="https://developer.oxforddictionaries.com/">Oxford Dictionaries API</a></p>
-<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-<p>これは英語辞書で有名な Oxford が提供してくれている (と思われる)、Web API である。<br>
-REST API の形をしていて (なんと Swagger の定義までついている)、ドキュメントの記載通りに叩くことで単語とその意味などを得ることができる。<br>
-形容詞で、&ldquo;super で始まる&rdquo; 5字以上の単語、みたいなクエリでワードリストを取得できるような機能が提供されている。</p>
-<p>これを利用しようということで、まずは提供されている swagger の定義をありがたくお借りしてクライアントライブラリを生成した。<br>
-以下のリポジトリに置いておいた。またいつか使うかもしれない。</p>
-<p><a class="embedly-card" data-card-controls="0" href="https://github.com/pankona/oxford-dict-api-client-go">pankona/oxford-dict-api-client-go</a></p>
-<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-<h3 id="レスポンス遅いけどキャッシュは規約違反">レスポンス遅いけどキャッシュは規約違反</h3>
-<p>ただ、一回のクエリに数秒かかるようなところがあり、PhraGen の裏で動かすにはちょっとしんどい一面がある。<br>
-3 単語から構成されるフレーズを作るということは 3 回リクエストするということであり、つまり 1 フレーズ生成につき 5〜6 秒は待たされてしまう。</p>
-<p>問い合わせてみたところ、規約上、フリーのプランでは Oxford Dictionaries API が吐き出す結果をキャッシュしておくことは禁止とのこと。<br>
-お金を払えば制限つきでキャッシュしておけるということで、検討されたしとのお達しであった。うーむ…。<br>
-※ この点については、近日中にバイオレーションのない形に変更予定。</p>
-<h3 id="ホスティングは-gaeバックエンドは-go">ホスティングは GAE、バックエンドは Go</h3>
-<p>ジェネレータは GAE/Go で作った。ソースコードは以下のリポジトリに格納。</p>
-<p><a class="embedly-card" data-card-controls="0" href="https://github.com/pankona/strongest-mashimashi">pankona/strongest-mashimashi</a></p>
-<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-<p>リポジトリ名に深い意味はなく、なんとなく語呂が良いのでつけておいた。ストロンゲストマシマシ。</p>
-<h3 id="フロントエンドは色々">フロントエンドは色々</h3>
-<p>フロントエンド力がナメクジレベルのパン粉であるが、色々調べつつ、以下の技術要素の利用を試みている。<br>
-特に CSS フレームワーク Bulma のおかげで、PhraGen はまあまあしゃらくさい感じのキレイな見た目になったのではないかと思っている。</p>
-<ul>
-<li>TypeScript</li>
-<li>React</li>
-<li>CSS フレームワークとして Bulma</li>
-</ul>
-<h3 id="使えるのか">使えるのか</h3>
-<p>使えるかどうかよりもそもそも使わなそう。<br>
-でもせっかく作ったので、実際にパスワードの生成のために使ってみる所存。</p>
 
                     </div>
                 </section>

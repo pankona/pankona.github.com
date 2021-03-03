@@ -28,7 +28,7 @@ jobs:
     - name: check since last commit
       run: |
         cd ./pankona.github.com/public
-        echo "SINCE_LAST_COMMIT=\"`sincelastcommit`\"" >> $GITHUB_ENV
+        echo "SINCE_LAST_COMMIT=`sincelastcommit`" >> $GITHUB_ENV
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:

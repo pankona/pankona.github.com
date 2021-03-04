@@ -30,10 +30,11 @@ jobs:
         cd ./pankona.github.com/public
         echo "SINCE_LAST_COMMIT=`sincelastcommit`" >> $GITHUB_ENV
     - name: Slack Notification
+      if: env.SINCE_LAST_COMMIT <= 7
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_CHANNEL: notification
-        SLACK_MESSAGE: ${{ env.SINCE_LAST_COMMIT }}
+        SLACK_MESSAGE: "最後のブログ更新から ${{ env.SINCE_LAST_COMMIT }} 日過ぎています。"
         SLACK_USERNAME: pankona
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 

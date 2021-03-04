@@ -30,7 +30,7 @@ jobs:
         cd ./pankona.github.com/public
         echo "SINCE_LAST_COMMIT=`sincelastcommit`" >> $GITHUB_ENV
     - name: Slack Notification
-      if: env.SINCE_LAST_COMMIT <= 7
+      if: env.SINCE_LAST_COMMIT >= 7
       uses: rtCamp/action-slack-notify@v2
       env:
         SLACK_CHANNEL: notification

@@ -85,6 +85,130 @@
             
             <div class="posts">
                 
+                <div class="content-subhead">2018-07-13 19:15:16</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2018/07/13/golangtokyo-16/">golang.tokyo #16 @メルペイ</a>
+
+                        <p class="post-meta">
+                            
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p><a href="https://golangtokyo.connpass.com/event/92225/">golang.tokyo #16 @メルペイ</a>に参加。<br>
+本日は wasm がメインテーマ。発表者と資料は末尾に記載。</p>
+<h2 id="そもそも-wasm-webassembly-とは何か">そもそも wasm (WebAssembly) とは何か</h2>
+<p>以下は公式サイト。webassembly.org。<br>
+<a class="embedly-card" data-card-controls="0" href="https://webassembly.org/">WebAssembly</a></p>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+<p>公式ページからの説明を引用すると以下のように書かれている。</p>
+<p><em>WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable target for compilation of high-level languages like C/C++/Rust, enabling deployment on the web for client and server applications.</em></p>
+<p>C/C++/Rust 等で作ったバイナリをウェブブラウザ上で動かすための規格、くらいに捉えれば良かろうか。<br>
+公式を含む各所の記事をあたってみると、wasm の存在意義としては基本的には JavaScript から比較しての軽量化、高速化である模様。</p>
+<h2 id="go-の-wasm-サポート">Go の wasm サポート</h2>
+<p>Go 言語も wasm へのビルド (トランスパイル) を Go 1.11 からサポートする予定であり、2018/07 現在は tip (Go の master のさきっちょ) を使うことで機能を試すことができる。<br>
+ちなみに Go 1.11 は、2018/08 にリリース予定。</p>
+<h2 id="go-から-wasm-をビルドしてみる">Go から wasm をビルドしてみる</h2>
+<p>たとえば以下のいわゆるハローワールド的なコードも wasm 向けにビルドできるようになる。</p>
+<pre><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Println(&quot;Hello world!&quot;)
+}
+</code></pre><p>wasm 向けのビルドは以下のようなコマンドで行う。<br>
+(上記のソースが main.go として存在していると仮定)</p>
+<pre><code>$ GOOS=js GOARCH=wasm go build -o hello.wasm main.go
+</code></pre><h2 id="生成した-wasm-の動作確認まで">生成した wasm の動作確認まで</h2>
+<p>動作を確認するためにはもういくつかファイルが必要であり、Go のリポジトリからコピーしてくる必要がある。<br>
+GitHub に curl を飛ばしても取得できる。</p>
+<p>ビルドと必要なファイルを揃える処理を一式 Makefile で書くと以下のような感じになる。</p>
+<pre><code>WASM = test.wasm
+HTML = wasm_exec.html
+JS   = wasm_exec.js
+CLEAN_TARGET = $(WASM) $(HTML) $(JS)
+
+all: $(WASM) $(HTML) $(JS)
+
+$(WASM):
+	GOOS=js GOARCH=wasm go build -o test.wasm main.go
+
+$(HTML):
+	curl -sO https://raw.githubusercontent.com/golang/go/master/misc/wasm/wasm_exec.html
+
+$(JS):
+	curl -sO https://raw.githubusercontent.com/golang/go/master/misc/wasm/wasm_exec.js
+
+clean:
+	rm -f $(CLEAN_TARGET)
+</code></pre><p>一式そろうと以下のようになる。</p>
+<pre><code>$ ls
+main.go  Makefile  server.go  test.wasm  wasm_exec.html  wasm_exec.js
+</code></pre><p>この状態で wasm_exec.html を何らかの HTTP Server でサーブすると、なんとなく Console に Hello world 的な文字がでることが確認できる。<br>
+ちなみに file:/// で wasm_exec.html をサーブしても正しく動作しない場合があるようで、これは Chrome が file スキームで読み込んだ HTML ファイルだと JavaScript を実行してくれないためである模様。</p>
+<p>上記までを一式納めたものは以下のリポジトリに置いておいた。<br>
+<a href="https://github.com/pankona/go-wasm-test">https://github.com/pankona/go-wasm-test</a></p>
+<h2 id="各セッションを聞いて">各セッションを聞いて</h2>
+<p>golang.tokyo#16 の各セッションを聞いての留意点としては、</p>
+<ul>
+<li>ベンチマークをとると、Go を JS にトランスパイルする GopherJS のほうがパフォーマンスが出る。wasm の最適化は今後の課題 (Go 1.12 以降？)
+<ul>
+<li>Chrome で動かす JS がやたら速いという一面も</li>
+</ul>
+</li>
+<li>Empscripten (C++ から wasm を作るやつ) が比較的速い</li>
+<li>Go から作った wasm はまだバイナリサイズが大きい (2MB〜) という面があり、この点も今後の最適化が待たれるところ</li>
+</ul>
+<h2 id="色々まだまだな-go-の-wasm-サポートとはいえ">色々まだまだな Go の wasm サポートとはいえ</h2>
+<p>ベンチマーク、バイナリサイズなどはまだ改善の余地があるとはいえ、超絶お手軽なクロスコンパイルは快適そのもの。<br>
+まだ出てきたばかり (出てきてすらいないか) なので、今後に大いに期待である。</p>
+<p>以下、各セッションの資料を記載。</p>
+<h2 id="session1-webassemblyとgoの対応状況について-by-tenntennhttpswwwtwittercomtenntenn-さん">(Session1) WebAssemblyとGoの対応状況について by <a href="https://www.twitter.com/tenntenn">tenntenn</a> さん</h2>
+<ul>
+<li>
+<p>(TODO: 2018/07/17現在、発表資料がへのリンクが見当たらないので、後々更新)</p>
+</li>
+<li>
+<p>goroutine と channel には対応。wasm にマルチスレッドの機能が入るらしい。</p>
+</li>
+<li>
+<p><a href="syscall/js">https://tip.golang.org/pkg/syscall/js</a> を使う</p>
+</li>
+</ul>
+<h2 id="session2-gopherjs-vs-goarchwasm-by-hajimehoshihttpswwwtwittercomhajimehoshi-さん">(Session2) GopherJS vs GOARCH=wasm by <a href="https://www.twitter.com/hajimehoshi">hajimehoshi</a> さん</h2>
+<p><a class="embedly-card" data-card-controls="0" href="https://docs.google.com/presentation/d/e/2PACX-1vQLOcSY-SpdWedMT48QFZ8f9T_XojfqUOCgMg4jqIz8cJjFIJhHm98gHKVyMaboqGpsXCfedplT-lmp/pub?start=false&loop=false&delayms=3000#slide=id.p">GopherJS vs GOARCH=wasm</a></p>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+<p>以下、ライトニングトーク。</p>
+<h2 id="lt1-go-で社内向け管理画面を楽に作る方法-by-yudppphttpswwwtwittercomyudppp-さん">(LT1) Go で社内向け管理画面を楽に作る方法 by <a href="https://www.twitter.com/yudppp">yudppp</a> さん</h2>
+<p><a class="embedly-card" data-card-controls="0" href="https://speakerdeck.com/yudppp/godeshe-nei-xiang-keguan-li-hua-mian-wole-nizuo-rufang-fa">Goで社内向け管理画面を楽に作る方法</a></p>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+<ul>
+<li>Go 歴 4 年の方。</li>
+<li>Viron を使って自社向けサービスの管理画面を自動生成する話。</li>
+</ul>
+<h2 id="lt2-go-のスライス容量拡張量がどのように決まるのか-by-kaznishi1246httpswwwtwittercomkaznishi1246-さん">(LT2) Go のスライス容量拡張量がどのように決まるのか by <a href="https://www.twitter.com/kaznishi1246">kaznishi1246</a> さん</h2>
+<p><a class="embedly-card" data-card-controls="0" href="https://speakerdeck.com/kaznishi/180713-lt">Goのスライス容量拡張量がどのように決まるのか追った / 180713 LT</a></p>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+<ul>
+<li>Go 歴 1 ヶ月の方とのこと。1 ヶ月で LT しにくるの強い。</li>
+<li>メモリ確保量によってクラス分けされている。</li>
+<li>TCMalloc がメモリ確保量を切り上げる動作をする。</li>
+</ul>
+<h2 id="lt3-go言語の正規表現に後読みを実装した話-by-さっき作ったhttpswwwtwittercommake_now_just-さん">(LT3) Go言語の正規表現に後読みを実装した話 by <a href="https://www.twitter.com/make_now_just">さっき作った</a> さん</h2>
+<p><a class="embedly-card" data-card-controls="0" href="https://slides.com/makenowjust/regexp-lookbehind-in-golang#/">Go言語の正規表現に後読みを実装した話</a></p>
+<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+<ul>
+<li>いまのところまだマージされていないが、上記は既に実装して Gerrit にてレビュー中。</li>
+<li>マージされたら嬉しいね！</li>
+</ul>
+
+                    </div>
+                </section>
+                
                 <div class="content-subhead">2018-06-23 17:00:42</div>
                 <section >
                     <header class="post-header">
@@ -2221,44 +2345,6 @@ Nexus 7 よりも若干薄いかな、と。</p>
 <p>ただ、性能に関してはちょっと色々あるので次回の記事で書こうと思うが、、、<br>
 性能さえもう少しイケていれば、間違いなく誰にでもオススメできる機種だったと思う。惜しい。<br>
 今回はこのへんで。次回は性能について。</p>
-
-                    </div>
-                </section>
-                
-                <div class="content-subhead">2015-07-31 19:36:04</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2015/07/31/code-review-best-practices-jp-translation/">Code Review Best Practices を日本語訳した</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p><a href="http://kevinlondon.com/2015/05/05/code-review-best-practices.html">Code Review Best Practices - Kevin London&rsquo;s blog</a> の日本語訳を作成した。</p>
-<p><a href="http://pankona.github.io/CodeReviewBestPractices_JP_Translation/">Code Review Best Practices 日本語翻訳</a></p>
-<p>コードレビューのやり方に関しての記事であるが、分かりやすいしフムフムと感じる内容だったため、<br>
-本人に許可をいただいて、翻訳、掲載をさせていただいた。<br>
-ありがとう、ケビンさん。</p>
-<p>おかしい点、改善点にお気づきの方がいらっしゃれば、issue登録、pull request、なんでもいいので連絡いただけると嬉しい。<br>
-リポジトリは<a href="https://github.com/pankona/CodeReviewBestPractices_JP_Translation">こちら</a></p>
-<p>実は<a href="http://postd.cc/code-review-best-practices/">POSTDに同じ記事を訳したもの</a>があることが分かったのだが、、、<br>
-まあいくつあってもいいかな、等と思いつつ。ちなみに訳はほとんど同じだった。</p>
-<p>この手のものは英語のままでいいと思う気持ちがある反面、<br>
-やっぱり日本人は日本語のほうが速く読める人が多いだろうし、一定の価値はあるかな、等と思うところである。</p>
-<p>記事の中で印象深かったのは、<em>Compliment / reinforce good practices</em> の部分である。</p>
-<p>平たく言えば、コードレビューで見つけた良いところを褒めていけ、という内容。<br>
-コードレビューではとかく指摘を探すことに終始しがちであるが、<br>
-確かに、褒めるというかイイネというか＋１というか、をしていくことで、<br>
-いい空気、もっといいコード書いてやろう的なモチベーションアップ、とか そういう効果もあるんじゃないかと思ったりもする。<br>
-ギスギスしがちなコードレビューの現場にはオススメ。私もやっていきます。</p>
 
                     </div>
                 </section>

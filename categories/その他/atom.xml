@@ -5,7 +5,16 @@
     <link>https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96/</link>
     <description>Recent content in その他 on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 04 Mar 2021 00:38:25 +0900</lastBuildDate><atom:link href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Mar 2021 08:24:46 +0900</lastBuildDate><atom:link href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>全然分からんプルリクをレビューするときはどうすればいいのか</title>
+      <link>https://pankona.github.io/blog/2021/03/05/hard-to-review-the-pull-request/</link>
+      <pubDate>Fri, 05 Mar 2021 08:24:46 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2021/03/05/hard-to-review-the-pull-request/</guid>
+      <description>&lt;p&gt;プルリクエストのレビューは業務で日常的に行っているのだが、時々レビューがとても難しいと感じる場面に出くわすことがある。そんなときどうするか。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>ブログを何日書いてないかをリマインドする仕組みを作った</title>
       <link>https://pankona.github.io/blog/2021/03/04/long-time-no-see-blog-post/</link>

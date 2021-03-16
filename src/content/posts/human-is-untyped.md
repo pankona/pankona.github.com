@@ -9,7 +9,7 @@ categories: ["EM"]
 
 <!--more-->
 
-[![image](https://user-images.githubusercontent.com/6533008/111060929-d02d3b80-84e3-11eb-8615-c1848e233431.png)](https://www.oreilly.co.jp/books/9784873118482/)
+[![image](https://user-images.githubusercontent.com/6533008/111060929-d02d3b80-84e3-11eb-8615-c1848e233431.png?s=100)](https://www.oreilly.co.jp/books/9784873118482/)
 
 ## ソフトウェアに対するエンジニアリングとチームに対するエンジニアリング
 

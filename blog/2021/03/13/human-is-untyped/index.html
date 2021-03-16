@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チームに対して CI するということ - make clean; make</title>
+
+    <meta name="description" content="Good poem">
+
+    <meta name="generator" content="Hugo 0.82.0-DEV" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="チームに対して CI するということ - make clean; make">
+    <meta name="twitter:description" content="Good poem">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="チームに対して CI するということ - make clean; make">
+    <meta property="og:description" content="Good poem">
+    <meta property="og:image" content="https://avatars1.githubusercontent.com/u/6533008?s=460&amp;v=4" />
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/@pankona"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/pankona "><i class="fa fa-github-alt"></i> GitHub</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> RSS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/categories"></i> Categories</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                <h1 class="content-subhead">2021-03-13 13:40:50</h1>
+                <section class="post">
+                    <header class="post-header">
+                        <a href="https://pankona.github.io/blog/2021/03/13/human-is-untyped/" class="post-title">チームに対して CI するということ</a>
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-EM" href="https://pankona.github.io/categories/em">EM</a>
+                            
+                        </p>
+                    </header>
+                    <div class="post-description">
+                        <p>社内の読書会で「エンジニアのためのマネジメントキャリアパス」という本を読んでいる。毎週金曜日の朝に開催。何人かの EM が参加していて、ちょっと読み進めては議論して、またちょっと読み進めては議論して、みたいな感じで読み進めている。</p>
+<p><a href="https://www.oreilly.co.jp/books/9784873118482/"><img src="https://user-images.githubusercontent.com/6533008/111060929-d02d3b80-84e3-11eb-8615-c1848e233431.png" alt="image"></a></p>
+<h2 id="ソフトウェアに対するエンジニアリングとチームに対するエンジニアリング">ソフトウェアに対するエンジニアリングとチームに対するエンジニアリング</h2>
+<p>議論の中のひとつに、Engineering Manager (以下 EM) あるいはチームメンバーという感じで立場が違っていても、向き合うものが組織なのかソフトウェアなのかという違いこそあれど、基本的には「課題を発見して解決していく」というところは同じだよね、みたいな話がなされていた。なるほど分かる。課題を発見し、ボトルネックを評価し、コスパのよい解決策を考えて実行する、みたいなことは確かに同じかもしれない。</p>
+<p>では、ソフトウェアに対してエンジニアが行う問題解決のアプローチは、はたして EM がチームに対してという形でも同じように応用できるものだろうか、できるとしたらどのへんだろうか、なんてことを話に出してみたわけである。</p>
+<h2 id="型のない人間">型のない人間</h2>
+<p>この話題に対して自分は、「ソフトウェアに対しては高速にトライ＆エラーができる。文法がおかしかったらコンパイルエラーになるし、単体テストを書いて CI しておけば変にバグったりというのをまあまあ防げる。チームや組織に対してはそうではないんではないか。同じようなことを考えることができるか」みたいなことを問うてみた。はたしてチームに対して「CI をまわす」みたいなことはできるのか。回せるものなら回したいが。</p>
+<p>それに対するアンサーは色々あったが、覚えている限りだと、</p>
+<ul>
+<li>書いたとおりに動くソフトウェアとは違い、人間はそのときの調子だとか感情だとかで同じインプットでも時と場合によってアウトプットが異なる。ソフトウェアのようにコンパイルや単体テストもできない。型もない。</li>
+<li>EM にできることは、上がってくる例外をキャッチして、然るべき対処をしていくってことなのではないか。例外の発生を検知するための営みが大事。</li>
+</ul>
+<p>なんかみんな無理やりソフトウェアに例えてるような気がしないでもないがまあ分かる。</p>
+<h2 id="チームが-throw-した例外をキャッチする">チームが throw した例外をキャッチする</h2>
+<p>その後、ではその「例外をキャッチする」というのはどうやればいいのかっていうのを考えていた。単体テストとまでは言わないが、チームの現状、あるいは変化を知るための営みというのはいろいろやりようがあるよなぁ、と思った。</p>
+<p>たとえば 1on1 。メンバーの話を聞いて、気持ちよく働けているか、やりにくい要素はないか、生産性を下げている何かがないか、などをヒアリングする。直接的聞くという意味では一番効果のありそうなアプローチかもしれなくて、やはりこれを定期的に実行するのには価値があるんだろう、と思う。</p>
+<p>その他の手段で、生産性みたいなものに関する指標を考えるならば、</p>
+<ul>
+<li>稼働時間の傾向を見る</li>
+<li>稼働時間に対するコミット数、あるいは pull request を出した数か何かの割合を見る</li>
+<li>稼働時間に対する捌いた issue の数を見る</li>
+</ul>
+<p>このようなものを定点観測すると少なくとも「いつもと違う」みたいなことには敏感になれるのかもしれない。起こった事柄についてどのような対処をしていくかというのはケースバイケースであろうと思うが、少なくとも catch できるものを増やすということには寄与するんじゃないかな、等と考えた。</p>
+<p>コードをいっぱい書くという感じではなくていっぱいコミュニケーションをとって成果を出すようなタイプの人もいるので、コミット数や pull request の数が必ずしも生産性を示す数値であるとは思わないが、だったら「Slack でのコメント数」とかも計測していってみてもいいのかも。で、無理やり例えるならば、この手の指標を定点観測することが「チーム (あるいはメンバー) に対して CI をまわす」ってことにあたるのかもしれない。</p>
+<h2 id="推測するな計測せよ">推測するな計測せよ</h2>
+<p>みたいな言葉があるけれども、ソフトウェアエンジニアを長くやってきた上で EM というロールをやるからこそ、データドリブンなチーム運営という発想を持つことができると思うし、計測したいことを定点観測するように実装することもできるというアドバンテージがあるんではないかと思う。</p>
+<p>割と 2020 年度の自分は初めての EM ということもあり、このへんを雰囲気でやってたところはありそう。来年度はこういった「CI」を試しに導入して、少しでも EM 業を進化させていくぞ。</p>
+                    </div>
+                    
+                    <div class="post-share">
+                        <div class="post-share-links">
+                            <h4 style="">Share</h4>
+                            
+                            
+                            
+                            <a href="#" data-type="twitter" data-url="https://pankona.github.io/blog/2021/03/13/human-is-untyped/" data-description="チームに対して CI するということ - make clean; make" class="prettySocial fa fa-twitter"></a>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </section>
+            </div>
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://pankona.github.io/js/all.min.js"></script>
+<script type="text/javascript" src="https://pankona.github.io/js/jquery.oembed.js"></script>
+<script>
+$(function(){
+    $("a.embed").oembed();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pankona.github.io/css/jquery.oembed.css"> 
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-48476608-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

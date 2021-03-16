@@ -5,7 +5,16 @@
     <link>https://pankona.github.io/</link>
     <description>Recent content on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 05 Mar 2021 08:24:46 +0900</lastBuildDate><atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 Mar 2021 13:40:50 +0900</lastBuildDate><atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>チームに対して CI するということ</title>
+      <link>https://pankona.github.io/blog/2021/03/13/human-is-untyped/</link>
+      <pubDate>Sat, 13 Mar 2021 13:40:50 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2021/03/13/human-is-untyped/</guid>
+      <description>&lt;p&gt;社内の読書会で「エンジニアのためのマネジメントキャリアパス」という本を読んでいる。毎週金曜日の朝に開催。何人かの EM が参加していて、ちょっと読み進めては議論して、またちょっと読み進めては議論して、みたいな感じで読み進めている。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>全然分からんプルリクをレビューするときはどうすればいいのか</title>
       <link>https://pankona.github.io/blog/2021/03/05/hard-to-review-the-pull-request/</link>

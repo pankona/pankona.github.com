@@ -85,6 +85,53 @@
             
             <div class="posts">
                 
+                <div class="content-subhead">2021-03-13 13:40:50</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2021/03/13/human-is-untyped/">チームに対して CI するということ</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-EM" href="https://pankona.github.io/categories/em">EM</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>社内の読書会で「エンジニアのためのマネジメントキャリアパス」という本を読んでいる。毎週金曜日の朝に開催。何人かの EM が参加していて、ちょっと読み進めては議論して、またちょっと読み進めては議論して、みたいな感じで読み進めている。</p>
+<p><a href="https://www.oreilly.co.jp/books/9784873118482/"><img src="https://user-images.githubusercontent.com/6533008/111060929-d02d3b80-84e3-11eb-8615-c1848e233431.png" alt="image"></a></p>
+<h2 id="ソフトウェアに対するエンジニアリングとチームに対するエンジニアリング">ソフトウェアに対するエンジニアリングとチームに対するエンジニアリング</h2>
+<p>議論の中のひとつに、Engineering Manager (以下 EM) あるいはチームメンバーという感じで立場が違っていても、向き合うものが組織なのかソフトウェアなのかという違いこそあれど、基本的には「課題を発見して解決していく」というところは同じだよね、みたいな話がなされていた。なるほど分かる。課題を発見し、ボトルネックを評価し、コスパのよい解決策を考えて実行する、みたいなことは確かに同じかもしれない。</p>
+<p>では、ソフトウェアに対してエンジニアが行う問題解決のアプローチは、はたして EM がチームに対してという形でも同じように応用できるものだろうか、できるとしたらどのへんだろうか、なんてことを話に出してみたわけである。</p>
+<h2 id="型のない人間">型のない人間</h2>
+<p>この話題に対して自分は、「ソフトウェアに対しては高速にトライ＆エラーができる。文法がおかしかったらコンパイルエラーになるし、単体テストを書いて CI しておけば変にバグったりというのをまあまあ防げる。チームや組織に対してはそうではないんではないか。同じようなことを考えることができるか」みたいなことを問うてみた。はたしてチームに対して「CI をまわす」みたいなことはできるのか。回せるものなら回したいが。</p>
+<p>それに対するアンサーは色々あったが、覚えている限りだと、</p>
+<ul>
+<li>書いたとおりに動くソフトウェアとは違い、人間はそのときの調子だとか感情だとかで同じインプットでも時と場合によってアウトプットが異なる。ソフトウェアのようにコンパイルや単体テストもできない。型もない。</li>
+<li>EM にできることは、上がってくる例外をキャッチして、然るべき対処をしていくってことなのではないか。例外の発生を検知するための営みが大事。</li>
+</ul>
+<p>なんかみんな無理やりソフトウェアに例えてるような気がしないでもないがまあ分かる。</p>
+<h2 id="チームが-throw-した例外をキャッチする">チームが throw した例外をキャッチする</h2>
+<p>その後、ではその「例外をキャッチする」というのはどうやればいいのかっていうのを考えていた。単体テストとまでは言わないが、チームの現状、あるいは変化を知るための営みというのはいろいろやりようがあるよなぁ、と思った。</p>
+<p>たとえば 1on1 。メンバーの話を聞いて、気持ちよく働けているか、やりにくい要素はないか、生産性を下げている何かがないか、などをヒアリングする。直接的聞くという意味では一番効果のありそうなアプローチかもしれなくて、やはりこれを定期的に実行するのには価値があるんだろう、と思う。</p>
+<p>その他の手段で、生産性みたいなものに関する指標を考えるならば、</p>
+<ul>
+<li>稼働時間の傾向を見る</li>
+<li>稼働時間に対するコミット数、あるいは pull request を出した数か何かの割合を見る</li>
+<li>稼働時間に対する捌いた issue の数を見る</li>
+</ul>
+<p>このようなものを定点観測すると少なくとも「いつもと違う」みたいなことには敏感になれるのかもしれない。起こった事柄についてどのような対処をしていくかというのはケースバイケースであろうと思うが、少なくとも catch できるものを増やすということには寄与するんじゃないかな、等と考えた。</p>
+<p>コードをいっぱい書くという感じではなくていっぱいコミュニケーションをとって成果を出すようなタイプの人もいるので、コミット数や pull request の数が必ずしも生産性を示す数値であるとは思わないが、だったら「Slack でのコメント数」とかも計測していってみてもいいのかも。で、無理やり例えるならば、この手の指標を定点観測することが「チーム (あるいはメンバー) に対して CI をまわす」ってことにあたるのかもしれない。</p>
+<h2 id="推測するな計測せよ">推測するな計測せよ</h2>
+<p>みたいな言葉があるけれども、ソフトウェアエンジニアを長くやってきた上で EM というロールをやるからこそ、データドリブンなチーム運営という発想を持つことができると思うし、計測したいことを定点観測するように実装することもできるというアドバンテージがあるんではないかと思う。</p>
+<p>割と 2020 年度の自分は初めての EM ということもあり、このへんを雰囲気でやってたところはありそう。来年度はこういった「CI」を試しに導入して、少しでも EM 業を進化させていくぞ。</p>
+                    </div>
+                </section>
+                
                 <div class="content-subhead">2021-03-05 08:24:46</div>
                 <section >
                     <header class="post-header">
@@ -1103,81 +1150,6 @@ ACCESS → Quipper 。今度は Web Developer として主に Rails 等を触っ
 そういった試みは前職にはなかったので、まずそれがあるだけでそれなりに感動であった。オンボーディングの内容自体はまだ練り上げている段階のようなので、せっかくの貴重なオンボーディング体験チャンス (当然だけど入社した直後しか体験する機会がない) であるから、よりよいオンボーディングを作る、みたいな文脈でも貢献していけたら良いなぁ等と思ったり。</p>
 <p>Ruby / Rails に関しては未経験ではないものの、もうすっかり忘れていて戦闘能力が 0 になっている。<br>
 改めて勉強し直しているが、まあ難しいこと難しいこと。全部黒魔法に見えてくる。そのうち自分にも黒魔法が使える日が来ると信じる。</p>
-
-                    </div>
-                </section>
-                
-                <div class="content-subhead">2019-04-24 14:52:59</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2019/04/24/golangtokyo-23/">golang.tokyo #23 @ DeNA</a>
-
-                        <p class="post-meta">
-                            
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>2019 年 4 月 19 日 (金) に行われた golang.tokyo #23 (@DeNA) に参加ました。</p>
-<p>イベントページはココ<br>
-<a class="embedly-card" data-card-controls="0" href="https://golangtokyo.connpass.com/event/126673/">golang.tokyo #23 (2019/04/19 19:10〜)</a></p>
-<script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-<p>ツイッターはハッシュタグ「#golangtokyo」で検索すると、当日の実況ツイートの様子が分かります。<br>
-<a href="https://twitter.com/search?f=tweets&amp;q=%23golangtokyo%20since%3A2019-04-19%20until%3A2019-04-23&amp;src=typd">ツイッター検索 (#golangtokyo since:2019-04-19 until: 2019-04-23)</a></p>
-<div style="margin-bottom:24px">
-  <a href=/images/golang.tokyo-23/03.jpg><img src=/images/golang.tokyo-23/03.jpg /></a>
-  <div class="caption">会場ではベイスターズ的アルコール飲料が振る舞われました</div>
-</div>
-<div style="margin-bottom:24px">
-  <a href=/images/golang.tokyo-23/02.jpg><img src=/images/golang.tokyo-23/02.jpg /></a>
-  <div class="caption">軽食 (ベイスターズ的アルコール飲料に合う) も振る舞われました</div>
-</div>
-<div style="margin-bottom:24px">
-  <a href=/images/golang.tokyo-23/01.jpg><img src=/images/golang.tokyo-23/01.jpg /></a>
-  <div class="caption">golang.tokyo #23 開幕</div>
-</div>
-<p>今回のテーマは「これから Go を始める人に知ってほしいこと」。<br>
-(実際に用いられた資料はイベントページを参照されたし)</p>
-<p>当日使われた全ての資料のいくらかはまだ connpass のイベントページに載っていないようなので、一応本記事でもリストアップしておきます。<br>
-(以下、登壇順)</p>
-<ul>
-<li>セッション
-<ul>
-<li><a href="https://docs.google.com/presentation/d/1u93oMe7QForbqrCwGE2lHbu99t4I9_m5IzfeYETD7BU/edit#slide=id.p">絶対に分かるポインタ</a> by <a href="https://twitter.com/tenntenn">tenntenn</a> さん</li>
-<li><a href="https://speakerdeck.com/mom0tomo/golang-tokyo-go-tools">Go をはじめるにあたって知っておいてほしいツール</a> by <a href="https://twitter.com/mom0tomo">mom0tomo</a> さん</li>
-<li><a href="https://speakerdeck.com/mishirakawa/golang-dot-tokyo-number-23">Go をはじめるにあたって知っておいてほしいツールやテスト</a> by <a href="https://twitter.com/micchiebear">micchie</a> さん</li>
-<li><a href="https://speakerdeck.com/xruins/delvewoyong-itadebatugu-and-pprofwoyong-itapurohuairingu">Delve を用いたデバッグ &amp; pprof を用いたプロファイリング</a> by <a href="https://twitter.com/C_Ruins">C_Ruins</a> さん</li>
-</ul>
-</li>
-<li>ライトニングトーク
-<ul>
-<li><a href="https://speakerdeck.com/shoheshohe/godoctotddnidaibusitaratuo-xin-ren-woshi-merareru-hua">GoDoc と TDD にダイブして脱新人を始められる？話</a> by <a href="https://twitter.com/PGShohei">PGShohei</a> さん</li>
-<li><a href="https://speakerdeck.com/horiryota/gorasisatogo-generate">Go らしさと go generate</a> by <a href="https://twitter.com/hori_ryota">hori_ryota</a> さん</li>
-<li><a href="https://speakerdeck.com/micnncim/goreleaser-release-and-distribute-go-application">GoRelaesr: Release and Distribute Go Application</a> by <a href="https://twitter.com/micnncim">micnncim</a> さん</li>
-</ul>
-</li>
-</ul>
-<p>DeNA のイベントスペースらしきところでの開催であり、100 人弱くらいは集まっていたんではなかろうか。</p>
-<p>golang.tokyo は今回で 23 回目。いつも定員オーバーになるくらいの人気な勉強会です。<br>
-今回も 74 の参加枠に対して 124 もの応募があった様子。人気。とても人気。</p>
-<p>だので普通に参加しようと思ったら概ねの場合は抽選になってしまいますが、「ブログ枠」という「イベントの様子をブログにしたためてくれるなら参加していいよ」枠が存在します。<br>
-私もしばしばこれで参加しています。この枠だと早いもの勝ち、かつ何故か人気がない (いつもだいたい空いている) ので、参加したいが抽選にあぶれたくない人はトライしてみるのも良いのではないかと思います。</p>
-<p>さて勉強会の様子。<br>
-今回は「これから Go を始める人に知っておいてほしいこと」ということで、セッションの内容はどちらかと言うと基礎的な内容でした。<br>
-Go の初学者の方にはもちろん有用であると思いますし、Go をやりこんでいる人にとっても諸々再確認できて非常に有意義な会だったと感じました。</p>
-<p>前半のツール紹介は、主に Go 公式から提供されているツール類の紹介、ならびに使い方の説明でしたが、このツール類の充実っぷりは Go の特徴かと思っています。<br>
-便利ツールの諸々が野良の OSS じゃなくて公式から提供されているっていうのは安心感あるよね！ということで、知っておいてほしいツール類、必見です。</p>
-<p>ライトニングトーク一発目の PGShohei さんは、今回が人生で初めてのライトニングトークだったとのこと。<br>
-初めてとは思えない発表クオリティにびびりつつ、その挑戦していく心意気には目頭が熱くなる思いでありました。<br>
-今回で 23 回目を数える golang.tokyo ですが、常連もいつつ、一方で新しいひともいつつ、という感じで広く門戸が開かれていると感じた会でした。</p>
-<p>そんな golang.tokyo ですが、次回開催 (#24) が既に告知されています (2019/05/02 現在、まだ募集を開始していません) 。<br>
-<a class="embedly-card" data-card-controls="0" href="https://golangtokyo.connpass.com/event/129067/">golang.tokyo #24 (2019/05/20 19:10〜)</a></p>
-<p>次回は Go Conference 2019 に参加できなかった勢が主なターゲット (いわゆる RejectCon) であるようなので、また濃い話が聞けるのではないかと思います。楽しみですね！<br>
-参加者募集開始のアナウンスなどは <a href="https://twitter.com/golangtokyo">golang.tokyo 公式ツイッターアカウント</a> をウォッチしていれば良いと思います。</p>
-<p>最後に、ブログ枠なのにブログ書くの遅くなってほんとすんません&hellip;！イベントから二週間くらい経っちゃってますな…。<br>
-ちなみに次回の golang.tokyo #24 では「ツイッター実況枠」というのが設けられたようなので (その代わりブログ枠はなくなった) 、ツイッターの腕に覚えのある方はトライしてみてもいいんじゃないかなと思います。</p>
 
                     </div>
                 </section>

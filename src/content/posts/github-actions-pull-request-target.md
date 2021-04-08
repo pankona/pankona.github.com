@@ -1,5 +1,5 @@
 ---
-title: "fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する"
+title: "pull_request_target トリガーを使って fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する"
 date: 2021-03-29T12:24:46+09:00
 draft: false
 categories: ["GitHub Actions"]

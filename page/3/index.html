@@ -89,7 +89,7 @@
             
             <div>
                 <div class="content-subhead" style="border-bottom:none">2021-03-29 12:24:46</div>
-                <div><a href="/blog/2021/03/29/github-actions-pull-request-target/">fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する</a></div>
+                <div><a href="/blog/2021/03/29/github-actions-pull-request-target/">pull_request_target トリガーを使って fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する</a></div>
                 <p>タイトルが長い。</p>
 <p>fork されたリポジトリからの pull request を受け取ったとき、GitHub Actions が fork 元のリポジトリの secrets にアクセスするためには例えば <code>pull_request_target</code> という trigger を使うやり方がある。<code>pull_request_target</code> という trigger は便利なんだけど、これを無配慮に使うとセキュリティ的に危ういということが GitHub のドキュメントにはつらつら書かれており、まあつまりどういうことなんや、どう使えばええということなんや、ということで色々調べたのでメモしておく。</p>
             </div>

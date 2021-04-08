@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 29 Mar 2021 12:24:46 +0900</lastBuildDate><atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する</title>
+      <title>pull_request_target トリガーを使って fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する</title>
       <link>https://pankona.github.io/blog/2021/03/29/github-actions-pull-request-target/</link>
       <pubDate>Mon, 29 Mar 2021 12:24:46 +0900</pubDate>
       

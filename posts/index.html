@@ -7,7 +7,7 @@
 
     <meta name="description" content="Good poem">
 
-    <meta name="generator" content="Hugo 0.82.0-DEV" />
+    <meta name="generator" content="Hugo 0.83.0-DEV" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Posts">
@@ -84,6 +84,54 @@
         <div>
             
             <div class="posts">
+                
+                <div class="content-subhead">2021-03-29 12:24:46</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2021/03/29/github-actions-pull-request-target/">fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-GitHub Actions" href="https://pankona.github.io/categories/github-actions">GitHub Actions</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>タイトルが長い。</p>
+<p>fork されたリポジトリからの pull request を受け取ったとき、GitHub Actions が fork 元のリポジトリの secrets にアクセスするためには例えば <code>pull_request_target</code> という trigger を使うやり方がある。<code>pull_request_target</code> という trigger は便利なんだけど、これを無配慮に使うとセキュリティ的に危ういということが GitHub のドキュメントにはつらつら書かれており、まあつまりどういうことなんや、どう使えばええということなんや、ということで色々調べたのでメモしておく。</p>
+<h2 id="まず先に-pull_request-という-trigger">まず先に <code>pull_request</code> という trigger</h2>
+<p>github actions の trigger にはいろいろなものを設定できるが、基本的には <code>pull_request</code> という trigger を使えば pull request 契機の何かをさせる (CI とか) には十分であろうと思う。</p>
+<p>なんだけど、この <code>pull_request</code> という trigger は fork からの pull request を受け取ったときには「fork 先のリポジトリの設定で github actions が動く」というような振る舞いをする。これで何が困るかというと、例えば fork 元で設定している secrets にアクセスできないという点。secrets にアクセスできないということは、たとえば普通 secrets に入れておいて github actions で用いたくなるような <code>GITHUB_TOKEN</code> だとか <code>SLACK_TOKEN</code> だとか、あるいは <code>FIREBASE_SERVICE_ACCOUNT_XXX</code> のようなものだとかが参照できないということが起こる。このへんの TOKEN を使って CI を契機に pull request にコメントしたり Slack にお知らせ飛ばしたり、firebase hosting に preview のためにアップロードしたりとか、そういうのやりたいとしてもできないということになる。</p>
+<h2 id="pull_request_target-という-trigger-を使うと便利だが"><code>pull_request_target</code> という trigger を使うと便利、だが</h2>
+<p>trigger を <code>pull_request</code> の代わりに <code>pull_request_trigger</code> を使うようにすると、「fork 先からのリポジトリからの pull request でも fork 元の設定で github actions が動く」というのを達成できる。これならば secrets にアクセスできる。やったね。</p>
+<p>と思うんだけど、これを無配慮に使ってしまうとセキュリティ的に良くないことになる。たとえば pull request の author が悪いやつで、CI の最中に secrets をダンプ (あるいはどこかに送信) するようなコードを pull request で送りつけられてしまうと、一発で secrets が漏れることになってしまう。これはまずい。</p>
+<h2 id="使いたかったら何に気をつけるべきか">使いたかったら何に気をつけるべきか</h2>
+<p>じゃあどうやって使えばいいんですか、ってことで調べていくと <a href="https://securitylab.github.com/research/github-actions-preventing-pwn-requests/">github actions のセキュリティに関する GitHub のブログ</a> が出てくる。これによると、<code>pull_request_target</code> を使う場合は、たとえば「特定のラベルが貼られたもの」に限定して github actions を実行するような制御を行うのが良いとして例示されている。pull request にラベルを貼れるのはそれ相応の権限をもった人に限られるので (fork を作った人は colaborator でもない限り fork 元の issue や pull request にラベルを貼ることはできない)、fork 元の人がちゃんとパッチの中身を確認し、問題がないことを確認してからラベルを貼るってやれば大丈夫だよね、という意図かと思う。</p>
+<p>たとえば、<code>ok to test</code>というラベルが貼られたら CI を発火させる、みたいなのはこんなふうに書けるかと思う。<br>
+worflow の冒頭を抜粋。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy to Firebase Hosting on PR</span><span class="w">
+</span><span class="w"></span><span class="nt">&#39;on&#39;</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">pull_request_target</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">labeled]</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build_and_preview</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">contains(github.event.pull_request.labels.*.name, &#39;ok to test&#39;)</span><span class="w">
+</span></code></pre></div><p>こうやると、この workflow はラベルが貼られたとき、かつラベルの中身が <code>ok to test</code> であれば実行される、という意味にできる。</p>
+<p>このとき、<code>pull_request_target</code> の types に <code>labeled</code> 以外のものを指定してしまうと (例えば push とか reopen とか)、一度 <code>ok to test</code> ラベルを貼ったあとにヤバいコードを push されてしまう、みたいなシチュエーションのときにも github actions が実行されてしまってやはり secrets が漏れる、みたいなこともありえそう。なので「<code>ok to test</code> というラベルが貼られたときしか発火しない workflow」(もう一回 CI したかったらラベルを貼り直す) という設計で workflow を作るのが盤石なやり口なのかなーと思う。ややめんどうかもしれないがやむなし。</p>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li><a href="https://docs.github.com/ja/actions/reference/events-that-trigger-workflows">ワークフローをトリガーするイベン - GitHub Docs</a></li>
+<li><a href="https://securitylab.github.com/research/github-actions-preventing-pwn-requests/">Keeping your GitHub Actions and workflows secure: Preventing pwn requests</a></li>
+<li><a href="https://github.com/pankona/moguri/blob/ed52f4731e87c4b8902fd478dc9619031e5a0da6/.github/workflows/firebase-hosting-pull-request.yml">実際に自分がこさえた pull_request_target trigger を使っている github actions ワークフロー</a></li>
+</ul>
+                    </div>
+                </section>
                 
                 <div class="content-subhead">2021-03-13 13:40:50</div>
                 <section >
@@ -1125,31 +1173,6 @@ ujihisa 曰く、「プロダクトに時間が割けない中でプロダクト
 <p>ところで、「みんなの Go 言語」が改定されて第 2 版がでるという話題が出ていた。<br>
 第 1 版には、本当に「いますぐ役立つ！」という感じの記事が並んでいたので、第 2 版にも期待である。</p>
 <blockquote class="blogcard" style="width:auto;border:1px solid #aaa;margin:1em 0;padding:1em;line-height:1.4;text-align:left;background:#fff;"><a href="https://gihyo.jp/book/2019/978-4-297-10727-7" target="_blank" style="display:block;text-decoration:none;"><div style="width:100%;margin-bottom:0.5em;"><span style="font-size:18px;font-weight:700;color:#333">改訂2版 みんなのGo言語</span></div><div style="min-height:100px;"><div style="float:left;width:80px;height:100px;margin:0 1em 0.5em 0;position:relative;"><img src="https://images.weserv.nl/?w=100&url=https://image.gihyo.co.jp/assets/images/cover/2019/thumb/TH300_9784297107277.jpg" alt="thumbnail" style="position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);border:none;"/></div><div><span style="font-size:12px;font-weight:400;color:#373;word-wrap:break-word">https://gihyo.jp/book/2019/978-4-297-10727-7</span></div></div></a></blockquote>
-
-                    </div>
-                </section>
-                
-                <div class="content-subhead">2019-05-31 10:50:59</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2019/05/31/job-change/">Quipper に転職した</a>
-
-                        <p class="post-meta">
-                            
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <p>2019 年 5 月、令和が始まるタイミングで転職した。<br>
-ACCESS → Quipper 。今度は Web Developer として主に Rails 等を触っていく仕事をする予定。</p>
-<p>入って概ね一ヶ月が経ったが戦力には程遠くて結構あれな気持ちにはなっているものの、<br>
-急に何もかもが分かるようになるのは難しいし、徐々に馴染んでいくしかないと思っているところ。</p>
-<p>ところで、新職場には「オンボーディング」と呼ばれる、新しく入った人が早く成果をあげられるようにするための訓練プログラム (？) のようなものがなんとなく整備されている。<br>
-そういった試みは前職にはなかったので、まずそれがあるだけでそれなりに感動であった。オンボーディングの内容自体はまだ練り上げている段階のようなので、せっかくの貴重なオンボーディング体験チャンス (当然だけど入社した直後しか体験する機会がない) であるから、よりよいオンボーディングを作る、みたいな文脈でも貢献していけたら良いなぁ等と思ったり。</p>
-<p>Ruby / Rails に関しては未経験ではないものの、もうすっかり忘れていて戦闘能力が 0 になっている。<br>
-改めて勉強し直しているが、まあ難しいこと難しいこと。全部黒魔法に見えてくる。そのうち自分にも黒魔法が使える日が来ると信じる。</p>
 
                     </div>
                 </section>

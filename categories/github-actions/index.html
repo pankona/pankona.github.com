@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Actions</title>
+
+    <meta name="description" content="Good poem">
+
+    <meta name="generator" content="Hugo 0.83.0-DEV" />
+    <meta name="twitter:card" content="summary">
+    
+    <meta name="twitter:title" content="GitHub Actions">
+    <meta name="twitter:description" content="Good poem">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="GitHub Actions">
+    <meta property="og:description" content="Good poem">
+    <meta property="og:image" content="https://avatars1.githubusercontent.com/u/6533008?s=460&amp;v=4" />
+
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-responsive-min.css">
+
+    <link rel="stylesheet" href="https://pankona.github.io/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="alternate" type="application/rss+xml" title="make clean; make" href="https://pankona.github.io/atom.xml" />
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+        <hgroup>
+            <h1 class="brand-title"><a href="https://pankona.github.io">make clean; make</a></h1>
+        </hgroup>
+
+        <nav class="nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://twitter.com/@pankona"><i class="fa fa-twitter"></i> Twitter</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://github.com/pankona "><i class="fa fa-github-alt"></i> GitHub</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/atom.xml"><i class="fa fa-rss"></i> RSS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="pure-button" href="https://pankona.github.io/categories"></i> Categories</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            
+            <div class="posts">
+                
+                <div class="content-subhead">2021-03-29 12:24:46</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2021/03/29/github-actions-pull-request-target/">fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-GitHub Actions" href="https://pankona.github.io/categories/github-actions">GitHub Actions</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>タイトルが長い。</p>
+<p>fork されたリポジトリからの pull request を受け取ったとき、GitHub Actions が fork 元のリポジトリの secrets にアクセスするためには例えば <code>pull_request_target</code> という trigger を使うやり方がある。<code>pull_request_target</code> という trigger は便利なんだけど、これを無配慮に使うとセキュリティ的に危ういということが GitHub のドキュメントにはつらつら書かれており、まあつまりどういうことなんや、どう使えばええということなんや、ということで色々調べたのでメモしておく。</p>
+<h2 id="まず先に-pull_request-という-trigger">まず先に <code>pull_request</code> という trigger</h2>
+<p>github actions の trigger にはいろいろなものを設定できるが、基本的には <code>pull_request</code> という trigger を使えば pull request 契機の何かをさせる (CI とか) には十分であろうと思う。</p>
+<p>なんだけど、この <code>pull_request</code> という trigger は fork からの pull request を受け取ったときには「fork 先のリポジトリの設定で github actions が動く」というような振る舞いをする。これで何が困るかというと、例えば fork 元で設定している secrets にアクセスできないという点。secrets にアクセスできないということは、たとえば普通 secrets に入れておいて github actions で用いたくなるような <code>GITHUB_TOKEN</code> だとか <code>SLACK_TOKEN</code> だとか、あるいは <code>FIREBASE_SERVICE_ACCOUNT_XXX</code> のようなものだとかが参照できないということが起こる。このへんの TOKEN を使って CI を契機に pull request にコメントしたり Slack にお知らせ飛ばしたり、firebase hosting に preview のためにアップロードしたりとか、そういうのやりたいとしてもできないということになる。</p>
+<h2 id="pull_request_target-という-trigger-を使うと便利だが"><code>pull_request_target</code> という trigger を使うと便利、だが</h2>
+<p>trigger を <code>pull_request</code> の代わりに <code>pull_request_trigger</code> を使うようにすると、「fork 先からのリポジトリからの pull request でも fork 元の設定で github actions が動く」というのを達成できる。これならば secrets にアクセスできる。やったね。</p>
+<p>と思うんだけど、これを無配慮に使ってしまうとセキュリティ的に良くないことになる。たとえば pull request の author が悪いやつで、CI の最中に secrets をダンプ (あるいはどこかに送信) するようなコードを pull request で送りつけられてしまうと、一発で secrets が漏れることになってしまう。これはまずい。</p>
+<h2 id="使いたかったら何に気をつけるべきか">使いたかったら何に気をつけるべきか</h2>
+<p>じゃあどうやって使えばいいんですか、ってことで調べていくと <a href="https://securitylab.github.com/research/github-actions-preventing-pwn-requests/">github actions のセキュリティに関する GitHub のブログ</a> が出てくる。これによると、<code>pull_request_target</code> を使う場合は、たとえば「特定のラベルが貼られたもの」に限定して github actions を実行するような制御を行うのが良いとして例示されている。pull request にラベルを貼れるのはそれ相応の権限をもった人に限られるので (fork を作った人は colaborator でもない限り fork 元の issue や pull request にラベルを貼ることはできない)、fork 元の人がちゃんとパッチの中身を確認し、問題がないことを確認してからラベルを貼るってやれば大丈夫だよね、という意図かと思う。</p>
+<p>たとえば、<code>ok to test</code>というラベルが貼られたら CI を発火させる、みたいなのはこんなふうに書けるかと思う。<br>
+worflow の冒頭を抜粋。</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy to Firebase Hosting on PR</span><span class="w">
+</span><span class="w"></span><span class="nt">&#39;on&#39;</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">pull_request_target</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">labeled]</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">build_and_preview</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">contains(github.event.pull_request.labels.*.name, &#39;ok to test&#39;)</span><span class="w">
+</span></code></pre></div><p>こうやると、この workflow はラベルが貼られたとき、かつラベルの中身が <code>ok to test</code> であれば実行される、という意味にできる。</p>
+<p>このとき、<code>pull_request_target</code> の types に <code>labeled</code> 以外のものを指定してしまうと (例えば push とか reopen とか)、一度 <code>ok to test</code> ラベルを貼ったあとにヤバいコードを push されてしまう、みたいなシチュエーションのときにも github actions が実行されてしまってやはり secrets が漏れる、みたいなこともありえそう。なので「<code>ok to test</code> というラベルが貼られたときしか発火しない workflow」(もう一回 CI したかったらラベルを貼り直す) という設計で workflow を作るのが盤石なやり口なのかなーと思う。ややめんどうかもしれないがやむなし。</p>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li><a href="https://docs.github.com/ja/actions/reference/events-that-trigger-workflows">ワークフローをトリガーするイベン - GitHub Docs</a></li>
+<li><a href="https://securitylab.github.com/research/github-actions-preventing-pwn-requests/">Keeping your GitHub Actions and workflows secure: Preventing pwn requests</a></li>
+<li><a href="https://github.com/pankona/moguri/blob/ed52f4731e87c4b8902fd478dc9619031e5a0da6/.github/workflows/firebase-hosting-pull-request.yml">実際に自分がこさえた pull_request_target trigger を使っている github actions ワークフロー</a></li>
+</ul>
+                    </div>
+                </section>
+                
+            </div>
+            
+
+            <div class="footer">
+    <div class="pure-menu pure-menu-horizontal pure-menu-open">
+        <ul>
+            <li>Powered by <a class="hugo" href="https://gohugo.io/" target="_blank">hugo</a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://pankona.github.io/js/all.min.js"></script>
+<script type="text/javascript" src="https://pankona.github.io/js/jquery.oembed.js"></script>
+<script>
+$(function(){
+    $("a.embed").oembed();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pankona.github.io/css/jquery.oembed.css"> 
+
+        </div>
+    </div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-48476608-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

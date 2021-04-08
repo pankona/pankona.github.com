@@ -5,7 +5,17 @@
     <link>https://pankona.github.io/</link>
     <description>Recent content on make clean; make</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 13 Mar 2021 13:40:50 +0900</lastBuildDate><atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Mar 2021 12:24:46 +0900</lastBuildDate><atom:link href="https://pankona.github.io/atom.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>fork されたリポジトリからの pull request で発火した GitHub Actions で fork 元の secrets を参照する</title>
+      <link>https://pankona.github.io/blog/2021/03/29/github-actions-pull-request-target/</link>
+      <pubDate>Mon, 29 Mar 2021 12:24:46 +0900</pubDate>
+      
+      <guid>https://pankona.github.io/blog/2021/03/29/github-actions-pull-request-target/</guid>
+      <description>&lt;p&gt;タイトルが長い。&lt;/p&gt;
+&lt;p&gt;fork されたリポジトリからの pull request を受け取ったとき、GitHub Actions が fork 元のリポジトリの secrets にアクセスするためには例えば &lt;code&gt;pull_request_target&lt;/code&gt; という trigger を使うやり方がある。&lt;code&gt;pull_request_target&lt;/code&gt; という trigger は便利なんだけど、これを無配慮に使うとセキュリティ的に危ういということが GitHub のドキュメントにはつらつら書かれており、まあつまりどういうことなんや、どう使えばええということなんや、ということで色々調べたのでメモしておく。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>チームに対して CI するということ</title>
       <link>https://pankona.github.io/blog/2021/03/13/human-is-untyped/</link>

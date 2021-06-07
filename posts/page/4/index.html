@@ -85,6 +85,81 @@
             
             <div class="posts">
                 
+                <div class="content-subhead">2014-05-14 17:59:10</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/05/14/arch-windows-multiboot-tips/">Arch LinuxとWindows8.1をデュアルブートにしたときの備忘録</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-ArchLinux" href="https://pankona.github.io/categories/archlinux">ArchLinux</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <h2 id="このポストは">このポストは</h2>
+<p>Windows8.1に対してWindows Updateしたところ、何だかわからないがデュアルブートしなくなって焦ったため、<br>
+直し方というか、そもそもどうやってデュアルブートにしているかをメモしておくための記事。</p>
+<h3 id="件のpcについて">件のPCについて</h3>
+<p>以下のようなPCと、その中身の構成にしている。</p>
+<p>&ndash; PC本体：Vaio Pro 13<br>
+&ndash; OS：Arch LinuxとWindows8.1のデュアルブート</p>
+<h3 id="デュアルブートのためにしたこと---まずは普通にarch-linuxをインストール">デュアルブートのためにしたこと - まずは普通にArch Linuxをインストール</h3>
+<ul>
+<li>Arch Linux起動のためのUSBメモリを作成。ここはWindowsを使う。</li>
+</ul>
+<p><a href="https://wiki.archlinux.org/index.php/USB_Installation_Media_(%E6%97%A5%E6%9C%AC%E8%AA%9E)">USB Installation Media（日本語） - Arch LinuxのWiki</a> なんかが参考になる。</p>
+<ul>
+<li>Windowsを使ってLinux向けのパーティションを切る。</li>
+</ul>
+<p>「管理」を使ってやる。<a href="http://windows.microsoft.com/ja-jp/windows/create-boot-partition#1TC=windows-7">ブート パーティンションを作成する - Microsoftのページ</a>等が参考になる。<br>
+とにかく何か領域が空いていればいい。うちの構成では180GB程度確保した。<br>
+少なくとも30GBくらいいるかな？</p>
+<ul>
+<li>Arch Linux起動用のUSBを挿した状態でPCを起動し、USBからのブートを行う。</li>
+</ul>
+<p>あとは↑で作ったパーティションにArch Linuxをインストールしていく。詳しくはやはりArch LinuxのWiki参照。<br>
+&ndash; パーティションのフォーマット。割り当て可能領域はすべて割り当て。EFIパーティションにする必要はない。普通ので。<br>
+&ndash; /mnt にフォーマットしたパーティションをマウント。<code>mount /dev/sda5 /mnt</code> ← うちの環境の場合。<br>
+&ndash; chrootする。<code>arch-chroot /mnt</code> で。<br>
+&ndash; Arch Linuxのインストール。 <code>pacman -S base base-devel</code> とかやる。<br>
+&ndash; genfstab とかそういったことをこまごま行う。<br>
+&ndash; ブートローダのインストール。ブートローダにはgummibootを採用した。</p>
+<pre><code>mount /dev/sda2 /boot/EFI
+cd /boot/EFI
+gummiboot install
+</code></pre><p>ここまでで勝手にデュアルブートしてくれたら嬉しかったが、そうはいかなかった（本来はこれだけでOKらしい）。<br>
+Vaioのせいなのか、Windowsのせいなのか。。</p>
+<h3 id="デュアルブートのためにしたこと---無理やりgummibootを使わせる">デュアルブートのためにしたこと - 無理やりgummibootを使わせる</h3>
+<p>上記までで何が起きるかというと、、、<br>
+どうやら、せっかくgummibootで設定したブートの設定がPC起動時になかったことにされてしまう模様。<br>
+つまりWindowsが問答無用で起動される状態に戻ってしまう。VaioのせいなのかWindowsのせいなのか。。。</p>
+<p>この点をちゃんと解決するのは諦めました。<br>
+諦めて、Windowsの起動に使われるファイルをgummibootのものと置き換えることでデュアルブートを実現。。<br>
+一応、やれればいいや、ということで。</p>
+<ul>
+<li>先ほどのUSBからArch Linuxを起動し、無理やりgummibootを使わせるようにしにいく</li>
+</ul>
+<p>&ndash; まず、EFIのパーティションをマウントする。</p>
+<pre><code>mount /dev/sda2 /mnt/boot/EFI
+</code></pre><p>&ndash; Windows起動用のファイルとgummiboot起動用のファイルを置き換える。</p>
+<p>&mdash; Windows起動用のファイル &hellip; /boot/EFI/Microsoft/boot/bootmgrfw.efi<br>
+&mdash; gummiboot起動用のファイル &hellip; /boot/EFI/gummiboot/gummibootx64.efi</p>
+<p>上記のWindows起動用のファイルを、gummiboot起動用のファイルで上書きしてやると、、、<br>
+次回のPC起動時には、OS選択の画面が表示されるはず。上書きする前にバックアップしてあげてね。。。</p>
+<h3 id="windowsアップデートのときにbootmgrfwefiが更新されちゃうことがあるっぽい">Windowsアップデートのときに、bootmgrfw.efiが更新されちゃうことがあるっぽい</h3>
+<p>だのでWindowsアップデートでデュアルブートができなくなったりするんだろう。<br>
+デュアルブートできなくなったら、いちいちgummibootx64.efiをWindows起動用のファイルに上書きしてやる必要がある。</p>
+<h2 id="これでwindowsアップデートも怖くない">これでWindowsアップデートも怖くない！</h2>
+
+                    </div>
+                </section>
+                
                 <div class="content-subhead">2014-05-05 23:38:52</div>
                 <section >
                     <header class="post-header">

@@ -7,7 +7,7 @@
 
     <meta name="description" content="Good poem">
 
-    <meta name="generator" content="Hugo 0.84.0-DEV" />
+    <meta name="generator" content="Hugo 0.85.0-DEV" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Posts">
@@ -84,6 +84,75 @@
         <div>
             
             <div class="posts">
+                
+                <div class="content-subhead">2014-05-15 12:25:25</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2014/05/15/vaio-pro-palm-detect-on-archlinux/">Vaio Pro 13における手のひら検知 on Arch Linux</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-ArchLinux" href="https://pankona.github.io/categories/archlinux">ArchLinux</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Vaio Pro 13にArch Linuxを入れて遊んでいる近頃である。<br>
+概ね快適なLinuxライフを過ごせているのだが、一個だけ非常に不満な点がある。<br>
+それは「タッチパッドの手のひら検知」。パームディテクト、Palm Detection、等と呼ばれる機能。</p>
+<h3 id="手のひら検知">手のひら検知？</h3>
+<p>もはや手のひら検知について触れる必要もなさそうだが、一応。</p>
+<p>Vaio Pro 13のタッチパッドはなかなか大きい。<br>
+これは最近のノートPC、MBPとか他のUltraBookにも採用されていて流行と言ったら流行。<br>
+これ自体は割と私は好みで、二本指、三本指でのスワイプなんかもやりやすくてなかなかいい。</p>
+<p>ただ大きいタッチパッドには弊害もあって、キーボードを打ってるときに親指の付け根のあたりで触れちゃうってこと。<br>
+触れちゃうとどうなるかっていうと、クリックした扱いになってしまって、つまりカーソルが飛ぶ。<br>
+編集中に予期せぬ場所にカーソルが飛んでしまって、あれ、これどうなった、みたいなことになる。</p>
+<p>それを解決してくれるのが、手のひら検知の仕組み。<br>
+つまり意図したタッチでないと思われるものは無視してくれるというやつで、考えた人凄いと思います。</p>
+<h3 id="arch-linux-on-vaio-pro-13の場合">Arch Linux on Vaio Pro 13の場合</h3>
+<p>件の手のひら検知を有効にする仕組みがある（デフォルトではオフ）。<br>
+synclient、PalmDetect、あたりでぐぐると結構出てくる。具体的には、<br>
+<code>synclient PalamDetect=1</code> とかってやって手のひら検知を有効にする。する、のだが。</p>
+<p>なんか全然効いてない気がするんですけど・・・。ということで調べてみた。<br>
+ほんとに効いてるのかどうかを。</p>
+<h3 id="結論からいうと効いてなかった">結論からいうと効いてなかった</h3>
+<p>効いてなかったです。ちくしょうめ。やっぱりか。</p>
+<p>ドライバのソースコードに簡単にログを仕込んで確認してみたところ、やっぱり効いてなかった。<br>
+Arch Linuxでタッチパッドのドライバーは、Synapticsが使われている（というか大体どこでもSynapticsか）。<br>
+ソースコードはこれ。Githubに公開されている。<a href="git:anongit.freedesktop.org/xorg/driverxf86-input-synaptics">xf86-input-synaptics</a></p>
+<p>なんで効かないかと言うと、の前に、ソースコードからどうやって手のひら検知をしているかを調べてみたのでそれをメモ。</p>
+<h3 id="どうやって手のひら検知している">どうやって手のひら検知している？</h3>
+<p>以下の3要素を考慮して手のひら検知としている模様。</p>
+<ul>
+<li>PalmDetectの設定が有効になっているか（synclient PalmDetect=1 で有効になるやつ）</li>
+<li>PalmMinZがしきい値を超えているか（これも synclient PalmMinZ=XXX で設定できる）</li>
+<li>PalmMinWidthがしきい値を超えているか（これも synclient PalmMinWidth=XXX で設定できる）</li>
+</ul>
+<p>PalmMinZ は、どれくらい深く（強く？）タッチパッドが押されたら手のひらと判断するか、のしきい値。<br>
+PalmMinWidth は、タッチの広さを見ていて、太すぎる指は手のひらとみなしましょう、という判断のためのしきい値。</p>
+<h3 id="arch-linux-on-vaio-pro-13-が手のひら検知をしてくれない理由">Arch Linux on Vaio Pro 13 が手のひら検知をしてくれない理由</h3>
+<p>上記のしきい値のうち、どうやらPalmMinWidthのほうがおかしいっぽくて、<br>
+どんな触り方をしても常に「0」で判定されてしまっている模様。<br>
+ちなみに、SynapticsはPalmMinWidthが0のときは手のひらとして判断しないように実装されている。<br>
+なので、PalmDetect、PalmMinZ、PalmMinWidth、どれをどの値にしても手のひら検知は効かないということである。ちくしょうめ。</p>
+<h3 id="どうすれば解決するのか">どうすれば解決するのか？</h3>
+<h4 id="palmminwidthを正しく判定させる方法">PalmMinWidthを正しく判定させる方法</h4>
+<p>調査をしているが今のところわからない。。一般ピープルに手が及ぶ範囲なのかどうか。</p>
+<h4 id="それ以外の対処法">それ以外の対処法？</h4>
+<p>PalmMinWidthはもう一切判断に含めないようにソースコードを書き換えてみたが、、、<br>
+それってつまりタッチ深度だけで手のひらを検知するということであって、それはまあ微妙な感じ。</p>
+<h4 id="つまり">つまり</h4>
+<p>**残念ながら、手のひら検知がいまいちな件は解決できていない。**なんとかする方法の調査はTo Be Continuedである。<br>
+デュアルブートしているWindowsの側ではできているっぽいので、Arch Linux側でも出来ないことないと信じて。</p>
+
+                    </div>
+                </section>
                 
                 <div class="content-subhead">2014-05-14 17:59:10</div>
                 <section >

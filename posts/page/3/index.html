@@ -7,7 +7,7 @@
 
     <meta name="description" content="Good poem">
 
-    <meta name="generator" content="Hugo 0.85.0-DEV" />
+    <meta name="generator" content="Hugo 0.86.0-DEV" />
     <meta name="twitter:card" content="summary">
     
     <meta name="twitter:title" content="Posts">
@@ -84,6 +84,88 @@
         <div>
             
             <div class="posts">
+                
+                <div class="content-subhead">2016-11-14 20:14:02</div>
+                <section >
+                    <header class="post-header">
+
+                        <a href="https://pankona.github.io/blog/2016/11/14/usb-wifi-dongle/">Linux で 無線LAN の USB ドングルを使う</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-ArchLinux" href="https://pankona.github.io/categories/archlinux">ArchLinux</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Linux と銘打っておりますが、Manjro で試しています。<br>
+本記事は Linux で 無線LAN のドングルを使えるようにした備忘録です。</p>
+<h2 id="使ったドングル二種">使ったドングル二種</h2>
+<p>訳あって二種類のドングルを使いました。いずれも I-O DATA 製。</p>
+<ul>
+<li>WN-AC433UM</li>
+<li>WN-G150UMK</li>
+</ul>
+<h2 id="wn-ac433um-編">WN-AC433UM 編</h2>
+<p>とりあえずぶっ挿してみたところ、無線LAN デバイスとしては認識されなかった。<br>
+つまりデフォルトの Manjro には WN-AC433UM のドライバが入っていなかったということ。<br>
+ドライバを入れていく。</p>
+<h3 id="wn-ac433um-は-rtl8192eu-というドライバで動いた">WN-AC433UM は rtl8192eu というドライバで動いた</h3>
+<p>rtl8192eu というドライバは <code>yaourt rtl8192eu</code> で一応インストールされるのであるが、<br>
+それだけだと WN-AC433UM は認識されなかった。</p>
+<p>WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、<br>
+<code>yaourt rtl8192eu</code> でインストールされるドライバではこれを認識するようになっていない。<br>
+(注: 2016.11.09 時点)</p>
+<p>なので、上記 idVendor、idProduct 値を認識するようにソースコードを書き換えた上で、<br>
+ビルド・インストールする必要がある。ソースコードは以下から入手できる。</p>
+<p><a href="https://github.com/Mange/rtl8192eu-linux-driver">Mange/rtl8192eu-linux-driver - GitHub</a><br>
+なお、リビジョンは <code>f016814</code> を使った。</p>
+<p>os_dep/linux/usb_intf.c に、以下のように追記する。<br>
+(注: 妥当か不明だがとりあえず以下の書き換えでうまくいった)</p>
+<pre><code>diff --git a/os_dep/linux/usb_intf.c b/os_dep/linux/usb_intf.c
+index 5a62f24..7138a26 100644
+--- a/os_dep/linux/usb_intf.c
++++ b/os_dep/linux/usb_intf.c
+@@ -220,6 +220,8 @@ static struct usb_device_id rtw_usb_id_tbl[] ={
+        {USB_DEVICE(0x2357, 0x0109),.driver_info = RTL8192E}, /* TP-Link - Cameo */
+        /*=== PLANEX ===========*/
+        {USB_DEVICE(0x2019, 0xab33),.driver_info = RTL8192E}, /* PLANEX - GW-300S Katana */
++       /*=== I-O DATA ===========*/
++       {USB_DEVICE(0x04bb, 0x0959),.driver_info = RTL8192E}, /* I-O DATA */
+ #endif
+ 
+ #ifdef CONFIG_RTL8723B
+</code></pre><p>ビルドし、インストールする。</p>
+<pre><code>$ cd rtl8192eu-linux-driver
+$ make
+$ sudo make install
+</code></pre><p>再起動すると、無線LAN ドングルを NIC として認識するようになった。</p>
+<h2 id="wn-g150umk-編">WN-G150UMK 編</h2>
+<p>上記 WN-AC433UM を認識させるにあたって散々ドライバをインストールしたせいなのであろうが、<br>
+こちらは挿しただけで認識されてしまった。</p>
+<h3 id="wn-g150umk-は-rtl8192cu-というドライバで動いている模様">WN-G150UMK は rtl8192cu というドライバで動いている模様</h3>
+<p>もしかしたらドライバをインストールする必要があるかもしれないのでメモしておくと、<br>
+WN-G150UMK は rtl8192cu というドライバで動いている模様。<code>lshw</code> コマンドで確認した。</p>
+<h2 id="ちなみにwn-ac433um-は-5-ghz-にしか対応していない">ちなみに、WN-AC433UM は 5 GHz にしか対応していない</h2>
+<p>WN-AC433UM は 5GHz 帯「のみ」に対応しており、<br>
+つまり 2.4 GHz 帯を用いる無線機器とは接続ができない。スキャンしても発見すらしてくれない。<br>
+2.4 GHz っていうのはたとえば Android 5.0 以前の Android 端末のテザリングであったり、<br>
+ちょっと古めのルーターだったりが該当する。</p>
+<p>完全に自分の見落としであるのだが、我が家の装備はことごとく 2.4 GHz 帯を扱うモノばかりだったので、<br>
+つまりせっかく頑張って WN-AC433UM を Linux に認識させたのであるが、日の目を見なかったのである…。<br>
+悲しい。そんなわけで WN-G150UMK を書い直したが、こちらは快調に動いてます。ナイス。</p>
+<h2 id="参考リンク">参考リンク</h2>
+<ul>
+<li><a href="http://www.iodata.jp/product/network/adp/wn-ac433um/">WN-AC433UMシリーズ - I-O DATA</a></li>
+<li><a href="http://www.iodata.jp/lib/product/w/4078.htm">WN-G150UMK - I-O DATA</a></li>
+</ul>
+
+                    </div>
+                </section>
                 
                 <div class="content-subhead">2016-10-25 19:38:13</div>
                 <section >
@@ -1661,50 +1743,6 @@ export XMODIFIERS='@im=uim'
 <h3 id="ここまでで">ここまでで</h3>
 <p>Alt + Space でDirect Inputと日本語入力がトグルできるようになった。<br>
 チャンスがあれば、他のIMも試してみよっかな。</p>
-
-                    </div>
-                </section>
-                
-                <div class="content-subhead">2014-05-19 21:21:34</div>
-                <section >
-                    <header class="post-header">
-
-                        <a href="https://pankona.github.io/blog/2014/05/19/about-google-search/">Google Japanの検索にgithubがヒットしないかと思ったがそんなことはなかった</a>
-
-                        <p class="post-meta">
-                            
-                            
-                                under 
-                                
-                                <a class="post-category post-category-その他" href="https://pankona.github.io/categories/%E3%81%9D%E3%81%AE%E4%BB%96">その他</a>
-                            
-                        </p>
-                    </header>
-
-                    <div class="post-description">
-                        <h2 id="自分のページがgoogle検索にヒットしない理由">自分のページがGoogle検索にヒットしない理由</h2>
-<p>なかなか自分のページ（ここのブログのこと）がGoogle検索に引っかからないので、<br>
-いや、大層なことを書いているわけでもないから引っかからなくても怒ったりはしないが、<br>
-いやでもなんで引っかからないんだろう、と思って調査をしていたところ、</p>
-<h3 id="githubのリポジトリはgoogle日本の検索に引っかからない">GithubのリポジトリはGoogle日本の検索に引っかからない</h3>
-<p>といった記事を見つけた。ほんまかいな？<br>
-もしかしてそのせいでうちのページはGoogleに引っかからないんじゃああるまいか？<br>
-（Github pagesを使って公開しているページなので）</p>
-<p>等と考えつつ、調査を続行していったところ、、、</p>
-<h3 id="結論からするとgithubのリポジトリはgoogle日本の検索にちゃんと引っかかる">結論からすると、GithubのリポジトリはGoogle日本の検索にちゃんと引っかかる。</h3>
-<p>ただし条件がある模様。それは（おそらく）、</p>
-<p><strong>ページ（リポジトリの場合はREADMEかな？）に日本語が含まれていること</strong></p>
-<p>つまり、Google日本の検索に引っかからない、というよりは、<br>
-**&ldquo;日本語のページを検索&rdquo;**に引っかからない、ということである模様。<br>
-全編英語で書いてたら英語のページと判断して、&ldquo;日本語のページを検索&quot;には載せない、ってことかなー。<br>
-そして、Google日本の検索は、おそらくデフォルトは&quot;日本語のページを検索&quot;になってる。という話。</p>
-<p>加えて、GithubのリポジトリのREADMEなんかは、英語だけで書かれているケースが多い。<br>
-だからGoogle日本を使ってそのまま検索をしていると、Githubのページがあんまり出てこないという現象が。</p>
-<p>だので、英語だけで書かれたGithubのページも、検索オプションで言語に依らない検索にしてあげれば、Google日本の検索でも出てきます。</p>
-<h3 id="じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか">じゃあ日本の人にもリポジトリにリーチしてもらうにはどうするか？</h3>
-<p>自分のGithubのリポジトリに日本人を呼び込みたい！と思ったら、READMEに日本語をちょっと混ぜてあげればリーチできる人が増えるかも？<br>
-と思っているがどうか。たぶん、おそらく、きっと、効果あると思われる。つまり自信ない。<br>
-自分のリポジトリ使って実験してみます。そのうち調査結果を書きます。</p>
 
                     </div>
                 </section>

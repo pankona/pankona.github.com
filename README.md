@@ -1,3 +1,3 @@
 # pankona.github.io
 
-using hugo 0.72.0
+using latest hugo

@@ -1,18 +1,18 @@
 ---
-title: "Alpine Linux 上で git command を叩くいたときに色がつかなかったり全画面 pager になったりするのは GNU の less が入っていないから"
+title: "Alpine Linux 上で git を使うときに色がつかなかったり全画面 pager になったりするのは GNU の less が入っていないから"
 date: 2021-12-22T20:00:08+09:00
 draft: false
 categories: ["Linux"]
 ---
            
-Alpine Linux 上で作業をすることを余儀なくされるケースがあったのだが、git command が色々と気に食わない (macOS や自分が普段使いしている Linux と表示が異なるという意味) ことになっていた。
+Alpine Linux 上で作業をすることを余儀なくされるケースがあったのだが、git が色々と気に食わない (macOS や自分が普段使いしている Linux と表示が異なるという意味) ことになっていた。
 GNU less をインストールすることで解決したのでメモしておく。
 
 <!--more-->
 
 ## 困り事
 
-Alpine Linux で git command を叩くと、色々気に食わないことが起こる。
+Alpine Linux で git を使うと、色々気に食わないことが起こる。
 
 - `git branch` を実行すると、画面全部を使った pager が起動する (いっぱいブランチがあるときには便利かもしれないが…)。
 - `git log` を実行したときに色がつかない。白黒。

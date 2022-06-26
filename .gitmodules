@@ -3,5 +3,5 @@
 	url = https://github.com/pankona/purehugo
 [submodule "public"]
 	path = public
-	url = git@github.com:pankona/pankona.github.com
+	url = https://github.com/pankona/pankona.github.com
 	branch = master

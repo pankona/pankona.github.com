@@ -30,13 +30,13 @@ jobs:
       run: |
         title="$ISSUE_TITLE"
         title="${title//\[*\]/}"
-        title=`echo $title | xargs`
+        title="$(echo $title | xargs)"
         title="${title// /-}"
-        GITHUB_TOKEN=${TOKEN} articlegen --issue-num=${{ github.event.issue.number }} > content/posts/${title}.md
+        GITHUB_TOKEN="${TOKEN}" articlegen --issue-num=${{ github.event.issue.number }} > "content/posts/${title}.md"
         git config --global user.email "yosuke.akatsuka@gmail.com"
         git config --global user.name "pankona"
-        git switch -c ${title}
-        git add content/posts/${title}.md
+        git switch -c "${title}"
+        git add "content/posts/${title}.md"
         git commit -m "add post ${title}"
     - name: push
       env:
@@ -44,8 +44,8 @@ jobs:
       run: |
         title="$ISSUE_TITLE"
         title="${title//\[*\]/}"
-        title=`echo $title | xargs`
+        title="$(echo $title | xargs)"
         title="${title// /-}"
         git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
-        git push https://x-access-token:${TOKEN}@github.com/pankona/pankona.github.com.git ${title} -f
-        GITHUB_TOKEN=${TOKEN} makepr --base="main" --head="${title}" --body="Resolves: ${{ github.event.issue.html_url }}"
+        git push https://x-access-token:${TOKEN}@github.com/pankona/pankona.github.com.git "${title}" -f
+        GITHUB_TOKEN="${TOKEN}" makepr --base="main" --head="${title}" --body="Resolves: ${{ github.event.issue.html_url }}"

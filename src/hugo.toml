@@ -15,7 +15,7 @@ baseName = "atom"
 
 [params]
   description = "Good poem"
-  twitterName = "@pankona"
+  twitterName = "pankona"
   twitter = ""
   githubName = "pankona"
   google_analytics = "UA-48476608-2"

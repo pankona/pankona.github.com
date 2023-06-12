@@ -1,6 +1,6 @@
 module github.com/pankona/pankona.github.com/tool/makepr
 
-go 1.16
+go 1.20
 
 require (
 	github.com/google/go-github/v33 v33.0.0

@@ -15,19 +15,14 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '^1.16'
-    - name: clone pankona.github.com
-      uses: actions/checkout@v3
-      with:
-        repository: pankona/pankona.github.com
-        path: pankona.github.com
-        submodules: 'recursive'
+    - uses: actions/checkout@v3
     - name: install sincelastcommit
       run: |
-        cd ./pankona.github.com/tool/sincelastcommit
+        cd ./tool/sincelastcommit
         go install .
+        cd ..
     - name: check since last commit
       run: |
-        cd ./pankona.github.com/public
         echo "SINCE_LAST_COMMIT=`sincelastcommit`" >> $GITHUB_ENV
     - name: Slack Notification
       if: env.SINCE_LAST_COMMIT >= 7

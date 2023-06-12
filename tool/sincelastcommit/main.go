@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/go-git/go-git/v5"
@@ -12,7 +13,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	commits, err := r.Log(&git.LogOptions{})
+	articlesDir := "content/posts"
+	commits, err := r.Log(&git.LogOptions{
+		PathFilter: func(path string) bool {
+			return strings.HasPrefix(path, articlesDir)
+		},
+	})
 	if err != nil {
 		panic(err)
 	}
@@ -22,6 +28,6 @@ func main() {
 	}
 
 	lastCommitDate := commit.Author.When
-	sinceLastCommit := time.Now().Sub(lastCommitDate)
+	sinceLastCommit := time.Since(lastCommitDate)
 	fmt.Printf("%d", int(sinceLastCommit.Hours()/24))
 }

@@ -8,8 +8,6 @@ endif
 
 build:
 	hugo --panicOnWarning
-	rm -rf $(CURDIR)/../public/*
-	mv public/* $(CURDIR)/../public/.
 
 serve:
 	hugo --panicOnWarning server -D --disableFastRender

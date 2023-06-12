@@ -3,10 +3,6 @@ name: generate_site_and_deploy
 on:
   workflow_dispatch:
   push:
-    paths:
-      - src/**
-      - .github/workflows/generate_site_and_deploy.yaml
-      - .gitmodules
     branches:
       - main
 
@@ -56,14 +52,14 @@ jobs:
         HUGO_ENVIRONMENT: production
         HUGO_ENV: production
       run: |
-        cd src && hugo --panicOnWarning \
+        hugo --panicOnWarning \
           --gc \
           --minify \
           --baseURL "${{ steps.pages.outputs.base_url }}/"
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
-        path: ./src/public
+        path: ./public
   deploy:
     environment:
       name: github-pages

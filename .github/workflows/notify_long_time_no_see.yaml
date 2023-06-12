@@ -23,11 +23,11 @@ jobs:
         submodules: 'recursive'
     - name: install sincelastcommit
       run: |
-        cd ./pankona.github.com/tool/sincelastcommit
+        cd ./tool/sincelastcommit
         go install .
+        cd ..
     - name: check since last commit
       run: |
-        cd ./pankona.github.com/public
         echo "SINCE_LAST_COMMIT=`sincelastcommit`" >> $GITHUB_ENV
     - name: Slack Notification
       if: env.SINCE_LAST_COMMIT >= 7

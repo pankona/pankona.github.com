@@ -7,15 +7,15 @@ else
 endif
 
 build:
-	hugo
+	hugo --panicOnWarning
 	rm -rf $(CURDIR)/../public/*
 	mv public/* $(CURDIR)/../public/.
 
 serve:
-	hugo server -D --disableFastRender
+	hugo --panicOnWarning server -D --disableFastRender
 
 newpost:
-	hugo new posts/$(post).md
+	hugo --panicOnWarning new posts/$(post).md
 
 edit:
 ifndef EDITOR

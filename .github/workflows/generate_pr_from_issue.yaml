@@ -15,24 +15,19 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '^1.16'
-    - name: clone pankona.github.com
-      uses: actions/checkout@v3
-      with:
-        repository: pankona/pankona.github.com
-        path: pankona.github.com
+    - uses: actions/checkout@v3
     - name: install articlegen
       run: |
-        cd ./pankona.github.com/tool/articlegen
+        cd ./tool/articlegen
         go install .
     - name: install makepr
       run: |
-        cd ./pankona.github.com/tool/makepr
+        cd ./tool/makepr
         go install .
     - name: commit
       env:
         ISSUE_TITLE: ${{ github.event.issue.title }}
       run: |
-        cd pankona.github.com
         title="$ISSUE_TITLE"
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
@@ -51,7 +46,6 @@ jobs:
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
         title="${title// /-}"
-        cd pankona.github.com
         git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
         git push https://x-access-token:${TOKEN}@github.com/pankona/pankona.github.com.git ${title} -f
         GITHUB_TOKEN=${TOKEN} makepr --base="main" --head="${title}" --body="Resolves: ${{ github.event.issue.html_url }}"

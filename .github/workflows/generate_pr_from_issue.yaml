@@ -44,8 +44,10 @@ jobs:
         git add src/content/posts/${title}.md
         git commit -m "add post ${title}"
     - name: push
+      env:
+        ISSUE_TITLE: ${{ github.event.issue.title }}
       run: |
-        title="${{ github.event.issue.title }}"
+        title="$ISSUE_TITLE"
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
         title="${title// /-}"

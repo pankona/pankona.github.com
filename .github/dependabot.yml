@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'gomod'
+    directory: '/tool/articlegen'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'gomod'
+    directory: '/tool/makepr'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'gomod'
+    directory: '/tool/sincelastcommit'
+    schedule:
+      interval: 'daily'

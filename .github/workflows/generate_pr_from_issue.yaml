@@ -37,11 +37,11 @@ jobs:
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
         title="${title// /-}"
-        GITHUB_TOKEN=${TOKEN} articlegen --issue-num=${{ github.event.issue.number }} > src/content/posts/${title}.md
+        GITHUB_TOKEN=${TOKEN} articlegen --issue-num=${{ github.event.issue.number }} > content/posts/${title}.md
         git config --global user.email "yosuke.akatsuka@gmail.com"
         git config --global user.name "pankona"
         git switch -c ${title}
-        git add src/content/posts/${title}.md
+        git add content/posts/${title}.md
         git commit -m "add post ${title}"
     - name: push
       env:

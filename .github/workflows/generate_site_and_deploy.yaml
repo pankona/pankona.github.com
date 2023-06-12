@@ -18,13 +18,13 @@ jobs:
       with:
         go-version: '^1.16'
     - name: clone pankona.github.com
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: pankona/pankona.github.com
         path: pankona.github.com
         submodules: 'recursive'
     - name: clone hugo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: gohugoio/hugo
         path: hugo

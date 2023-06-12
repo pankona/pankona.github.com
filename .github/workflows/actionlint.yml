@@ -7,7 +7,6 @@ on:
     paths:
       - '.github/**'
 
-
 jobs:
   actionlint:
     runs-on: ubuntu-latest

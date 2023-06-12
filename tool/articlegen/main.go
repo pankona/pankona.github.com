@@ -44,7 +44,8 @@ func main() {
 		Categories: func() []string {
 			ret := make([]string, 0, len(issue.Labels))
 			for _, label := range issue.Labels {
-				if label.GetName() != "" {
+				labelName := label.GetName()
+				if labelName != "article" && labelName != "" {
 					ret = append(ret, label.GetName())
 				}
 			}
@@ -121,7 +122,7 @@ date: {{.Date}}
 draft: {{.Draft}}
 categories: [{{.Categories}}]
 ---
-           
+
 {{.Body}}
 `
 

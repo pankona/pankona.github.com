@@ -1,7 +1,3 @@
 [submodule "src/themes/purehugo"]
 	path = src/themes/purehugo
 	url = https://github.com/pankona/purehugo
-[submodule "public"]
-	path = public
-	url = https://github.com/pankona/pankona.github.com
-	branch = master

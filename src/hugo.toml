@@ -10,7 +10,7 @@ pygmentsStyle = "monokai"
 
 [outputFormats]
 [outputFormats.RSS]
-mediaType = "application/rss"
+mediaType = "application/rss+xml"
 baseName = "atom"
 
 [params]

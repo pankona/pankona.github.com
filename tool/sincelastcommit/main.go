@@ -22,6 +22,6 @@ func main() {
 	}
 
 	lastCommitDate := commit.Author.When
-	sinceLastCommit := time.Now().Sub(lastCommitDate)
+	sinceLastCommit := time.Since(lastCommitDate)
 	fmt.Printf("%d", int(sinceLastCommit.Hours()/24))
 }

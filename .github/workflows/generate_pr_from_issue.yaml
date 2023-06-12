@@ -29,9 +29,11 @@ jobs:
         cd ./pankona.github.com/tool/makepr
         go install .
     - name: commit
+      env:
+        ISSUE_TITLE: ${{ github.event.issue.title }}
       run: |
         cd pankona.github.com
-        title="${{ github.event.issue.title }}"
+        title="$ISSUE_TITLE"
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
         title="${title// /-}"

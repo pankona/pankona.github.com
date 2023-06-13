@@ -41,6 +41,11 @@ jobs:
       with:
         submodules: recursive
         fetch-depth: 0
+    # Required go env because hugo module depends on it
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version-file: 'go.mod'
     - name: Setup Pages
       id: pages
       uses: actions/configure-pages@v3

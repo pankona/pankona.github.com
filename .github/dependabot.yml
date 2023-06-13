@@ -16,7 +16,3 @@ updates:
     directory: '/tool/sincelastcommit'
     schedule:
       interval: 'daily'
-  - package-ecosystem: 'gitsubmodule'
-    directory: '/'
-    schedule:
-      interval: 'daily'

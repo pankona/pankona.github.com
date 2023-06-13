@@ -24,7 +24,8 @@ jobs:
         cd ..
     - name: check since last commit
       run: |
-        echo "SINCE_LAST_COMMIT=`sincelastcommit`" >> $GITHUB_ENV
+        days="$(sincelastcommit)"
+        echo "SINCE_LAST_COMMIT=${days}" >> $GITHUB_ENV
     - name: Slack Notification
       if: env.SINCE_LAST_COMMIT >= 7
       uses: rtCamp/action-slack-notify@v2

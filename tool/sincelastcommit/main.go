@@ -16,7 +16,7 @@ func main() {
 	articlesDir := "content/posts"
 	commits, err := r.Log(&git.LogOptions{
 		PathFilter: func(path string) bool {
-			return strings.HasPrefix(path, articlesDir)
+			return strings.Contains(path, articlesDir)
 		},
 	})
 	if err != nil {

@@ -21,7 +21,10 @@ jobs:
       run: |
         cd ./tool/sincelastcommit
         go install .
-        cd ..
+    - name: Debug print for digging sincelastcommit panic
+      run: |
+        pwd
+        git log -- content/posts
     - name: check since last commit
       run: |
         days="$(sincelastcommit)"

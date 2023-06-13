@@ -5,6 +5,10 @@ updates:
     schedule:
       interval: 'daily'
   - package-ecosystem: 'gomod'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+  - package-ecosystem: 'gomod'
     directory: '/tool/articlegen'
     schedule:
       interval: 'daily'
@@ -14,9 +18,5 @@ updates:
       interval: 'daily'
   - package-ecosystem: 'gomod'
     directory: '/tool/sincelastcommit'
-    schedule:
-      interval: 'daily'
-  - package-ecosystem: 'gitsubmodule'
-    directory: '/'
     schedule:
       interval: 'daily'

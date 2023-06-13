@@ -38,9 +38,12 @@ jobs:
       run: sudo snap install dart-sass-embedded
     - name: Checkout
       uses: actions/checkout@v3
+    # Required go env because hugo module depends on it
+    - name: Set up Go
+      uses: actions/setup-go@v4
       with:
-        submodules: recursive
-        fetch-depth: 0
+        go-version-file: 'go.mod'
+        cache-dependency-path: 'go.sum'
     - name: Setup Pages
       id: pages
       uses: actions/configure-pages@v3

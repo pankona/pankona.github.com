@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
     - name: setup go
       uses: actions/setup-go@v4

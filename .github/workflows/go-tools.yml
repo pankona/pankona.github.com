@@ -1,0 +1,45 @@
+name: CI for Go tools
+
+on:
+  push:
+    paths:
+      - 'tool/**'
+  pull_request:
+    paths:
+      - 'tool/**'
+
+jobs:
+  ci-articlegen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'tool/articlegen/go.mod'
+          cache-dependency-path: 'tool/articlegen/go.sum'
+      - name: Build
+        run: pushd ./tool/articlegen && go build -v
+  ci-makepr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'tool/makepr/go.mod'
+          cache-dependency-path: 'tool/makepr/go.sum'
+      - name: Build
+        run: pushd ./tool/makepr && go build -v
+  ci-sincelastcommit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'tool/sincelastcommit/go.mod'
+          cache-dependency-path: 'tool/sincelastcommit/go.sum'
+      - name: Build
+        run: pushd ./tool/makepr && go build -v
+

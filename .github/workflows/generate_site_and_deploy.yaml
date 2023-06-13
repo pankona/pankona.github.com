@@ -26,7 +26,6 @@ defaults:
 
 jobs:
   build:
-    if: github.event.sender.login == 'pankona'
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.113.0
@@ -58,6 +57,7 @@ jobs:
           --minify \
           --baseURL "${{ steps.pages.outputs.base_url }}/"
     - name: Upload artifact
+      if: github.event.sender.login == 'pankona'
       uses: actions/upload-pages-artifact@v1
       with:
         path: ./public
@@ -67,7 +67,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name != 'pull_request'
+    if: github.event.sender.login == 'pankona' && github.event_name != 'pull_request'
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

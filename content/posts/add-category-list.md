@@ -5,7 +5,7 @@ comments: true
 categories: [Octopressカスタマイズ]
 ---
 
-Octopressにプラグインを追加して、tag_cloundとcategory_listを表示できるようにしてみた。
+Octopressにプラグインを追加して、tag_cloudとcategory_listを表示できるようにしてみた。
 見た目デフォルトのままというのも微妙なので、徐々にカスタマイズしていこう。
 
 tag_cloud、category_listの追加については以下のページを参考にさせていただきました。多謝。

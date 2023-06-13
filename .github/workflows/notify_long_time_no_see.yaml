@@ -30,12 +30,9 @@ jobs:
       run: |
         cd ./tool/sincelastcommit
         go install .
-    - name: Debug print for digging sincelastcommit panic
+    - name: Logging the collection items are actually head
       run: |
-        pwd
-        git log -- content/posts
         cd tmp/head
-        pwd
         git log -- content/posts
     - name: check since last commit
       run: |

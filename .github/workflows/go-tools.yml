@@ -2,6 +2,8 @@ name: CI for Go tools
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'tool/**'
   pull_request:

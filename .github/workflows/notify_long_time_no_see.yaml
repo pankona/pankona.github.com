@@ -27,6 +27,7 @@ jobs:
       run: |
         pwd
         git log -- content/posts
+        # What happned...?
     - name: check since last commit
       run: |
         days="$(sincelastcommit)"

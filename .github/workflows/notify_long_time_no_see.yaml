@@ -18,9 +18,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: install sincelastcommit
       run: |
-        cd ./tool/sincelastcommit
+        pushd ./tool/sincelastcommit
         go install .
-        cd ..
+        popd
     - name: check since last commit
       run: |
         echo "SINCE_LAST_COMMIT=`sincelastcommit`" >> $GITHUB_ENV

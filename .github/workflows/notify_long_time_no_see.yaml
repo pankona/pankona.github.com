@@ -38,7 +38,7 @@ jobs:
       run: |
         cd tmp/head
         days="$(sincelastcommit)"
-        echo "SINCE_LAST_COMMIT=${days}" >> $GITHUB_ENV
+        echo "SINCE_LAST_COMMIT=${days}" | tee -a "$GITHUB_ENV"
     - name: Slack Notification
       if: env.SINCE_LAST_COMMIT >= 7 && github.event_name != 'pull_request'
       uses: rtCamp/action-slack-notify@v2

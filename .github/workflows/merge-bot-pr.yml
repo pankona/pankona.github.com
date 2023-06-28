@@ -18,13 +18,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Wait other jobs
         # if: ${{steps.metadata.outputs.update-type != 'version-update:semver-major'}}
-        uses: kachick/wait-other-jobs@v1.2.1
+        uses: kachick/wait-other-jobs@v1.3.0
         timeout-minutes: 30
-        with:
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Approve and merge
         # if: ${{steps.metadata.outputs.update-type != 'version-update:semver-major'}}
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --squash "$PR_URL"
         env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: '${{secrets.GITHUB_TOKEN}}'
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: '${{ secrets.PERSONAL_ACCESS_TOKEN }}'

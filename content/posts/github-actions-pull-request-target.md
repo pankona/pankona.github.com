@@ -28,7 +28,7 @@ trigger を `pull_request` の代わりに `pull_request_trigger` を使うよ�
 じゃあどうやって使えばいいんですか、ってことで調べていくと [github actions のセキュリティに関する GitHub のブログ](https://securitylab.github.com/research/github-actions-preventing-pwn-requests/) が出てくる。これによると、`pull_request_target` を使う場合は、たとえば「特定のラベルが貼られたもの」に限定して github actions を実行するような制御を行うのが良いとして例示されている。pull request にラベルを貼れるのはそれ相応の権限をもった人に限られるので (fork を作った人は colaborator でもない限り fork 元の issue や pull request にラベルを貼ることはできない)、fork 元の人がちゃんとパッチの中身を確認し、問題がないことを確認してからラベルを貼るってやれば大丈夫だよね、という意図かと思う。
 
 たとえば、`ok to test`というラベルが貼られたら CI を発火させる、みたいなのはこんなふうに書けるかと思う。
-worflow の冒頭を抜粋。
+workflow の冒頭を抜粋。
 
 ```yaml
 name: Deploy to Firebase Hosting on PR

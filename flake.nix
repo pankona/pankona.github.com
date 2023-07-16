@@ -23,6 +23,7 @@
               actionlint
               nil
               nixpkgs-fmt
+              vim
             ];
           };
       });

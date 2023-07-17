@@ -20,6 +20,7 @@
               peco
               typos
               dprint
+              imagemagick
               actionlint
               nil
               nixpkgs-fmt

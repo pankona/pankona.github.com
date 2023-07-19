@@ -1,4 +1,4 @@
-module github.com/pankona/pankona.github.com/tool/makepr
+module github.com/pankona/pankona.github.com/tool
 
 go 1.20
 

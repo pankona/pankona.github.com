@@ -18,10 +18,10 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version-file: 'tool/articlegen/go.mod'
-          cache-dependency-path: 'tool/articlegen/go.sum'
+          go-version-file: 'tool/go.mod'
+          cache-dependency-path: 'tool/go.sum'
       - name: Build
-        run: pushd ./tool/articlegen && go build -v
+        run: go build -v -C ./tool/articlegen
   ci-makepr:
     runs-on: ubuntu-latest
     steps:
@@ -29,10 +29,10 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version-file: 'tool/makepr/go.mod'
-          cache-dependency-path: 'tool/makepr/go.sum'
+          go-version-file: 'tool/go.mod'
+          cache-dependency-path: 'tool/go.sum'
       - name: Build
-        run: pushd ./tool/makepr && go build -v
+        run: go build -v -C ./tool/makepr
   ci-sincelastcommit:
     runs-on: ubuntu-latest
     steps:
@@ -40,8 +40,8 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version-file: 'tool/sincelastcommit/go.mod'
-          cache-dependency-path: 'tool/sincelastcommit/go.sum'
+          go-version-file: 'tool/go.mod'
+          cache-dependency-path: 'tool/go.sum'
       - name: Build
-        run: pushd ./tool/makepr && go build -v
+        run: go build -v -C ./tool/makepr
 

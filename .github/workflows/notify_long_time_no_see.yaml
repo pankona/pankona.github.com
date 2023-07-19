@@ -24,12 +24,10 @@ jobs:
     - name: setup go
       uses: actions/setup-go@v4
       with:
-        go-version-file: 'tool/sincelastcommit/go.mod'
-        cache-dependency-path: 'tool/sincelastcommit/go.sum'
+        go-version-file: 'tool/go.mod'
+        cache-dependency-path: 'tool/go.sum'
     - name: install sincelastcommit
-      run: |
-        cd ./tool/sincelastcommit
-        go install .
+      run: go install -C ./tool/sincelastcommit
     - name: Logging the collection items are actually head
       run: |
         cd tmp/head

@@ -15,8 +15,8 @@ jobs:
     - name: setup go
       uses: actions/setup-go@v4
       with:
-        go-version-file: 'tool/articlegen/go.mod'
-        cache-dependency-path: 'tool/articlegen/go.sum'
+        go-version-file: 'tool/go.mod'
+        cache-dependency-path: 'tool/go.sum'
     - name: install articlegen
       run: |
         cd ./tool/articlegen

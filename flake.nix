@@ -1,6 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/7fd307937db70af23b956c4539033542809ae263";
+    # How to update the revision: `nix flake update --commit-lock-file`
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -13,6 +14,9 @@
         devShells.default = with pkgs;
           mkShell {
             buildInputs = [
+              # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
+              bashInteractive
+
               hugo
               go_1_20
               gnumake

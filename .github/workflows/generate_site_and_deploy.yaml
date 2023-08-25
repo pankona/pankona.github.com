@@ -28,7 +28,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.113.0
+      # Keep same version with `make deps`
+      HUGO_VERSION: 0.117.0
     steps:
     - name: Install Hugo CLI
       run: |

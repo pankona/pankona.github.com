@@ -21,7 +21,7 @@ jobs:
           go-version-file: 'tool/go.mod'
           cache-dependency-path: 'tool/go.sum'
       - name: Build
-        run: go build -v -C ./tool/articlegen
+        run: go build -C ./tool/articlegen -v
   ci-makepr:
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +32,7 @@ jobs:
           go-version-file: 'tool/go.mod'
           cache-dependency-path: 'tool/go.sum'
       - name: Build
-        run: go build -v -C ./tool/makepr
+        run: go build -C ./tool/makepr -v
   ci-sincelastcommit:
     runs-on: ubuntu-latest
     steps:
@@ -43,5 +43,5 @@ jobs:
           go-version-file: 'tool/go.mod'
           cache-dependency-path: 'tool/go.sum'
       - name: Build
-        run: go build -v -C ./tool/makepr
+        run: go build -C ./tool/sincelastcommit -v
 

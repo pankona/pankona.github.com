@@ -4,6 +4,10 @@ on:
   issues:
     types: [opened, edited, labeled, unlabeled]
 
+concurrency:
+  group: create_pr-from-issue-${{ github.event.issue.number }}
+  # Do not set "cancel-in-progress: true" here, just queuing will fit
+
 jobs:
   build:
     if: (github.event.sender.login == 'pankona') && contains(github.event.issue.labels.*.name, 'article')
@@ -47,6 +51,7 @@ jobs:
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
         title="${title// /-}"
+        pr_number="$(gh pr list --search '<$title>' --state open --json number --jq 'map(.number)[0]')"
         git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
         git push https://x-access-token:${TOKEN}@github.com/pankona/pankona.github.com.git ${title} -f
-        GITHUB_TOKEN=${TOKEN} makepr --base="main" --head="${title}" --body="Resolves: ${{ github.event.issue.html_url }}"
+        GITHUB_TOKEN=${TOKEN} makepr --base="main" --head="${title}" --pr_number="${pr_number:0}" --body="Resolves: ${{ github.event.issue.html_url }}"

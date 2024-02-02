@@ -31,13 +31,6 @@ jobs:
       # Keep same version with `make deps`
       HUGO_VERSION: 0.117.0
     steps:
-    - name: Cache hugo resources
-      uses: actions/cache@v4
-      with:
-        path: /home/runner/.cache/hugo_cache
-        key: ${{ runner.os }}-hugo-v${{ env.HUGO_VERSION }}-hugomod-${{ hashFiles('go.sum') }}
-        restore-keys: |
-          ${{ runner.os }}-hugo-v${{ env.HUGO_VERSION }}-hugomod-
     - name: Install Hugo CLI
       run: |
         wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
@@ -47,6 +40,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     # Required go env because hugo module depends on it
+    - name: Cache hugo resources
+      uses: actions/cache@v4
+      with:
+        path: /home/runner/.cache/hugo_cache
+        key: ${{ runner.os }}-hugo-v${{ env.HUGO_VERSION }}-hugomod-${{ hashFiles('go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-hugo-v${{ env.HUGO_VERSION }}-hugomod-
     - name: Set up Go
       uses: actions/setup-go@v5
       with:

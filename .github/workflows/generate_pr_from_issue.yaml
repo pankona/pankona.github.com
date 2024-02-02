@@ -20,6 +20,8 @@ jobs:
         # Needed to specify token for checkout phase, only in push phase is too late
         # https://github.com/orgs/community/discussions/27072#discussioncomment-3254515
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    - name: debug logging for git remotes
+      run: git remote -v
     - name: setup go
       uses: actions/setup-go@v5
       with:

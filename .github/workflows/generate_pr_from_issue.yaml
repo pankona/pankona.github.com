@@ -40,7 +40,7 @@ jobs:
         GITHUB_TOKEN=${TOKEN} articlegen --issue-num=${{ github.event.issue.number }} > content/posts/${title}.md
         git config user.email "yosuke.akatsuka@gmail.com"
         git config user.name "pankona"
-        git switch -c ${title}
+        git switch "${title}" || git switch -c "${title}"
         git add content/posts/${title}.md
         git commit -m "add post ${title}"
     - name: push

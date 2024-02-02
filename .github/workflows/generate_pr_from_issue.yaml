@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   build:
-    if: (github.event.sender.login == 'pankona') && contains(github.event.issue.labels.*.name, 'article')
+    if: contains(github.event.issue.labels.*.name, 'article')
     runs-on: ubuntu-latest
     env:
       TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}

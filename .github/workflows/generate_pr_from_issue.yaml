@@ -45,6 +45,7 @@ jobs:
         git commit -m "add post ${title}"
     - name: push
       env:
+        GH_TOKEN: ${{ github.token }}
         ISSUE_TITLE: ${{ github.event.issue.title }}
       run: |
         title="$ISSUE_TITLE"

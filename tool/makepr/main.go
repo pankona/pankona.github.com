@@ -73,7 +73,7 @@ func main() {
 
 		defer resp.Body.Close()
 
-		if resp.StatusCode != 201 {
+		if resp.StatusCode != 200 {
 			buf, err := ioutil.ReadAll(resp.Body)
 			if err != nil {
 				panic(err)

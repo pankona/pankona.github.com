@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   build:
-    if: (github.event.sender.login == 'pankona') && contains(github.event.issue.labels.*.name, 'article')
+    if: contains(github.event.issue.labels.*.name, 'article')
     runs-on: ubuntu-latest
     env:
       TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
@@ -45,13 +45,14 @@ jobs:
         git commit -m "add post ${title}"
     - name: push
       env:
+        GH_TOKEN: ${{ github.token }}
         ISSUE_TITLE: ${{ github.event.issue.title }}
       run: |
         title="$ISSUE_TITLE"
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
         title="${title// /-}"
-        pr_number="$(gh pr list --search '<$title>' --state open --json number --jq 'map(.number)[0]')"
+        pr_number="$(gh pr list --search "in:title ${title}" --state open --json number --jq 'map(.number)[0]')"
         git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
         git push https://x-access-token:${TOKEN}@github.com/pankona/pankona.github.com.git ${title} --force-with-lease
-        GITHUB_TOKEN=${TOKEN} makepr --base="main" --head="${title}" --pr_number="${pr_number:0}" --body="Resolves: ${{ github.event.issue.html_url }}"
+        GITHUB_TOKEN=${TOKEN} makepr --base="main" --head="${title}" --pr_number="${pr_number:=0}" --body="Resolves: ${{ github.event.issue.html_url }}"

@@ -31,7 +31,8 @@ jobs:
       # Keep same version with `make deps`
       HUGO_VERSION: 0.117.0
     steps:
-    - uses: actions/cache@v4
+    - name: Cache hugo resources
+      uses: actions/cache@v4
       with:
         path: /home/runner/.cache/hugo_cache
         key: ${{ runner.os }}-hugo-v${{ env.HUGO_VERSION }}-hugomod-${{ hashFiles('**/go.sum') }}

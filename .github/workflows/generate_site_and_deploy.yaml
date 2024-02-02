@@ -40,6 +40,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     # Required go env because hugo module depends on it
+    - name: Cache hugo resources
+      uses: actions/cache@v4
+      with:
+        path: /home/runner/.cache/hugo_cache
+        key: ${{ runner.os }}-hugo-v${{ env.HUGO_VERSION }}-hugomod-${{ hashFiles('go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-hugo-v${{ env.HUGO_VERSION }}-hugomod-
     - name: Set up Go
       uses: actions/setup-go@v5
       with:

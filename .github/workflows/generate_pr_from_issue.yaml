@@ -16,6 +16,10 @@ jobs:
       TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
     - uses: actions/checkout@v4
+      with:
+        # Needed to specify token for checkout phase, only in push phase is too late
+        # https://github.com/orgs/community/discussions/27072#discussioncomment-3254515
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     - name: setup go
       uses: actions/setup-go@v5
       with:
@@ -54,5 +58,5 @@ jobs:
         title="${title// /-}"
         pr_number="$(gh pr list --search "in:title ${title}" --state open --json number --jq 'map(.number)[0]')"
         git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
-        git push --set-upstream origin ${title} --force-with-lease
+        git push origin ${title} --force-with-lease
         GITHUB_TOKEN=${TOKEN} makepr --base="main" --head="${title}" --pr_number="${pr_number:=0}" --body="Resolves: ${{ github.event.issue.html_url }}"

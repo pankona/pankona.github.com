@@ -53,11 +53,12 @@ jobs:
       env:
         GH_TOKEN: ${{ github.token }}
         ISSUE_TITLE: ${{ github.event.issue.title }}
+      # "--force-with-lease" will not fit for upserting
       run: |
         title="$ISSUE_TITLE"
         title="${title//\[*\]/}"
         title=`echo $title | xargs`
         title="${title// /-}"
         pr_number="$(gh pr list --search "in:title ${title}" --state open --json number --jq 'map(.number)[0]')"
-        git push --set-upstream origin "${title}" --force-with-lease
+        git push --set-upstream origin "${title}" --force
         GITHUB_TOKEN=${TOKEN} makepr --base="main" --head="${title}" --pr_number="${pr_number:=0}" --body="Resolves: ${{ github.event.issue.html_url }}"

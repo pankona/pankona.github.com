@@ -46,7 +46,7 @@ jobs:
         go install .
     - name: commit
       run: |
-        GITHUB_TOKEN=${TOKEN} articlegen --issue-num=${{ github.event.issue.number }} > content/posts/${title}.md
+        GITHUB_TOKEN=${TOKEN} articlegen --issue-num=${{ github.event.issue.number }} > 'content/posts/${{ steps.normalizer.outputs.title }}.md'
         git config user.email "yosuke.akatsuka@gmail.com"
         git config user.name "pankona"
         git switch '${{ steps.normalizer.outputs.title }}' || git switch -c '${{ steps.normalizer.outputs.title }}'

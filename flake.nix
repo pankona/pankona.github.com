@@ -24,6 +24,7 @@
               peco
               typos
               dprint
+              yamlfmt
               imagemagick
               actionlint
               nil

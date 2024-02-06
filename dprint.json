@@ -1,0 +1,12 @@
+{
+  "excludes": [],
+  "exec": {
+    "commands": [{
+      "command": "yamlfmt -in -formatter retain_line_breaks=true",
+      "exts": ["yaml", "yml"]
+    }]
+  },
+  "plugins": [
+    "https://plugins.dprint.dev/exec-0.4.4.json@c207bf9b9a4ee1f0ecb75c594f774924baf62e8e53a2ce9d873816a408cecbf7"
+  ]
+}

@@ -3,7 +3,7 @@ name: notify_long_time_no_see
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '0 22 * * *'
+    - cron: '0 22 * * *'
   pull_request:
     paths:
       - 'tool/sincelastcommit/**'
@@ -13,36 +13,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout codebase
-      uses: actions/checkout@v4
-    - name: Checkout articles in head ref to collect git info
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-        fetch-depth: 0
-        path: tmp/head
-    - name: setup go
-      uses: actions/setup-go@v5
-      with:
-        go-version-file: 'tool/go.mod'
-        cache-dependency-path: 'tool/go.sum'
-    - name: install sincelastcommit
-      run: go install -C ./tool/sincelastcommit
-    - name: Logging the collection items are actually head
-      run: |
-        cd tmp/head
-        git log -- content/posts
-    - name: check since last commit
-      run: |
-        cd tmp/head
-        days="$(sincelastcommit)"
-        echo "SINCE_LAST_COMMIT=${days}" | tee -a "$GITHUB_ENV"
-    - name: Slack Notification
-      if: env.SINCE_LAST_COMMIT >= 7 && github.event_name != 'pull_request'
-      uses: rtCamp/action-slack-notify@v2
-      env:
-        SLACK_CHANNEL: notification
-        SLACK_MESSAGE: "最後のブログ更新から ${{ env.SINCE_LAST_COMMIT }} 日過ぎています。"
-        SLACK_USERNAME: pankona
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Checkout codebase
+        uses: actions/checkout@v4
+      - name: Checkout articles in head ref to collect git info
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          path: tmp/head
+      - name: setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'tool/go.mod'
+          cache-dependency-path: 'tool/go.sum'
+      - name: install sincelastcommit
+        run: go install -C ./tool/sincelastcommit
+      - name: Logging the collection items are actually head
+        run: |
+          cd tmp/head
+          git log -- content/posts
+      - name: check since last commit
+        run: |
+          cd tmp/head
+          days="$(sincelastcommit)"
+          echo "SINCE_LAST_COMMIT=${days}" | tee -a "$GITHUB_ENV"
+      - name: Slack Notification
+        if: env.SINCE_LAST_COMMIT >= 7 && github.event_name != 'pull_request'
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: notification
+          SLACK_MESSAGE: "最後のブログ更新から ${{ env.SINCE_LAST_COMMIT }} 日過ぎています。"
+          SLACK_USERNAME: pankona
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 

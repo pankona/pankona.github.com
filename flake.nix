@@ -18,7 +18,7 @@
               bashInteractive
 
               hugo
-              go_1_21
+              go_1_22
               gnumake
               coreutils
               peco

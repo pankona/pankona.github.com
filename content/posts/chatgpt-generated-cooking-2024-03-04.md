@@ -36,11 +36,11 @@ categories: ["AI","料理"]
 - レシピは ChatGPT に聞いた。だいたい「キャベツとコンソメがあるぞ！」とだけ伝えたら上のようなレシピが提示された。
 - キャベツと人参を切ったところで MP を使い切ったのでタマネギの参入は見送った。
 - 味噌汁も作っておよそ一時間かかった。タイパは微妙か
-- 味見した感じでは味が薄かった。醤油を2さじくらい足したらまあまあの味になったけどコンソメというよりは醤油味になった。コンソメスープで煮る？というのがやり方が "なってない" のかもしれない。
-- そもそも「煮る」という行為は栄養を摂取するという観点では好まれないらしい (Refs: 勝間式 超ロジカル家事)
+- 味見した感じでは味が薄かった。醤油を2さじくらい足したらまあまあの味になったけどコンソメというよりは醤油味になった。コンソメスープで煮る？という部分のやり方が "なってない" のかもしれない。
+- そもそも「煮る」という行為は栄養を摂取するという観点では好まれないらしい (Refs: [勝間式 超ロジカル家事](https://www.amazon.co.jp/%E5%8B%9D%E9%96%93%E5%BC%8F-%E8%B6%85%E3%83%AD%E3%82%B8%E3%82%AB%E3%83%AB%E5%AE%B6%E4%BA%8B-%E5%8B%9D%E9%96%93-%E5%92%8C%E4%BB%A3-ebook/dp/B0793PRS7G/ref=mp_s_a_1_4?adgrpid=100044800609&dib=eyJ2IjoiMSJ9.WDd8LmNs1foYL241se6gg5t6id1cnoyjYKrjWChDATf2Soz_h4czV00sA01s_wPEv9YqtunRactFd8YoBo6Wz_d6HuiLibrO5lGWDQBQERBMGAuZRg9NavfzBVNhEUyfxMUR9SmNkH01cquWaRZ1jFUun2aAfo28Y93KjFwCoruja3o6fnNOLYn2vpJfRN3bFTAFhUbKRERxFwsEgST2GA.KL787MlPKhV3usvcpkMNEpisThzlWsXK2kaxvAmRIAk&dib_tag=se&gclid=CjwKCAiA3JCvBhA8EiwA4kujZoHQHL2OE7eyMuW5AByeGdXSVTG87sqklIi5tzTewA7pB7F_ZtBYGRoCDk4QAvD_BwE&hvadid=665711634710&hvdev=m&hvlocphy=1009313&hvnetw=g&hvqmt=e&hvrand=14094873522516289666&hvtargid=kwd-887708265972&hydadcr=8871_13690352&keywords=%E5%8B%9D%E9%96%93%E5%BC%8F%E8%B6%85%E3%83%AD%E3%82%B8%E3%82%AB%E3%83%AB%E6%96%99%E7%90%86&linkCode=plm&qid=1709516649&sr=8-4))
   - ので、煮るのをやめろって話しもワンチャンある
   - コンソメ味で蒸す、ってできるものか？
 - あと「炒める」という工程は、完全に人間をブロックする (人間がフライパンに張り付いてないといけない) ので、その間に何かをやるってのが難しい。非同期で行える何かをスタートしてから (味噌汁の湯を沸かすとか) 炒めものに入るほうがリソース効率が良さそう。
-- とはいえ家族からの評判はまあまあだった。熟練して半分の時間で作れるならまたやっても良さそう。
+- とはいえ家族からの評判はまあまあだった。熟練して半分の時間で作れるならまたやっても良いかも。
   - 素材をカットするだけで 30 分近くかかっているので、なんかこう、トントントントンーン！って出来るようになればもっと早く済みそうではある
 

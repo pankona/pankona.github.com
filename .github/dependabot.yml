@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
     groups:
       nix:
         patterns:
@@ -11,8 +11,8 @@ updates:
   - package-ecosystem: 'gomod'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
   - package-ecosystem: 'gomod'
     directory: '/tool'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'

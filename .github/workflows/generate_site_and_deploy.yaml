@@ -31,11 +31,13 @@ jobs:
           key: ${{ runner.os }}-flake-${{ hashFiles('flake.lock') }}-hugomod-${{ hashFiles('go.sum') }}
           restore-keys: |
             ${{ runner.os }}-flake-${{ hashFiles('flake.lock') }}-hugomod-
-      - uses: DeterminateSystems/nix-installer-action@v10
-      - uses: DeterminateSystems/magic-nix-cache-action@v4
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - uses: DeterminateSystems/nix-installer-action@v10
+      - uses: DeterminateSystems/magic-nix-cache-action@v4
+      - name: Build hugo-nix to measure how longtime used to build
+        run: 'nix run .#hugo-nix -- version'
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && nix develop --command npm ci || true"
       # Required go env before this step because hugo module depends on it. Now whole setup is completed with Nix

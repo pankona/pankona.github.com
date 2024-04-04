@@ -30,10 +30,31 @@
               nixpkgs-fmt
               vim
 
+              edge-pkgs.dprint
+
               edge-pkgs.hugo
               edge-pkgs.go_1_22
-              edge-pkgs.dprint
+              dart-sass
             ];
           };
-      });
+
+        apps = {
+          hugo-nix = {
+            type = "app";
+            program = with pkgs;lib.getExe (writeShellApplication
+              {
+                name = "hugo-with-dependencies";
+                runtimeInputs = [
+                  edge-pkgs.hugo
+                  edge-pkgs.go_1_22
+                  dart-sass
+                ];
+                text = ''
+                  hugo "$@"
+                '';
+              });
+          };
+        };
+      }
+    );
 }

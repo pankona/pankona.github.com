@@ -34,8 +34,8 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-      - uses: DeterminateSystems/nix-installer-action@v10
-      - uses: DeterminateSystems/magic-nix-cache-action@v4
+      - uses: DeterminateSystems/nix-installer-action@v11
+      - uses: DeterminateSystems/magic-nix-cache-action@v6
       - name: Build hugo-nix to measure how longtime used to build
         run: 'nix run .#hugo-nix -- version'
       - name: Install Node.js dependencies

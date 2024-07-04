@@ -1,16 +1,14 @@
 {
   inputs = {
     # How to update the revision: `nix flake update --commit-lock-file`
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    edge-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, edge-nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        edge-pkgs = edge-nixpkgs.legacyPackages.${system};
       in
       {
         devShells.default = with pkgs;
@@ -30,10 +28,10 @@
               nixpkgs-fmt
               vim
 
-              edge-pkgs.dprint
+              dprint
 
-              edge-pkgs.hugo
-              edge-pkgs.go_1_22
+              hugo
+              go_1_22
               dart-sass
             ];
           };
@@ -45,8 +43,8 @@
               {
                 name = "hugo-with-dependencies";
                 runtimeInputs = [
-                  edge-pkgs.hugo
-                  edge-pkgs.go_1_22
+                  hugo
+                  go_1_22
                   dart-sass
                 ];
                 text = ''

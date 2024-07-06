@@ -1,6 +1,7 @@
 {
   "excludes": [],
   "yaml": {
+    "quotes": "preferSingle"
   },
   "plugins": [
     "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.2.0.wasm"

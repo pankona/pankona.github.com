@@ -42,7 +42,6 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_CHANNEL: notification
-          SLACK_MESSAGE: "最後のブログ更新から ${{ env.SINCE_LAST_COMMIT }} 日過ぎています。"
+          SLACK_MESSAGE: '最後のブログ更新から ${{ env.SINCE_LAST_COMMIT }} 日過ぎています。'
           SLACK_USERNAME: pankona
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-

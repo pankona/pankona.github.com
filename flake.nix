@@ -28,7 +28,6 @@
               gnumake
               coreutils
               peco
-              yamlfmt
               typos
               imagemagick
               actionlint

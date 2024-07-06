@@ -39,7 +39,7 @@ jobs:
       - name: Build hugo-nix to measure how longtime used to build
         run: 'nix run .#hugo-nix -- version'
       - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && nix develop --command npm ci || true"
+        run: '[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && nix develop --command npm ci || true'
       # Required go env before this step because hugo module depends on it. Now whole setup is completed with Nix
       - name: Build with Hugo
         env:
@@ -60,7 +60,7 @@ jobs:
     # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
     # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
     concurrency:
-      group: "pages"
+      group: 'pages'
       cancel-in-progress: false
     environment:
       name: github-pages
@@ -72,4 +72,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

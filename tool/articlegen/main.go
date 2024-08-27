@@ -117,7 +117,8 @@ func write(w io.Writer, article Article) error {
 	}
 
 	const articleTemplate = `---
-title: "{{.Title}}"
+title: >-
+  {{.Title}}
 date: {{.Date}}
 draft: {{.Draft}}
 categories: [{{.Categories}}]

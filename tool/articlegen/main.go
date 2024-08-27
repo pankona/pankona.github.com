@@ -7,7 +7,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
@@ -56,14 +55,6 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("%s\n", w.String())
-}
-
-func mustReadAll(r io.Reader) []byte {
-	buf, err := ioutil.ReadAll(r)
-	if err != nil {
-		panic(err)
-	}
-	return buf
 }
 
 func extractTitleFromBody(body string) string {
@@ -132,14 +123,4 @@ categories: [{{.Categories}}]
 	}
 
 	return t.Execute(w, data)
-}
-
-var annotations = []string{"[draft]", "[deleted]"}
-
-func trimAnnotations(s string) string {
-	ret := s
-	for _, a := range annotations {
-		ret = strings.ReplaceAll(s, a, "")
-	}
-	return ret
 }

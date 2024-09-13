@@ -68,44 +68,44 @@ language: android
 
 # Handle git submodules yourself
 git:
-    submodules: false
+  submodules: false
 
 install:
-# NDK configuration
-    - printenv
-    - echo `pwd`
-    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
-    - chmod a+x android-ndk-r10d-linux-x86_64.bin
-    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
-    - export NDK_ROOT=`pwd`/android-ndk-r10d
-    - echo $NDK_ROOT
-    - export PATH=$PATH:$NDK_ROOT
-    - echo $PATH
+  # NDK configuration
+  - printenv
+  - echo `pwd`
+  - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+  - chmod a+x android-ndk-r10d-linux-x86_64.bin
+  - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+  - export NDK_ROOT=`pwd`/android-ndk-r10d
+  - echo $NDK_ROOT
+  - export PATH=$PATH:$NDK_ROOT
+  - echo $PATH
 
-# Android SDK configuration
-    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
-    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
+  # Android SDK configuration
+  - export ANDROID_SDK_ROOT=/usr/local/android-sdk
+  - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 
-# git submodule
-# Use sed to replace the SSH URL with the public URL, then initialize submodules
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-    - git submodule update --init --recursive
+  # git submodule
+  # Use sed to replace the SSH URL with the public URL, then initialize submodules
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
 
-# cocos setup
-    - cd ./cocos2d
-    - python download-deps.py --remove-download=yes
-    - python ./setup.py
-    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
-    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
-    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
-    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
-    - export ANT_ROOT=/usr/share/ant/bin
-    - export PATH=$PATH:$ANT_ROOT
-    - printenv
+  # cocos setup
+  - cd ./cocos2d
+  - python download-deps.py --remove-download=yes
+  - python ./setup.py
+  - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+  - export PATH=$PATH:$COCOS_CONSOLE_ROOT
+  - export COCOS_TEMPLATES_ROOT=`pwd`/templates
+  - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+  - export ANT_ROOT=/usr/share/ant/bin
+  - export PATH=$PATH:$ANT_ROOT
+  - printenv
 
 script:
-    - cd ..
-    - cocos compile -p android -j 8
+  - cd ..
+  - cocos compile -p android -j 8
 ```
 
 躓き備忘録を以下に記しておく。
@@ -159,7 +159,7 @@ SSH鍵の関係で、gitスキームを用いているsubmoduleの取得に失�
 
 ```yaml
 # Use sed to replace the SSH URL with the public URL, then initialize submodules
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+- sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 ```
 
 #### 環境変数設定を頑張る

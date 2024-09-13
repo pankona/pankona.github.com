@@ -63,7 +63,7 @@ CI環境としてTravis CIをチョイスした。無料で使えるからであ
 いかにもやっつけ感満載でありつつ、とりあえずビルドパスするところまでいけた。
 記念に貼り付けておく。もしかして誰かの役に立つことも願いつつ。
 
-```
+```yaml
 language: android
 
 # Handle git submodules yourself
@@ -91,7 +91,7 @@ install:
     - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
     - git submodule update --init --recursive
 
-# cocos setup 
+# cocos setup
     - cd ./cocos2d
     - python download-deps.py --remove-download=yes
     - python ./setup.py
@@ -131,7 +131,7 @@ cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたり
 
 上記ymlでいうところの、以下の箇所を実行するとerror 137を報告してビルドが失敗に終わることがあった。
 
-```
+```yaml
 - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
 - chmod a+x android-ndk-r10d-linux-x86_64.bin
 - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
@@ -157,7 +157,7 @@ SSH鍵の関係で、gitスキームを用いているsubmoduleの取得に失�
 なのでgitを用いてる部分はhttpsに無理やり書き換えている。以下の部分である。
 涙ぐましい。
 
-```
+```yaml
 # Use sed to replace the SSH URL with the public URL, then initialize submodules
     - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 ```
@@ -169,7 +169,7 @@ cocos2d設定の過程で`setup.py`を実行するところがあるが、こい
 Travis CIのScript上では効かないので、しかたなく`.bashrc`に追記されるものと同等の設定を`.travis.yml`にて実施した。
 以下の部分である。
 
-```
+```yaml
 - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
 - export PATH=$PATH:$COCOS_CONSOLE_ROOT
 - export COCOS_TEMPLATES_ROOT=`pwd`/templates

@@ -47,6 +47,6 @@ jobs:
 
 ## 参考文献
 
-- [ワークフローをトリガーするイベン - GitHub Docs](https://docs.github.com/ja/actions/reference/events-that-trigger-workflows)
+- [ワークフローをトリガーするイベント - GitHub Docs](https://docs.github.com/ja/actions/reference/events-that-trigger-workflows)
 - [Keeping your GitHub Actions and workflows secure: Preventing pwn requests](https://securitylab.github.com/research/github-actions-preventing-pwn-requests/)
 - [実際に自分がこさえた pull_request_target trigger を使っている github actions ワークフロー](https://github.com/pankona/moguri/blob/ed52f4731e87c4b8902fd478dc9619031e5a0da6/.github/workflows/firebase-hosting-pull-request.yml)

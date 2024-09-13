@@ -10,10 +10,10 @@ categories: [cocos2d-x]
 
 ## だいたいのやり方
 
-* ビルドが成功したら`curl`コマンドにてDeployGateにAPKをアップロードする。
-* アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。
-* API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
-    * 暗号化には`travis`コマンドを用いる。
+- ビルドが成功したら`curl`コマンドにてDeployGateにAPKをアップロードする。
+- アップロードにあたってDeployGateのAPI Keyが必要になる。DeployGateにログインして個人設定的なところを見れば載っている。
+- API Keyは.travis.ymlに書くことになるが、そのまま載せちゃうとセキュリティ的に問題なので暗号化する。
+  - 暗号化には`travis`コマンドを用いる。
 
 ## ちょっと細かいやり方
 
@@ -84,7 +84,7 @@ env:
 ```
 
 ```
-    - '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'
+- '[ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] && curl -F "file=@./bin/debug/android/KonaReflection-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" -F "message=Deploy from Travis CI" https://deploygate.com/api/users/pankona/apps'
 ```
 
 後者の部分で、`${DEPLOYGATE_TOKEN}`という環境変数を参照しているが、これを設定しているのが前者の部分。
@@ -93,7 +93,7 @@ env:
 
 以下のコマンドでDeployGateのAPI Keyを暗号化する。
 
-`$ gem install travis ` # travisコマンドを使えるようにする。
+`$ gem install travis` # travisコマンドを使えるようにする。
 `$ travis encrypt DEPLOYGATE_TOKEN={My DeployGate API Key}` # DeployGateで確認したAPI Keyを暗号化するコマンド（中括弧はいらない）。
 
 このコマンドで得られた文字列をそのまま.travis.ymlに貼っつければOKである。
@@ -113,5 +113,3 @@ AndroidアプリにAPKをいちいち頑張って転送しなくても、開発�
 ちなみに、アップロードされたAPKはDeployGateアプリ経由で取得することになる。
 
 今回はここまで。
-
-

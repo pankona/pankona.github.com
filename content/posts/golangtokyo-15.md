@@ -3,14 +3,13 @@ title: "golang.tokyo #15@DeNA"
 date: 2018-05-30T19:39:48+09:00
 ---
 
-
 [golang.tokyo #15](https://golangtokyo.connpass.com/event/87064/)に参加してきた。
 内容は以下。
 
-* メインの30分セッションふたつ
-  * Effective Streaming in Golang by [avvmoto](https://twitter.com/avvmoto) さん
-  * 次世代のコンテナランタイム！？gVisorのコードを読みながら理解してみる by [niconegoto](https://twitter.com/niconegoto) さん
-* ライトニングトークは発表予定の 2 人が都合が悪くなってしまったらしく、急遽代打を現地で 2 名補充
+- メインの30分セッションふたつ
+  - Effective Streaming in Golang by [avvmoto](https://twitter.com/avvmoto) さん
+  - 次世代のコンテナランタイム！？gVisorのコードを読みながら理解してみる by [niconegoto](https://twitter.com/niconegoto) さん
+- ライトニングトークは発表予定の 2 人が都合が悪くなってしまったらしく、急遽代打を現地で 2 名補充
 
 ## Effective Streaming in Golang by [avvmoto](https://twitter.com/avvmoto) さん
 
@@ -61,22 +60,21 @@ Google においては、gVisor についていずれ論文で技術的な詳細
   <div class="caption">yoshi_xxxxxiiii さん。アゴヒゲキンパツの二つ名があるとのこと。</div>
 </div>
 
-* 「mamanoko」「ままのて」というサービスを運営されているとのこと。
-* せっかく実装したローディング画面について、サーバが JSON 返すの速くなりすぎてローディング画面が出ない、という苦情があったらしい。すごいね。
+- 「mamanoko」「ままのて」というサービスを運営されているとのこと。
+- せっかく実装したローディング画面について、サーバが JSON 返すの速くなりすぎてローディング画面が出ない、という苦情があったらしい。すごいね。
 
 しばしば Rails と Go は比較に上がる気がする。Go に一部変えたら速くなりました！みたいな。
 Rails だから遅いってこともないという認識だけど、速くしようと思ったら大変ってことなのかなー。
 
 ## LT by [@pospome](https://twitter.com/pospome) さん
 
-* 急遽代打で登壇。
-* 技術書典で golang.tokyo が出した本に寄稿した内容の紹介
+- 急遽代打で登壇。
+- 技術書典で golang.tokyo が出した本に寄稿した内容の紹介
 
 ## LT by [@karupanerura](https://twitter.com/karupanerura) さん
 
-* こちらも急遽代打で登壇。
-* 以下の記事について解説。
-<a class="embedly-card" href="https://qiita.com/karupanerura/items/fa3b35dfdceb96730b03">Goで書いたMicroservicesな構成からWeb APIを叩くときに考えたこと - Qiita</a>
+- こちらも急遽代打で登壇。
+- 以下の記事について解説。
+  <a class="embedly-card" href="https://qiita.com/karupanerura/items/fa3b35dfdceb96730b03">Goで書いたMicroservicesな構成からWeb APIを叩くときに考えたこと - Qiita</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-
-

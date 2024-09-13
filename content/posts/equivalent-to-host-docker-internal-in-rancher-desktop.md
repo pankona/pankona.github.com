@@ -4,7 +4,7 @@ date: 2022-05-01T14:34:21+09:00
 draft: false
 categories: ["その他"]
 ---
-           
+
 どこにも書いてない気がしたのでひとまず備忘録として残しておく。Rancher Desktop で `host.docker.internal` みたいなことがしたいときは `host.rancher-desktop.internal` を使えばいい。
 
 <!--more-->
@@ -27,4 +27,3 @@ Rancher Desktop においてこれと同等のことをしたい場合は `host.
 この情報は公式ドキュメントには載ってないような気がする (2022-04-28 時点)。自分のググり力の問題かもしれないが、ちょっとググッたくらいでは出てこなかった (どっかに書いてあったらすまぬ)。
 
 2022-04-28 の時点では `host.rancher-desktop.internal` というアドレス指定が動作することを確認した。動作確認した環境は 2019 年の Mac Book Pro、Intel な CPU、OS は Monterey。あと Rancher Desktop の設定でコンテナランタイムに containerd を選択していた。使った Rancher Desktop は v1.3.0 だった。
-

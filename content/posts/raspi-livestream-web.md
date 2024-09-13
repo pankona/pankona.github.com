@@ -17,6 +17,7 @@ https://github.com/jacksonliam/mjpg-streamer
 ## 上記のリポジトリの情報を元にやったこと
 
 ### mjpg-streamerのインストール。
+
 上記のリポジトリからソースコードをもってきてビルド。ビルド方法も上記のリポジトリのREADMEに記載されている。
 pacmanであったりyaourtで取得できるmjpg-streamerのパッケージは使わない。それらはinput_raspicam.soを作ってくれないため。
 

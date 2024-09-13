@@ -31,7 +31,9 @@ golang.tokyo 2 回目のテーマは **「テスト」** について。
 # テストしやすいGoコードのデザイン by deeeet さん
 
 <a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" data-card-type="article-full" href="https://talks.godoc.org/github.com/tcnksm/talks/2016/12/golang-tokyo/golang-tokyo.slide#1">テストしやすいGoコードのデザイン</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+
 (↑のカードをクリックでスライドに飛びます。)
 
 ![golang.tokyo-2](/images/golang.tokyo-2/07.jpg)
@@ -49,32 +51,35 @@ golang.tokyo 2 回目のテーマは **「テスト」** について。
 ## テストしやすいコードとは
 
 **「Table Driven Test」** がおすすめ。
-* 入出力が理解しやすい
-* テストケース追加が容易
-* 「Table Driven Test に落とし込めるコード」は入出力が明確でテストしやすいコード
+
+- 入出力が理解しやすい
+- テストケース追加が容易
+- 「Table Driven Test に落とし込めるコード」は入出力が明確でテストしやすいコード
 
 ## テストしにくくなる要素とその対策
 
 テストしにくくなるというのは「Table Driven Test」がやりにくくなる状況を指す。
 → 入力以外の要素が出力影響を及ぼしてしまう状況。
 
-* グローバル変数 (暗黙の入力)
-  * なるべく関数の引数に入れるようにしてテストしやすくする
-  * もしくは「デフォルトの値」として **のみ** 使う
-  * 変わらないかもしれない定数っぽい値もなるべく設定可能にする
-  * 環境変数もグローバル変数と同じ
-* ユーザーの入力 (コマンドを入力→期待通りに動いたか、のテスト)
-  * 入力の受取に os.Stdin を暗黙的に使わず io.Reader を使い、テスト時に仮想的な入力を行えるようにする。
-  * 入力に対する出力で、Table Driven にすることができるようになる。
-* ファイル出力 (ファイル出力された内容が正しいかどうか、のテスト)
-  * 実際に書いたあとに開き直して中身を確認するのでもテストは可能だが、大量にやろうと思うと遅くなってしまう。
-  * 入力のときと考え方は同じで、io.Writer を出力先とし、テスト時はオンメモリのバッファに出力できるようにする。
-  * バッファに出力された内容とその期待結果で、Table Driven することができるようになる。
+- グローバル変数 (暗黙の入力)
+  - なるべく関数の引数に入れるようにしてテストしやすくする
+  - もしくは「デフォルトの値」として **のみ** 使う
+  - 変わらないかもしれない定数っぽい値もなるべく設定可能にする
+  - 環境変数もグローバル変数と同じ
+- ユーザーの入力 (コマンドを入力→期待通りに動いたか、のテスト)
+  - 入力の受取に os.Stdin を暗黙的に使わず io.Reader を使い、テスト時に仮想的な入力を行えるようにする。
+  - 入力に対する出力で、Table Driven にすることができるようになる。
+- ファイル出力 (ファイル出力された内容が正しいかどうか、のテスト)
+  - 実際に書いたあとに開き直して中身を確認するのでもテストは可能だが、大量にやろうと思うと遅くなってしまう。
+  - 入力のときと考え方は同じで、io.Writer を出力先とし、テスト時はオンメモリのバッファに出力できるようにする。
+  - バッファに出力された内容とその期待結果で、Table Driven することができるようになる。
 
 # MacherelにおけるGoのエコシステムとかテストとか by Songmu さん
 
 <a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" data-card-image="https://mackerel.io/files/images/brand-assets/screenshot-service.png" data-card-type="article-full" href="http://songmu.github.io/slides/golangtokyo-2/">MackerelにおけるGoのエコシステムとかテストとか</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+
 (↑のカードをクリックでスライドに飛びます。)
 
 ![golang.tokyo-2](/images/golang.tokyo-2/09.jpg)
@@ -82,20 +87,20 @@ golang.tokyo 2 回目のテーマは **「テスト」** について。
 
 ## Mackerel のエコシステム周りの話
 
-* ソースをオープンにしてパッチ受け入れるようにした。
-    * ホスト先は GitHub。contribute してもらいやすい。
-    * pull request に対するレビュー体制、CI が必要。
-    * Travis CI、Circle CI を使っている。CI の内容は以下のようなもの。
-        * go vet、 golint go test
-        * coverage 計測
-        * cross build 可能か
-* ちなみに Changelog はプルリクエストの情報から自動生成している。
+- ソースをオープンにしてパッチ受け入れるようにした。
+  - ホスト先は GitHub。contribute してもらいやすい。
+  - pull request に対するレビュー体制、CI が必要。
+  - Travis CI、Circle CI を使っている。CI の内容は以下のようなもの。
+    - go vet、 golint go test
+    - coverage 計測
+    - cross build 可能か
+- ちなみに Changelog はプルリクエストの情報から自動生成している。
 
 ## ミドルウェアのテスト
 
-* 実際にテスト時に実行する
-    * DB ならばモックせずに実際に DB を立ててデータを入れて確認をする、のような。
-    * モックや interface でのテストでは気づけない部分もあるので、実際にやってテストする。
+- 実際にテスト時に実行する
+  - DB ならばモックせずに実際に DB を立ててデータを入れて確認をする、のような。
+  - モックや interface でのテストでは気づけない部分もあるので、実際にやってテストする。
 
 ---
 
@@ -114,7 +119,6 @@ deeeet さん、songmu さんの発表のあと、いったん休憩に。
 ![golang.tokyo-2](/images/golang.tokyo-2/13.jpg)
 図6. deeeet さんにむらがる Gophers (私もこのあとむらがりました) 。
 
-
 勉強会の真ん中にこういう親睦会的なノリの時間が設けられるのは珍しいかな？
 なんだか新鮮でした。参加者の方とも少しだけお話できたりしました。
 勉強会終わってからの親睦会だと参加できないケースが多い私のようなものにとっては、会の真ん中にこういうのやってもらうのもいいかもしれない。
@@ -128,27 +132,29 @@ deeeet さん、songmu さんの発表のあと、いったん休憩に。
 ## timakin さん
 
 <a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/timakin/plain-db-import-with-go">Plain db import with Go</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
-* [timakin/gopli](https://github.com/timakin/gopli)
-  * 開発環境を本番環境に近づけるやつ。本番データをローカルに簡単にもってくる。
+- [timakin/gopli](https://github.com/timakin/gopli)
+  - 開発環境を本番環境に近づけるやつ。本番データをローカルに簡単にもってくる。
 
 ## osamingo さん
 
 <a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/osamingo/go-deshi-meru-json-rpc-ru-men">Go で始める JSON-RPC 入門</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
-* JSON-RPC！
+- JSON-RPC！
 
 ## KazuhiraTogo さん
 
-
 <a class="embedly-card" data-card-key="ee29ed4b275e459483a608ca67084559" data-card-controls="0" href="https://speakerdeck.com/ktogo/continuous-deployment-with-go-on-aws-ecs">Continuous Deployment with Go on AWS ECS</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
-* デプロイをとことん自動化した話。
-* 本番とローカルで同じ環境を → Docker を使う。
-* Circle CI 上の docker は Ubuntu。本番は Alpine。環境の違いが問題に。 → Docker on Docker にして解決した。
+- デプロイをとことん自動化した話。
+- 本番とローカルで同じ環境を → Docker を使う。
+- Circle CI 上の docker は Ubuntu。本番は Alpine。環境の違いが問題に。 → Docker on Docker にして解決した。
 
 ---
 
@@ -163,4 +169,3 @@ deeeet さん、songmu さんの発表のあと、いったん休憩に。
 他にも、アンケートを集めて次回のネタにしたりしていて (今回のテーマも、前回のアンケートでテストに関することを聞きたいという要望が多かったから、という理由で選んだとのこと)、golang.tokyo 運営すげーなという印象です。すげーな！
 
 次回もまた来年に予定されているようです。楽しみにしています！
-

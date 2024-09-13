@@ -10,11 +10,12 @@ date: 2018-07-13T19:15:16+09:00
 
 以下は公式サイト。webassembly.org。
 <a class="embedly-card" data-card-controls="0" href="https://webassembly.org/">WebAssembly</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
 公式ページからの説明を引用すると以下のように書かれている。
 
-*WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable target for compilation of high-level languages like C/C++/Rust, enabling deployment on the web for client and server applications.*
+_WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable target for compilation of high-level languages like C/C++/Rust, enabling deployment on the web for client and server applications._
 
 C/C++/Rust 等で作ったバイナリをウェブブラウザ上で動かすための規格、くらいに捉えれば良かろうか。
 公式を含む各所の記事をあたってみると、wasm の存在意義としては基本的には JavaScript から比較しての軽量化、高速化である模様。
@@ -90,10 +91,10 @@ https://github.com/pankona/go-wasm-test
 
 golang.tokyo#16 の各セッションを聞いての留意点としては、
 
-* ベンチマークをとると、Go を JS にトランスパイルする GopherJS のほうがパフォーマンスが出る。wasm の最適化は今後の課題 (Go 1.12 以降？)
-  * Chrome で動かす JS がやたら速いという一面も
-* Empscripten (C++ から wasm を作るやつ) が比較的速い
-* Go から作った wasm はまだバイナリサイズが大きい (2MB〜) という面があり、この点も今後の最適化が待たれるところ
+- ベンチマークをとると、Go を JS にトランスパイルする GopherJS のほうがパフォーマンスが出る。wasm の最適化は今後の課題 (Go 1.12 以降？)
+  - Chrome で動かす JS がやたら速いという一面も
+- Empscripten (C++ から wasm を作るやつ) が比較的速い
+- Go から作った wasm はまだバイナリサイズが大きい (2MB〜) という面があり、この点も今後の最適化が待たれるところ
 
 ## 色々まだまだな Go の wasm サポートとはいえ
 
@@ -104,14 +105,15 @@ golang.tokyo#16 の各セッションを聞いての留意点としては、
 
 ## (Session1) WebAssemblyとGoの対応状況について by [tenntenn](https://www.twitter.com/tenntenn) さん
 
-* (TODO: 2018/07/17現在、発表資料がへのリンクが見当たらないので、後々更新)
+- (TODO: 2018/07/17現在、発表資料がへのリンクが見当たらないので、後々更新)
 
-* goroutine と channel には対応。wasm にマルチスレッドの機能が入るらしい。
-* [https://tip.golang.org/pkg/syscall/js](syscall/js) を使う
+- goroutine と channel には対応。wasm にマルチスレッドの機能が入るらしい。
+- [https://tip.golang.org/pkg/syscall/js](syscall/js) を使う
 
 ## (Session2) GopherJS vs GOARCH=wasm by [hajimehoshi](https://www.twitter.com/hajimehoshi) さん
 
 <a class="embedly-card" data-card-controls="0" href="https://docs.google.com/presentation/d/e/2PACX-1vQLOcSY-SpdWedMT48QFZ8f9T_XojfqUOCgMg4jqIz8cJjFIJhHm98gHKVyMaboqGpsXCfedplT-lmp/pub?start=false&loop=false&delayms=3000#slide=id.p">GopherJS vs GOARCH=wasm</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
 以下、ライトニングトーク。
@@ -119,25 +121,27 @@ golang.tokyo#16 の各セッションを聞いての留意点としては、
 ## (LT1) Go で社内向け管理画面を楽に作る方法 by [yudppp](https://www.twitter.com/yudppp) さん
 
 <a class="embedly-card" data-card-controls="0" href="https://speakerdeck.com/yudppp/godeshe-nei-xiang-keguan-li-hua-mian-wole-nizuo-rufang-fa">Goで社内向け管理画面を楽に作る方法</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
-* Go 歴 4 年の方。
-* Viron を使って自社向けサービスの管理画面を自動生成する話。
+- Go 歴 4 年の方。
+- Viron を使って自社向けサービスの管理画面を自動生成する話。
 
 ## (LT2) Go のスライス容量拡張量がどのように決まるのか by [kaznishi1246](https://www.twitter.com/kaznishi1246) さん
 
 <a class="embedly-card" data-card-controls="0" href="https://speakerdeck.com/kaznishi/180713-lt">Goのスライス容量拡張量がどのように決まるのか追った / 180713 LT</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
-* Go 歴 1 ヶ月の方とのこと。1 ヶ月で LT しにくるの強い。
-* メモリ確保量によってクラス分けされている。
-* TCMalloc がメモリ確保量を切り上げる動作をする。
+- Go 歴 1 ヶ月の方とのこと。1 ヶ月で LT しにくるの強い。
+- メモリ確保量によってクラス分けされている。
+- TCMalloc がメモリ確保量を切り上げる動作をする。
 
 ## (LT3) Go言語の正規表現に後読みを実装した話 by [さっき作った](https://www.twitter.com/make_now_just) さん
 
 <a class="embedly-card" data-card-controls="0" href="https://slides.com/makenowjust/regexp-lookbehind-in-golang#/">Go言語の正規表現に後読みを実装した話</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
-* いまのところまだマージされていないが、上記は既に実装して Gerrit にてレビュー中。
-* マージされたら嬉しいね！
-
+- いまのところまだマージされていないが、上記は既に実装して Gerrit にてレビュー中。
+- マージされたら嬉しいね！

@@ -10,12 +10,11 @@ categories: [イベント]
 
 <!--more-->
 
-[当日のツイッターの様子 (#kichijojipm since:2020-06-02 until:2020-06-03)](<https://twitter.com/search?q=(%23kichijojipm)%20until%3A2020-06-03%20since%3A2020-06-02&src=typed_query>)
+[当日のツイッターの様子 (#kichijojipm since:2020-06-02 until:2020-06-03)](https://twitter.com/search?q=(%23kichijojipm)%20until%3A2020-06-03%20since%3A2020-06-02&src=typed_query)
 
 <div style="max-width: 800px">
   <a href="https://kichijojipm.connpass.com/event/177459/"><img src=/images/kichijojipm-22/kichip22-01.jpg></a>
 </div>
-
 
 以下、登壇に使われた資料の一覧。
 ※ 一部の資料が発見できなかった...。アップされていないかもしれない。
@@ -55,7 +54,6 @@ categories: [イベント]
 <div style="max-width: 800px">
   <script async class="speakerdeck-embed" data-id="966b216d5b3845d0adb3bd3d29e9ad55" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 </div>
-
 
 ## 参加した所感など
 

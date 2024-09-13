@@ -6,12 +6,12 @@ date: 2018-04-16T19:32:07+09:00
 [golang.tokyo #14](https://golangtokyo.connpass.com/event/82723/) に参加してきたのでその内容メモ。
 発表内容は以下。
 
-* ホリネズミでもわかる Goroutine 入門 by [@inukirom](https://twitter.com/inukirom) さん
-* チャネルのしくみ by [@knsh14](https://twitter.com/knsh14) さん
-* ライトニングトーク 3 つ
-  * vgo の話 by [@tanksuzuki](https://twitter.com/tanksuzuki) さん
-  * プロダクションに Go を適用した話 by [@kurikazu](https://twitter.com/kurikazu) さん
-  * linter を作る話
+- ホリネズミでもわかる Goroutine 入門 by [@inukirom](https://twitter.com/inukirom) さん
+- チャネルのしくみ by [@knsh14](https://twitter.com/knsh14) さん
+- ライトニングトーク 3 つ
+  - vgo の話 by [@tanksuzuki](https://twitter.com/tanksuzuki) さん
+  - プロダクションに Go を適用した話 by [@kurikazu](https://twitter.com/kurikazu) さん
+  - linter を作る話
 
 例によって軽食 (と言いつつかなり十分な量の食事が) 提供されており、ありがたくいただきました…！
 ありがとうございました。ごちそうさまでした。
@@ -43,18 +43,19 @@ func B() {
     panic("panic!!")
 }
 ```
+
 状況としては、
 
-* `A()` が終わるよりも先に `B()` 内の `panic` が先に実行されたときは、`A()` 内の `defer` は呼び出されないまま終わる。
-* `panic` よりも `A()` が終了するほうが先なのであれば、`defer` は実行される。
+- `A()` が終わるよりも先に `B()` 内の `panic` が先に実行されたときは、`A()` 内の `defer` は呼び出されないまま終わる。
+- `panic` よりも `A()` が終了するほうが先なのであれば、`defer` は実行される。
 
 ### channel
 
 channel については以下のような話題がとりあげられた。
 
-* close は結構デリケート (使い方を誤るとすぐに動かなくなる) なので注意
-* RW、R only、W only という属性を持たせられる
-* select. default で non-blocking にできる
+- close は結構デリケート (使い方を誤るとすぐに動かなくなる) なので注意
+- RW、R only、W only という属性を持たせられる
+- select. default で non-blocking にできる
 
 ところで、channel は close しないでほっとくような例もよく見るのであれが、close しなくて良いのだろうか？
 
@@ -64,39 +65,38 @@ channel については以下のような話題がとりあげられた。
 
 goroutine の終了を待ち合わせする例の紹介。
 
-* channel で待つ 
-  * 単なるお知らせであってお知らせ内容に意味がないのであれば、`struct{}{}` を使うのがメモリ効率が良い。
-* sync.WaitGroup
-  * `sync.WaitGroup` で、複数の goroutine を待ち合わせしやすくなる
-  * `sync.WaitGroup` にエラー処理を生やしたみたいな `errgroup` なんかもある
+- channel で待つ
+  - 単なるお知らせであってお知らせ内容に意味がないのであれば、`struct{}{}` を使うのがメモリ効率が良い。
+- sync.WaitGroup
+  - `sync.WaitGroup` で、複数の goroutine を待ち合わせしやすくなる
+  - `sync.WaitGroup` にエラー処理を生やしたみたいな `errgroup` なんかもある
 
 ### for ループと goroutine
 
 for 文の中で goroutine 立てる例。よくある罠。
 
-* 引数に渡して何とかする例
-* 競合の解決
-  * 直列でええやん、という場合もある
-  * 排他制御に `sync.Mutex` 使う例。`RWMutex` もあるぞ
-  * `sync/atomic` というパッケージもあるぞ
+- 引数に渡して何とかする例
+- 競合の解決
+  - 直列でええやん、という場合もある
+  - 排他制御に `sync.Mutex` 使う例。`RWMutex` もあるぞ
+  - `sync/atomic` というパッケージもあるぞ
 
 ### goroutine のリーク
 
-* goroutine の中でブロックしちゃうと goroutine がリークする
-  * `context.Context` 等を用いると goroutine を終わらせる処理を書きやすい
+- goroutine の中でブロックしちゃうと goroutine がリークする
+  - `context.Context` 等を用いると goroutine を終わらせる処理を書きやすい
 
 ### 便利ツールの紹介
 
-* gotrace
-  * goroutine と channel のやりとりを可視化できるぞ…！
-  * docker image を使って動かしている
+- gotrace
+  - goroutine と channel のやりとりを可視化できるぞ…！
+  - docker image を使って動かしている
 
 ## チャネルのしくみ by [@knsh14](https://twitter.com/knsh14) さん
 
 <div style="max-width: 800px">
 <script async class="speakerdeck-embed" data-id="3ca3b188d9904775b4281cfee7018c27" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 </div>
-
 
 <div style="margin-bottom:24px">
   <a href=/images/golang.tokyo-14/03.jpg><img src=/images/golang.tokyo-14/resized_03.jpg /></a>
@@ -138,4 +138,3 @@ vgo に関してはまだ使うのしんどい一面もあるものの、GOPATH�
 
 プロジェクト独自のコーディングルールとかがあるのであれば、チームで lint を作って運用するのもありかもしれない。
 個人的には named return value 禁止とかやりたいところであるが…？
-

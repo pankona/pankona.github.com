@@ -30,6 +30,7 @@ GAE/Go で作成。[ココ](https://strongest-mashimashi.appspot.com/) にホス
 そもそも英語の辞書のデータをどのように扱えば良いのか。出どころはどこか、ということを探していると以下を見つけた。
 
 <a class="embedly-card" data-card-controls="0" href="https://developer.oxforddictionaries.com/">Oxford Dictionaries API</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
 これは英語辞書で有名な Oxford が提供してくれている (と思われる)、Web API である。
@@ -40,6 +41,7 @@ REST API の形をしていて (なんと Swagger の定義までついている
 以下のリポジトリに置いておいた。またいつか使うかもしれない。
 
 <a class="embedly-card" data-card-controls="0" href="https://github.com/pankona/oxford-dict-api-client-go">pankona/oxford-dict-api-client-go</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
 ### レスポンス遅いけどキャッシュは規約違反
@@ -56,6 +58,7 @@ REST API の形をしていて (なんと Swagger の定義までついている
 ジェネレータは GAE/Go で作った。ソースコードは以下のリポジトリに格納。
 
 <a class="embedly-card" data-card-controls="0" href="https://github.com/pankona/strongest-mashimashi">pankona/strongest-mashimashi</a>
+
 <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
 
 リポジトリ名に深い意味はなく、なんとなく語呂が良いのでつけておいた。ストロンゲストマシマシ。
@@ -65,12 +68,11 @@ REST API の形をしていて (なんと Swagger の定義までついている
 フロントエンド力がナメクジレベルのパン粉であるが、色々調べつつ、以下の技術要素の利用を試みている。
 特に CSS フレームワーク Bulma のおかげで、PhraGen はまあまあしゃらくさい感じのキレイな見た目になったのではないかと思っている。
 
-* TypeScript
-* React
-* CSS フレームワークとして Bulma
+- TypeScript
+- React
+- CSS フレームワークとして Bulma
 
 ### 使えるのか
 
 使えるかどうかよりもそもそも使わなそう。
 でもせっかく作ったので、実際にパスワードの生成のために使ってみる所存。
-

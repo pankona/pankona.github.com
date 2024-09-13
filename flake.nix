@@ -40,6 +40,8 @@
               hugo
               go_1_22
               dart-sass
+
+              markdownlint-cli2
             ];
           };
 

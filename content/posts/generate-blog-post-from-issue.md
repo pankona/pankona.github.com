@@ -1,16 +1,16 @@
-
 ---
 title: "hugo 使っているけどスマホで記事を書きたいと思ったので"
 date: 2021-02-13T15:21:00+09:00
 draft: false
 categories: ["その他"]
 ---
-           
+
 GitHub issue をブログ記事に変換する仕組みを GitHub Actions を使ってこしらえてみた。
 
 <!--more-->
 
 できたもの
+
 - [issue を pull request に変換する GitHub Action](https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_pr_from_issue.yaml)
 - ついでに [pull request マージ後にサイトをビルド＆デプロイする GitHub Action (手動)](https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/generate_site_and_deploy.yaml)
 
@@ -19,6 +19,7 @@ GitHub issue をブログ記事に変換する仕組みを GitHub Actions を使
 本ブログの生成には hugo という静的サイトジェネレータを使っており、基本的には PC を使って執筆、生成、デプロイまで行うような建付けで運用している。が、ときどきスマホで記事が書けなくて不便だなーと思うことがあり、うまいやり方はないものかと考えていた。
 
 うすらぼんやり考えていた要件としては、
+
 - スマホでちゃちゃっと記事が書ける
 - マークダウンみたいなもので書くことができる
 - あわよくば既存の記事を後から編集できる
@@ -46,6 +47,7 @@ hugo には、たとえばワードプレスについてるような管理画面
 ## 課題
 
 なんとなく使えそうだけどもいくらか課題があり、
+
 - issue 変更時には pull request を更新してほしいが、次々 commit を積むというのも難しいので force push にしている
   - これは PC での編集と相性が悪いようにも思える (pull request を PC で編集したら issue 側に反映させないといけない気がする)
 - 自分以外が issue を立てたときもブログ記事になってしまう。ﾜﾛｽ
@@ -55,4 +57,3 @@ hugo には、たとえばワードプレスについてるような管理画面
 ## 書けよ
 
 仕組みを作るのはいいがちゃんとブログを書こうな (戒め)
-

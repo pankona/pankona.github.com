@@ -23,6 +23,7 @@ about.html はこんな感じに。
 
 {% codeblock %}
 {% raw %}
+
 <section>
   <h1>About Me</h1>
   {% if site.gravatar_email %}
@@ -43,6 +44,5 @@ about.html はこんな感じに。
 1. Disqusのアカウントを作り、ブログサイトに関する情報を登録するとshort nameが取得できる
 2. _config.ymlのdisqus_short_nameに、↑で取得したshort nameを設定する
 </span>
-
 
 次はテーマを変更してみようかな。デフォルトでもそこそこかっこいいが。

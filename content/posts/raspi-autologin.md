@@ -23,9 +23,10 @@ PiTFTをくっつけた、というのはちょっと前の記事で書いたと
 IPアドレスさえわかれば、だいたいにおいてSSH接続できるしね。
 
 方法は、
-* 自動でログインさせる
-* ログイン時にifconfigし、IPアドレスの部分を抽出しつつ、コンソール（PiTFT）出力
-といった感じ。以下、詳細。
+
+- 自動でログインさせる
+- ログイン時にifconfigし、IPアドレスの部分を抽出しつつ、コンソール（PiTFT）出力
+  といった感じ。以下、詳細。
 
 ### 自動ログインさせる
 
@@ -34,7 +35,7 @@ Raspbian、Pidora等とは設定が違うと思われるので注意されたし
 Arch Linuxなので、現在のところ起動時の仕組みはSystemdが用いられている。
 
 Systemdにおける自動ログインの設定は、例によってArch Wikiに載っていたのでそれを参照した。
-ここを参照。→  [Automatic login to virtual console](https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console_(日本語)]x)
+ここを参照。→ [Automatic login to virtual console](https://wiki.archlinux.org/index.php/Automatic_login_to_virtual_console_(日本語)]x)
 仮想コンソールの章を、騙されたと思ってそのまま設定し、そんで再起動してやればもう自動ログインできているはずである。
 
 ### ログイン時にifconfigし、IPアドレス部分を抽出

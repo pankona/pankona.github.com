@@ -51,7 +51,7 @@ default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/gith
 
 #### deployしたら完了
 
-```bundle exec rake gen_deploy``` 的なことをやってデプロイする。
+`bundle exec rake gen_deploy` 的なことをやってデプロイする。
 
 ### ここまでで
 

@@ -4,7 +4,7 @@ date: 2021-12-22T20:00:08+09:00
 draft: false
 categories: ["Linux"]
 ---
-           
+
 Alpine Linux 上で作業をすることを余儀なくされるケースがあったのだが、git が色々と気に食わない (macOS や自分が普段使いしている Linux と表示が異なるという意味) ことになっていた。
 GNU less をインストールすることで解決したのでメモしておく。
 
@@ -34,10 +34,11 @@ Alpine Linux に最初から入っている less は、Busybox 由来の less �
 Refs: https://wiki.alpinelinux.org/wiki/Alpine_Linux:FAQ#How_to_enable.2Ffix_colors_for_git.3F
 
 曰く、
+
 ```
 The problem is not in git itself or terminal, but in the less command. Busybox’s less doesn’t support -r (--raw-control-chars) and -R (--RAW-CONTROL-CHARS) options.
 The simplest (yet not ideal) solution is to install GNU less:
 apk add less
 ```
-ということである。Busybox の less は省機能で作られているってことかしらね。
 
+ということである。Busybox の less は省機能で作られているってことかしらね。

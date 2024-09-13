@@ -9,9 +9,10 @@ categories: [cocos2d-x]
 かれこれ２ヶ月あまりが経過した。ほぼ通勤時間でのみ作っている。
 
 いまのところの作業の流れとしては、
-* まずLinux向けにビルドして動作確認
-* 問題なさそうであれば、Android向けのビルドを実施
-* なんとかして実機にAPKを移し、インストールする
+
+- まずLinux向けにビルドして動作確認
+- 問題なさそうであれば、Android向けのビルドを実施
+- なんとかして実機にAPKを移し、インストールする
 
 という手順なのであるが、実機へのデプロイがなかなか面倒である。
 基本的に電車内なので、ケーブルをスマホとPCに繋いで〜、というひと手間がなかなか面倒である。
@@ -21,10 +22,11 @@ categories: [cocos2d-x]
 これを用いると、変更をコミットするとそれだけで最新版APKがメールで送られてくるっていうようになるようである。
 
 なので今回はこれを導入してみることにした。流れは以下のような感じになる予定である。
-* PC上にてcocos2d-xでアプリ作成。ソースをGithubにPush。
-* Travis CIでビルド。
-* ビルド成果物をTravis CIがDeployGateに送信。
-* DeployGateがわしのスマホにメールを送信（APK添付）。
+
+- PC上にてcocos2d-xでアプリ作成。ソースをGithubにPush。
+- Travis CIでビルド。
+- ビルド成果物をTravis CIがDeployGateに送信。
+- DeployGateがわしのスマホにメールを送信（APK添付）。
 
 以下、長文。
 
@@ -37,11 +39,11 @@ CI環境としてTravis CIをチョイスした。無料で使えるからであ
 
 ちょいちょい試してみたところ、以下のような感じである。
 
-* GithubへのPushをトリガーにして自動的にビルド実施。
-  * ビルドに限らず、任意のScriptを実行可能。自動テストなんかも行うようにするとなお吉。
-  * ビルド前処理、後処理、など、割と細かくステージ分けがされている。
-* ビルド失敗、成功の旨をメールにて通知。
-* masterだけでなく、他のブランチへのPushに対しても同様の処理をしてくれる。
+- GithubへのPushをトリガーにして自動的にビルド実施。
+  - ビルドに限らず、任意のScriptを実行可能。自動テストなんかも行うようにするとなお吉。
+  - ビルド前処理、後処理、など、割と細かくステージ分けがされている。
+- ビルド失敗、成功の旨をメールにて通知。
+- masterだけでなく、他のブランチへのPushに対しても同様の処理をしてくれる。
 
 ざっくりだがこんな感じだろうと。無料で使えるにしては十分かな。
 
@@ -61,49 +63,49 @@ CI環境としてTravis CIをチョイスした。無料で使えるからであ
 いかにもやっつけ感満載でありつつ、とりあえずビルドパスするところまでいけた。
 記念に貼り付けておく。もしかして誰かの役に立つことも願いつつ。
 
-```
+```yaml
 language: android
 
 # Handle git submodules yourself
 git:
-    submodules: false
+  submodules: false
 
 install:
-# NDK configuration
-    - printenv
-    - echo `pwd`
-    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
-    - chmod a+x android-ndk-r10d-linux-x86_64.bin
-    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
-    - export NDK_ROOT=`pwd`/android-ndk-r10d
-    - echo $NDK_ROOT
-    - export PATH=$PATH:$NDK_ROOT
-    - echo $PATH
+  # NDK configuration
+  - printenv
+  - echo `pwd`
+  - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+  - chmod a+x android-ndk-r10d-linux-x86_64.bin
+  - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+  - export NDK_ROOT=`pwd`/android-ndk-r10d
+  - echo $NDK_ROOT
+  - export PATH=$PATH:$NDK_ROOT
+  - echo $PATH
 
-# Android SDK configuration
-    - export ANDROID_SDK_ROOT=/usr/local/android-sdk
-    - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
+  # Android SDK configuration
+  - export ANDROID_SDK_ROOT=/usr/local/android-sdk
+  - export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools
 
-# git submodule
-# Use sed to replace the SSH URL with the public URL, then initialize submodules
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-    - git submodule update --init --recursive
+  # git submodule
+  # Use sed to replace the SSH URL with the public URL, then initialize submodules
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
 
-# cocos setup 
-    - cd ./cocos2d
-    - python download-deps.py --remove-download=yes
-    - python ./setup.py
-    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
-    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
-    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
-    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
-    - export ANT_ROOT=/usr/share/ant/bin
-    - export PATH=$PATH:$ANT_ROOT
-    - printenv
+  # cocos setup
+  - cd ./cocos2d
+  - python download-deps.py --remove-download=yes
+  - python ./setup.py
+  - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+  - export PATH=$PATH:$COCOS_CONSOLE_ROOT
+  - export COCOS_TEMPLATES_ROOT=`pwd`/templates
+  - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+  - export ANT_ROOT=/usr/share/ant/bin
+  - export PATH=$PATH:$ANT_ROOT
+  - printenv
 
 script:
-    - cd ..
-    - cocos compile -p android -j 8
+  - cd ..
+  - cocos compile -p android -j 8
 ```
 
 躓き備忘録を以下に記しておく。
@@ -129,10 +131,10 @@ cocosコマンドを使えるようにしなくても、Ant、ndk-buildあたり
 
 上記ymlでいうところの、以下の箇所を実行するとerror 137を報告してビルドが失敗に終わることがあった。
 
-```
-    - wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
-    - chmod a+x android-ndk-r10d-linux-x86_64.bin
-    - ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
+```yaml
+- wget http://dl.google.com/android/ndk/android-ndk-r10d-linux-x86_64.bin
+- chmod a+x android-ndk-r10d-linux-x86_64.bin
+- ./android-ndk-r10d-linux-x86_64.bin -y | grep -v Extracting # because log will be too long!
 ```
 
 解凍時にログをリダイレクトしているが、これをしないとログが大量に出過ぎることが原因でTravis CIに怒られ、ビルドが失敗に終わる。
@@ -155,9 +157,9 @@ SSH鍵の関係で、gitスキームを用いているsubmoduleの取得に失�
 なのでgitを用いてる部分はhttpsに無理やり書き換えている。以下の部分である。
 涙ぐましい。
 
-```
+```yaml
 # Use sed to replace the SSH URL with the public URL, then initialize submodules
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+- sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 ```
 
 #### 環境変数設定を頑張る
@@ -167,13 +169,13 @@ cocos2d設定の過程で`setup.py`を実行するところがあるが、こい
 Travis CIのScript上では効かないので、しかたなく`.bashrc`に追記されるものと同等の設定を`.travis.yml`にて実施した。
 以下の部分である。
 
-```
-    - export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
-    - export PATH=$PATH:$COCOS_CONSOLE_ROOT
-    - export COCOS_TEMPLATES_ROOT=`pwd`/templates
-    - export PATH=$PATH:$COCOS_TEMPLATES_ROOT
-    - export ANT_ROOT=/usr/share/ant/bin
-    - export PATH=$PATH:$ANT_ROOT
+```yaml
+- export COCOS_CONSOLE_ROOT=`pwd`/tools/cocos2d-console/bin
+- export PATH=$PATH:$COCOS_CONSOLE_ROOT
+- export COCOS_TEMPLATES_ROOT=`pwd`/templates
+- export PATH=$PATH:$COCOS_TEMPLATES_ROOT
+- export ANT_ROOT=/usr/share/ant/bin
+- export PATH=$PATH:$ANT_ROOT
 ```
 
 ここまでいくと、Travis CI上で`cocos`コマンドが使えるようになる。
@@ -191,5 +193,3 @@ https://github.com/pankona/KonaReflection
 追記：DeployGateさんへのアップロードについては[次回記事](http://pankona.github.io/blog/2015/04/22/travis-ci-with-deploygate/)も見てね。
 
 今回はここまで。
-
-

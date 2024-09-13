@@ -32,7 +32,6 @@ Octopressのカスタマイズを続けていく。
 {% endraw %}
 {% endcodeblock %}
 
-
 というので書くことができた。raw ~ endraw というのを使う。<br>
 ただ、↑に書いている通り、ネストさせることができなかったのでバックスラッシュ突っ込んでお茶を濁した。。<br>
 ネストさせるのはどうやればいいのかな？
@@ -50,5 +49,3 @@ PygmentsというやつがPython2.7を求めているところを、違うバー
 
 修正方法は以下のページを参考にしました。というかそのまま使わせていただきました。多謝。
 [Arch Linux, Octopress, and misbehaving Pygments - Nonsense By Me](http://www.nonsenseby.me/blog/2013/04/13/arch-linux/)
-
-

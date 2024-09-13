@@ -131,13 +131,15 @@ MVVM でいうところの VM 部分で、共通するGenericな部分 + 型ス�
 
 ご多分にもれずというか、やはり iOS アプリも自動ビルド/自動デプロイをなさっている模様。
 構成要素としては、
-* Travis CI (CI 時間は7分くらい)
-* agvtool でビルド番号を振る (Xcodeに付随)。
-* DeployGate (dev) と TestFlight (prod) にデプロイ
+
+- Travis CI (CI 時間は7分くらい)
+- agvtool でビルド番号を振る (Xcodeに付随)。
+- DeployGate (dev) と TestFlight (prod) にデプロイ
 
 また、その他の作法として、
-* 手元でのアーカイブはしない。
-* QAが通ればそのまま審査へ
+
+- 手元でのアーカイブはしない。
+- QAが通ればそのまま審査へ
 
 というのが紹介されていました。
 

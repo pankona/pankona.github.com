@@ -69,4 +69,3 @@ export XMODIFIERS='@im=uim'
 
 Alt + Space でDirect Inputと日本語入力がトグルできるようになった。
 チャンスがあれば、他のIMも試してみよっかな。
-

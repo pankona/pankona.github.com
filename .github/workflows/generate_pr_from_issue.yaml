@@ -15,6 +15,10 @@ jobs:
     env:
       TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
     steps:
+      - name: Install dprint
+        run: |
+          curl -fsSL https://dprint.dev/install.sh | sh -s '0.45.0' > /dev/null 2>&1
+          echo "/home/runner/.dprint/bin" >> "$GITHUB_PATH"
       - uses: actions/checkout@v4
         with:
           # Needed to specify token for checkout phase, only in push phase is too late
@@ -47,6 +51,7 @@ jobs:
       - name: commit
         run: |
           GITHUB_TOKEN=${TOKEN} articlegen --issue-num=${{ github.event.issue.number }} > 'content/posts/${{ steps.normalizer.outputs.title }}.md'
+          dprint fmt 'content/posts/${{ steps.normalizer.outputs.title }}.md'
           git config user.email "yosuke.akatsuka@gmail.com"
           git config user.name "pankona"
           git switch '${{ steps.normalizer.outputs.title }}' || git switch -c '${{ steps.normalizer.outputs.title }}'

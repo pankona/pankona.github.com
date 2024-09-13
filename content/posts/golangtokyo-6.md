@@ -23,8 +23,7 @@ categories: [go]
 
 # Gopher Fest 2017 に参加した話 by tenntenn さん
 
-* mercari テックブログ にて既にまとめられている [tenntenn さんの記事](http://tech.mercari.com/entry/gopherfest2017_report)もあります。
-
+- mercari テックブログ にて既にまとめられている [tenntenn さんの記事](http://tech.mercari.com/entry/gopherfest2017_report)もあります。
 
 今日は参加レポートをしてくれました。
 主に 2017年8月上旬あたりにリリースされそうな Go 1.9 の話。
@@ -38,6 +37,7 @@ https://www.slideshare.net/takuyaueda967/gopher-fest-2017
 
 型にエイリアスが張れるようになるとのこと。
 以下のような書き方ができるようになる。
+
 ```
 type Applicant = http.Client
 ```
@@ -53,8 +53,8 @@ type Applicant = http.Client
 type Applicant Client
 ```
 
-* Applicant は Client に生えていたメソッドを引き継げない。
-* キャストは可能。
+- Applicant は Client に生えていたメソッドを引き継げない。
+- キャストは可能。
 
 (パターン2) 埋め込みを使う場合
 
@@ -62,18 +62,18 @@ type Applicant Client
 type Applicant struct { Client }
 ```
 
-* Applicant は Client に生えていたメソッドを引き継げる
-* しかしキャストはできない
+- Applicant は Client に生えていたメソッドを引き継げる
+- しかしキャストはできない
 
 型エイリアスを用いると、
 
-* 両者等価なのでキャスト不要で交換可能
-* メソッドもそのまま使える、が、エイリアス側に生やすことはできない
+- 両者等価なのでキャスト不要で交換可能
+- メソッドもそのまま使える、が、エイリアス側に生やすことはできない
 
 #### 参考
 
-* 安全にリファクタリングするには？  
-[codebase refactoring (with help from Go) by rsc](https://talks.golang.org/2016/refactor.article)
+- 安全にリファクタリングするには？\
+  [codebase refactoring (with help from Go) by rsc](https://talks.golang.org/2016/refactor.article)
 
 ## ライブラリへの変更
 
@@ -91,7 +91,6 @@ http://tip.golang.org/pkg/math/bits/
 
 環境変数で指定されている値をコード上で上書きできなかった。
 Go 1.9 からは後勝ち。より直感的な動作になる。コードで上書きできるように！
-
 
 などなど。
 スライドには出ていませんでしたが、個人的には mips32 向けの softfloat サポートがどうなったか気になります。Go 1.9 でサポートされるんだったような。
@@ -111,9 +110,9 @@ https://www.slideshare.net/yuichi1004/golangtokyo-6-in-japanese
 
 ## 教訓1. Go でフレームワークに拘ることはない。
 
-* Gin を使って開発を始める。
-* ちょっと困ったことがあって、一部で別のフレームワーク (Echo) を使い始める
-* 両対応しつつ、また Echo 自身の開発がホットなせいで設計がどんどん変わってしまう
+- Gin を使って開発を始める。
+- ちょっと困ったことがあって、一部で別のフレームワーク (Echo) を使い始める
+- 両対応しつつ、また Echo 自身の開発がホットなせいで設計がどんどん変わってしまう
 
 というようなことで、聞いているだけでしんどい気持ちでいっぱいでしたが、
 結論としては、フレームワークに頼らずに net/http 使っとくのが一番や、という話でした。
@@ -136,17 +135,17 @@ deeeet さんの [Golangのエラー処理とpkg/errors](http://deeeet.com/writi
 JSON Schema でバリデーション。
 OSS として扱った二種の速度の話。
 
-* gojsonschema
-  * validation のたびに parse & compile するので遅い
-* go-jsval
-  * こちらは速い
+- gojsonschema
+  - validation のたびに parse & compile するので遅い
+- go-jsval
+  - こちらは速い
 
 regex / reflection 等の処理は遅いので、使うときは意識しないといけない
 
 ## 結論
 
-* Go の哲学。シンプルなアプローチを。
-* 「コンパイルする言語だから速い」と過信せず、パフォーマンスに気を配ろう。
+- Go の哲学。シンプルなアプローチを。
+- 「コンパイルする言語だから速い」と過信せず、パフォーマンスに気を配ろう。
 
 以下、LT。
 
@@ -172,7 +171,8 @@ https://speakerdeck.com/knsh14/go-code-review-comment-wofan-yi-sitahua
 [Go Code review comments](https://github.com/golang/go/wiki/CodeReviewComments)
 
 それを日本語訳した！
-* [Qiita の記事はこちら](http://qiita.com/knsh14/items/8b73b31822c109d4c497)
+
+- [Qiita の記事はこちら](http://qiita.com/knsh14/items/8b73b31822c109d4c497)
 
 初学者のみならず、ある程度経験がある人でも読んで損はないと思いました。
 認識を改めるというかね。ちなみに社内勉強会で使わせていただきました、感謝！
@@ -202,4 +202,3 @@ https://paper.dropbox.com/doc/Crypto-in-Go-cWLX9XxHQm6bAPqrZYkjt
 2017.06.15 現在、既に次の golang.tokyo が企画されています。
 [golang.tokyo #7](https://techplay.jp/event/624712)
 気になる方は要チェックです！
-

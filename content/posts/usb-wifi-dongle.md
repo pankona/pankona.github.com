@@ -12,8 +12,8 @@ Linux と銘打っておりますが、Manjro で試しています。
 
 訳あって二種類のドングルを使いました。いずれも I-O DATA 製。
 
-* WN-AC433UM
-* WN-G150UMK
+- WN-AC433UM
+- WN-G150UMK
 
 ## WN-AC433UM 編
 
@@ -88,5 +88,5 @@ WN-AC433UM は 5GHz 帯「のみ」に対応しており、
 
 ## 参考リンク
 
-* [WN-AC433UMシリーズ - I-O DATA](http://www.iodata.jp/product/network/adp/wn-ac433um/)
-* [WN-G150UMK - I-O DATA](http://www.iodata.jp/lib/product/w/4078.htm)
+- [WN-AC433UMシリーズ - I-O DATA](http://www.iodata.jp/product/network/adp/wn-ac433um/)
+- [WN-G150UMK - I-O DATA](http://www.iodata.jp/lib/product/w/4078.htm)

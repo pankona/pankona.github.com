@@ -1,7 +1,3 @@
 config:
-  default: true
-  MD010: false # no-hard-tabs
-  MD014: false # commands-show-output
-  MD013: false # line-length
-  MD026: false # no-trailing-punctuation
-  MD033: false # no-inline-html
+  default: false
+  MD040: true # fenced-code-language

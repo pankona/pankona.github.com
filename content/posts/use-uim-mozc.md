@@ -39,7 +39,7 @@ Arch Linux向けです。
 
 .xinitrcに以下を追記。uimを使う設定ですな。
 
-```
+```bash
 # uim
 export GTK_IM_MODULE='uim'
 export QT_IM_MODULE='uim'

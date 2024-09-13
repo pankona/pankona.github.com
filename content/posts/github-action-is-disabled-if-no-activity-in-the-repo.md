@@ -11,7 +11,7 @@ GitHub から「更新のないリポジトリで使ってる定期実行 GitHub
 
 GitHub 曰く、
 
-```
+```plaintext
 Scheduled workflows are disabled automatically after 60 days of repository inactivity
 ```
 

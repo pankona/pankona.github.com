@@ -30,7 +30,7 @@ dconf Editor を開き、以下の設定を確認する。
 
 コマンドラインから確認する場合は以下のように入力する。
 
-```
+```console
 $ gsettings get org.gnome.settings-daemon.plugins.xsettings overrides
 # (期待される出力) {'Gtk/IMModule': <'fcitx'>}
 ```
@@ -38,7 +38,7 @@ $ gsettings get org.gnome.settings-daemon.plugins.xsettings overrides
 入ってなかったら、上記の値をコピペして設定する。
 コマンドラインから設定する場合は以下のように入力する。
 
-```
+```console
 $ gsettings set org.gnome.settings-daemon.plugins.xsettings overrides "{'Gtk/IMModule':<'fcitx'>}"
 ```
 

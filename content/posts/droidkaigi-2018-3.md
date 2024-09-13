@@ -104,7 +104,7 @@ func (t *t) Show(text string) error {
 
 ちゃんとどのようなエラーが (4) で吐かれているか補足してみたところ、以下の例外が投げられていた。
 
-```
+```plaintext
 java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
 ```
 

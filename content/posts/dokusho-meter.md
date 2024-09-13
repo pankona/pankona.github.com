@@ -33,7 +33,7 @@ Octopressに読書メーターのブログパーツを追加する方法。
 中身は上記ブログパーツの内容をコピペしたものだが。
 ブログパーツとして「最近読んだ本」をチョイス。
 
-```
+```html
 <section>
 <a href="http://book.akahoshitakuya.com/u/{人によって違うID}" title="{人の名前}の最近読んだ本"><img src="http://img.bookmeter.com/bp_image/640/509/{人によって違うID}.jpg" border="0" alt="{人の名前}の最近読んだ本"></a>
 </section>
@@ -43,10 +43,18 @@ Octopressに読書メーターのブログパーツを追加する方法。
 
 _config.ymlのdefault_asidesを変更。読書メーター用HTMLファイルを指定。
 
-```
-default_asides: [custom/asides/about.html, asides/recent_posts.html, asides/github.html, asides/delicious.html, 
-                 asides/pinboard.html, asides/googleplus.html, custom/asides/tag_cloud.html, custom/asides/category_list.html,
-                 custom/asides/dokusho_meter.html]
+```yaml
+default_asides: [
+  custom/asides/about.html,
+  asides/recent_posts.html,
+  asides/github.html,
+  asides/delicious.html,
+  asides/pinboard.html,
+  asides/googleplus.html,
+  custom/asides/tag_cloud.html,
+  custom/asides/category_list.html,
+  custom/asides/dokusho_meter.html,
+]
 ```
 
 #### deployしたら完了

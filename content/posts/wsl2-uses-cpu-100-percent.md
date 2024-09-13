@@ -22,7 +22,7 @@ categories: ["Linux"]
 
 具体的には、`%userprofile%.wslconfig` というファイルを作って以下の内容を書き込む。WSL2 を再起動すれば設定が適用される。
 
-```
+```ini
 [wsl2]
 guiApplications=false
 ```

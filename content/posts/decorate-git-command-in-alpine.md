@@ -22,7 +22,7 @@ Alpine Linux で git を使うと、色々気に食わないことが起こる�
 
 less を入れる。
 
-```
+```bash
 sudo apk add less
 ```
 
@@ -35,7 +35,7 @@ Refs: https://wiki.alpinelinux.org/wiki/Alpine_Linux:FAQ#How_to_enable.2Ffix_col
 
 曰く、
 
-```
+```plaintext
 The problem is not in git itself or terminal, but in the less command. Busybox’s less doesn’t support -r (--raw-control-chars) and -R (--RAW-CONTROL-CHARS) options.
 The simplest (yet not ideal) solution is to install GNU less:
 apk add less

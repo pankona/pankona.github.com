@@ -27,3 +27,12 @@ jobs:
           dprint-version: 0.45.0
       - name: Debug print for deprint target paths
         run: dprint output-file-paths
+
+  markdownlint:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@3aaa38e446fbd2c288af4291aa0f55d64651050f # v12
+        with:
+          globs: '**/*.md'

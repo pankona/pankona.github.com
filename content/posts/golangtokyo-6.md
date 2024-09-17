@@ -38,7 +38,7 @@ https://www.slideshare.net/takuyaueda967/gopher-fest-2017
 型にエイリアスが張れるようになるとのこと。
 以下のような書き方ができるようになる。
 
-```
+```go
 type Applicant = http.Client
 ```
 
@@ -49,7 +49,7 @@ type Applicant = http.Client
 
 (パターン1) 新しい型を作って順次移行する場合
 
-```
+```go
 type Applicant Client
 ```
 
@@ -58,7 +58,7 @@ type Applicant Client
 
 (パターン2) 埋め込みを使う場合
 
-```
+```go
 type Applicant struct { Client }
 ```
 

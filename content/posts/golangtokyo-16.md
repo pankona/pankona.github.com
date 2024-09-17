@@ -29,7 +29,7 @@ Go 言語も wasm へのビルド (トランスパイル) を Go 1.11 からサ�
 
 たとえば以下のいわゆるハローワールド的なコードも wasm 向けにビルドできるようになる。
 
-```
+```go
 package main
 
 import "fmt"
@@ -42,7 +42,7 @@ func main() {
 wasm 向けのビルドは以下のようなコマンドで行う。
 (上記のソースが main.go として存在していると仮定)
 
-```
+```console
 $ GOOS=js GOARCH=wasm go build -o hello.wasm main.go
 ```
 
@@ -53,7 +53,7 @@ GitHub に curl を飛ばしても取得できる。
 
 ビルドと必要なファイルを揃える処理を一式 Makefile で書くと以下のような感じになる。
 
-```
+```makefile
 WASM = test.wasm
 HTML = wasm_exec.html
 JS   = wasm_exec.js
@@ -76,7 +76,7 @@ clean:
 
 一式そろうと以下のようになる。
 
-```
+```console
 $ ls
 main.go  Makefile  server.go  test.wasm  wasm_exec.html  wasm_exec.js
 ```

@@ -1,0 +1,3 @@
+config:
+  default: false
+  MD040: true # fenced-code-language

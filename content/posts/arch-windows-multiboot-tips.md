@@ -39,7 +39,7 @@ Windows8.1に対してWindows Updateしたところ、何だかわからない�
 -- genfstab とかそういったことをこまごま行う。
 -- ブートローダのインストール。ブートローダにはgummibootを採用した。
 
-```
+```bash
 mount /dev/sda2 /boot/EFI
 cd /boot/EFI
 gummiboot install
@@ -62,7 +62,7 @@ Vaioのせいなのか、Windowsのせいなのか。。
 
 -- まず、EFIのパーティションをマウントする。
 
-```
+```bash
 mount /dev/sda2 /mnt/boot/EFI
 ```
 

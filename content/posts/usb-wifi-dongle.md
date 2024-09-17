@@ -39,7 +39,7 @@ WN-AC433UM は、idVendor が 04BB、idProduct が 0959 であるが、
 os_dep/linux/usb_intf.c に、以下のように追記する。
 (注: 妥当か不明だがとりあえず以下の書き換えでうまくいった)
 
-```
+```patch
 diff --git a/os_dep/linux/usb_intf.c b/os_dep/linux/usb_intf.c
 index 5a62f24..7138a26 100644
 --- a/os_dep/linux/usb_intf.c
@@ -57,7 +57,7 @@ index 5a62f24..7138a26 100644
 
 ビルドし、インストールする。
 
-```
+```console
 $ cd rtl8192eu-linux-driver
 $ make
 $ sudo make install

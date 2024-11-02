@@ -198,7 +198,7 @@ Go でデバッガといえば [delve](https://github.com/derekparker/delve) か
 ### Q. デプロイまでのフロート工夫している点。CIとか。
 
 - kaneshin さん >
-  - ansible。dynamic inventry を使っている。
+  - ansible。dynamic inventory を使っている。
 
 #### ところで、Go のビルドが遅くなる理由
 

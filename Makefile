@@ -24,7 +24,8 @@ deps:
 	convert --version
 	actionlint --version
 	ls --version
-	nil --version
+	nixfmt --version
+	nixd --version
 	peco --version
 	vim --version | sed -n '1p'
 	markdownlint-cli2 --version | grep 'markdownlint v'

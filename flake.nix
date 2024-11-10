@@ -39,7 +39,7 @@
               dprint
 
               hugo
-              go_1_22
+              go_1_23
               dart-sass
 
               markdownlint-cli2
@@ -61,7 +61,7 @@
                 name = "hugo-with-dependencies";
                 runtimeInputs = with pkgs; [
                   hugo
-                  go_1_22
+                  go_1_23
                   dart-sass
                 ];
                 text = ''

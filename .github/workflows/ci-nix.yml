@@ -1,5 +1,7 @@
 name: CI - Nix
 on:
+  push:
+    branches: [main]
   pull_request:
     paths:
       - '.github/workflows/ci-nix.yml'

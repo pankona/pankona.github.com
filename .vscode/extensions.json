@@ -6,6 +6,7 @@
     "tekumara.typos-vscode",
     "dprint.dprint",
     "jnoortheen.nix-ide",
-    "davidanson.vscode-markdownlint"
+    "davidanson.vscode-markdownlint",
+    "redhat.vscode-yaml"
   ]
 }

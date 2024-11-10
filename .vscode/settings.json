@@ -4,6 +4,15 @@
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
+  "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": ["nixfmt"]
+      }
+    }
+  },
+  "nix.enableLanguageServer": true,
   "[go]": {
     "editor.defaultFormatter": "golang.go"
   }

@@ -2,37 +2,38 @@
   inputs = {
     # How to update the revision: `nix flake update --commit-lock-file`
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
+    { nixpkgs, ... }:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
+    in
     {
-      self,
-      nixpkgs,
-      flake-utils,
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        formatter = pkgs.nixfmt-rfc-style;
-        devShells.default =
-          with pkgs;
-          mkShell {
-            buildInputs = [
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = pkgs.mkShellNoCC {
+            # Realize nixd pkgs version inlay hints for stable channel instead of latest
+            NIX_PATH = "nixpkgs=${pkgs.path}";
+
+            buildInputs = with pkgs; [
               # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
               bashInteractive
+              coreutils
+              findutils # xargs
+              nixfmt-rfc-style
+              nixd
 
               gnumake
-              coreutils
               peco
               typos
               imagemagick
               actionlint
-              nil
-              nixfmt-rfc-style
               vim
 
               dprint
@@ -44,15 +45,21 @@
               markdownlint-cli2
             ];
           };
+        }
+      );
 
-        apps = {
+      apps = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
           hugo-nix = {
             type = "app";
-            program =
-              with pkgs;
-              lib.getExe (writeShellApplication {
+            program = pkgs.lib.getExe (
+              pkgs.writeShellApplication {
                 name = "hugo-with-dependencies";
-                runtimeInputs = [
+                runtimeInputs = with pkgs; [
                   hugo
                   go_1_22
                   dart-sass
@@ -60,9 +67,10 @@
                 text = ''
                   hugo "$@"
                 '';
-              });
+              }
+            );
           };
-        };
-      }
-    );
+        }
+      );
+    };
 }

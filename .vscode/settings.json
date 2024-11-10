@@ -15,5 +15,6 @@
   "nix.enableLanguageServer": true,
   "[go]": {
     "editor.defaultFormatter": "golang.go"
-  }
+  },
+  "redhat.telemetry.enabled": false
 }

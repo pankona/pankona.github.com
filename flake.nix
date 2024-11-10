@@ -43,6 +43,8 @@
               dart-sass
 
               markdownlint-cli2
+
+              yaml-language-server
             ];
           };
         }

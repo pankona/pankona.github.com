@@ -1,7 +1,7 @@
 {
   inputs = {
     # How to update the revision: `nix flake update --commit-lock-file`
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
   };
 
   outputs =

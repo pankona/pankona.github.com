@@ -28,7 +28,7 @@ func main() {
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
 
-	issue, resp, err := client.Issues.Get(context.Background(), "pankona", "pankona.github.com", *issueNum)
+	issue, resp, err := client.Issues.Get(context.Background(), "pankona", "pankona.github.io", *issueNum)
 	if err != nil {
 		panic(err)
 	}

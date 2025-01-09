@@ -9,7 +9,7 @@ categories: ["AI","料理"]
 
 <!--more-->
 
-![PXL_20240303_082838594](https://github.com/pankona/pankona.github.com/assets/6533008/c7c82e7d-ca47-4169-9e57-fd7cbae9ba8f)
+![PXL_20240303_082838594](https://github.com/pankona/pankona.github.io/assets/6533008/c7c82e7d-ca47-4169-9e57-fd7cbae9ba8f)
 完成したところ
 
 ## 材料

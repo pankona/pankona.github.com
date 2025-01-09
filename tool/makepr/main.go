@@ -31,7 +31,7 @@ func main() {
 	client := github.NewClient(tc)
 
 	if *pr_number == 0 {
-		pr, resp, err := client.PullRequests.Create(context.Background(), "pankona", "pankona.github.com",
+		pr, resp, err := client.PullRequests.Create(context.Background(), "pankona", "pankona.github.io",
 			&github.NewPullRequest{
 				Title: &title,
 				Head:  head,
@@ -62,7 +62,7 @@ func main() {
 
 		log.Printf("pull request created: %s", *pr.IssueURL)
 	} else {
-		pr, resp, err := client.PullRequests.Edit(context.Background(), "pankona", "pankona.github.com", *pr_number,
+		pr, resp, err := client.PullRequests.Edit(context.Background(), "pankona", "pankona.github.io", *pr_number,
 			&github.PullRequest{
 				Title: &title,
 				Body:  body,

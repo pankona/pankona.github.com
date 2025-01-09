@@ -16,7 +16,7 @@ reviews:
     - '!*.md'
   tools:
     markdownlint:
-      # Use https://github.com/pankona/pankona.github.com/pull/314
+      # Use https://github.com/pankona/pankona.github.io/pull/314
       enabled: false
 chat:
   auto_reply: true

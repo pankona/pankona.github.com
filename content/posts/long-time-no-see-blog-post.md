@@ -21,7 +21,7 @@ categories: ["その他"]
 - GitHub Actions で cron job を仕込み、毎朝 7:00 に確認するようにする
 
 できたものはこれ。ちゃんと動いている。
-https://github.com/pankona/pankona.github.com/blob/hugo/.github/workflows/notify_long_time_no_see.yaml
+https://github.com/pankona/pankona.github.io/blob/hugo/.github/workflows/notify_long_time_no_see.yaml
 
 ## そもそも人間 (自分を含む) を信じるな
 

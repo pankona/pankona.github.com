@@ -1,4 +1,4 @@
-module github.com/pankona/pankona.github.com/tool
+module github.com/pankona/pankona.github.io/tool
 
 go 1.23.1
 

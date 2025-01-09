@@ -27,7 +27,7 @@ categories: ["その他"]
 
 ところで Chromebook は、昨今のデバイスでもメモリ 4GB がメインストリームっぽい。8GB っていうとちょっといいヤツっていう雰囲気。そういえば 10 年前に買った Sony Vaio Pro 13 (英語キーボードにカスタマイズしている) がメモリ 8GB だったことを思い出し、こいつに ChromeOS Flex を入れたら案外快適にイケるんじゃない？なんてことを思いついたのだった。
 
-![image](https://github.com/pankona/pankona.github.com/assets/6533008/043c8f5b-94c9-4d0b-9534-0668cae67a35)
+![image](https://github.com/pankona/pankona.github.io/assets/6533008/043c8f5b-94c9-4d0b-9534-0668cae67a35)
 たしかこれ。メモリは 8GB、SSD は 512GB にカスタマイズしてある。ChromeOS Flex はスクショも撮れる…！
 
 インストールはすんなり済んだ。フル充電して電源をつけてみると「残り4時間」という表示。10年選手だしバッテリーがへたっているのは当然であろうが、とはいえまあまあか？YouTube で 1080p の動画を 20 分くらい流してみたところ、残り時間は 2 時間という表示になっていた。ヘビーな使い方をせず、GitHub Codespaces でちょいとコードを書くくらいなら十分に役割を果たしてくれそうな気がしてきた。

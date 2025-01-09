@@ -42,6 +42,8 @@
               go_1_23
               dart-sass
 
+              firebase-tools
+
               markdownlint-cli2
 
               yaml-language-server

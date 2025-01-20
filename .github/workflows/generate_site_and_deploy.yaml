@@ -50,8 +50,10 @@ jobs:
           tar -xvf "dart-sass-${SASS_VERSION}-linux-x64.tar.gz";
           echo "$GOBIN"
           echo "$GITHUB_WORKSPACE/dart-sass/" >> $GITHUB_PATH
-      - name: Make sure hugo version
-        run: hugo version
+      - name: Make sure dependency versions
+        run: |
+          hugo version
+          sass --version
       - name: Install Node.js dependencies
         run: '[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true'
       - name: Build with Hugo

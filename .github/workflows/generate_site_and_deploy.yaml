@@ -46,7 +46,6 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
       - name: Upload artifact
-        if: github.event.sender.login == 'pankona'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public

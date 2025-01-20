@@ -51,30 +51,5 @@
           };
         }
       );
-
-      apps = forAllSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          hugo-nix = {
-            type = "app";
-            program = pkgs.lib.getExe (
-              pkgs.writeShellApplication {
-                name = "hugo-with-dependencies";
-                runtimeInputs = with pkgs; [
-                  hugo
-                  go_1_23
-                  dart-sass
-                ];
-                text = ''
-                  hugo "$@"
-                '';
-              }
-            );
-          };
-        }
-      );
     };
 }

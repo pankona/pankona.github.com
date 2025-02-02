@@ -93,7 +93,7 @@ jobs:
           tree ./public
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          repoToken: ${{ github.token }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PANKONA_BLOG }}
           projectId: pankona-blog
 

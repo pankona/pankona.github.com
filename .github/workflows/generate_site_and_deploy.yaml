@@ -92,6 +92,8 @@ jobs:
           tar -xf ./github-pages/artifact.tar -C public
           tree ./public
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        # dependabot does not have read permission for secrets
+        if: github.actor != 'dependabot[bot]'
         with:
           repoToken: ${{ github.token }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PANKONA_BLOG }}
